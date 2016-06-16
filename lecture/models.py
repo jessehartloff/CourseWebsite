@@ -1,6 +1,4 @@
 from django.db import models
-import datetime
-from django.utils import timezone
 
 
 class Lesson(models.Model):
@@ -41,8 +39,7 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+        return True
 
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
