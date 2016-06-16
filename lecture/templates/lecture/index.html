@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %} Lectures {% endblock %}
+
+{% block content %}
+    <div class="well">
+            {% for lesson in lesson_list %}
+                <h4><a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a></h4>
+            {% endfor %}
+    </div>
+{% endblock %}
