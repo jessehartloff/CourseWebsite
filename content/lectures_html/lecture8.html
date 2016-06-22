@@ -1,0 +1,335 @@
+<div class="container">
+
+    <div class="panel-group">
+        <div class="text-center panel panel-primary">
+            <div class="panel-heading panel-page-heading"><h1>HTML</h1></div>
+        </div>
+    </div>
+
+
+    <div class="well">
+        <h2>HTML - The Supreme Markup Language</h2>
+        <p>
+            W3Schools Tutorial: <a href="http://www.w3schools.com/html/">http://www.w3schools.com/html/</a></p>
+        <p>
+            HTMl is a markup language designed to develop web pages and the world!!
+        </p>
+        <ul>
+            <li>HTML stands for <b>H</b>yper <b>T</b>ext <b>M</b>arkup <b>L</b>anguage.</li>
+            <li>HTML documents (web pages) are described by HTML tags.</li>
+            <li>There are reserved tags that represent different kinds of web page content.</li>
+            <ul>
+                <li><b>&lt;p&gt; --- &lt;/p&gt; </b>Paragraph: organizes the text it contains into paragraph blocks.
+                </li>
+                <li><b>&lt;body&gt; --- &lt;/body&gt; </b>Body: contains all elements that will be visible within the
+                    browser.
+                </li>
+                <li><b>&lt;html&gt; --- &lt;/html&gt; </b>HTML: contains all elements the make up the web page.
+                    (Includes styling and scripts)
+                </li>
+            </ul>
+        </ul>
+        <br>
+        <h4>Basic Web Page File:</h4>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+            <textarea class="form-control" rows="13" id="html1">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+</textarea>
+        <br/>
+        <button class="btn btn-default" type="button" onclick="tryItCustom('html1','html1Out')">Try It
+        </button>
+    </div>
+</form>
+
+<div class="well" id="html1Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <h3>Structural Tags:</h3>
+        <p>These are some tags required to develop a basic webpage.</p>
+        <ol>
+            <li>The <b>DOCTYPE</b> tag defines the document to be of the HTML type.</li>
+            <li>As mentioned above, the <b>HTML</b> tags contain all of the web page elements.</li>
+            <li>The <b>head</b> tags provide information about the document.</li>
+            <ul>
+                <li>Any text inside the head tags does not appear on the web page.</li>
+            </ul>
+            <li>The <b>title</b> tags provide a title for the page (appears in the browser tab).</li>
+            <li>The <b>body</b> tags contain elements that will be visible on the web page.</li>
+            <li>The <b>h1</b> describes a heading.</li>
+            <li>The <b>p</b> tags contain text that will be represented as a paragraph.</li>
+        </ol>
+        <br>
+        <p>Tags are normally in pairs, like <b>&lt;p&gt;</b> and <b>&lt;/p&gt;</b>, where the first tag is
+            the start tag, and the second tag is the end tag. Note that the end tag is identical to the start, but
+            is simply preceeded with a forward slash.</p>
+        <p>The <b>body</b> tag is most important in terms of relaying content. The body of a web page is what contains
+            all of the text links and images the web designer wishes to relay to visitors.</p>
+
+        <br>
+        <h3>Content Tags:</h3>
+        <p>These are the tags that are required to relay different kinds of content on a page.</p>
+        <h5>Text</h5>
+        <ul>
+            <li>Boldface</li>
+            <ul>&lt;b&gt; Boldfaced Text &lt;/b&gt;</ul>
+            <li>Italics</li>
+            <ul>&lt;i&gt; Italicized Text &lt;/i&gt;</ul>
+            <li>Underline</li>
+            <ul>&lt;u&gt; Underlined Text &lt;/u&gt;</ul>
+            <li>Superscrips</li>
+            <ul>&lt;sup&gt; Superscript Text &lt;/sup&gt;</ul>
+            <li>Subscript</li>
+            <ul>&lt;sub&gt; Subscript Text &lt;/sub&gt;</ul>
+            <li>Centering Text</li>
+            <ul>&lt;center&gt; Centered Text &lt;/center&gt;</ul>
+            <li>Line Break</li>
+            <ul>&lt;br&gt; - Line Break (single tag)</ul>
+        </ul>
+
+        <br>
+
+        <h4>Text Altering Example:</h4>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+            <textarea class="form-control" rows="25" id="html2">
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Title</title>
+            </head>
+            <body>
+
+            <h1>Text Alterations:</h1>
+            <p>
+                <b>Bold</b>
+                <br>
+                <i>Italic</i>
+                <br>
+                <u>Underline</u>
+                <br>
+                <b><u><i>Multiple Alterations</i></u></b>
+                <br>
+            <center>Centered</center>
+            <br>
+            Wow, all this HTML coding makes me thirsty for a tall glass of H<sub>2</sub>O
+            </p>
+
+            </body>
+            </html>
+            </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('html2','html2Out')">Try It
+                    </button>
+                </div>
+            </form>
+
+            <div class="well" id="html2Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <br>
+        <h4>Images:</h4>
+        <p>Images can be added to web pages using an image tag.</p>
+        <ul>
+            <li>Image Tag</li>
+            <ul>&lt;IMG SRC="filename"&gt;</ul>
+        </ul>
+        <p>The image tag is self-closing; It does not have an end tag.</p>
+        <p>The attribute, 'filename,' can be a path to a local file, or a URL to an online image.</p>
+        <br>
+
+        <h4>Image Example:</h4>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+            <textarea class="form-control" rows="15" id="html3">
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Title</title>
+            </head>
+            <body>
+
+            <h1>My First Image:</h1>
+            <center><img
+                    src="http://vignette4.wikia.nocookie.net/waynesworld/images/5/5d/Wayne_Campbell.jpg/revision/latest?cb=20131114160902"
+                    alt=""></center>
+
+            </body>
+            </html>
+            </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('html3','html3Out')">Try It
+                    </button>
+                </div>
+            </form>
+
+            <div class="well" id="html3Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <br>
+
+        <h4>Hyperlinks:</h4>
+        <ul>
+            <li>Hypertext Link Tag</li>
+            <ul>&lt;a href="link"&gt; description of link &lt;/a&gt;</ul>
+            <li>A link can be a reference to another website, or to another place on your page.</li>
+            <li>To link to another part of your web page...</li>
+            <ul>&lt;a href="#name"&gt; description &lt;/a&gt;</ul>
+            <ul>
+                <li>(Will jump to separate 'A' tag on the page)</li>
+            </ul>
+            <ul>&lt;a name="name"&gt;</ul>
+        </ul>
+
+        <br>
+
+        <h4>Mailto:</h4>
+        <ul>
+            <li>Mailto tag</li>
+            <li>&lt;a href="mailto:email-address@webpage.com"&gt; description &lt;/a&gt;</li>
+            <li>Will open up the client's mail application and start an email to the address in the tag.</li>
+        </ul>
+
+        <br>
+
+        <h4>Simple Page:</h4>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+            <textarea class="form-control" rows="18" id="html4">
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>WW</title>
+            </head>
+            <body>
+
+            <h1>Wayne's Site</h1>
+            <center>
+                <img src="http://vignette4.wikia.nocookie.net/waynesworld/images/5/5d/Wayne_Campbell.jpg/revision/latest?cb=20131114160902"
+                     width=100 height=200>
+                <br><br>
+                <a href="mailto:wayne@ww.com">Get in touch!</a>
+                <a href="http://www.google.com">Check out my page!</a>
+            </center>
+            </body>
+            </html>
+            </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('html4','html4Out')">Try It
+                    </button>
+                </div>
+            </form>
+
+            <div class="well" id="html4Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <br>
+
+        <h4>Lists:</h4>
+        <ul>
+            <li>Unordered: Bulleted list</li>
+            <ul>&lt;UL&gt; &lt;li&gt; bullet in list &lt;/li&gt; &lt;/UL&gt; </ul>
+            <ul>
+                <li>UL - Unordered List</li>
+            </ul>
+            <ul>
+                <li>li - List item</li>
+            </ul>
+            <li>Ordered: Numbered list</li>
+            <ul>&lt;OL&gt; &lt;li&gt; bullet in list &lt;/li&gt; &lt;/OL&gt; </ul>
+            <ul>
+                <li>OL - Ordered List</li>
+            </ul>
+            <ul>
+                <li>li - List item</li>
+            </ul>
+        </ul>
+        <h4>Tables:</h4>
+        <ul>
+            <li>&lt;TABLE BORDER&gt; - Will ensure that the table has a border.</li>
+            <li>&lt;TR&gt; Table Row &lt;/TR&gt;</li>
+            <li>&lt;TD&gt; Table Cell (Within a pair of row tags) &lt;/TD&gt;</li>
+            <li>&lt;/TABLE&gt; - End of table.</li>
+        </ul>
+
+        <h4>Comments:</h4>
+        <ul>
+            <li>To comment in HTML, the following tag can be used.</li>
+            <li>&lt;!-- THIS IS A COMMENT --&gt;</li>
+        </ul>
+
+        <br>
+        <h4>Larger Example:</h4>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+            <textarea class="form-control" rows="31" id="html5">
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Putting It Together</title>
+            </head>
+            <body>
+
+            <h1>Personal Site:</h1>
+
+            <br>
+            <center>
+                <p>You can reach me here:</p>
+                <ul>
+                    <li>Phone - (xxx)xxx-xxxx</li>
+                    <li>Email - <a href="mailto:name@domain.com">name@domain.com</a></li>
+                    <li>Facebook - <a href="http://www.facebook.com">Me</a></li>
+                </ul>
+            </center>
+            <table BORDER>
+                <tr>
+                    <td>Favorite Food</td>
+                    <td>Restaurant of Choice</td>
+                </tr>
+                <tr>
+                    <td>Wings</td>
+                    <td><a href="http://www.duffswings.com">Duffs!</a></td>
+                </tr>
+            </table>
+            </body>
+            </html>
+            </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('html5','html5Out')">Try It
+                    </button>
+                </div>
+            </form>
+
+            <div class="well" id="html5Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <h3>More...</h3>
+        <p>There are even more tags and style options offered by HTML, allowing for easy and simple customization of a
+            web page.</p>
+        <p>Explore what HTML has to offer at <a href="http://www.w3schools.com/html/">w3 Schools</a>, a site configured
+            by the team who established the world wide web and HTML as a language.</p>
+        <p>Also, remember that <a href="http://www.codeacademy.com">Code Academy</a> is an awesome (and free) resource
+            that helps teach languages from the ground up.</p>
+    </div>
+</div>

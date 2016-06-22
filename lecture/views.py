@@ -43,8 +43,9 @@ def index(request):
 
 def lecture(request, lecture_name):
     this_lesson = Lesson.objects.get(title=lecture_name)
-    context = {'this_lesson': this_lesson}
+    context = {'this_lesson': this_lesson, "sidebars": True}
     return render(request, 'lecture/lecture.html', context)
+
 
 
 def detail(request, question_id):

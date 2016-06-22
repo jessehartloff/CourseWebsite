@@ -6,10 +6,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'lecture/UBStylin.css' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'lecture/favicon.ico' %}">
     <meta charset="UTF-8">
-    {#    <meta http-equiv="expires" content="0"/>#}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        function hide_bars() {
+            document.getElementById("left_sidebar").className = "hidden";
+            document.getElementById("right_sidebar").className = "hidden";
+            document.getElementById("center_content").className = "col-xs-12 padded";
+        }
+
+        function show_bars() {
+            document.getElementById("left_sidebar").className = "col-xs-2";
+            document.getElementById("right_sidebar").className = "col-xs-3";
+            document.getElementById("center_content").className = "col-xs-7";
+        }
+    </script>
 </head>
 
 
@@ -26,25 +39,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="?">CSE</a>
+            <a class="navbar-brand" href="{% url 'lecture:index' %}">CSE</a>
         </div>
         <div class="collapse navbar-collapse" id="theNavbar">
             <ul class="nav navbar-nav">
                 <!--<li><a href="?">Home</a></li>-->
                 {#                <li><a href="{% url 'lecture:index' %}">Index</a></li>#}
                 {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
-                <li><a href="?syllabus.html">Syllabus</a></li>
-                <li><a href="?schedule.html">Schedule</a></li>
-                <li><a href="?lectures/lectures.html">Lectures</a></li>
-                <!--<li class="dropdown">-->
-                <!--<a class="dropdown-toggle" data-toggle="dropdown" href="?schedule.html">Lectures<span-->
-                <!--class="caret"></span></a>-->
-                <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
-                <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
-                <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
-                <!--</ul>-->
-                <!--</li>-->
+                <li><a href="{% url 'lecture:index' %}">Syllabus</a></li>
+                <li><a href="{% url 'lecture:index' %}">Schedule</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Lectures<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for lesson in all_lessons %}
+                            <li><a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a></li>
+                        {% endfor %}
+                        <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
+                        <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
+                    </ul>
+                </li>
                 <!--<li class="dropdown">-->
                 <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Homework<span class="caret"></span></a>-->
                 <!--<ul class="dropdown-menu">-->
@@ -53,6 +67,8 @@
                 <!--</li>-->
                 <!--<li><a href="?resources.html">Resources</a></li>-->
                 <!--<li><a href="?Piazza.html">Piazza</a></li>-->
+                <li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>
+                <li><a href="#" onclick="show_bars(); return false;">Show</a></li>
 
             </ul>
         </div>
@@ -60,91 +76,51 @@
 </nav>
 
 <div class="container-fluid">
+
     <div class="row">
-        <div class="col-xs-2">
-            {#            <div class="well" data-spy="affix" style="overflow-y:scroll">#}
-            <div class="left-side-bar">
-                <div class="well">
-{#                    <ul class="plain">#}
-                <h4>Lectures</h4>
+        <div id="left_sidebar" class="col-xs-2">
+            {% block left_sidebar %}
+                <div class="left-side-bar">
+                    <div class="well">
+                        <h4>Lectures</h4>
                         {% for lesson in all_lessons %}
                             <a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a><br/>
                         {% endfor %}
-{#                    </ul>#}
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-7">
-        <div class="content-area">
-            {% block content %}{% endblock %}
-{#            <br/><br/><br/><br/><br/>#}
-        </div>
-        </div>
-        <div class="col-xs-3">
-            {#            <div class="well" data-spy="affix">#}
-            {#            <iframe>#}
-            <div class="right-side-bar">
-                <div class="well">
-                    <p>
-                        Questions/Comments go here:
-                    </p>
-                    <ul>
-                        <li>What's going on?</li>
-                        <li>I'm bored</li>
-                        <li>This class is confusing</li>
-                        <li>What's going on?</li>
-                        <li>I'm bored</li>
-                        <li>This class is confusing</li>
-                        <li>What's going on?</li>
-                        <li>I'm bored</li>
-                        <li>This class is confusing</li>
-                        <li>What's going on?</li>
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-{#                        <li>What's going on?</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>I'm bored</li>#}
-{#                        <li>This class is confusing</li>#}
-                    </ul>
-                </div>
-                {#            </iframe>#}
-            </div>
+            {% endblock %}
         </div>
 
+
+        <div id="center_content" class="col-xs-7">
+            {% block content %}{% endblock %}
+        </div>
+
+
+        <div id="right_sidebar" class="col-xs-3">
+            {% block right_sidebar %}
+                <div class="right-side-bar">
+                    <div class="well">
+                        <p>
+                            Questions/Comments go here:
+                        </p>
+                        <ul>
+                            <li>What's going on?</li>
+                            <li>I'm bored</li>
+                            <li>This class is confusing</li>
+                            <li>What's going on?</li>
+                            <li>I'm bored</li>
+                            <li>This class is confusing</li>
+                            <li>What's going on?</li>
+                            <li>I'm bored</li>
+                            <li>This class is confusing</li>
+                            <li>What's going on?</li>
+                        </ul>
+                    </div>
+                </div></div>
+            {% endblock %}
     </div>
 </div>
-
 
 </body>
 </html>

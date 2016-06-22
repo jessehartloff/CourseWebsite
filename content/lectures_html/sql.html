@@ -1,0 +1,392 @@
+<div class="container">
+
+    <div class="panel-group">
+        <div class="text-center panel panel-primary">
+            <div class="panel-heading panel-page-heading"><h1>SQL in Python</h1></div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="well">
+        <h2>Questions</h2>
+        Submit question here: <a href="http://ubcse.com/CSE250/suggestions.html">http://ubcse.com/CSE250/suggestions.html</a>
+        <br/>
+        <br/>
+    </div>
+
+    <div class="well">
+
+
+        <div class="well">
+
+
+            <div><h2>SQL - Structured Query Language</h2></div>
+            <p>
+                W3schools SQL Tutorial: <a href="http://www.w3schools.com/sql/default.asp">http://www.w3schools.com/sql/default.asp</a>.
+            </p>
+            <br/>
+            <p>
+                In this lecture we will explore:
+            </p>
+            <ul>
+                <li>The definition & use of SQL</li>
+                <li>Setting up the environment for SQL</li>
+                <li>Creating a table</li>
+                <li>Inserting values to the table</li>
+                <li>Handling the database</li>
+            </ul>
+            <br/>
+
+            <div class="well">
+                <h3>SQL</h3>
+                    <br/>
+                    <p>SQL is a standard language for accessing and managing databases.</p>
+                    <p>Database consists of table(s), that usually contain a number of rows (values).</p>
+                    <p>We will learn how to create a database and a table to the database, insert values to the table, and handle the database.</p>
+
+            </div>
+
+
+            <div class="well">
+                <h3>Setting up the environment</h3>
+                    <br/>
+                    <p>This is the first step where we just set up the environment for using SQL.</p>
+                    <br/>
+                    <p>Firstly we import sqlite3, and then make our own sample database (.db) that we are going to handle for practice.</p>
+
+                    <p>
+<pre>
+import sqlite3
+sample = sqlite3.connect('movie_sample.db')
+</pre>
+                    </p>
+                    <p>Here we connect to an object of database. The database 'movie_sample.db' has been created in the same directory where we executed our .py file, and now the data can be stored in the file, which we are going to do in the next steps.</p>
+            
+            </div>
+
+            <div class="well">
+                <h3>Creating the table for the database</h3>
+                    <br/>
+                    <p>Now we will create a table in the database we just created above.</p>
+
+                    <p>
+<pre>
+c = sample.cursor()
+c.execute('''CREATE TABLE movies
+             (title text, year int, rate real)''')
+</pre>
+                    </p>
+                    <p>Firstly we create a cursor object (built in SQL) and connect it to our sample.</p>
+                    <p>Next we use .execute method from cursor object, and then create a table called 'movies'.</p>
+                    <p>Our columns consist of title (type: text), year (type: int), and rate (type: real).</p>
+                    <br/>
+                    <div class="alert alert-info">Note that we cannot create a duplicate table in the database. So in our example, since we just created the table 'movies', we cannot create another 'movies' table in the 'movie_sample.db'.
+                    </div>
+
+                    <p>We can still create other tables with different names in the same database.</p>
+            </div>
+
+            <div class="well">
+                <h3>Inserting values (rows) to the existing table</h3>
+                    <br/>
+                    <p>We just created a table above, so now we will learn how to insert rows to the table.</p>
+                    <br/>
+                    <p>
+<pre>
+c.execute("INSERT INTO movies VALUES ('Romeo and Juliet', 1968, 7.7)")
+c.execute("INSERT INTO movies VALUES ('The Sound of Music', 1965, 8.0)")
+c.execute("INSERT INTO movies VALUES ('Avengers: Age of Ultron', 2015, 7.5)")
+c.execute("INSERT INTO movies VALUES ('Gravity', 2013, 7.8)")
+c.execute("INSERT INTO movies VALUES ('Superman II', 1981, 6.8)")
+c.execute("INSERT INTO movies VALUES ('Home Alone', 1990, 7.5)")
+c.execute("INSERT INTO movies VALUES ('The Dark Knight Rises', 2012, 8.5)")
+c.execute("INSERT INTO movies VALUES ('Speed', 1994, 7.2)")
+c.execute("INSERT INTO movies VALUES ('Gladiator', 2000, 8.5)")
+c.execute("INSERT INTO movies VALUES ('Iron Man 3', 2013, 7.3)")
+c.execute("INSERT INTO movies VALUES ('Interstellar', 2014, 8.6)")
+sample.commit()
+</pre>
+                    </p>
+                    <p>We are inserting values to the table 'movies'. Note that the types of values stick to the ones we made in the table.</p>
+                    <p>Also, we save the changes to the database in the last line ( sample.commit() ).</p>
+
+            </div>
+
+
+            <div class="well">
+                <h3>Handling the data</h3>
+                    <br/>
+                    <p>We just finished making the data set, so now let's learn how handle the data efficiently.</p>
+                    <br/>
+                    <div class="well">
+
+                        <h4>SELECT *</h4>
+                        <br/>
+
+                        <p>Let's learn very basic syntax in SQL first.</p>
+
+                        <p>
+<pre>
+SELECT * FROM movies
+</pre>
+                        </p>
+
+                        <ul>
+                            <li>SELECT is to grab the info</li>
+                            <li>* represents everything</li>
+                            <li>after FROM, we choose the table where we want to extract info</li>
+                        </ul>
+
+
+                        <p>This will enable us to extract all info from the table 'movies' in the database.</p>
+
+                        <br/>
+                        <p>Now let's print out the info by using the line introduced above in Python.</p>
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>If we use the code lines above, we can simply print out every row from the table 'movies' :</p>
+
+                        <p>
+<pre>
+('Romeo and Juliet', 1968, 7.7)
+('The Sound of Music', 1965, 8.0)
+('Avengers: Age of Ultron', 2015, 7.5)
+('Gravity', 2013, 7.8)
+('Superman II', 1981, 6.8)
+('Home Alone', 1990, 7.5)
+('The Dark Knight Rises', 2012, 8.5)
+('Speed', 1994, 7.2)
+('Gladiator', 2000, 8.5)
+('Iron Man 3', 2013, 7.3)
+('Interstellar', 2014, 8.6)
+</pre>
+                        </p>
+                    </div>
+
+                    <div class="well">
+                        <h4>SELECT (certain columns)</h4>
+                        <br/>
+                        <p>If we just want to print out the title and year only, then</p>
+
+                        <p>
+<pre>
+for row in c.execute('SELECT title,year FROM movies'):
+    print(row)
+</pre>
+                        </p>
+
+
+                        <p>we just need to select title, year.</p>
+                        <br/>
+                        <p>Then the output will be: </p>
+                        <p>
+<pre>
+('Romeo and Juliet', 1968)
+('The Sound of Music', 1965)
+('Avengers: Age of Ultron', 2015)
+('Gravity', 2013)
+('Superman II', 1981)
+('Home Alone', 1990)
+('The Dark Knight Rises', 2012)
+('Speed', 1994)
+('Gladiator', 2000)
+('Iron Man 3', 2013)
+('Interstellar', 2014)
+</pre>
+                        </p>
+                    </div>
+                    
+                    <div class="well">
+                        <h4>ORDER BY</h4>
+                        <br/>
+                        <p>If we want to print out all the rows by order of rate, we can do this:</p>
+
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies ORDER BY rate'):
+    print(row)
+</pre>
+
+                        </p>
+                        <br/>
+                        <p>It will result in this output:</p>
+
+
+                        <p>
+<pre>
+('Superman II', 1981, 6.8)
+('Speed', 1994, 7.2)
+('Iron Man 3', 2013, 7.3)
+('Avengers: Age of Ultron', 2015, 7.5)
+('Home Alone', 1990, 7.5)
+('Romeo and Juliet', 1968, 7.7)
+('Gravity', 2013, 7.8)
+('The Sound of Music', 1965, 8.0)
+('The Dark Knight Rises', 2012, 8.5)
+('Gladiator', 2000, 8.5)
+('Interstellar', 2014, 8.6)
+</pre>
+                        </p>
+                        <p>This is the very useful point of SQL. We can manage and organize the data set with the format we want.</p>
+                    </div>
+
+                    <div class="well">
+                        <h4>WHERE</h4>
+                        <br/>
+                        <p>To go a little bit deeper, if you want to extract in a more narrowed range, like printing out all rows with rate 7.5 or higher, you can do this:</p>
+
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies WHERE rate >= 7.5'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Output:</p>
+                        <p>
+<pre>
+('Romeo and Juliet', 1968, 7.7)
+('The Sound of Music', 1965, 8.0)
+('Avengers: Age of Ultron', 2015, 7.5)
+('Gravity', 2013, 7.8)
+('Home Alone', 1990, 7.5)
+('The Dark Knight Rises', 2012, 8.5)
+('Gladiator', 2000, 8.5)
+('Interstellar', 2014, 8.6)
+</pre>
+                        </p>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <p>Or if you just want to print out rows with rate = 7.5, then</p>
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies WHERE rate == 7.5'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Output:</p>
+                        <p>
+<pre>
+('Avengers: Age of Ultron', 2015, 7.5)
+('Home Alone', 1990, 7.5)
+</pre>
+                        </p>
+                    </div>
+
+                    <div class="well">
+                        <h4>GROUP BY</h4>
+                        <br/>
+                        <p>If we want to print out movies with rate > 7.5, and order by rate, what we can do is: </p>
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies WHERE rate > 7.5 GROUP BY rate'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Output:</p>
+                        <p>
+<pre>
+('Romeo and Juliet', 1968, 7.7)
+('Gravity', 2013, 7.8)
+('The Sound of Music', 1965, 8.0)
+('Gladiator', 2000, 8.5)
+('Interstellar', 2014, 8.6)
+</pre>
+                        </p>
+                        <br/>
+                        <div class="alert alert-info">Note that GROUP BY removes a duplicate value.
+                        </div>
+                        <p>In this example, "The Dark Knight Rises" got removed as it has the same rate (8.0) with "The Sound of Music".</p>
+                    </div>
+
+                    <div class="well">
+                        <h4>AND</h4>
+                        <br/>
+                        <p>We can also implement 'AND' condition. If we want to select a movie with 7.5 rate and release year in 1990,</p>
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies WHERE rate == 7.5 AND year == 1990'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Then we can only see 'Home Alone':</p>
+                        <p>
+<pre>
+('Home Alone', 1990, 7.5)
+</pre>
+                        </p>
+                    </div>
+
+                    <div class="well">
+                        <h4>SQL function</h4>
+                        <br/>
+                        <p>To extract the movie info with max rate,</p>
+                        <p>
+<pre>
+for row in c.execute('SELECT title, year, MAX(rate) FROM movies'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Output:</p>
+                        <p>
+<pre>
+('Interstellar', 2014, 8.6)
+</pre>
+                        </p>
+                    </div>
+
+                    <div class="well">
+                        <h4>LIKE</h4>
+                        <br/>
+                        <p>If we want to print out movies starting with "T",</p>
+                        <p>
+<pre>
+for row in c.execute('SELECT * FROM movies WHERE title LIKE "T%"'):
+    print(row)
+</pre>
+                        </p>
+                        <br/>
+                        <p>Output:</p>
+                        <p>
+<pre>
+('The Sound of Music', 1965, 8.0)
+('The Dark Knight Rises', 2012, 8.5)
+</pre>
+                        </p>
+                    </div>
+            </div>
+
+            <div class="well">
+                    <h3>Closing</h3>
+                    <br/>
+                    <p>Lastly when we are done with any operation on the database, we need to close the connection with this:</p>
+                    <p>
+<pre>
+conn.close()
+</pre>
+            </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+

@@ -1,0 +1,198 @@
+<div class="container">
+
+    <div class="panel-group">
+        <div class="text-center panel panel-primary">
+            <div class="panel-heading panel-page-heading"><h1>Homework 4: Querying a Web API</h1></div>
+        </div>
+    </div>
+    <div class="well outer-well">
+        <div class="well">
+            <h3 class="text-center">Due Date</h3>
+            <hr/>
+            HW4 Due Friday, April 1 @ 2 hours after 11:59pm (2am Saturday morning)
+        </div>
+
+        <div class="well">
+            <h3 class="text-center">Objectives</h3>
+            <hr/>
+            <ul>
+                <li>Use the Yahoo Finance web API</li>
+                <li>Apply your python programming skills</li>
+            </ul>
+        </div>
+
+
+        <div class="well">
+            <h3 class="text-center">Resources</h3>
+            <hr/>
+            <ul>
+                <li><a href="?lectures/HTTP.html">HTTP Lecture</a></li>
+            </ul>
+        </div>
+
+
+        <div class="well">
+
+            <h3 class="text-center">Lab (1 point)</h3>
+
+
+            <h4 class="text-center">Part 1: Reading Historical Prices</h4>
+            <br/>
+
+            <div class="well code-well"><code>
+                def getHistoricalPrice(ticker, date):
+            </code></div>
+
+            <p>
+                We will provide the historical prices for the top 5 companies, by market cap, in csv files
+                and walk through parsing them during lab. For this part, we will write a function that takes a ticker
+                symbol and a date in the format "1981-06-16" and returns the close price of the stock on that date. For
+                some of the requirements in this assignment, you will need to call this function to obtain the close
+                price
+                of particular stocks on particular dates.
+            </p>
+
+            <div class="alert alert-info">Note: If you are interested in obtaining more historical data, use an API call
+                of the format "http://ichart.finance.yahoo.com/table.csv?s=FB".
+            </div>
+        </div>
+
+
+        <div class="well">
+            <h3 class="text-center">Independent Tasks (3 point)</h3>
+            <hr/>
+            <p>
+                The independent tasks will require you to query the Yahoo Finance API to obtain current information
+                about various stocks and process the resulting data. Some parts will also require the historical data
+                from
+                part 1.
+            </p>
+            <h4 class="text-center">Part 2: Querying the API</h4>
+            <br/>
+            <p>
+                Use the appropriate API variables to complete the following functions.
+            </p>
+            <div class="well">
+                <div class="well code-well"><code>
+                    def companyName(ticker):
+                </code></div>
+
+                <p>
+                    Return the company name for the given ticker symbol.
+                </p>
+            </div>
+
+            <div class="well">
+                <div class="well code-well"><code>
+                    def currentSpread(ticker):
+                </code></div>
+
+                <p>
+                    Return the current spread for the ticker symbol where spread is the difference between the bid and
+                    ask prices (ask minus bid). Note: use 'a' and 'b' for this, not 'b2' and 'b3'.
+                </p>
+            </div>
+
+            <div class="well">
+                <div class="well code-well"><code>
+                    def lastTradeValue(ticker):
+                </code></div>
+
+                <p>
+                    Return the value of the last trade of the given ticker. The value of the trade is the price per
+                    share times the number of shares for that trade.
+                </p>
+            </div>
+
+            <hr/>
+            <hr/>
+
+            <h4 class="text-center">Part 3: ROI of a trade</h4>
+            <br/>
+            <div class="well code-well"><code>
+                def computeTradeROI(trade):
+            </code></div>
+            <p>
+                Complete this function that will compute the current ROI of a trade provided as a list in the form
+                [ticker, date, numberOfShares]. A trade given as ["AAPL", "1981-06-16", 100] is interpreted as buying
+                100 shares of AAPL at the close price on June 16, 1981.
+                Return the ROI of the trade as a percentage gain/loss based on the last trade price of that stock.
+            </p>
+            <p>
+                Trade will only be made for the 5 stocks for which we provided historical data.
+            </p>
+            <div class="alert alert-info">Note: ROI = 100.0*((currentValue - initialValue)/initialValue)</div>
+
+            <div class="alert alert-info">Note: We will assume the number of shares remains constant between trades
+                (ignore splits)
+            </div>
+
+
+            <hr/>
+            <hr/>
+            <h4 class="text-center">Part 4: ROI of a portfolio</h4>
+            <br/>
+            <div class="well code-well"><code>
+                def computePortfolioROI(initialCash, trades):
+            </code></div>
+            <p>
+                Complete this function that will be given a list of trades and a starting dollar amount of cash on hand
+                and computes the current ROI after all trades have been executed. All trades will be given in
+                chronological order and will only be for the 5 stocks for which we provided historical data. If no
+                trades are made, then the ROI is
+                0.0. You can assume that no shares are owned at the start of trading.
+            </p>
+            <p>
+                The trades will be given as a list of trades in the same format as the previous function: [ticker, date,
+                numberOfShares]. This function will also contain sales of stocks that will be
+                expressed by negative numbers. For example ["AMZN", 2016-02-08, -400] is interpreted as the sale of 400
+                shares of Amazon stock on February 8, 2016. If a sale of stock is made that is larger than the number of
+                shares owned, a short position is established for that stock. This can be thought of as selling shares
+                that are not owned resulting in an ownership of negative shares. When establishing a short, the cash for
+                the sale is still added to the cash total. Note: It is common for traders to establish a short position
+                when they
+                believe a stock price will decrease.
+            </p>
+            <h5><b>Error Checking</b></h5>
+            <p>
+                To receive credit for this function, you must incorporate checks for the following error that can
+                occur while trading:
+            <ul>
+                <li>If a purchase order is placed and there is not enough cash on hand to purchase the shares, the order
+                    will not be placed.
+                </li>
+            </ul>
+            </p>
+
+            <div class="alert alert-info">Note: We will assume the number of shares remains constant between trades
+                (ignore splits)
+            </div>
+
+        </div>
+
+
+        <div class="well">
+            <h3>Code</h3>
+            Download the following zip file containing hw4.py as well as files containing historical data for some
+            stocks.<br/>
+            <h3><a href="homeworkCode/hw4.zip">hw4.zip</a></h3>
+        </div>
+
+
+        <div class="well">
+            <h3>Submission</h3>
+            <p>
+            Submit your completed hw4.py through the submission web site:<br/>
+            <a href="https://www-student.cse.buffalo.edu/planetexpress/">https://www-student.cse.buffalo.edu/planetexpress/</a>
+            </p>
+            <br/>
+
+            <div class="alert alert-warning">There will not be any email feedback for this assignment. Please test your
+                code thoroughly by changing the inputs in the sampleUsage function and manually checking the results.
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

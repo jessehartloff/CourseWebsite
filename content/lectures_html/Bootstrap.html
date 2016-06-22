@@ -1,0 +1,416 @@
+<div class="panel-group">
+    <div class="text-center panel panel-primary">
+        <div class="panel-heading panel-page-heading"><h1>Bootstrap</h1></div>
+    </div>
+</div>
+
+<div class="well">
+    <h2>Questions</h2>
+    Submit questions here: <a
+        href="http://ubcse.com/CSE250/suggestions.html">http://ubcse.com/CSE250/suggestions.html</a>
+</div>
+
+<div class="well"> <!-- well 1 -->
+    <h2>Bootstrap</h2>
+
+    <p>
+        W3Schools Bootstrap Tutorial: <a
+            href="http://www.w3schools.com/bootstrap/">http://www.w3schools.com/bootstrap/</a>.
+    </p>
+
+    <p>
+        <a href="http://getbootstrap.com/">Bootstrap</a>, developed by Mark Otto and Jacob Thornton of Twitter,
+        allows us to quickly make great looking sites. Bootstrap is an open-source, free to use,
+        mobile-friendly set of tools built with CSS and JavaScript.
+    </p>
+
+
+    <p>
+        In this lesson we will explore:
+    </p>
+    <ul>
+        <li>How to include Bootstrap</li>
+        <li>Bootstrap Classes</li>
+        <li>Bootstrap Tables</li>
+        <li>Image Sizing</li>
+        <li>Bootstrap Alerts</li>
+        <li>Bootstrap Forms</li>
+        <li>The grid</li>
+        <!--<li>Menus</li>-->
+    </ul>
+
+
+    <br/>
+</div>
+<div class="well">
+
+    <h3>Including Bootstrap</h3>
+    <p>To start using Bootstrap, we will add the following 4 lines in the head of out HTML file.</p>
+    <!-- WYSIWYG Area -->
+    <div>
+        <pre>
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+    </div>
+    <br/>
+    <p>The first line sets up the page in a mobile friendly way by setting the page width equal to width
+        of the device. The following 3 lines download the CSS and Javascript files that will run Bootstrap.
+        Bootstrap using jquery functions, so we have to include this as well. With these three files
+        included,
+        we can start using Bootstrap, and jquery, on our page.</p>
+    <p>
+        Putting this into an HTML file will create the following shell for a Bootstrap powered page.
+    </p>
+    <br/>
+    <div>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;container&quot;&gt;
+    &lt;p&gt;Now we&apos;re cooking with Bootstrap!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+    </div>
+    <!-- end WYSIWYG -->
+    <br/><br/>
+    <p>
+        This page is ready to take advantage of Bootstrap, through we haven't done anything interesting with
+        it yet. For the examples on this page, we will not show the includes and the header since this site
+        itself has already included them.
+    </p>
+
+</div>
+
+
+<div class="well">
+    <h3>Bootstrap Classes</h3>
+    <p>
+        Most of our interaction with Bootstrap will be through classes. Bootstrap has a multitude of classes
+        defined that will alter the appearance of our HTML elements by changing their class attribute.
+    </p>
+
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="4" id="boots1">
+<div class="container">
+    <p class="text-success">We're using Bootstrap classes!</p>
+</div>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots1','boots1Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots1Out"></div>
+    <!-- end WYSIWYG -->
+    <br/>
+    <p>
+        We used two Bootstrap classes in this example. The first is a div with the class container. This will be
+        the outer tag for our Bootstrap pages and will handle the top level formatting to keep our elements on
+        the screen regardless of its size. The container class will add padding on the sides of the page. To
+        remove this padding and use the full page width we can use the container-fluid class instead.
+    </p>
+    <p>
+        The second class uses is text-success which changed the style of our paragraph text.
+    </p>
+
+    <br/>
+    <hr/>
+    <br/>
+
+    <p>To add multiple formatting changes to the same element we can add several classes each separated by a
+        space.</p>
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="4" id="boots2">
+<div class="container-fluid text-success">
+    <p>We're using multiple Bootstrap classes on the same element!</p>
+</div>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots2','boots2Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots2Out"></div>
+</div> <!-- end WYSIWYG -->
+
+
+<div class="well">
+    <h3>Bootstrap Tables</h3>
+    <p>
+        Let's revisit our wings table one more time. Recall the styling that we applied to this table in CSS. This
+        time, let's style it using Bootstrap classes.
+    </p>
+
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="18" id="boots3">
+<table class="table table-hover table-striped table-bordered table-condensed">
+    <tr>
+        <th colspan="2" class="text-center text-primary info">All about food</th>
+    </tr>
+    <tr style="font-weight: bold">
+        <td>Favorite Food</td>
+        <td>Restaurant of Choice</td>
+    </tr>
+    <tr>
+        <td>Wings</td>
+        <td><a href="http://www.duffswings.com">Duffs</a></td>
+    </tr>
+    <tr>
+        <td>Donuts</td>
+        <td><a href="http://paulasdonuts.com/">Paula's Donuts</a></td>
+    </tr>
+</table>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots3','boots3Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots3Out"></div>
+    <!-- end WYSIWYG -->
+
+    <br/>
+    <p>
+        This example shows off quite a few Bootstrap classes. Try removing them one-by-one to see the effect that
+        each
+        has on the format of the table.
+    </p>
+</div>
+
+
+<div class="well">
+    <h3>Image Sizing</h3>
+    <p>
+        Bootstrap give us a more flexible way to forget about sizing our images. By using the img-responsive class,
+        our image will automatically resize within it's container. On some devices all three of these images might
+        look fine, but try resizing the window or viewing this on a mobile device and observe how the three images
+        differ.
+    </p>
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="6" id="boots4">
+<p>Source: <a href="http://xkcd.com/936/">http://xkcd.com/936/</a></p>
+<br/>
+<img src="images/password_strength.png" class="img-responsive"><br/>
+<img src="images/password_strength.png" width="50%"><br/>
+<img src="images/password_strength.png" width="740" height="601"><br/>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots4','boots4Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots4Out"></div>
+</div> <!-- end WYSIWYG -->
+
+
+<div class="well">
+    <h3>Bootstrap Wells, Panels, and Alerts</h3>
+    <p>
+        Bootstrap provides several types of containers for displaying content. These are stylistic choices that
+        allow variety when displaying content to a user. All of these classes are used with the HTML div element.
+        A div is a division on the page which inherently has no properties and is used as a way to add CSS to a
+        blank element.
+    </p>
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="32" id="boots5">
+<div class="well">Text trapped in a well</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">panel panel-default</div>
+    <div class="panel-body">Content</div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">panel panel-primary</div>
+    <div class="panel-body">Content</div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">panel panel-success</div>
+    <div class="panel-body">Content</div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">panel panel-info</div>
+    <div class="panel-body">Content</div>
+</div>
+<div class="panel panel-warning">
+    <div class="panel-heading">panel panel-warning</div>
+    <div class="panel-body">Content</div>
+</div>
+<div class="panel panel-danger">
+    <div class="panel-heading">panel panel-danger</div>
+    <div class="panel-body">Content</div>
+</div>
+
+<div class="alert alert-success">alert-success</div>
+<div class="alert alert-info">alert-info</div>
+<div class="alert alert-warning">alert-warning</div>
+<div class="alert alert-danger">alert-danger</div>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots5','boots5Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots5Out"></div>
+</div> <!-- end WYSIWYG -->
+
+
+<div class="well">
+    <h3>Bootstrap Forms</h3>
+
+    <p>
+        When we make interactive sites with JavaScript and Python, we will need a way to get input from the user.
+        This
+        will primarily be done through forms and we have a variety of options we can use for inputs.
+    </p>
+
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="38" id="boots6">
+<h2>Enter Information Here</h2><br/>
+ <form role="form">
+     <div class="form-group">
+         <label for="name">Username:</label>
+         <input class="form-control" type="text" id="name">
+     </div>
+     <div class="form-group">
+         <label for="password">Password:</label>
+         <input class="form-control" type="password" id="password">
+     </div>
+     <div class="form-group">
+         &lt;label for=&quot;message&quot;&gt;Enter a message:&lt;/label&gt;
+         &lt;textarea class=&quot;form-control&quot; rows=&quot;3&quot; id=&quot;message&quot;&gt;&lt;/textarea&gt;
+     </div>
+     <div class="checkbox">
+         <label><input type="checkbox">Check This to Win</label>
+     </div>
+     <div class="form-group">
+         <p>How do you feel about Bootstrap?</p>
+         <div class="radio">
+             <label><input type="radio" name="bootstrap">It's good</label>
+         </div>
+         <div class="radio">
+             <label><input type="radio" name="bootstrap">It's great</label>
+         </div>
+         <div class="radio">
+             <label><input type="radio" name="bootstrap">It's the best thing ever!</label>
+         </div>
+     </div>
+     <br/>
+     <button type="submit" class="btn btn-default">btn-default</button>
+     <button type="submit" class="btn btn-primary">btn-primary</button>
+     <button type="submit" class="btn btn-success">btn-success</button>
+     <button type="submit" class="btn btn-info">btn-info</button>
+     <button type="submit" class="btn btn-warning">btn-warning</button>
+     <button type="submit" class="btn btn-danger">btn-danger</button>
+ </form>
+        </textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots6','boots6Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots6Out"></div>
+    <!-- end WYSIWYG -->
+
+
+    <p>This form doesn't perform any action, but serves it purpose to show off some of the options we have for
+        forms.</p>
+
+
+</div>
+<div class="well">
+    <h3>The grid</h3>
+    <p>Bootstrap provides a 12 column grid system to help organize our content the way we want. This grid is similar
+        to an HTML table with 12 columns and we will specify how many of the rows columns each cell will use in
+        order to format the page how we want.</p>
+
+    <!-- WYSIWYG Area -->
+    <div>
+        <form role="form">
+            <div class="form-group">
+        <textarea class="form-control" rows="18" id="boots7">
+<div class="row">
+    <div class="col-sm-4"><p>Source: <a href="http://xkcd.com/936/">http://xkcd.com/936/</a></p></div>
+    <div class="col-sm-6"><img src="images/password_strength.png" class="img-responsive"></div>
+    <div class="col-sm-2">This is an image from XKCD.</div>
+    <br/>
+</div>
+<div class="row">
+    <div class="col-lg-4"><p>Source: <a href="http://xkcd.com/936/">http://xkcd.com/936/</a></p></div>
+    <div class="col-lg-6"><img src="images/password_strength.png" class="img-responsive"></div>
+    <div class="col-lg-2">This is an image from XKCD. While resizing the browser window, this row will collapse at a
+        large size than the "sm" row.
+    </div>
+</div>
+</textarea>
+                <br/>
+                <button class="btn btn-default" type="button" onclick="tryItCustom('boots7','boots7Out')">
+                    Try It
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="well" id="boots7Out"></div>
+    <!-- end WYSIWYG -->
+
+    <br/>
+    <p>
+        It's important that each row adds up to 12 columns or the page might not display properly. We can add empty
+        columns to have blank space on the site and further control the layout.
+    </p>
+    <p>There are 4 different
+        sizes that can be used for the column. In increasing order of size, they are: {"xs", "sm", "md", "lg"}.
+        Changing
+        the size of a column will change the way it collapses with the smallest size maintaining it's structure even
+        on
+        mobile phones. Try changing these sizes then resizing your browser window to se how the structure changes.
+    </p>
+</div>
+
+
+<!--<div class="well">-->
+<!--<h3>Menus</h3>-->
+<!--</div>-->
+

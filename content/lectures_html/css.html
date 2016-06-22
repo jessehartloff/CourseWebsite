@@ -1,0 +1,360 @@
+<div class="container">
+
+    <div class="panel-group">
+        <div class="text-center panel panel-primary">
+            <div class="panel-heading panel-page-heading"><h1>CSS</h1></div>
+        </div>
+    </div>
+
+    <div class="well">
+        <h2>Questions</h2>
+        Submit question here: <a href="http://ubcse.com/CSE250/suggestions.html">http://ubcse.com/CSE250/suggestions.html</a>
+    </div>
+
+    <div class="well"> <!-- well 1 -->
+        <div class="well">
+            <h2>CSS: Cascading Style Sheet</h2>
+            <p>
+                W3Schools CSS Tutorial: <a href="http://www.w3schools.com/css/">http://www.w3schools.com/css/</a>.
+            </p>
+
+            <br/>
+            <p>
+                In this lecture we will explore:
+            </p>
+            <ul>
+                <li>The style property</li>
+                <li>Embedded CSS</li>
+                <li>CSS Classes</li>
+                <li>External CSS</li>
+                <li>Choosing colors</li>
+                <!--<li>Change the color of titles on the course site</li>-->
+            </ul>
+
+
+            <br/>
+
+            <div class="well">
+
+                <h3>The style property</h3>
+                <p>In this lecture we will start adding style to our sites using CSS. There are several methods of
+                    adding
+                    style, the first of which is through the style property. Like the properties we have already seen,
+                    the
+                    style property follows the syntax of propertyName="value" though the syntax for the value is a bit
+                    different. We'll see that the value of a style tag can have multiple statements within it, ech
+                    separated
+                    by a semicolon with the syntax "name1:value1; name2:value2;". These can be thought of as
+                    sub-properties
+                    of the style property and the colon can be read as an equal sign.</p>
+                <!-- WYSIWYG Area -->
+                <div>
+                    <form role="form">
+                        <div class="form-group">
+        <textarea class="form-control" rows="3" id="css1">
+
+<h1 style="color: blue; background-color:yellow; text-align:center;">Let's add some style to our sites!</h1>
+</textarea>
+                            <br/>
+                            <button class="btn btn-default" type="button" onclick="tryItCustom('css1','css1Out')">Try It
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="well" id="css1Out"></div>
+                <!-- end WYSIWYG -->
+
+                <p>
+                    In this example we are using 3 of the style properties:
+                <ul>
+                    <li>color:blue;</li>
+                    <ul>
+                        <li>Set the color of the font to blue in this element.</li>
+                    </ul>
+                    <li>background-color:yellow;</li>
+                    <ul>
+                        <li>Set the background color of this element to yellow.</li>
+                    </ul>
+                    <li>text-align:center;</li>
+                    <ul>
+                        <li>Center the text in this element.</li>
+                    </ul>
+                </ul>
+                </p>
+
+                <br/>
+
+                <!-- WYSIWYG Area -->
+                <div>
+                    <form role="form">
+                        <div class="form-group">
+        <textarea class="form-control" rows="9" id="css2">
+<h1 style="font-weight: bold; background-color: #0300b9; color:white; text-align:center;">Let's add some style to our
+    sites!</h1>
+<img src="images/python.png" style="width:30%;">
+</textarea>
+                            <br/>
+                            <button class="btn btn-default" type="button" onclick="tryItCustom('css2','css2Out')">Try It
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="well" id="css2Out"></div>
+            </div> <!-- end WYSIWYG -->
+
+            <br/>
+
+            <!-- WYSIWYG Area -->
+            <div>
+                <form role="form">
+                    <div class="form-group">
+        <textarea class="form-control" rows="30" id="css3">
+<table style="border:2px groove green;">
+    <tr>
+        <th colspan="2" style="height:60px; font-weight: 900; background-color: greenyellow; text-align: center;">
+            <b>All about food</b>
+        </th>
+    </tr>
+    <tr>
+        <td style="border:1px solid green; background-color: yellow; color: #000000; padding: 10px;">
+            Favorite Food
+        </td>
+        <td style="border:1px solid green; background-color: yellow; color: #000000; padding: 10px;">
+            Restaurant of Choice
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2" style="border:1px solid green; background-color: yellow; color: #000000; padding: 10px;">
+            Wings
+        </td>
+        <td style="border:1px solid green; background-color: yellow; color: #000000; padding: 10px;">
+            <a href="http://www.duffswings.com">Duffs!</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="border:1px solid green; background-color: yellow; color: #000000; padding: 10px;">
+            <a href="https://www.anchorbar.com/">Anchor Bar!</a>
+        </td>
+    </tr>
+</table>
+</textarea>
+                        <br/>
+                        <button class="btn btn-default" type="button" onclick="tryItCustom('css3','css3Out')">Try It
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="well" id="css3Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+
+        <div class="well">
+            <h3>Embedded CSS</h3>
+            <p>Using the style property on individual elements can be very cumbersome, especially when we want to make a
+                change to many elements of the same type. To simplify this we will use CSS to make changes to the entire
+                page with one edit which is similar to defining a variable or a function.</p>
+
+            <!-- WYSIWYG Area -->
+            <div>
+                <form role="form">
+                    <div class="form-group">
+        <textarea class="form-control" rows="40" id="css37">
+<style>
+    table {
+        border: 2px groove green;
+    }
+
+    th {
+        height: 60px;
+        font-weight: 900;
+        background-color: greenyellow;
+        text-align: center;
+    }
+
+    td {
+        border: 1px solid green;
+        background-color: yellow;
+        color: #000000;
+        padding: 10px;
+    }
+</style>
+<table>
+    <tr>
+        <th colspan="2">All about food</th>
+    </tr>
+    <tr>
+        <td>Favorite Food</td>
+        <td>Restaurant of Choice</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Wings</td>
+        <td><a href="http://www.duffswings.com">Duffs!</a></td>
+    </tr>
+    <tr>
+        <td><a href="https://www.anchorbar.com/">Anchor Bar!</a></td>
+    </tr>
+</table>
+</textarea>
+                        <br/>
+                        <button class="btn btn-default" type="button" onclick="tryItCustom('css37','css37Out')">Try It
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="well" id="css37Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+        <p>Here we are defining style properties for every element of a particular type. This makes the code much more
+            readable and make changes simpler to implement.</p>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+        <textarea class="form-control" rows="6" id="css21">
+<style>
+    body {
+        background-color: orange;
+    }
+</style>
+    </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('css21','css21Out')">Try It
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="well" id="css21Out"></div>
+        <!-- end WYSIWYG -->
+
+        <p>Background image on a page. </p>
+        <!-- WYSIWYG Area -->
+        <div>
+            <form role="form">
+                <div class="form-group">
+        <textarea class="form-control" rows="6" id="css212">
+<style>
+    body {
+        background-image: url("images/python.png");
+    }
+</style>
+    </textarea>
+                    <br/>
+                    <button class="btn btn-default" type="button" onclick="tryItCustom('css212','css212Out')">Try It
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="well" id="css212Out"></div>
+        <!-- end WYSIWYG -->
+
+
+        <div class="well">
+            <h3>Classes</h3>
+            <p>When we don't want to change every element of a particular property, we will use classes. In fact, it is
+                rare
+                that a top level tag should be given a property in CSS. We will use classes to specify which elements
+                should
+                take which style.</p>
+            <p></p>
+
+            <!-- WYSIWYG Area -->
+            <div>
+                <form role="form">
+                    <div class="form-group">
+        <textarea class="form-control" rows="55" id="css375">
+<style>
+    .yellowTable {
+        border: 2px groove green;
+        background-color: yellow;
+    }
+
+    .blueTable {
+        border: 2px groove blue;
+        background-color: #156ad2;
+    }
+
+    th {
+        height: 60px;
+        font-weight: 900;
+        text-align: center;
+    }
+</style>
+<table class="yellowTable">
+    <tr>
+        <th colspan="2" class="yellowTable">I want this table to be yellow!</th>
+    </tr>
+    <tr>
+        <td class="yellowTable">Favorite Food</td>
+        <td class="yellowTable">Restaurant of Choice</td>
+    </tr>
+    <tr>
+        <td rowspan="2" class="yellowTable">Wings</td>
+        <td class="yellowTable"><a href="http://www.duffswings.com">Duffs!</a></td>
+    </tr>
+    <tr>
+        <td class="yellowTable"><a href="https://www.anchorbar.com/">Anchor Bar!</a></td>
+    </tr>
+</table>
+<br/>
+<table class="blueTable">
+    <tr>
+        <th colspan="2" class="blueTable">I want this table to be blue!</th>
+    </tr>
+    <tr>
+        <td class="blueTable">Favorite Food</td>
+        <td class="blueTable">Restaurant of Choice</td>
+    </tr>
+    <tr>
+        <td rowspan="2" class="blueTable">Wings</td>
+        <td class="blueTable"><a href="http://www.duffswings.com">Duffs!</a></td>
+    </tr>
+    <tr>
+        <td class="blueTable"><a href="https://www.anchorbar.com/">Anchor Bar!</a></td>
+    </tr>
+</table>
+</textarea>
+                        <br/>
+                        <button class="btn btn-default" type="button" onclick="tryItCustom('css375','css375Out')">Try It
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="well" id="css375Out"></div>
+        </div> <!-- end WYSIWYG -->
+
+
+        <div class="well">
+            <h3>Choosing Colors</h3>
+            <p>
+                There are many times in web development where we have to choose colors for our pages. Thankfully there
+                are many tools online to help us avoid editing hex values directly.
+            </p>
+            <p>Recommended: <a href="http://kuler.adobe.com/">http://kuler.adobe.com/</a></p>
+        </div>
+
+
+        <div class="well">
+            <h3>External CSS</h3>
+            <p><h5>Storing all style setting in a separate file.</h5></p>
+            <p>
+                Just like it's not desirable to use the style tag for individual elements, we usually don't want to use
+                embedded CSS for individual pages. Consider building a website with 50 different pages linked together
+                with a menu and deciding that you want to change the background color of every table. This could involve
+                editing every HTML file and changing the property inside the style tags. In the spirit of reducing our
+                typing, there is an answer for this called External CSS.
+            </p>
+            <p>
+                We will store all the style setting for an entire site in a CSS file and include the file in the head of
+                each HTML file like this:
+            </p>
+
+                <pre>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;UBStylin.css&quot;&gt;
+        </pre>
+            <p>This will include all the setting in UBStylin.css into the current page. This is the external CSS used
+                for this course site: <a href="UBStylin.css">UBStylin.css</a></p>
+        </div>
+
+
+    </div>
+</div>

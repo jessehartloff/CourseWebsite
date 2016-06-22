@@ -1,0 +1,254 @@
+<div class="container">
+
+    <div class="panel-group">
+        <div class="text-center panel panel-primary">
+            <div class="panel-heading panel-page-heading"><h1>File Input and Output</h1></div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="well">
+        <h2>Questions</h2>
+        Submit question here: <a href="http://ubcse.com/CSE250/suggestions.html">http://ubcse.com/CSE250/suggestions.html</a>
+        <br/>
+        <br/>
+    </div>
+
+    <div class="well">
+
+
+        <div class="well">
+
+
+            <div><h2>File Input - read contents from a file / File Output - write contents to a file</h2></div>
+
+
+
+            <br/>
+            <p>
+                In this lecture we will explore:
+            </p>
+            <ul>
+                <li>Reading contents from a .txt file</li>
+                <li>Writing contents to a .txt file</li>
+                <li>Reading contents from a .csv file</li>
+            </ul>
+            <br/>
+
+
+            <div class="well">
+
+                <h3>Reading from .txt file</h3>
+                <br/>
+                <p>Below is the contents of "CSE113.txt"</p>
+                <p>
+<pre>
+Hello!
+Welcome to CSE 113!
+Python is my favorite programming language.
+CSE 113 is one of my favorite courses.
+I can't wait to see my final project done!
+</pre>
+                </p>
+                <br/>
+                <p>If we use the code below in Python</p>
+                <p>
+<pre>
+with open("CSE113.txt") as file_Input: # opening the .txt file
+    readlines = file_Input.readlines()  # getting contents from the file
+for line in readlines:
+    print(line) # printing each line
+</pre>
+                </p>
+                <br/>
+                <p>Or this one below</p>
+                <p>
+<pre>
+file_Input = open("CSE113.txt",'r')
+for line in file_Input:
+    print(line)
+</pre>
+                </p>
+                <br/>
+                <p>then below (output) will be printed.</p>
+                <p>
+<pre>
+Hello!
+
+Welcome to CSE 113!
+
+Python is my favorite programming language.
+
+CSE 113 is one of my favorite courses.
+
+I can't wait to see my final project done!
+
+</pre>
+                </p>
+                <br/>
+                <div class="alert alert-info">Note that the "CSE113.txt" file must exist in your directory, or else it will throw an error as you are trying to open a file that does not exist.
+                </div>
+                <br/>
+                <p>We could notice that when reading lines from a .txt file, each line adds one extra new line ('\n').</p>
+                <p>And of course we can get rid of this.</p>
+                <br/>
+                <p>With the code below,</p>
+                <p>
+<pre>
+file_Input = open("CSE113.txt",'r')
+for line in file_Input:
+    print(line.strip())
+</pre>
+                </p>
+                <br/>
+                <p>We can see the lines (output) without inserting new line for each.</p>
+                <p>
+<pre>
+Hello!
+Welcome to CSE 113!
+Python is my favorite programming language.
+CSE 113 is one of my favorite courses.
+I can't wait to see my final project done!
+</pre>
+                </p>
+            </div>
+
+            <div class="well">
+                <h3>Using a list</h3>
+                <br/>
+                <p>We do not necessarily have to print out the contents from the .txt file. Let's use things we learned from list lecture.</p>
+                <p>
+<pre>
+file_Input = open("CSE113.txt",'r')
+line_list = []
+for line in file_Input:
+    line_list.append(line)
+    line_list.append(line.strip())
+    break
+print(line_list)
+</pre>
+                </p>
+                <br/>
+                <p>In the code we are just adding the first line with & without '\n' into a list.</p>
+                <p>From the code above, we can see output below by printing the list.</p>
+                <p>
+<pre>
+['Hello!\n', 'Hello!']
+</pre>
+                </p>
+
+            </div>
+            <div class="well">
+                <h3>Writing to .txt file</h3>
+                <br/>
+                <p>Now let's learn how to write to .txt file.</p>
+                <p>If you use the code below,</p>
+                <p>
+<pre>
+f = open("Write.txt",'w')
+f.write("let's learn how to write to a .txt file." + '\n')
+f.write("How's your final project going?" + '\n')
+f.close()
+</pre>
+                </p>
+                <br/>
+                <p>"Write.txt" file will look like</p>
+<pre>
+let's learn how to write to a .txt file.
+How's your final project going?
+</pre>
+                <br/>
+                <div class="alert alert-info">Note that the "CSE113.txt" file will be created with the contents you wrote even if it did NOT originally exist. It it existed already, the contents will be overridden by the contents you write to it. 
+                </div>
+
+            </div>
+
+            <div class="well">
+
+                <h3>Reading from .csv (comma-separated values) file</h3>
+                <br/>
+                <p>Below is a csv file of Google's stock price (from hw4) that we are going to parse line by line.</p>
+                <p>
+<pre>
+Date,Open,High,Low,Close,Volume,Adj Close
+2016-03-09,698.469971,705.679993,694.00,705.23999,1418700,705.23999
+2016-03-08,688.590027,703.789978,685.340027,693.969971,2063400,693.969971
+2016-03-07,706.900024,708.091003,686.900024,695.159973,2985100,695.159973
+</pre>
+                </p>
+                <br/>
+                <p>We can read this csv file line by line with the code below.</p>
+                <p>
+<pre>
+dataFile = open("part_of_hw4.csv", "r")
+for line in dataFile.readlines():
+    print(line)
+</pre>
+                </p>
+                <br/>
+                <p>And then our output is</p>
+
+                <p>
+<pre>
+Date,Open,High,Low,Close,Volume,Adj Close
+
+2016-03-09,698.469971,705.679993,694.00,705.23999,1418700,705.23999
+
+2016-03-08,688.590027,703.789978,685.340027,693.969971,2063400,693.969971
+
+2016-03-07,706.900024,708.091003,686.900024,695.159973,2985100,695.159973
+
+</pre>
+                </p>
+                <br/>
+                <p>Since each line is separated by commas in csv file, we can separate each element by comma.</p>
+                <p>
+<pre>
+dataFile = open("part_of_hw4.csv", "r")
+for line in dataFile.readlines():
+    print(line.split(","))
+</pre>
+                </p>
+                <br/>
+                <p>We can get lists containing each element like below.</p>
+                <p>
+<pre>
+['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Adj Close\n']
+['2016-03-09', '698.469971', '705.679993', '694.00', '705.23999', '1418700', '705.23999\n']
+['2016-03-08', '688.590027', '703.789978', '685.340027', '693.969971', '2063400', '693.969971\n']
+['2016-03-07', '706.900024', '708.091003', '686.900024', '695.159973', '2985100', '695.159973\n']
+</pre>
+                </p>
+                <br/>
+                <p>If we want to print out dates (first column in each line), we can do it in this way:</p>
+                <p>
+<pre>
+dataFile = open("part_of_hw4.csv", "r")
+for line in dataFile.readlines():
+    print(line.split(",")[0])
+</pre>
+                </p>
+                <p>We just needed to add [0], which refers to the first index of the list.</p>
+                <p>Eventually our output is </p>
+                <p>
+<pre>
+Date
+2016-03-09
+2016-03-08
+2016-03-07
+</pre>
+                </p>
+            </div>
+
+
+            <br/>
+            <br/>
+
+            <a href="examples/FileIO.zip"><h2>Code From Live Examples</h2></a>
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -33,6 +33,15 @@ ul.plain {
     /*padding-top: 60px;*/
 }
 
+div.hidden{
+    width: 0;
+}
+
+div.padded{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 div.right-side-bar {
     /*margin: 2px;*/
     /*padding: 2px;*/

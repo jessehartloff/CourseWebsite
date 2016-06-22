@@ -9,7 +9,7 @@ class Lesson(models.Model):
 
 
 class Section(models.Model):
-    lesson = models.ForeignKey(Lesson)
+    lesson = models.ForeignKey(Lesson, blank=True, null=True)
     sectionTitle = models.CharField(max_length=100)
     index = models.IntegerField()
     content = models.TextField()

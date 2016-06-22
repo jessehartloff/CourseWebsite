@@ -3,9 +3,9 @@ from .models import Choice, Question, Lesson, Section, Assignment, AssignmentPar
 # admin.site.register(Question)
 
 
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 3
+# class ChoiceInline(admin.TabularInline):
+#     model = Choice
+#     extra = 3
 
 
 class SectionInline(admin.TabularInline):
@@ -13,12 +13,12 @@ class SectionInline(admin.TabularInline):
     extra = 3
 
 
-class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['question_text']}),
-        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-    ]
-    inlines = [ChoiceInline]
+# class QuestionAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#         (None, {'fields': ['question_text']}),
+#         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+#     ]
+#     inlines = [ChoiceInline]
 
 
 class LessonAdmin(admin.ModelAdmin):
@@ -28,5 +28,5 @@ class LessonAdmin(admin.ModelAdmin):
     inlines = [SectionInline]
 
 
-admin.site.register(Question, QuestionAdmin)
+# admin.site.register(Question, QuestionAdmin)
 admin.site.register(Lesson, LessonAdmin)
