@@ -1,25 +1,25 @@
 {% extends "base.html" %}
-{#{% extends sidebars|yesno:"base_sidebars.html,base.html" %}#}
-{#{% if sidebars %}#}
-{#    {% extends "base_sidebars.html" %}#}
-{#{% else %}#}
-{#{% endif %}#}
 
 {% block title %} {{ this_lesson.title }} {% endblock %}
 
 {% block content %}
-    <div class="well">
-        <h1>{{ this_lesson.title }}</h1>
-        <a href="{% url 'lecture:index' %}">Lessons</a>
-    </div>
-    <div class="well">
-        {% for section in this_lesson.section_set.all %}
-            <h3>{{ section.sectionTitle }}</h3>
-            <p>
-                {{ section.content |safe }}
-            </p>
-            <br/>
-            <hr/><br/>
-        {% endfor %}
-    </div>
+<!--<div class="well outer-well">-->
+<div class="well lecture-section-well">
+    <h1>{{ this_lesson.title }}</h1>
+    <!--<a href="{% url 'lecture:index' %}">Lessons</a>-->
+</div>
+{% for section in this_lesson.section_set.all %}
+
+<div class="well lecture-section-well">
+    <h3>{{ section.sectionTitle }}</h3>
+    <!--<p>-->
+    {{ section.content |safe }}
+    <!--</p>-->
+    <!--<br/>-->
+    <!--<hr/>-->
+    <!--<br/>-->
+
+</div>
+{% endfor %}
+<!--</div>-->
 {% endblock %}
