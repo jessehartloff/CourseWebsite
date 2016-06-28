@@ -63,7 +63,9 @@ def parse_lesson(filename, page_type):
                         if result[0] == 'title':
                             lesson.title = result[1]
                         if result[0] == 'next_lesson':
-                            lesson.next_lesson = result[1]
+                            lesson.next_lesson_title = result[1]
+                        if result[0] == 'previous_lesson':
+                            lesson.previous_lesson_title = result[1]
                         if result[0] == 'due_date':
                             lesson.due_date = result[1]
 

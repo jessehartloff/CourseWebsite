@@ -6,11 +6,11 @@ def all_lessons(request):
 
 
 def all_lectures(request):
-    return {'all_lectures': Lesson.objects.all().filter(page_type='lecture')}
+    return {'all_lectures': Lesson.objects.all().filter(page_type='lecture').order_by('index')}
 
 
 def all_assignments(request):
-    return {'all_assignments': Lesson.objects.all().filter(page_type='assignment')}
+    return {'all_assignments': Lesson.objects.all().filter(page_type='assignment').order_by('index')}
 
 
 def syllabus(request):
@@ -19,4 +19,3 @@ def syllabus(request):
 
 def schedule(request):
     return {'schedule': Lesson.objects.all().filter(page_type='schedule')}
-
