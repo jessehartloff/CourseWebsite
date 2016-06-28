@@ -7,6 +7,11 @@
     <h1>{{ this_lesson.title }}</h1>
     <!--<a href="{% url 'lecture:index' %}">Lessons</a>-->
 </div>
+<div class="well lecture-section-well">
+
+    <h2>Due: {{ this_lesson.due_date }}</h2>
+    <!--<a href="{% url 'lecture:index' %}">Lessons</a>-->
+</div>
 {% for section in this_lesson.section_set.all %}
 
 <div class="well lecture-section-well">

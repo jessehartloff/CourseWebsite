@@ -14,12 +14,10 @@
         var bars = true;
 
         function toggle_bars() {
-            if(bars){
+            if (bars) {
                 hide_bars();
-                bars = false;
-            }else{
+            } else {
                 show_bars();
-                bars = true;
             }
         }
 
@@ -27,13 +25,29 @@
             document.getElementById("left_sidebar").className = "hidden";
             document.getElementById("right_sidebar").className = "hidden";
             document.getElementById("center_content").className = "col-xs-12 padded";
+            bars = false;
         }
 
         function show_bars() {
             document.getElementById("left_sidebar").className = "col-xs-2 less-padding";
-            document.getElementById("right_sidebar").className = "col-xs-3 less-padding";
-            document.getElementById("center_content").className = "col-xs-7 less-padding";
+            document.getElementById("right_sidebar").className = "col-xs-2 less-padding";
+            document.getElementById("center_content").className = "col-xs-8 less-padding";
+            bars = true;
         }
+
+
+        function no_left_bar() {
+            document.getElementById("left_sidebar").className = "hidden";
+            document.getElementById("right_sidebar").className = "col-xs-3 less-padding";
+            document.getElementById("center_content").className = "col-xs-9";
+            bars = true;
+        }
+
+        //        function hide_question_bar() {
+        //            document.getElementById("left_sidebar").className = "col-xs-2 less-padding";
+        //            document.getElementById("right_sidebar").className = "hidden";
+        //            document.getElementById("center_content").className = "col-xs-10 less-padding";
+        //        }
     </script>
 </head>
 
@@ -58,17 +72,26 @@
                 <!--<li><a href="?">Home</a></li>-->
                 {#                <li><a href="{% url 'lecture:index' %}">Index</a></li>#}
                 {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
-                <li><a href="{% url 'lecture:index' %}">Syllabus</a></li>
-                <li><a href="{% url 'lecture:index' %}">Schedule</a></li>
+                <li><a href="{% url 'lecture:syllabus' %}">Syllabus</a></li>
+                <li><a href="{% url 'lecture:schedule' %}">Schedule</a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Assignments<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        {% for lesson in all_assignments %}
+                            <li><a href="{% url 'lecture:assignment' lesson.title %}">{{ lesson.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Lectures<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        {% for lesson in all_lessons %}
+                        {% for lesson in all_lectures %}
                             <li><a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a></li>
                         {% endfor %}
-                        <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
-                        <!--<li><a href="?lectures/intro.html">Introduction</a></li>-->
                     </ul>
                 </li>
                 <!--<li class="dropdown">-->
@@ -94,10 +117,16 @@
                 <div class="left-side-bar">
                     <div class="well sidebar-well">
                         <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
-                <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-                        <!--<h4>Lectures</h4>-->
-                        {% for lesson in all_lessons %}
-                            <a class="menu_link" href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a><br/>
+                        <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
+                        <h4>Assignments</h4>
+                        {% for assignment in all_assignments %}
+                            <a class="menu_link"
+                               href="{% url 'lecture:assignment' assignment.title %}">{{ assignment.title }}</a><br/>
+                        {% endfor %}
+                        <h4>Lectures</h4>
+                        {% for lecture in all_lectures %}
+                            <a class="menu_link"
+                               href="{% url 'lecture:lecture' lecture.title %}">{{ lecture.title }}</a><br/>
                         {% endfor %}
                     </div>
                 </div>
@@ -105,61 +134,97 @@
         </div>
 
 
-        <div id="center_content" class="col-xs-7 less-padding">
+        <div id="center_content" class="col-xs-8 less-padding">
             <div class="content-area">
-            {% block content %}{% endblock %}
-                </div>
+                {% block content %}{% endblock %}
+            </div>
         </div>
 
 
-        <div id="right_sidebar" class="col-xs-3 less-padding">
+        <div id="right_sidebar" class="col-xs-2 less-padding">
             {% block right_sidebar %}
                 <div class="right-side-bar">
                     <div class="well sidebar-well">
                         <!--<button onclick="toggle_bars(); return false;">Hide Sidebars</button>-->
                         <p>
-                            Questions/Comments go here:
+                            Questions/Comments:
                         </p>
-                        <ul>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>What's going on?</li>>
-                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>What's going on?</li>>
-                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>What's going on?</li>>
-                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                            <li>I'm bored</li>
-                            <li>This class is confusing</li>
-                            <li>What's going on?</li>
-                        </ul>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        <div class="well question-well">What it do?</div>
+                        <div class="well question-well">We aint got all day</div>
+                        <div class="well question-well">You ever wonder why we're here?</div>
+                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use
+                            that over merge sort?
+                        </div>
+                        {#                        <ul class="plain">#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>What's going on?</li>>#}
+                        {#                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>What's going on?</li>>#}
+                        {#                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>What's going on?</li>>#}
+                        {#                            <li>This class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusingThis class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                            <li>I'm bored</li>#}
+                        {#                            <li>This class is confusing</li>#}
+                        {#                            <li>What's going on?</li>#}
+                        {#                        </ul>#}
                     </div>
                 </div></div>
             {% endblock %}

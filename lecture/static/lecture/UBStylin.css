@@ -9,6 +9,13 @@ div.hidden {
 
 div.sidebar-well {
     border-radius: 0;
+    padding: 5px;
+}
+
+div.question-well {
+    padding: 3px;
+    margin: 5px;
+    /*border-radius: 0;*/
 }
 
 
@@ -52,7 +59,7 @@ div.content-area {
 }
 
 div.less-padding{
-    padding: 0px;
+    padding: 0;
     /*margin: 0;*/
 }
 

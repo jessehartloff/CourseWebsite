@@ -2,7 +2,12 @@ from django.db import models
 
 
 class Lesson(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=101)
+    page_type = models.CharField(max_length=100, blank=True, null=True)
+    due_date = models.CharField(max_length=200, blank=True, null=True)
+    # next_lesson = models.ForeignKey('self', blank=True, null=True)
+    next_lesson_title = models.CharField(max_length=100, blank=True, null=True)
+    # index = models.IntegerField()
 
     def __str__(self):
         return self.title
@@ -16,40 +21,3 @@ class Section(models.Model):
 
     def __str__(self):
         return self.sectionTitle
-
-
-# class Activity(models.Model):
-#     section = models.ForeignKey(Section)
-
-
-class Assignment(models.Model):
-    title = models.CharField(max_length=100)
-
-
-class AssignmentPart(models.Model):
-    assignment = models.ForeignKey(Assignment)
-    text = models.TextField()
-
-
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-    def __str__(self):
-        return self.question_text
-
-    def was_published_recently(self):
-        return True
-
-    was_published_recently.admin_order_field = 'pub_date'
-    was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question)
-    choice_test = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.choice_test

@@ -4,8 +4,17 @@
 
 {% block content %}
     <div class="well">
-            {% for lesson in lesson_list %}
-                <h4><a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a></h4>
-            {% endfor %}
+        <h1>Assignments</h1>
+        {% for assignment in all_assignments %}
+            <h4><a class="menu_link"
+                   href="{% url 'lecture:assignment' assignment.title %}">{{ assignment.title }}</a><br/>
+            </h4>
+        {% endfor %}
+        <h1>Lectures</h1>
+        {% for lecture in all_lectures %}
+            <h4><a class="menu_link"
+                   href="{% url 'lecture:lecture' lecture.title %}">{{ lecture.title }}</a><br/>
+            </h4>
+        {% endfor %}
     </div>
 {% endblock %}

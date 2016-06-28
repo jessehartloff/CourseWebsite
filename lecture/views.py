@@ -1,4 +1,3 @@
-
 from django.http import Http404
 
 from django.shortcuts import get_object_or_404, render
@@ -6,8 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 
-from .models import Choice, Question, Lesson, Section, Assignment, AssignmentPart
-
+from .models import Lesson, Section
 
 # class IndexView(generic.ListView):
 #     template_name = 'polls/index.html'
@@ -42,20 +40,24 @@ def index(request):
 
 
 def lecture(request, lecture_name):
-    this_lesson = Lesson.objects.get(title=lecture_name)
-    context = {'this_lesson': this_lesson, "sidebars": True}
+    this_lesson = Lesson.objects.get(title=lecture_name, page_type='lecture')
+    context = {'this_lesson': this_lesson}
     return render(request, 'lecture/lecture.html', context)
 
 
-
-def detail(request, question_id):
-    context = {}
-    return render(request, 'base.html', context)
-
-
-def results(request, question_id):
-    raise Http404("Question does not exist")
+def assignment(request, assignment_name):
+    this_lesson = Lesson.objects.get(title=assignment_name, page_type='assignment')
+    context = {'this_lesson': this_lesson}
+    return render(request, 'lecture/assignment.html', context)
 
 
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+def syllabus(request):
+    this_lesson = Lesson.objects.get(page_type='syllabus')
+    context = {'this_lesson': this_lesson}
+    return render(request, 'lecture/syllabus.html', context)
+
+
+def schedule(request):
+    this_lesson = Lesson.objects.get(page_type='schedule')
+    context = {'this_lesson': this_lesson}
+    return render(request, 'lecture/schedule.html', context)

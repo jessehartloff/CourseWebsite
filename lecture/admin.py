@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Choice, Question, Lesson, Section, Assignment, AssignmentPart
+from .models import Lesson, Section
 # admin.site.register(Question)
 
 

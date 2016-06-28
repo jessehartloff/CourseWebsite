@@ -64,6 +64,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'lecture.context_processors.all_lessons',
+                'lecture.context_processors.all_lectures',
+                'lecture.context_processors.all_assignments',
+                'lecture.context_processors.syllabus',
+                'lecture.context_processors.schedule',
+
             ],
         },
     },
