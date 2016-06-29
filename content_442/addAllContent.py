@@ -23,6 +23,8 @@ def populate_file(file, page_type):
 
 def populate_directory(directory, page_type):
     for file in os.listdir(directory):
+        if file.find(".DS_Store") != -1:
+            continue
         populate_file(directory + file, page_type)
 
 

@@ -10,12 +10,14 @@ div.hidden {
 div.sidebar-well {
     border-radius: 0;
     padding: 5px;
+    overflow: auto;
 }
 
 div.question-well {
     padding: 3px;
     margin: 5px;
     /*border-radius: 0;*/
+    overflow: auto;
 }
 
 

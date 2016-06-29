@@ -1,0 +1,182 @@
+---
+title: Version Control
+next_lesson: Scrum
+previous_lesson: Introduction
+---
+
+== Version Control
+
+<h1 style="page-break-before:always; ">How do you share code?</h1>
+<h2>Discussion</h2>
+<h1 style="page-break-before:always; ">How we share code</h1>
+<ul>
+    <li>Working in a team, you need to share code</li>
+    <ul>
+        <li>How?</li>
+    </ul>
+    <li>Email attachments?</li>
+    <li>Sneakernet?</li>
+    <li>What if two people edit the same file at the same time?</li>
+    <li>Google Docs? Dropbox?</li>
+    <ul>
+        <li>No merging in Dropbox</li>
+        <li>GoogleDocs not meant for code</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">We’ll use git</h1>
+<ul>
+    <li>What does git do for you?</li>
+    <ul>
+        <li>Version control and source control</li>
+        <li>tracks all changes submitted to the codebase</li>
+        <ul>
+            <li>revert changes</li>
+            <li>Create working braches without affecting stable releases</li>
+        </ul>
+        <li>Tells you when there are merge conflicts</li>
+    </ul>
+    <li>Why git?</li>
+    <ul>
+        <li>Because “everyone” is using it</li>
+        <li>You’re likely to use it when you get a job</li>
+        <li>It’s free</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">git </h1>
+<ul>
+    <li>Version control software</li>
+    <ul>
+        <li>Linux/Linus</li>
+    </ul>
+    <li>Remote server hosts your repository</li>
+    <li>Every user maintains a local copy of the entire repos</li>
+    <li>Need to install git if it doesn’t come with your OS</li>
+</ul>
+<h1 style="page-break-before:always; ">git is..</h1>
+<h1 style="page-break-before:always; ">Scenario</h1>
+<ul>
+    <ul>
+        <li>Bob writes a bug just before a big release</li>
+    </ul>
+    <li>With poor version control</li>
+    <ul>
+        <li>The customer is not happy</li>
+    </ul>
+    <li>With proper version control</li>
+    <ul>
+        <li>Bob was working on separate branch</li>
+        <li>Bob pushes to the release branch</li>
+        <ul>
+            <li>The team will revert to the last commit before Bob’s blunder</li>
+        </ul>
+        <li>Customer never sees the bug</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">(some) git Commands</h1>
+<ul>
+    <li>Make a repo</li>
+    <ul>
+        <li>init</li>
+    </ul>
+    <li>Update a repo</li>
+    <ul>
+        <li>add</li>
+        <li>commit</li>
+        <li>push</li>
+    </ul>
+    <li>Connect to a remote repo</li>
+    <ul>
+        <li>clone</li>
+    </ul>
+    <li>Update local repo</li>
+    <ul>
+        <li>pull</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Making a repo</h1>
+<ul>
+    <li>init</li>
+    <ul>
+        <li>Creates a new git repo in the current directory</li>
+    </ul>
+    <li>Or create a repo in GitHub</li>
+</ul>
+<h1 style="page-break-before:always; ">Updating the Repo</h1>
+<ul>
+    <li>add &lt;filename&gt;</li>
+    <ul>
+        <li>Tell git that you want it to track &lt;filename&gt;</li>
+    </ul>
+    <li>commit</li>
+    <ul>
+        <li>Updates changes to your local repository</li>
+        <li>Add a meaningful commit message</li>
+    </ul>
+    <li>push</li>
+    <ul>
+        <li>Updates the remote repo with the changes committed to your local repo</li>
+        <li>Lets your team access your changes</li>
+        <li>Will warn you to pull first if there are remote changes</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Commit messages</h1>
+<ul>
+    <li>Many different conventions</li>
+    <li>Choose one</li>
+    <ul>
+        <li>Or not</li>
+        <li><a href="https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md%23git-commit-guidelines"><u>AngularJS</u></a>
+        </li>
+    </ul>
+    <li>Whatever you do, make your messages meaningful and descriptive</li>
+    <ul>
+        <li>Your future self and contributors will thank you!</li>
+        <li>Especially as you move on to bigger and better projects</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Connecting to a repo</h1>
+<ul>
+    <li>clone &lt;repoLocation&gt;</li>
+    <ul>
+        <li>Copies the entire repository to your local directory</li>
+    </ul>
+    <li>https</li>
+    <ul>
+        <li>git clone https://hartloff@bitbucket.org/hartloff/cse250-fall2015.git</li>
+    </ul>
+    <li>ssh</li>
+    <ul>
+        <li>git clone git@bitbucket.org:hartloff/cse250-fall2015.git</li>
+        <li>must create ssh keys and upload your public ssh key to the server</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Pull often</h1>
+<ul>
+    <li>pull</li>
+    <ul>
+        <li>Copies the most up-to-date code from the server to your local copy of the repo</li>
+        <li>Can cause a merge conflict</li>
+    </ul>
+    <li><b>pull often!</b></li>
+</ul>
+<h1 style="page-break-before:always; ">git Structure</h1>
+<h1 style="page-break-before:always; ">GitHub</h1>
+<ul>
+    <li>Provides servers to host git repos</li>
+    <ul>
+        <li>An interface and server for git</li>
+    </ul>
+    <li>Why GitHub?</li>
+    <ul>
+        <li>Because “<a
+                href="http://programmers.stackexchange.com/questions/164618/why-are-many-programmers-moving-their-code-to-github"><u>everyone</u></a>”
+            uses it
+        </li>
+        <li>It’s free</li>
+    </ul>
+    <li>If you want to use another service</li>
+    <ul>
+        <li>Let me know</li>
+        <li><a href="https://bitbucket.org/"><u>BitBucket</u></a></li>
+    </ul>
+</ul>

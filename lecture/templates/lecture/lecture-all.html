@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load  render_as_template %}
+
+{% block title %} All Lectures {% endblock %}
+
+
+{% block content %}
+    {% for lecture in all_assignments %}
+{#    {% for lecture in all_lectures %}#}
+        <div class="well lecture-section-well">
+            <h1>{{ lecture.title }}</h1>
+        </div>
+        {% block extra %}{% endblock %}
+        {% for section in lecture.section_set.all %}
+            <div class="well lecture-section-well">
+                <h3>{{ section.sectionTitle }}</h3>
+                {% render_as_template section.content %}
+            </div>
+        {% endfor %}
+        <hr/>
+    {% endfor %}
+{% endblock %}

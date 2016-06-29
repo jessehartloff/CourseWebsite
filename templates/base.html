@@ -65,7 +65,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'lecture:index' %}">UB</a>
+            <a class="navbar-brand" href="{% url 'lecture:index' %}">CSE442</a>
         </div>
         <div class="collapse navbar-collapse" id="theNavbar">
             <ul class="nav navbar-nav">
@@ -76,7 +76,7 @@
                 <li><a href="{% url 'lecture:schedule' %}">Schedule</a></li>
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Assignments<span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Points<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% for lesson in all_assignments %}
@@ -86,7 +86,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Lectures<span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Knowledge<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% for lesson in all_lectures %}
@@ -102,8 +102,8 @@
                 <!--</li>-->
                 <!--<li><a href="?resources.html">Resources</a></li>-->
                 <!--<li><a href="?Piazza.html">Piazza</a></li>-->
-                <li><a href="#" onclick="toggle_bars(); return false;">Toggle Sidebars</a></li>
-
+            </ul><ul class="nav navbar-nav navbar-right">
+                <li><a href="#" onclick="toggle_bars(); return false;">Sidebars</a></li>
             </ul>
         </div>
     </div>
@@ -118,14 +118,14 @@
                     <div class="well sidebar-well">
                         <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
                         <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-                        <h4>Assignments</h4>
+                        <h4>Earn Points</h4>
                         {% for assignment in all_assignments %}
-                            <a class="menu_link"
+                            &nbsp;<a class="menu_link"
                                href="{% url 'lecture:assignment' assignment.title %}">{{ assignment.title }}</a><br/>
                         {% endfor %}
-                        <h4>Lectures</h4>
+                        <h4>Gain Knowledge</h4>
                         {% for lecture in all_lectures %}
-                            <a class="menu_link"
+                            &nbsp;<a class="menu_link"
                                href="{% url 'lecture:lecture' lecture.title %}">{{ lecture.title }}</a><br/>
                         {% endfor %}
                     </div>

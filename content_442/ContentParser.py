@@ -24,6 +24,7 @@ def parse_lesson(filename, page_type):
         section_index = 0
 
         for line in file_content:
+            original_line = line
             line = line.strip()
 
             if state == 'normal':
@@ -52,7 +53,7 @@ def parse_lesson(filename, page_type):
                     state = 'variables'
 
                 elif section_index != 0:
-                    current_section.content += line
+                    current_section.content += original_line
 
             elif state == 'variables':
                 if line.startswith("---"):

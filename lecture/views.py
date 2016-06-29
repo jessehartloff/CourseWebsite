@@ -39,6 +39,10 @@ def index(request):
     return render(request, 'lecture/index.html', context)
 
 
+def all_lecture(request):
+    return render(request, 'lecture/lecture-all.html')
+
+
 def lecture(request, lecture_name):
     this_lesson = Lesson.objects.get(title=lecture_name, page_type='lecture')
     context = {'this_lesson': this_lesson}

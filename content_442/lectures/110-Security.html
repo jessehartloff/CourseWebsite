@@ -1,0 +1,272 @@
+---
+title: Security
+next_lesson: Careers
+previous_lesson:
+---
+
+== Security
+
+<h1 style="page-break-before:always; ">Security Flaws</h1>
+<ul>
+    <li>Errors that can be exploited by attackers</li>
+    <li>Constantly exploited</li>
+</ul>
+<h1 style="page-break-before:always; ">Database Breaches</h1>
+<ul>
+    <li>Sony PSN (2011)</li>
+    <ul>
+        <li>~77 million users</li>
+    </ul>
+    <li>Target (2013)</li>
+    <ul>
+        <li>Reports of 40-110 million customers affected</li>
+    </ul>
+    <li>JP Morgan Chase (2014)</li>
+    <ul>
+        <li>~76 million users</li>
+    </ul>
+    <li>Many others</li>
+</ul>
+<h1 style="page-break-before:always; ">SQL</h1>
+<ul>
+    <li>Allow anyone to get information about any user by UID</li>
+</ul>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘” + $_POST[“UID”] + “’”;</p>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘295081754966’”;</p>
+<p>…</p>
+<p>“Jesse Hartloff”, “hartloff@buffalo.edu”</p>
+<h1 style="page-break-before:always; ">SQL Attack</h1>
+<ul>
+    <li>Attacker wants all emails to send spam</li>
+    <li>Needs to know every UID</li>
+    <li>Can brute force UID’s</li>
+    <ul>
+        <li>Easy to detect</li>
+        <li>Stop taking requests from same IP</li>
+    </ul>
+</ul>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘” + $_POST[“UID”] + “’”;</p>
+<h1 style="page-break-before:always; ">SQL Injection</h1>
+<h2>“Uh oh”</h2>
+<ul>
+    <li>Returns every users’ name and email address</li>
+    <li>Spammers rejoice!</li>
+</ul>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘” + $_POST[“UID”] + “’”;</p>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘’ OR ‘12’=‘12’”;</p>
+<h1 style="page-break-before:always; ">SQL Injection</h1>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘” + $_POST[“UID”] + “’”;</p>
+<p>$query = “SELECT name, email FROM user WHERE uid=‘’; DROP TABLE users; SELECT * FROM passwords WHERE ‘12’=‘12’”</p>
+<h1 style="page-break-before:always; ">SQL Injection - Prevention </h1>
+<ul>
+    <li>Validate user inputs</li>
+    <li>Use language functions to clean inputs</li>
+    <li>Prevents most attacks</li>
+    <li>Still one of the most common software attacks</li>
+</ul>
+<h1 style="page-break-before:always; ">SQL Injection</h1>
+<h1 style="page-break-before:always; ">Buffer Overflow</h1>
+<ul>
+    <li>“In every sufficiently large C program”</li>
+    <h2>char values[80];</h2>
+    <h2>values = inputFromUser();</h2>
+    <ul>
+        <li>Intended functionality</li>
+        <li>User can input any data in the array</li>
+    </ul>
+    <li>User can input data larger than 80 char’s</li>
+    <ul>
+        <li>Very bad!</li>
+    </ul>
+    <li>User can write anything in the memory after the end of the array</li>
+    <ul>
+        <li>Control statement that runs malicious code</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">More C Code</h1>
+<h2>…</h2>
+<h2>memcpy(bp, pl, payload);</h2>
+<h2>…</h2>
+<ul>
+    <li>User supplies pl and payload</li>
+    <ul>
+        <li>pl : User supplied data</li>
+        <li>payload: size of pl</li>
+    </ul>
+    <li>Copy payload bytes of data from pl to bp</li>
+    <li>Send bp back to the user</li>
+</ul>
+<h1 style="page-break-before:always; ">More C Code</h1>
+<h2>memcpy(bp, pl, payload);</h2>
+<ul>
+    <li>User supplies</li>
+    <ul>
+        <li>pl = “information”;</li>
+        <li>payload = 11;</li>
+    </ul>
+    <li>User receives 11 bytes of data containing “information”</li>
+</ul>
+<h1 style="page-break-before:always; ">More C Code</h1>
+<h2>memcpy(bp, pl, payload);</h2>
+<ul>
+    <li>User supplies</li>
+    <ul>
+        <li>pl = “”;</li>
+        <li>payload = 2000;</li>
+    </ul>
+    <li>User receives 2000 bytes of server data</li>
+    <ul>
+        <li>Whatever happened to be sitting in bp when its memory was allocated</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Heartbleed</h1>
+<h2>memcpy(bp, pl, payload);</h2>
+<ul>
+    <li>This line of code was found in OpenSSL</li>
+    <ul>
+        <li>Security protocol used extensively across the internet</li>
+    </ul>
+    <li>This line was in a function called heartbeat</li>
+    <ul>
+        <li>Heartbleed bug</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; "></h1>
+<h1 style="page-break-before:always; ">Secure Communication</h1>
+<ul>
+    <li>RSA</li>
+    <ul>
+        <li>Public key encryption</li>
+        <li>Factoring is hard</li>
+        <ul>
+            <li>We hope</li>
+        </ul>
+    </ul>
+    <li>SSH</li>
+    <ul>
+        <li>Setting up git without HTTPS</li>
+        <li>Need to upload public key</li>
+        <li>Used to connect to CSE servers</li>
+        <li>Not built into Windows (PuTTY)</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Secure Hashing</h1>
+<ul>
+    <li>One way function</li>
+    <li>Easy to compute hash</li>
+    <li>Computationally infeasible to inverse</li>
+    <li>Small input space leads to lack of security</li>
+    <ul>
+        <li>Weak passwords</li>
+        <li>Brute force search</li>
+        <ul>
+            <li>Dictionary attack</li>
+            <li>Rainbow table</li>
+        </ul>
+    </ul>
+    <li>Avalanche effect</li>
+</ul>
+<h1 style="page-break-before:always; ">Passwords and Hashing</h1>
+<ul>
+    <li>SHA256 hash of my password</li>
+    <ul>
+        <li>1906bc7c801f03c41551b06e2fd406e8f471787c51357e8731ec61dd599f04c8</li>
+    </ul>
+    <li>SHA256 hash of my password with 1 edit</li>
+    <ul>
+        <li>6410ef0d3a6d3324fcba02131e5742215c99301055398a75457a27ac89dffb5f</li>
+    </ul>
+    <li>Inputs must match exactly</li>
+</ul>
+<h1 style="page-break-before:always; ">Network Attacks</h1>
+<ul>
+    <li>Man-in-the-middle</li>
+    <ul>
+        <li>Where does security start?</li>
+        <li>What if someone replaces your public key while you’re uploading</li>
+        <li>Intercept all communication and replace with their own</li>
+    </ul>
+    <li>Replay attack</li>
+    <ul>
+        <li>Resend observed network traffic</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Virus - Biology</h1>
+<ul>
+    <li>Needs a host to reproduce</li>
+    <li>Contains DNA or RNA</li>
+    <li>Protective coating of proteins</li>
+</ul>
+<h1 style="page-break-before:always; ">Virus - Computer</h1>
+<ul>
+    <li>Needs a host to reproduce</li>
+    <li>Contains code (not genetic)</li>
+    <li>Packaged as a program</li>
+</ul>
+<h1 style="page-break-before:always; ">Computer Viruses</h1>
+<ul>
+    <li>Once it finds a host</li>
+    <ul>
+        <li>Reproduce and spread</li>
+        <li>Often has a mission</li>
+    </ul>
+    <li>Motivation</li>
+    <ul>
+        <li>Senseless destruction?</li>
+        <ul>
+            <li>A good virus does not kill it’s host</li>
+        </ul>
+        <li>Revenge?</li>
+        <ul>
+            <li>Sometimes</li>
+        </ul>
+        <li>Challenge?</li>
+        <ul>
+            <li>Seems legit</li>
+        </ul>
+        <li>Financial?</li>
+        <ul>
+            <li>BotNet</li>
+        </ul>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">BotNet Scenario</h1>
+<ul>
+    <li>Legit company hires an ad agency</li>
+    <ul>
+        <li>Pays per click</li>
+        <li>Pays for traffic</li>
+    </ul>
+    <li>Ad agency maliciously controls a BotNet</li>
+    <li>Puts BotNet to work spreading spam and clicking links</li>
+    <li>Ad agency cashes big checks</li>
+    <li>Motivation to keep hosts alive and healthy</li>
+</ul>
+<h1 style="page-break-before:always; ">DoS – Denial of Service Attack</h1>
+<ul>
+    <li>Spam a site to shut it down</li>
+    <li>Simplest version is easy to detect</li>
+    <ul>
+        <li>Many requests from a single IP</li>
+        <li>Stop taking requests from that IP</li>
+    </ul>
+    <li>More dangerous with <a href="https://en.wikipedia.org/wiki/IP_address_spoofing"><u>IP-Spoofing</u></a></li>
+    <ul>
+        <li>Spoofing detection is possible</li>
+    </ul>
+    <li>With a BotNet</li>
+    <ul>
+        <li>Distributed DoS (DDos)</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; "><a
+        href="http://www.audible.com/pd/Nonfiction/Ghost-in-the-Wires-Audiobook/B005H3FYR4/ref=a_search_c4_1_1_srTtl?qid=1443589970&sr=1-1"><u>Social
+    Engineering</u></a></h1>
+<ul>
+    <li>The most vulnerable point in a well-designed security system?</li>
+    <ul>
+        <li>Humans</li>
+    </ul>
+</ul>
+<h1 style="page-break-before:always; ">Challenge</h1>
+<h2>HTML/PHP code injection</h2>
