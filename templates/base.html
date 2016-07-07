@@ -102,7 +102,8 @@
                 <!--</li>-->
                 <!--<li><a href="?resources.html">Resources</a></li>-->
                 <!--<li><a href="?Piazza.html">Piazza</a></li>-->
-            </ul><ul class="nav navbar-nav navbar-right">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" onclick="toggle_bars(); return false;">Sidebars</a></li>
             </ul>
         </div>
@@ -121,12 +122,14 @@
                         <h4>Earn Points</h4>
                         {% for assignment in all_assignments %}
                             &nbsp;<a class="menu_link"
-                               href="{% url 'lecture:assignment' assignment.title %}">{{ assignment.title }}</a><br/>
+                                     href="{% url 'lecture:assignment' assignment.title %}"><span class="glyphicon glyphicon-minus"></span> {{ assignment.title }}</a>
+                            <br/>
                         {% endfor %}
+                        <br/>
                         <h4>Gain Knowledge</h4>
                         {% for lecture in all_lectures %}
                             &nbsp;<a class="menu_link"
-                               href="{% url 'lecture:lecture' lecture.title %}">{{ lecture.title }}</a><br/>
+                                     href="{% url 'lecture:lecture' lecture.title %}"><span class="glyphicon glyphicon-minus"></span> {{ lecture.title }}</a><br/>
                         {% endfor %}
                     </div>
                 </div>
@@ -146,16 +149,16 @@
                 <div class="right-side-bar">
                     <div class="well sidebar-well">
                         <!--<button onclick="toggle_bars(); return false;">Hide Sidebars</button>-->
-{#                        <p>#}
-{#                            Questions/Comments:#}
-{#                        </p>#}
-{#                        <div class="well question-well"></div>#}
-{#                        <div class="well question-well">What it do?</div>#}
-{#                        <div class="well question-well">We aint got all day</div>#}
-{#                        <div class="well question-well">You ever wonder why we're here?</div>#}
-{#                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use#}
-{#                            that over merge sort?#}
-{#                        </div>#}
+                        {#                        <p>#}
+                        {#                            Questions/Comments:#}
+                        {#                        </p>#}
+                        {#                        <div class="well question-well"></div>#}
+                        {#                        <div class="well question-well">What it do?</div>#}
+                        {#                        <div class="well question-well">We aint got all day</div>#}
+                        {#                        <div class="well question-well">You ever wonder why we're here?</div>#}
+                        {#                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use#}
+                        {#                            that over merge sort?#}
+                        {#                        </div>#}
                     </div>
                 </div></div>
             {% endblock %}

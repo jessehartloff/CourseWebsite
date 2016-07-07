@@ -1,5 +1,6 @@
 import os
 import django
+import io
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
@@ -16,7 +17,7 @@ def parse_variable(line):
 
 def parse_lesson(filename, page_type):
 
-    with open(filename) as file_content:
+    with io.open(filename, "r", encoding='utf8') as file_content:
         lesson = Lesson.objects.create()
         lesson.page_type = page_type
 

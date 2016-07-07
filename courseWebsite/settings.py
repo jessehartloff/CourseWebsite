@@ -120,4 +120,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+# STATIC_URL = '/static/'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+# STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+# STATIC_ROOT = '/http://www.cse.buffalo.edu/~hartloff/CourseWebsite/lecture/'
+
 STATIC_URL = '/static/'
+# STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/'
+# STATIC_URL = 'http://google.com'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     '/home/csdue/hartloff/public_html/',
+#     '/home/csdue/hartloff/public_html/CourseWebsite/lecture/',
+#     '/home/csdue/hartloff/public_html/CourseWebsite/lecture/static/',
+#     '/~hartloff/CourseWebsite/lecture/',
+# ]

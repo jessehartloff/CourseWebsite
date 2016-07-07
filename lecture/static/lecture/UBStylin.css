@@ -20,6 +20,11 @@ div.question-well {
     overflow: auto;
 }
 
+.glyphicon {
+    font-size: 10px;
+    /*vertical-align: 0;*/
+}
+
 
 div.padded {
     padding-left: 5%;

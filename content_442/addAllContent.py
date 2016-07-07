@@ -1,6 +1,7 @@
 import os
 import django
 import ContentParser
+import sys
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
@@ -63,3 +64,4 @@ populate_file(extra_directory + 'schedule.html', 'schedule')
 
 sort_lesson_type('lecture')
 sort_lesson_type('assignment')
+
