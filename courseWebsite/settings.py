@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lecture',
+    'courses',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -63,11 +63,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'lecture.context_processors.all_lessons',
-                'lecture.context_processors.all_lectures',
-                'lecture.context_processors.all_assignments',
-                'lecture.context_processors.syllabus',
-                'lecture.context_processors.schedule',
+                'courses.context_processors.all_lessons',
+                'courses.context_processors.all_lectures',
+                'courses.context_processors.all_assignments',
+                'courses.context_processors.syllabus',
+                'courses.context_processors.schedule',
 
             ],
         },

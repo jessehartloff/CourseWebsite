@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/
 
 import os
 
+# import sys
+# sys.path.append("/home/csdue/hartloff/public_html/CourseWebsite")
+
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 
 application = get_wsgi_application()
+

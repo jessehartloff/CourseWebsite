@@ -3,8 +3,8 @@
 <head>
     <title>{% block title %}CSE{% endblock %}</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'lecture/UBStylin.css' %}"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'lecture/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/UBStylin.css' %}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'courses/favicon.ico' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -65,32 +65,45 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{% url 'lecture:index' %}">CSE442</a>
+            {#            <a class="navbar-brand" href="{% url 'lecture:index' %}">CSE442</a>#}
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">CSE442</a>
+                    <ul class="dropdown-menu">
+                        {% for lesson in all_assignments %}
+                            <li><a href="{% url 'courses:assignment' 'cse333' lesson.title %}">{{ lesson.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
         </div>
         <div class="collapse navbar-collapse" id="theNavbar">
             <ul class="nav navbar-nav">
                 <!--<li><a href="?">Home</a></li>-->
                 {#                <li><a href="{% url 'lecture:index' %}">Index</a></li>#}
                 {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
-                <li><a href="{% url 'lecture:syllabus' %}">Syllabus</a></li>
-                <li><a href="{% url 'lecture:schedule' %}">Schedule</a></li>
+                <li><a href="{% url 'courses:syllabus' 'cse333' %}">Syllabus</a></li>
+                <li><a href="{% url 'courses:schedule' 'cse333' %}">Schedule</a></li>
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Points<span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">Points<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% for lesson in all_assignments %}
-                            <li><a href="{% url 'lecture:assignment' lesson.title %}">{{ lesson.title }}</a></li>
+                            <li><a href="{% url 'courses:assignment' 'cse333' lesson.title %}">{{ lesson.title }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'lecture:index' %}">Knowledge<span
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">Knowledge<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% for lesson in all_lectures %}
-                            <li><a href="{% url 'lecture:lecture' lesson.title %}">{{ lesson.title }}</a></li>
+                            <li><a href="{% url 'courses:lecture' 'cse442' lesson.title %}">{{ lesson.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -112,57 +125,61 @@
 
 <div class="container-fluid">
 
-    <div class="row">
-        <div id="left_sidebar" class="col-xs-2 less-padding">
-            {% block left_sidebar %}
-                <div class="left-side-bar">
-                    <div class="well sidebar-well">
-                        <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
-                        <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-                        <h4>Earn Points</h4>
-                        {% for assignment in all_assignments %}
-                            &nbsp;<a class="menu_link"
-                                     href="{% url 'lecture:assignment' assignment.title %}"><span class="glyphicon glyphicon-minus"></span> {{ assignment.title }}</a>
+    {% block body %}
+        <div class="row">
+            <div id="left_sidebar" class="col-xs-2 less-padding">
+                {% block left_sidebar %}
+                    <div class="left-side-bar">
+                        <div class="well sidebar-well">
+                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
+                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
+                            <h4>Earn Points</h4>
+                            {% for assignment in all_assignments %}
+                                &nbsp;<a class="menu_link"
+                                         href="{% url 'courses:assignment' 'cse' assignment.title %}"><span
+                                    class="glyphicon glyphicon-minus"></span> {{ assignment.title }}</a>
+                                <br/>
+                            {% endfor %}
                             <br/>
-                        {% endfor %}
-                        <br/>
-                        <h4>Gain Knowledge</h4>
-                        {% for lecture in all_lectures %}
-                            &nbsp;<a class="menu_link"
-                                     href="{% url 'lecture:lecture' lecture.title %}"><span class="glyphicon glyphicon-minus"></span> {{ lecture.title }}</a><br/>
-                        {% endfor %}
+                            <h4>Gain Knowledge</h4>
+                            {% for lecture in all_lectures %}
+                                &nbsp;<a class="menu_link"
+                                         href="{% url 'courses:lecture' 'cse' lecture.title %}"><span
+                                    class="glyphicon glyphicon-minus"></span> {{ lecture.title }}</a><br/>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endblock %}
-        </div>
-
-
-        <div id="center_content" class="col-xs-8 less-padding">
-            <div class="content-area">
-                {% block content %}{% endblock %}
+                {% endblock %}
             </div>
+
+
+            <div id="center_content" class="col-xs-8 less-padding">
+                <div class="content-area">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+
+
+            <div id="right_sidebar" class="col-xs-2 less-padding">
+                {% block right_sidebar %}
+                    <div class="right-side-bar">
+                        <div class="well sidebar-well">
+                            <!--<button onclick="toggle_bars(); return false;">Hide Sidebars</button>-->
+                            {#                                                <p>#}
+                            {#                                                    Questions/Comments:#}
+                            {#                                                </p>#}
+                            {#                                                <div class="well question-well"></div>#}
+                            {#                                                <div class="well question-well">What it do?</div>#}
+                            {#                                                <div class="well question-well">We aint got all day</div>#}
+                            {#                                                <div class="well question-well">You ever wonder why we're here?</div>#}
+                            {#                                                <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use#}
+                            {#                                                    that over merge sort?#}
+                            {#                                                </div>#}
+                        </div>
+                    </div></div>
+                {% endblock %}
         </div>
-
-
-        <div id="right_sidebar" class="col-xs-2 less-padding">
-            {% block right_sidebar %}
-                <div class="right-side-bar">
-                    <div class="well sidebar-well">
-                        <!--<button onclick="toggle_bars(); return false;">Hide Sidebars</button>-->
-                        {#                        <p>#}
-                        {#                            Questions/Comments:#}
-                        {#                        </p>#}
-                        {#                        <div class="well question-well"></div>#}
-                        {#                        <div class="well question-well">What it do?</div>#}
-                        {#                        <div class="well question-well">We aint got all day</div>#}
-                        {#                        <div class="well question-well">You ever wonder why we're here?</div>#}
-                        {#                        <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use#}
-                        {#                            that over merge sort?#}
-                        {#                        </div>#}
-                    </div>
-                </div></div>
-            {% endblock %}
-    </div>
+    {% endblock %}
 </div>
 
 </body>
