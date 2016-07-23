@@ -31,8 +31,8 @@ def populate_file(course, the_file, page_type):
 
 
 def populate_directory(course, directory, page_type):
-    for the_file in os.listdir(content_directory + course.course_number + "/" + directory):
-        populate_file(course, content_directory + course.course_number + "/" + directory + the_file, page_type)
+    for the_file in os.listdir(content_directory + course.course_number.lower() + "/" + directory):
+        populate_file(course, content_directory + course.course_number.lower() + "/" + directory + the_file, page_type)
 
 
 def sort_lesson_type(course, page_type):
@@ -69,8 +69,8 @@ def sort_lesson_type(course, page_type):
 
 
 def copy_files(course, source_directory, destination_directory):
-    for the_file in os.listdir(content_directory + course.course_number + "/" + source_directory):
-        shutil.copyfile(content_directory + course.course_number + "/" + source_directory + the_file,
+    for the_file in os.listdir(content_directory + course.course_number.lower() + "/" + source_directory):
+        shutil.copyfile(content_directory + course.course_number.lower() + "/" + source_directory + the_file,
                         destination_directory + the_file)
 
 
@@ -82,9 +82,9 @@ def process_course(course_number, course_title, image_destination_directory):
     populate_directory(course, lectures_directory, 'lecture')
     populate_directory(course, assignments_directory, 'assignment')
 
-    populate_file(course, content_directory + course.course_number + "/" + extra_directory + 'syllabus.html',
+    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'syllabus.html',
                   'syllabus')
-    populate_file(course, content_directory + course.course_number + "/" + extra_directory + 'schedule.html',
+    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'schedule.html',
                   'schedule')
 
     sort_lesson_type(course, 'lecture')
