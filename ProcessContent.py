@@ -6,8 +6,6 @@ image_destination_directory = "static/courses/"
 if not os.path.exists(image_destination_directory):
     os.makedirs(image_destination_directory)
 
-
-
 process_course('CSE115', "Introduction to Computer Science", image_destination_directory)
 process_course('CSE250', "Data Structures", image_destination_directory)
 process_course('CSE404', "Web Development", image_destination_directory)
