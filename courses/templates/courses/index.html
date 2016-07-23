@@ -1,26 +1,24 @@
-{% extends "base.html" %}
-
-{% block title %} CSE {% endblock %}
+{% extends "courses/course_base.html" %}
 
 {% block content %}
     <div class="well">
 
-{#        <h2><a href="{% url 'lecture:syllabus' %}">Syllabus</a></h2>#}
-{#        <h2><a href="{% url 'lecture:schedule' %}">Schedule</a></h2>#}
-{##}
-{#        <h2>Earn Points</h2>#}
-{#        {% for assignment in all_assignments %}#}
-{#            <h4>&nbsp;<a class="menu_link"#}
-{#                         href="{% url 'lecture:assignment' assignment.title %}">{{ assignment.title }}</a><br/>#}
-{#            </h4>#}
-{#        {% endfor %}#}
-{#        <h2>Gain Knowledge</h2>#}
-{#        {% for lecture in all_lectures %}#}
-{#            <h4>&nbsp;<a class="menu_link"#}
-{#                         href="{% url 'lecture:lecture' lecture.title %}">{{ lecture.title }}</a><br/>#}
-{#            </h4>#}
-{#        {% endfor %}#}
-{#    <br/>#}
+        <h2><a href="{% url 'courses:syllabus' course.course_number %}">Syllabus</a></h2>
+        <h2><a href="{% url 'courses:schedule' course.course_number %}">Schedule</a></h2>
+
+        <h2>Earn Points</h2>
+        {% for assignment in assignments %}
+            <h4>&nbsp;<a class="menu_link"
+                         href="{% url 'courses:assignment' course.course_number assignment.title %}">{{ assignment.title }}</a><br/>
+            </h4>
+        {% endfor %}
+        <h2>Gain Knowledge</h2>
+        {% for lecture in lectures %}
+            <h4>&nbsp;<a class="menu_link"
+                         href="{% url 'courses:lecture' course.course_number lecture.title %}">{{ lecture.title }}</a><br/>
+            </h4>
+        {% endfor %}
+    <br/>
     <h2><a href="#" onclick="toggle_bars(); return false;">Hide/Show Sidebars</a></h2>
     </div>
 {% endblock %}

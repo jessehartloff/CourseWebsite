@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load  render_as_template %}
+
+{% block title %} {{ course.course_number }}: {{ course.course_title }} {% endblock %}
+{% block corner_title %}{{ course.course_number }}{% endblock %}
+
+{% block navbar %}
+    <ul class="nav navbar-nav">
+        <!--<li><a href="?">Home</a></li>-->
+        {#                <li><a href="{% url 'lecture:index' %}">Index</a></li>#}
+        {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
+        <li><a href="{% url 'courses:syllabus' course.course_number %}">Syllabus</a></li>
+        <li><a href="{% url 'courses:schedule' course.course_number %}">Schedule</a></li>
+
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:course_home' course.course_number %}">Points<span
+                    class="caret"></span></a>
+            <ul class="dropdown-menu">
+                {% for lesson in assignments %}
+                    <li><a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:course_home' course.course_number %}">Knowledge<span
+                    class="caret"></span></a>
+            <ul class="dropdown-menu">
+                {% for lesson in lectures %}
+                    <li><a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <!--<li class="dropdown">-->
+        <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Homework<span class="caret"></span></a>-->
+        <!--<ul class="dropdown-menu">-->
+        <!--<li><a href="?homework/hw0.html">HW0</a></li>-->
+        <!--</ul>-->
+        <!--</li>-->
+        <!--<li><a href="?resources.html">Resources</a></li>-->
+        <!--<li><a href="?Piazza.html">Piazza</a></li>-->
+    </ul>
+
+{% endblock %}
+
+{% block left_sidebar %}
+    <div class="left-side-bar">
+        <div class="well sidebar-well">
+            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
+            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
+            <h4>Earn Points</h4>
+            {% for assignment in assignments %}
+                &nbsp;<a class="menu_link"
+                         href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
+                {#                                <span class="glyphicon glyphicon-minus"></span> #}
+                &#x2022; {{ assignment.title }}</a>
+                <br/>
+            {% endfor %}
+            <br/>
+            <h4>Gain Knowledge</h4>
+            {% for lecture in lectures %}
+                &nbsp;<a class="menu_link"
+                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
+                {#                                <span class="glyphicon glyphicon-minus"></span> #}
+                &#x2022; {{ lecture.title }}</a><br/>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{#{% block content %}#}
+{#    <div class="well lecture-section-well">#}
+{#        <h1>{{ this_lesson.title }}</h1>#}
+{#        <!--<a href="{% url 'courses:index' %}">Lessons</a>-->#}
+{#    </div>#}
+{##}
+{#    {% block extra %}{% endblock %}#}
+{#    {% for section in this_lesson.section_set.all %}#}
+{##}
+{#        <div class="well lecture-section-well">#}
+{#            <h3>{{ section.sectionTitle }}</h3>#}
+{#            {% render_as_template section.content %}#}
+{#    {{ section.content | safe }}#}
+{##}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% endblock %}#}

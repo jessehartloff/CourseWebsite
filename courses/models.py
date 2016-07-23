@@ -31,5 +31,8 @@ class Section(models.Model):
     index = models.IntegerField()
     html_content = models.TextField()
 
+    class Meta:
+        ordering = ['index']
+
     def __str__(self):
         return self.sectionTitle

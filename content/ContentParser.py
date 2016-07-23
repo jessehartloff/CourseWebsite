@@ -38,7 +38,7 @@ def parse_lesson(course, filename, page_type):
                     section_index += 1
                     current_section.lesson = lesson
                     current_section.sectionTitle = line[3:].strip()
-                    current_section.content = ""
+                    current_section.html_content = ""
 
                 elif line.startswith("="):
                     # subsection called line[2:].strip()
@@ -52,7 +52,7 @@ def parse_lesson(course, filename, page_type):
                     state = 'variables'
 
                 elif section_index != 0:
-                    current_section.content += line
+                    current_section.html_content += line
 
             elif state == 'variables':
                 if line.startswith("---"):

@@ -1,8 +1,12 @@
 from courses.models import Course, Content
 
 
-def all_lessons(request):
-    return {'all_lessons': Content.objects.all()}
+def all_courses(request):
+    return {'all_courses': Course.objects.all().order_by('course_number')}
+
+
+def all_content(request):
+    return {'all_content': Content.objects.all()}
 
 
 def all_lectures(request):

@@ -16,6 +16,11 @@ lectures_directory = "lectures/"
 image_directory = "images/"
 
 
+def delete_all_courses():
+    pass
+    # Course.objects.all().delete()
+
+
 def delete_course(course_number):
     Course.objects.filter(course_number=course_number).delete()
 
@@ -55,7 +60,8 @@ def sort_lesson_type(course, page_type):
             break
         if len(lesson) != 1:
             print(
-            "Warning: More than one " + str(page_type) + " with title of " + str(only_lesson.next_content_short_title))
+                "Warning: More than one " + str(page_type) + " with title of " + str(
+                    only_lesson.next_content_short_title))
         only_lesson = lesson[0]
         only_lesson.index = current_index
         current_index += 1

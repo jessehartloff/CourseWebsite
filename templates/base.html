@@ -52,8 +52,6 @@
 </head>
 
 
-</head>
-
 <body class="outer">
 
 
@@ -69,10 +67,12 @@
 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">CSE442</a>
+                    <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">
+                        {% block corner_title %}Courses{% endblock %}</a>
                     <ul class="dropdown-menu">
-                        {% for course in all_assignments %}
-                            <li><a href="{% url 'courses:assignment' 'cse333' lesson.title %}">{{ lesson.title }}</a>
+                        {% for course in all_courses %}
+                            <li>
+                                <a href="{% url 'courses:course_home' course.course_number %}">{{ course.course_number }}: {{ course.course_title }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -80,42 +80,9 @@
             </ul>
         </div>
         <div class="collapse navbar-collapse" id="theNavbar">
-            <ul class="nav navbar-nav">
-                <!--<li><a href="?">Home</a></li>-->
-                {#                <li><a href="{% url 'lecture:index' %}">Index</a></li>#}
-                {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
-                <li><a href="{% url 'courses:syllabus' 'cse333' %}">Syllabus</a></li>
-                <li><a href="{% url 'courses:schedule' 'cse333' %}">Schedule</a></li>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">Points<span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        {% for lesson in all_assignments %}
-                            <li><a href="{% url 'courses:assignment' 'cse333' lesson.title %}">{{ lesson.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
+            {% block navbar %}{% endblock %}
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">Knowledge<span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        {% for lesson in all_lectures %}
-                            <li><a href="{% url 'courses:lecture' 'cse442' lesson.title %}">{{ lesson.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <!--<li class="dropdown">-->
-                <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Homework<span class="caret"></span></a>-->
-                <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="?homework/hw0.html">HW0</a></li>-->
-                <!--</ul>-->
-                <!--</li>-->
-                <!--<li><a href="?resources.html">Resources</a></li>-->
-                <!--<li><a href="?Piazza.html">Piazza</a></li>-->
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" onclick="toggle_bars(); return false;">Sidebars</a></li>
             </ul>
@@ -129,26 +96,28 @@
         <div class="row">
             <div id="left_sidebar" class="col-xs-2 less-padding">
                 {% block left_sidebar %}
-                    <div class="left-side-bar">
-                        <div class="well sidebar-well">
-                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
-                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-                            <h4>Earn Points</h4>
-                            {% for assignment in all_assignments %}
-                                &nbsp;<a class="menu_link"
-                                         href="{% url 'courses:assignment' 'cse' assignment.title %}"><span
-                                    class="glyphicon glyphicon-minus"></span> {{ assignment.title }}</a>
-                                <br/>
-                            {% endfor %}
-                            <br/>
-                            <h4>Gain Knowledge</h4>
-                            {% for lecture in all_lectures %}
-                                &nbsp;<a class="menu_link"
-                                         href="{% url 'courses:lecture' 'cse' lecture.title %}"><span
-                                    class="glyphicon glyphicon-minus"></span> {{ lecture.title }}</a><br/>
-                            {% endfor %}
-                        </div>
-                    </div>
+{#                    <div class="left-side-bar">#}
+{#                        <div class="well sidebar-well">#}
+{#                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->#}
+{#                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->#}
+{#                            <h4>Earn Points</h4>#}
+{#                            {% for assignment in all_assignments %}#}
+{#                                &nbsp;<a class="menu_link"#}
+{#                                         href="{% url 'courses:assignment' 'cse' assignment.title %}">#}
+{#                                <span class="glyphicon glyphicon-minus"></span> #}
+{#                                &#x2022; {{ assignment.title }}</a>#}
+{#                                <br/>#}
+{#                            {% endfor %}#}
+{#                            <br/>#}
+{#                            <h4>Gain Knowledge</h4>#}
+{#                            {% for lecture in all_lectures %}#}
+{#                                &nbsp;<a class="menu_link"#}
+{#                                         href="{% url 'courses:lecture' 'cse' lecture.title %}">#}
+{#                                <span class="glyphicon glyphicon-minus"></span> #}
+{#                               &#x2022; {{ lecture.title }}</a><br/>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
                 {% endblock %}
             </div>
 
