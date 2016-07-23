@@ -11,10 +11,12 @@ class Course(models.Model):
 
 class Content(models.Model):
     course = models.ForeignKey(Course)
-    short_title = models.CharField(max_length=40, blank=True, null=True)
     title = models.CharField(max_length=100)
+    short_title = models.CharField(max_length=40, blank=True, null=True)
     page_type = models.CharField(max_length=100, blank=True, null=True)
     due_date = models.CharField(max_length=200, blank=True, null=True)
+
+    # ordering variables
     next_content_short_title = models.CharField(max_length=100, blank=True, null=True)
     previous_content_short_title = models.CharField(max_length=100, blank=True, null=True)
     index = models.IntegerField(blank=True, null=True)

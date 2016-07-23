@@ -129,7 +129,7 @@ USE_TZ = True
 # STATIC_ROOT = '/http://www.cse.buffalo.edu/~hartloff/CourseWebsite/lecture/'
 
 STATIC_URL = '/static/'
-# STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/'
+# STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/static/'
 # STATIC_URL = 'http://google.com'
 
 # STATICFILES_DIRS = [

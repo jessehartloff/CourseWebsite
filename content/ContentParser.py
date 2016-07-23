@@ -62,10 +62,12 @@ def parse_lesson(course, filename, page_type):
                     if len(result) == 2:
                         if result[0] == 'title':
                             lesson.title = result[1]
-                        if result[0] == 'next_lesson':
-                            lesson.next_lesson_title = result[1]
-                        if result[0] == 'previous_lesson':
-                            lesson.previous_lesson_title = result[1]
+                        if result[0] == 'short_title':
+                            lesson.short_title = result[1]
+                        if result[0] == 'next_content_short':
+                            lesson.next_content_short_title = result[1]
+                        if result[0] == 'previous_content_short':
+                            lesson.previous_content_short_title = result[1]
                         if result[0] == 'due_date':
                             lesson.due_date = result[1]
 

@@ -71,7 +71,7 @@
                 <li class="dropdown">
                     <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:index' %}">CSE442</a>
                     <ul class="dropdown-menu">
-                        {% for lesson in all_assignments %}
+                        {% for course in all_assignments %}
                             <li><a href="{% url 'courses:assignment' 'cse333' lesson.title %}">{{ lesson.title }}</a>
                             </li>
                         {% endfor %}
