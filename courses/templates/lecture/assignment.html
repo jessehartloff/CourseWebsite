@@ -1,0 +1,25 @@
+{% extends "lecture/lecture.html" %}
+
+{#{% block title %} {{ this_lesson.title }} {% endblock %}#}
+
+{#{% block content %}#}
+{#<div class="well lecture-section-well">#}
+{#    <h1>{{ this_lesson.title }}</h1>#}
+{#    <!--<a href="{% url 'lecture:index' %}">Lessons</a>-->#}
+{#</div>#}
+    {% block extra %}
+<div class="well lecture-section-well">
+
+    <h3>Due: {{ this_lesson.due_date }}</h3>
+    <!--<a href="{% url 'lecture:index' %}">Lessons</a>-->
+</div>
+        {% endblock %}
+{#{% for section in this_lesson.section_set.all %}#}
+{##}
+{#<div class="well lecture-section-well">#}
+{#    <h3>{{ section.sectionTitle }}</h3>#}
+{#    {{ section.content |safe }}#}
+{##}
+{#</div>#}
+{#{% endfor %}#}
+{#{% endblock %}#}
