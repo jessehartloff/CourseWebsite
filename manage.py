@@ -2,6 +2,13 @@
 import os
 import sys
 
+'''
+ASDFAguohqerf
+eagrioaw'
+awefu
+fqeirojfha
+afwruohasf
+'''
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 

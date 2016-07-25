@@ -1,5 +1,6 @@
 ul.plain {
     list-style-type: none;
+    text-decoration: none;
 }
 
 div.hidden {
