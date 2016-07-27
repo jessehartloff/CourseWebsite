@@ -24,7 +24,6 @@ def parse_lesson(course, filename, page_type):
         section_index = 0
 
         for line in file_content:
-            line = line.strip()
 
             if state == 'normal':
 
@@ -32,6 +31,7 @@ def parse_lesson(course, filename, page_type):
                 #     lesson.title = line[4:].strip()
 
                 if line.startswith("=="):
+                    line = line.strip()
                     if section_index != 0:
                         current_section.save()
                     current_section = Section.objects.create(index=section_index)
@@ -41,10 +41,12 @@ def parse_lesson(course, filename, page_type):
                     current_section.html_content = ""
 
                 elif line.startswith("="):
+                    line = line.strip()
                     # subsection called line[2:].strip()
                     pass
 
                 elif line.startswith("[.python_example]"):
+                    line = line.strip()
                     # read between the "--"'s
                     pass
 
@@ -58,6 +60,7 @@ def parse_lesson(course, filename, page_type):
                 if line.startswith("---"):
                     state = 'normal'
                 else:
+                    line = line.strip()
                     result = parse_variable(line)
                     if len(result) == 2:
                         if result[0] == 'title':
