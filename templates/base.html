@@ -72,7 +72,7 @@
                     <ul class="dropdown-menu">
                         {% for course in all_courses %}
                             <li>
-                                <a href="{% url 'courses:course_home' course.course_number %}">{{ course.course_number }}: {{ course.course_title }}</a>
+                                <a href="{% url 'courses:syllabus' course.course_number %}">{{ course.course_number }}: {{ course.course_title }}</a>
                             </li>
                         {% endfor %}
                     </ul>
