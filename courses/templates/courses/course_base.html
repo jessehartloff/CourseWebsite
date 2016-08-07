@@ -2,7 +2,8 @@
 {% load  render_as_template %}
 
 {% block title %} {{ course.course_number }}: {{ course.course_title }} {% endblock %}
-{% block corner_title %}{{ course.course_number }}{% endblock %}
+{#{% block corner_title %}{{ course.course_number }}{% endblock %}#}
+{% block corner_title %}Courses{% endblock %}
 
 {% block navbar %}
     <ul class="nav navbar-nav">
@@ -13,22 +14,27 @@
         <li><a href="{% url 'courses:schedule' course.course_number %}">Schedule</a></li>
 
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:course_home' course.course_number %}">Points<span
+            <a class="dropdown-toggle" data-toggle="dropdown"
+               href="{% url 'courses:course_home' course.course_number %}">Points<span
                     class="caret"></span></a>
             <ul class="dropdown-menu">
                 {% for lesson in assignments %}
-                    <li><a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
+                    <li>
+                        <a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
                     </li>
                 {% endfor %}
             </ul>
         </li>
 
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'courses:course_home' course.course_number %}">Knowledge<span
+            <a class="dropdown-toggle" data-toggle="dropdown"
+               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span
                     class="caret"></span></a>
             <ul class="dropdown-menu">
                 {% for lesson in lectures %}
-                    <li><a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a></li>
+                    <li>
+                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>
@@ -49,20 +55,22 @@
         <div class="well sidebar-well">
             <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
             <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-            <h4>Earn Points</h4>
+            <h4>&nbsp;{{ course.course_number }}</h4>
+            &nbsp; <a href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
+            &nbsp; <a href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
+            <br/>
+            <h4>&nbsp;Earn Points</h4>
             {% for assignment in assignments %}
                 &nbsp;<a class="menu_link"
                          href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
-                {#                                <span class="glyphicon glyphicon-minus"></span> #}
                 &#x2022; {{ assignment.title }}</a>
                 <br/>
             {% endfor %}
-            <br/>
-            <h4>Gain Knowledge</h4>
+
+            <h4>&nbsp;Gain Knowledge</h4>
             {% for lecture in lectures %}
                 &nbsp;<a class="menu_link"
                          href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
-                {#                                <span class="glyphicon glyphicon-minus"></span> #}
                 &#x2022; {{ lecture.title }}</a><br/>
             {% endfor %}
         </div>

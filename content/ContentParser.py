@@ -4,7 +4,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
 
-from courses.models import Course, Content, Section
+from courses.models import Course, Content, Section, SubSection
 
 
 def parse_variable(line):
@@ -22,6 +22,9 @@ def parse_lesson(course, filename, page_type):
 
         state = 'normal'
         section_index = 0
+        subsection_index = 0
+
+        current_top_level_section = 0
 
         for line in file_content:
 
@@ -35,15 +38,22 @@ def parse_lesson(course, filename, page_type):
                     if section_index != 0:
                         current_section.save()
                     current_section = Section.objects.create(index=section_index)
+                    current_top_level_section = current_section
                     section_index += 1
+                    subsection_index = 0
                     current_section.lesson = lesson
                     current_section.sectionTitle = line[3:].strip()
                     current_section.html_content = ""
 
                 elif line.startswith("="):
                     line = line.strip()
-                    # subsection called line[2:].strip()
-                    pass
+                    if section_index != 0:
+                        current_section.save()
+                    current_section = SubSection.objects.create(index=subsection_index)
+                    subsection_index += 1
+                    current_section.section = current_top_level_section
+                    current_section.subSectionTitle = line[2:].strip()
+                    current_section.html_content = ""
 
                 elif line.startswith("[.python_example]"):
                     line = line.strip()
