@@ -1,5 +1,5 @@
 # from django.http import Http404
-
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -29,7 +29,7 @@ def index(request):
 
 def render_content(request, course_number, page_type, template, short_title=""):
     course = Course.objects.get(course_number=course_number)
-    lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
+    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     this_lecture = Content.objects.get(course=course, page_type=page_type, short_title=short_title) if short_title != "" \
         else Content.objects.get(course=course, page_type=page_type)
@@ -67,3 +67,13 @@ def schedule(request, course_number):
     # this_lesson = Content.objects.get(course=course, page_type='schedule')
     # context = {'course': course, 'this_lesson': this_lesson}
     # return render(request, 'courses/schedule.html', context)
+
+
+def hook(request, course_number):
+    valid_courses = ["CSE442", "CSE442-Fall"]
+    if course_number in valid_courses:
+        with open("junk.txt", "w") as output_file:
+            output_file.write(str(request))
+        # raise Http404("You really shouldn't be here: " + str(request))
+
+    raise Http404("You really shouldn't be here")

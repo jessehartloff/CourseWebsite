@@ -19,6 +19,7 @@ def parse_lesson(course, filename, page_type):
     with open(filename) as file_content:
         lesson = Content.objects.create(course=course)
         lesson.page_type = page_type
+        lesson.index = -1
 
         state = 'normal'
         section_index = 0
