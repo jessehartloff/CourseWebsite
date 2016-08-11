@@ -12,3 +12,4 @@ process_course('CSE404', "Web Development", image_destination_directory)
 process_course('CSE442', "Software Engineering", image_destination_directory)
 process_course('CSE442-Fall', "Software Engineering", image_destination_directory)
 
+### Did it work???
