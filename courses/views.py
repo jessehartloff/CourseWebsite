@@ -73,7 +73,7 @@ def schedule(request, course_number):
 
 def sys_call(the_call):
     # print(the_call)
-    result = subprocess.Popen(the_call.strip().split(" "), stdout=subprocess.PIPE).communicate()[0]
+    result = subprocess.Popen(the_call.strip().split(" "), stderr=subprocess.PIPE).communicate()[0]
     result = result.decode("utf-8")
     return result
 
