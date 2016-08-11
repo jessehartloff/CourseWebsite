@@ -1,4 +1,6 @@
 # from django.http import Http404
+import subprocess
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponseRedirect
@@ -69,13 +71,21 @@ def schedule(request, course_number):
     # context = {'course': course, 'this_lesson': this_lesson}
     # return render(request, 'courses/schedule.html', context)
 
+def sys_call(the_call):
+    # print(the_call)
+    result = subprocess.Popen(the_call.strip().split(" "), stdout=subprocess.PIPE).communicate()[0]
+    result = result.decode("utf-8")
+    return result
+
 
 def hook(request, course_number):
     valid_courses = ["CSE442", "CSE442-Fall"]
+    result = "no call"
     if course_number in valid_courses:
-        call(["git", "pull"])
+        result = sys_call("git pull")
+        # call(["git", "pull"])
         # with open("junk.txt", "w") as output_file:
         #     output_file.write(str(request))
         # raise Http404("You really shouldn't be here: " + str(request))
 
-    raise Http404("You really shouldn't be here")
+    raise Http404("You really shouldn't be here: " + str(result))
