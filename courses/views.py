@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from subprocess import call
 
 from .models import Course, Content
 
@@ -72,8 +73,9 @@ def schedule(request, course_number):
 def hook(request, course_number):
     valid_courses = ["CSE442", "CSE442-Fall"]
     if course_number in valid_courses:
-        with open("junk.txt", "w") as output_file:
-            output_file.write(str(request))
+        call(["git", "pull"])
+        # with open("junk.txt", "w") as output_file:
+        #     output_file.write(str(request))
         # raise Http404("You really shouldn't be here: " + str(request))
 
     raise Http404("You really shouldn't be here")
