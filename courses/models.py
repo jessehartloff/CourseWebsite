@@ -12,7 +12,7 @@ class Comment(models.Model):
 
 
 class Course(models.Model):
-    course_number = models.CharField(max_length=10, blank=True, null=True)
+    course_number = models.CharField(max_length=15, blank=True, null=True)
     course_title = models.CharField(max_length=100, blank=True, null=True)
 
 
