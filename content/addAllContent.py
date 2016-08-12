@@ -6,7 +6,7 @@ import shutil
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
 
-from courses.models import Course, Content
+from courses.models import Course, Content, Comment
 
 content_directory = "content/"
 
@@ -76,6 +76,12 @@ def copy_files(course, source_directory, destination_directory):
 
 def process_course(course_number, course_title, image_destination_directory):
     delete_course(course_number)
+
+    # comments = Comment.objects.all()
+    # comments.delete()
+
+    # comment_object = Comment.objects.create(comment_text="Howdy!")
+    # comment_object.save()
 
     course = Course.objects.create(course_number=course_number, course_title=course_title)
 

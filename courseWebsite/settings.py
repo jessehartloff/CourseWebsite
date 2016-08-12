@@ -63,12 +63,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'courses.context_processors.all_comments',
                 'courses.context_processors.all_courses',
                 'courses.context_processors.all_content',
                 'courses.context_processors.all_lectures',
                 'courses.context_processors.all_assignments',
                 'courses.context_processors.syllabus',
                 'courses.context_processors.schedule',
+
 
             ],
         },

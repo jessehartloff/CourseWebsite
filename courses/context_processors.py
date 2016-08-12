@@ -1,5 +1,8 @@
-from courses.models import Course, Content
+from courses.models import Course, Content, Comment
 
+
+def all_comments(request):
+    return {'all_comments': Comment.objects.all()}
 
 def all_courses(request):
     return {'all_courses': Course.objects.all().order_by('course_number')}

@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^(?P<course_number>.+)/syllabus/$', views.syllabus, name='syllabus'),
     url(r'^(?P<course_number>.+)/schedule/$', views.schedule, name='schedule'),
     url(r'^(?P<course_number>.+)/hook/$', views.hook, name='hook'),
-    url(r'^(?P<course_number>.+)/hook$', views.hook, name='hook'),
+    url(r'^(?P<course_number>.+)/hook$', views.hook, name='hook2'),
+    url(r'^(?P<course_number>.+)/comment_form/', views.comment_form, name='comment_form'),
     # url(r'^(?P<course_number>.+)/all_lecture/$', views.all_lecture, name='all_lecture'),
     url(r'^', views.index, name='index'),
 ]

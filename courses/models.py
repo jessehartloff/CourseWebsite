@@ -4,6 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class Comment(models.Model):
+    name = models.CharField(max_length=14, default="anon")
+    comment_text = models.CharField(max_length=140, default="no text")
+    votes = models.IntegerField(default=0)
+    # time of submission
+
+
 class Course(models.Model):
     course_number = models.CharField(max_length=10, blank=True, null=True)
     course_title = models.CharField(max_length=100, blank=True, null=True)

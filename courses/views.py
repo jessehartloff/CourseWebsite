@@ -1,14 +1,45 @@
 # from django.http import Http404
 import subprocess
 
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 # from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from subprocess import call
 
-from .models import Course, Content
+from .forms import CommentForm
+
+from .models import Course, Content, Comment
+
+
+def comment_form(request, course_number):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = CommentForm(request.POST)
+        # comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get('comment_text')))
+        # comment_object.save()
+
+        # check whether it's valid:
+        if form.is_valid():
+            pass
+            # jhvg;
+            # form.cleaned_data.comment
+            comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
+            comment_object.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render_content(request, course_number, 'schedule', 'courses/schedule.html')
+            # return HttpResponseRedirect('/learn/courses/' + str(course_number) + '/schedule/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = CommentForm()
+
+    return render_content(request, course_number, 'schedule', 'courses/schedule.html')
+    # return render(request, 'courses/schedule.html', {'form': form, 'course_number'})
 
 
 def course_home(request, course_number):
@@ -31,12 +62,17 @@ def index(request):
 
 
 def render_content(request, course_number, page_type, template, short_title=""):
+    # comment_object = Comment.objects.create()
+    # comment_object.comment_text = "hello!!"
+    # comment_object.save()
     course = Course.objects.get(course_number=course_number)
     lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     this_lecture = Content.objects.get(course=course, page_type=page_type, short_title=short_title) if short_title != "" \
         else Content.objects.get(course=course, page_type=page_type)
-    context = {'lectures': lectures, 'assignments': assignments, 'course': course, 'this_lecture': this_lecture}
+    form = CommentForm()
+    context = {'lectures': lectures, 'assignments': assignments, 'course': course, 'this_lecture': this_lecture,
+               'form': form}
     return render(request, template, context)
 
 
@@ -71,9 +107,10 @@ def schedule(request, course_number):
     # context = {'course': course, 'this_lesson': this_lesson}
     # return render(request, 'courses/schedule.html', context)
 
+
 def sys_call(the_call):
     # print(the_call)
-    result = subprocess.Popen(the_call.strip().split(" "), stderr=subprocess.PIPE).communicate()[0]
+    result = subprocess.Popen(the_call.strip().split(" "), stdout=subprocess.PIPE).communicate()[0]
     result = result.decode("utf-8")
     return result
 
