@@ -36,6 +36,7 @@ def comment_form(request, course_number):
             # jhvg;
             # form.cleaned_data.comment
             comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
+            comment_object.time_submitted = timezone.now()
             comment_object.save()
             # process the data in form.cleaned_data as required
             # ...
