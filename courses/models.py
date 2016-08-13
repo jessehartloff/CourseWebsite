@@ -12,7 +12,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=14, default="anon")
     comment_text = models.CharField(max_length=250, default="no text")
     votes = models.IntegerField(default=0)
-    time_submitted = models.DateTimeField(default=timezone.now())
+    time_submitted = models.DateTimeField(auto_now_add=True)
     answered = models.BooleanField(default=False)
 
     # defaults to time submitted. Update before setting answered to True
