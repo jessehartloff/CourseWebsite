@@ -7,10 +7,19 @@ from django.shortcuts import get_object_or_404, render
 from django.core.urlresolvers import reverse
 from django.views import generic
 from subprocess import call
+from django.utils import timezone
 
 from .forms import CommentForm
 
 from .models import Course, Content, Comment
+
+
+def comment_answered(request, course_number, comment_id):
+    comment_object = Comment.objects.filter(comment_id=comment_id)[0]
+    comment_object.time_answered = timezone.now()
+    comment_object.answered = True
+    comment_object.save()
+    return render_content(request, course_number, 'schedule', 'courses/schedule.html')
 
 
 def comment_form(request, course_number):

@@ -1,8 +1,10 @@
+import datetime
+
 from courses.models import Course, Content, Comment
 
 
 def all_comments(request):
-    return {'all_comments': Comment.objects.all()}
+    return {'all_comments': Comment.objects.all().filter(time_submitted__gte=datetime.datetime.now()-datetime.timedelta(minutes=30)).order_by('answered', '-time_submitted')}
 
 def all_courses(request):
     return {'all_courses': Course.objects.all().order_by('course_number')}

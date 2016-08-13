@@ -1,14 +1,22 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from django.utils import timezone
+
 from django.db import models
 
 
 class Comment(models.Model):
+    comment_id = models.AutoField(primary_key=True)
+    course_number = models.CharField(max_length=15, blank=True, null=True)
     name = models.CharField(max_length=14, default="anon")
-    comment_text = models.CharField(max_length=140, default="no text")
+    comment_text = models.CharField(max_length=250, default="no text")
     votes = models.IntegerField(default=0)
-    # time of submission
+    time_submitted = models.DateTimeField(default=timezone.now())
+    answered = models.BooleanField(default=False)
+
+    # defaults to time submitted. Update before setting answered to True
+    time_answered = models.DateTimeField(default=timezone.now())
 
 
 class Course(models.Model):

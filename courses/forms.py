@@ -1,6 +1,9 @@
 from django import forms
 
 
+class CommentAnsweredForm(forms.Form):
+    comment = forms.CharField(label='Comment', max_length=140)
+
 class CommentForm(forms.Form):
     comment = forms.CharField(label='Comment', max_length=140)
 
