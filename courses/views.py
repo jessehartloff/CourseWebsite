@@ -19,7 +19,8 @@ def comment_answered(request, course_number, comment_id):
     comment_object.time_answered = timezone.now()
     comment_object.answered = True
     comment_object.save()
-    return render_content(request, course_number, 'schedule', 'courses/schedule.html')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return render_content(request, course_number, 'schedule', 'courses/schedule.html')
 
 
 def comment_form(request, course_number):
