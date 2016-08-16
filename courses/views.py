@@ -41,14 +41,14 @@ def comment_form(request, course_number):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return render_content(request, course_number, 'schedule', 'courses/schedule.html')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             # return HttpResponseRedirect('/learn/courses/' + str(course_number) + '/schedule/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = CommentForm()
 
-    return render_content(request, course_number, 'schedule', 'courses/schedule.html')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # return render(request, 'courses/schedule.html', {'form': form, 'course_number'})
 
 
