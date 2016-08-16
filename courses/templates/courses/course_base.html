@@ -56,8 +56,8 @@
             <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
             <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
             <h4>&nbsp;{{ course.course_number }}</h4>
-            &nbsp; <a href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
-            &nbsp; <a href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
+            &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
+            &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
             <br/>
             <h4>&nbsp;Earn Points</h4>
             {% for assignment in assignments %}
