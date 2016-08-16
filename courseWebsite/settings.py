@@ -88,9 +88,9 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_courses',
-        'USER': 'django',
-        'PASSWORD': 'donthackmeplease',
+        'NAME': os.environ['DJANGO_DB_USER'],
+        'USER': os.environ['DJANGO_DB_USER'],
+        'PASSWORD': os.environ['DJANGO_DB_KEY'],
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
