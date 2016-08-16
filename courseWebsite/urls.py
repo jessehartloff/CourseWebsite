@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^courses/', include('courses.urls', namespace="courses")),
-    url(r'^admin/', admin.site.urls),
-    url(r'^admin', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
+    # url(r'^admin', admin.site.urls),
     url(r'^', TemplateView.as_view(template_name='faculty_page.html')),
 ]
