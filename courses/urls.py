@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^(?P<course_number>.+)/comment_answered/(?P<comment_id>.+)', views.comment_answered, name='comment_answered'),
     # url(r'^(?P<course_number>.+)/all_lecture/$', views.all_lecture, name='all_lecture'),
     url(r'^', views.index, name='index'),
+    url(r'.*', views.index, name='index'),
 ]
