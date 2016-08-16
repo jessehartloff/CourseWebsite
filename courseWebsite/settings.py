@@ -88,7 +88,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DJANGO_DB_USER'],
+        'NAME': os.environ['DJANGO_DB_NAME'],
         'USER': os.environ['DJANGO_DB_USER'],
         'PASSWORD': os.environ['DJANGO_DB_KEY'],
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
