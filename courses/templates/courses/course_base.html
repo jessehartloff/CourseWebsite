@@ -26,18 +26,21 @@
             </ul>
         </li>
 
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown"
-               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span
-                    class="caret"></span></a>
-            <ul class="dropdown-menu">
-                {% for lesson in lectures %}
-                    <li>
-                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
+{#        <li class="dropdown">#}
+{#            <a class="dropdown-toggle" data-toggle="dropdown"#}
+{#               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span#}
+{#                    class="caret"></span></a>#}
+{#            <ul class="dropdown-menu">#}
+{#                {% for lesson in lectures %}#}
+{#                    <li>#}
+{#                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </li>#}
+
+
+
         <!--<li class="dropdown">-->
         <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Homework<span class="caret"></span></a>-->
         <!--<ul class="dropdown-menu">-->
@@ -67,12 +70,12 @@
                 <br/>
             {% endfor %}
 
-            <h4>&nbsp;Gain Knowledge</h4>
-            {% for lecture in lectures %}
-                &nbsp;<a class="menu_link"
-                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
-                &#x2022; {{ lecture.title }}</a><br/>
-            {% endfor %}
+{#            <h4>&nbsp;Gain Knowledge</h4>#}
+{#            {% for lecture in lectures %}#}
+{#                &nbsp;<a class="menu_link"#}
+{#                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">#}
+{#                &#x2022; {{ lecture.title }}</a><br/>#}
+{#            {% endfor %}#}
         </div>
     </div>
 {% endblock %}
