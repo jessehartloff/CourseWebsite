@@ -24,29 +24,29 @@
         function hide_bars() {
             document.getElementById("left_sidebar").className = "hidden";
             document.getElementById("right_sidebar").className = "hidden";
-            document.getElementById("center_content").className = "col-xs-12 padded";
+            document.getElementById("center_content").className = "col-sm-12 padded";
             bars = false;
         }
 
         function show_bars() {
-            document.getElementById("left_sidebar").className = "col-xs-2 less-padding";
-            document.getElementById("right_sidebar").className = "col-xs-2 less-padding";
-            document.getElementById("center_content").className = "col-xs-8 less-padding";
+            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";
+            document.getElementById("right_sidebar").className = "col-sm-2 less-padding";
+            document.getElementById("center_content").className = "col-sm-8 less-padding";
             bars = true;
         }
 
 
         function no_left_bar() {
             document.getElementById("left_sidebar").className = "hidden";
-            document.getElementById("right_sidebar").className = "col-xs-3 less-padding";
-            document.getElementById("center_content").className = "col-xs-9";
+            document.getElementById("right_sidebar").className = "col-sm-3 less-padding";
+            document.getElementById("center_content").className = "col-sm-9";
             bars = true;
         }
 
         //        function hide_question_bar() {
-        //            document.getElementById("left_sidebar").className = "col-xs-2 less-padding";
+        //            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";
         //            document.getElementById("right_sidebar").className = "hidden";
-        //            document.getElementById("center_content").className = "col-xs-10 less-padding";
+        //            document.getElementById("center_content").className = "col-sm-10 less-padding";
         //        }
     </script>
 </head>
@@ -94,7 +94,7 @@
 
     {% block body %}
         <div class="row">
-            <div id="left_sidebar" class="col-xs-2 less-padding">
+            <div id="left_sidebar" class="col-sm-2 less-padding">
                 {% block left_sidebar %}
 {#                    <div class="left-side-bar">#}
 {#                        <div class="well sidebar-well">#}
@@ -122,14 +122,14 @@
             </div>
 
 
-            <div id="center_content" class="col-xs-8 less-padding">
+            <div id="center_content" class="col-sm-8 less-padding">
                 <div class="content-area">
                     {% block content %}{% endblock %}
                 </div>
             </div>
 
 
-            <div id="right_sidebar" class="col-xs-2 less-padding">
+            <div id="right_sidebar" class="col-sm-2 less-padding">
                 {% block right_sidebar %}
                     <div class="right-side-bar">
                         <div class="well sidebar-well">
