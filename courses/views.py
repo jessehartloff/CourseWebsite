@@ -36,10 +36,10 @@ def comment_form(request, course_number):
         if True:
             # jhvg;
             # form.cleaned_data.comment
-            # comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
+            comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
 
             ### !!!*** CAUTION: Intentional Security Hole ***!!! ###
-            comment_object = Comment.objects.create(comment_text=str(form.get("comment")))
+            # comment_object = Comment.objects.create(comment_text=str(form.get("comment")))
 
 
             # comment_object.time_submitted = timezone.now()
