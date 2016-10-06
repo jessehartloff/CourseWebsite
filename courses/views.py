@@ -32,8 +32,8 @@ def comment_form(request, course_number):
         # comment_object.save()
 
         # check whether it's valid:
-        # if form.is_valid():
-        if True:
+        if form.is_valid():
+        # if True:
             # jhvg;
             # form.cleaned_data.comment
             comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
