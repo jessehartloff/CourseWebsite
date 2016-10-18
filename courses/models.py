@@ -64,3 +64,7 @@ class SubSection(models.Model):
 
     def __str__(self):
         return self.sectionTitle
+
+
+class GroupProject(models.Model):
+    pass

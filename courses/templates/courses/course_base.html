@@ -26,18 +26,21 @@
             </ul>
         </li>
 
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown"
-               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span
-                    class="caret"></span></a>
-            <ul class="dropdown-menu">
-                {% for lesson in lectures %}
-                    <li>
-                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
+{#        <li class="dropdown">#}
+{#            <a class="dropdown-toggle" data-toggle="dropdown"#}
+{#               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span#}
+{#                    class="caret"></span></a>#}
+{#            <ul class="dropdown-menu">#}
+{#                {% for lesson in lectures %}#}
+{#                    <li>#}
+{#                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </li>#}
+
+
+
         <!--<li class="dropdown">-->
         <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Homework<span class="caret"></span></a>-->
         <!--<ul class="dropdown-menu">-->
@@ -56,8 +59,8 @@
             <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
             <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
             <h4>&nbsp;{{ course.course_number }}</h4>
-            &nbsp; <a href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
-            &nbsp; <a href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
+            &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
+            &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
             <br/>
             <h4>&nbsp;Earn Points</h4>
             {% for assignment in assignments %}
@@ -67,12 +70,12 @@
                 <br/>
             {% endfor %}
 
-            <h4>&nbsp;Gain Knowledge</h4>
-            {% for lecture in lectures %}
-                &nbsp;<a class="menu_link"
-                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
-                &#x2022; {{ lecture.title }}</a><br/>
-            {% endfor %}
+{#            <h4>&nbsp;Gain Knowledge</h4>#}
+{#            {% for lecture in lectures %}#}
+{#                &nbsp;<a class="menu_link"#}
+{#                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">#}
+{#                &#x2022; {{ lecture.title }}</a><br/>#}
+{#            {% endfor %}#}
         </div>
     </div>
 {% endblock %}

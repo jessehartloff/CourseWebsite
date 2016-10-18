@@ -19,12 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i&to3#n$g0k$hmvvhb9*_&jszk!p^1g9oc=$@(hn=p5hycgr@q'
+# SECRET_KEY = 'i&to3#n$g0k$hmvvhb9*_&jszk!p^1g9oc=$@(hn=p5hycgr@q'
+SECRET_KEY = os.environ['DJANGO_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yeager.cse.buffalo.edu']
 
 # Application definition
 
@@ -88,7 +89,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DJANGO_DB_USER'],
+        'NAME': os.environ['DJANGO_DB_NAME'],
         'USER': os.environ['DJANGO_DB_USER'],
         'PASSWORD': os.environ['DJANGO_DB_KEY'],
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on

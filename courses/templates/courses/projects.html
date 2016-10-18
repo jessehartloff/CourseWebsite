@@ -1,0 +1,23 @@
+{% extends "courses/course_base.html" %}
+{% load  render_as_template %}
+
+
+{% block content %}
+    <div class="well lecture-section-well">
+        <h1>{{ this_lecture.title }}</h1>
+    </div>
+
+    {% block extra %}{% endblock %}
+
+    {% for section in this_lecture.section_set.all %}
+        <div class="well lecture-section-well">
+            <h3>{{ section.sectionTitle }}</h3>
+            {% render_as_template section.html_content %}
+            {% for subsection in section.subsection_set.all %}
+                <hr/>
+                <h4>{{ subsection.subSectionTitle }}</h4>
+                {% render_as_template subsection.html_content %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
