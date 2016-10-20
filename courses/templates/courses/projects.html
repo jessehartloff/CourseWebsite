@@ -16,52 +16,57 @@
                 <div class="row">
             {% endif %}
             <div class="col-md-6">
-                <div class="well">
-
-                    <h3>{{ group.name }} - <a href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a></h3>
-{#                    <h4>#}
-{#                        <a href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a><br/>#}
-{#                    </h4>#}
-
-                    {% for video in group.video_set.all reversed %}
-                        {% if forloop.first %}
-                            <div class="embed-responsive embed-responsive-4by3"
-                                 onclick="loadVideo(this, '{{ video.link }}')">
-                                <img style="cursor: pointer;"
-                                     src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
-                            </div>
-                        {% else %}
-                            <h5><a href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a></h5>
-                        {% endif %}
-                    {% endfor %}
-
-
-                    <p>{{ group.description }}</p>
-
-
-                    <p>
-                        Devs:<br/>
-                        {% for member in group.developer_set.all %}
-                            <a href="http://www.acsu.buffalo.edu/~{{ member.ubit }}"><span
-                                    class="label label-primary">{{ member.ubit }}</span></a>
-                        {% endfor %}&nbsp;
-                    </p>
-                    <p>
-                        TA:<br/>
-
-                        <a href="http://www.acsu.buffalo.edu/~{{ group.ta }}"><span
-                                class="label label-info">{{ group.ta }}</span></a> &nbsp;
-                        {#                        Private: {{ group.private }}#}
-                    </p>
-
-
-                    {% if not group.private %}
-                        <hr/>
-                        {% for repo in group.repository_set.all %}
-                            <h4><a href="{{ repo.link }}">Source
-                                {% if not forloop.counter0 == 0 %}{{ forloop.counter }}{% endif %}</a></h4>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3>{{ group.name }} - <a
+                                href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a>
+                        </h3>
+                        {#                    <h4>#}
+                        {#                        <a href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a><br/>#}
+                        {#                    </h4>#}
+                    </div>
+                    <div class="panel-body">
+                        {% for video in group.video_set.all reversed %}
+                            {% if forloop.first %}
+                                <div class="embed-responsive embed-responsive-4by3"
+                                     onclick="loadVideo(this, '{{ video.link }}')">
+                                    <img style="cursor: pointer;"
+                                         src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
+                                </div>
+                            {% else %}
+                                <h5><a href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a>
+                                </h5>
+                            {% endif %}
                         {% endfor %}
-                    {% endif %}
+
+
+                        <p>{{ group.description }}</p>
+
+
+                        <p>
+                            Devs:<br/>
+                            {% for member in group.developer_set.all %}
+                                <a href="http://www.acsu.buffalo.edu/~{{ member.ubit }}"><span
+                                        class="label label-primary">{{ member.ubit }}</span></a>
+                            {% endfor %}&nbsp;
+                        </p>
+                        <p>
+                            TA:<br/>
+
+                            <a href="http://www.acsu.buffalo.edu/~{{ group.ta }}"><span
+                                    class="label label-info">{{ group.ta }}</span></a> &nbsp;
+                            {#                        Private: {{ group.private }}#}
+                        </p>
+
+
+                        {% if not group.private %}
+                            <hr/>
+                            {% for repo in group.repository_set.all %}
+                                <h4><a href="{{ repo.link }}">Source
+                                    {% if not forloop.counter0 == 0 %}{{ forloop.counter }}{% endif %}</a></h4>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         {% endfor %}
