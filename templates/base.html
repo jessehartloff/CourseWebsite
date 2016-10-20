@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>{% block title %}CSE{% endblock %}</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'courses/UBStylin.css' %}"/>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'courses/favicon.ico' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{% static 'courses/functions.js' %}"></script>
     <script>
         var bars = true;
@@ -48,6 +48,10 @@
         //            document.getElementById("right_sidebar").className = "hidden";
         //            document.getElementById("center_content").className = "col-sm-10 less-padding";
         //        }
+    </script>
+    <script>
+        function loadVideo(element, youTube) {
+            element.innerHTML = "<iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/" + youTube + "?autoplay=1\" allowfullscreen></iframe>";}
     </script>
 </head>
 
@@ -96,28 +100,28 @@
         <div class="row">
             <div id="left_sidebar" class="col-sm-2 less-padding">
                 {% block left_sidebar %}
-{#                    <div class="left-side-bar">#}
-{#                        <div class="well sidebar-well">#}
-{#                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->#}
-{#                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->#}
-{#                            <h4>Earn Points</h4>#}
-{#                            {% for assignment in all_assignments %}#}
-{#                                &nbsp;<a class="menu_link"#}
-{#                                         href="{% url 'courses:assignment' 'cse' assignment.title %}">#}
-{#                                <span class="glyphicon glyphicon-minus"></span> #}
-{#                                &#x2022; {{ assignment.title }}</a>#}
-{#                                <br/>#}
-{#                            {% endfor %}#}
-{#                            <br/>#}
-{#                            <h4>Gain Knowledge</h4>#}
-{#                            {% for lecture in all_lectures %}#}
-{#                                &nbsp;<a class="menu_link"#}
-{#                                         href="{% url 'courses:lecture' 'cse' lecture.title %}">#}
-{#                                <span class="glyphicon glyphicon-minus"></span> #}
-{#                               &#x2022; {{ lecture.title }}</a><br/>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#                    </div>#}
+                    {#                    <div class="left-side-bar">#}
+                    {#                        <div class="well sidebar-well">#}
+                    {#                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->#}
+                    {#                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->#}
+                    {#                            <h4>Earn Points</h4>#}
+                    {#                            {% for assignment in all_assignments %}#}
+                    {#                                &nbsp;<a class="menu_link"#}
+                    {#                                         href="{% url 'courses:assignment' 'cse' assignment.title %}">#}
+                    {#                                <span class="glyphicon glyphicon-minus"></span> #}
+                    {#                                &#x2022; {{ assignment.title }}</a>#}
+                    {#                                <br/>#}
+                    {#                            {% endfor %}#}
+                    {#                            <br/>#}
+                    {#                            <h4>Gain Knowledge</h4>#}
+                    {#                            {% for lecture in all_lectures %}#}
+                    {#                                &nbsp;<a class="menu_link"#}
+                    {#                                         href="{% url 'courses:lecture' 'cse' lecture.title %}">#}
+                    {#                                <span class="glyphicon glyphicon-minus"></span> #}
+                    {#                               &#x2022; {{ lecture.title }}</a><br/>#}
+                    {#                            {% endfor %}#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 {% endblock %}
             </div>
 

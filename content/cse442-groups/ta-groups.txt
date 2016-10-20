@@ -1,0 +1,39 @@
+Artemis	ak229
+Flight_Simulator	ak229
+Segfaultforever_VR	ak229
+Sign Language Software	ak229
+Tutr	ak229
+Beat_That	accassid
+EquipSavy	accassid
+SecureChat	accassid
+TA Logistics	accassid
+Ascension	ljsieber
+Bar Hopping	ljsieber
+Hackathon Manager	ljsieber
+Perfect Toilet Time	ljsieber
+Chromesthesia	mdrewitt
+Pied Piper	mdrewitt
+Rent Rater	mdrewitt
+Schedule-web	mdrewitt
+Achievelife	mwehar
+Biubiubiu	mwehar
+Course Evaluation 2.0	mwehar
+Memory1	mwehar
+Memory2	mwehar
+Memory3	mwehar
+PKB	mwehar
+Team_PageMe	mwehar
+Visual Construction	mwehar
+chYOUR	ruhansa
+Election-and-data-sci	ruhansa
+Event App Group	ruhansa
+Maze Image Solver	ruhansa
+Meal_Designer	ruhansa
+Roadside_Trash	ruhansa
+Scheduling Team	ruhansa
+Team-JAM	ruhansa
+Wear Where	ruhansa
+AYA	troylieb
+BoardGame	troylieb
+Digidash	troylieb
+ParkingSwap	troylieb

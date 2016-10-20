@@ -4,20 +4,91 @@
 
 {% block content %}
     <div class="well lecture-section-well">
-        <h1>{{ this_lecture.title }}</h1>
+        <h1>Projects</h1>
     </div>
 
     {% block extra %}{% endblock %}
 
-    {% for section in this_lecture.section_set.all %}
-        <div class="well lecture-section-well">
-            <h3>{{ section.sectionTitle }}</h3>
-            {% render_as_template section.html_content %}
-            {% for subsection in section.subsection_set.all %}
-                <hr/>
-                <h4>{{ subsection.subSectionTitle }}</h4>
-                {% render_as_template subsection.html_content %}
-            {% endfor %}
+    <div class="row">
+        {% for group in groups %}
+            {% if not forloop.first and forloop.counter0|divisibleby:2 %}
+                </div>
+                <div class="row">
+            {% endif %}
+            <div class="col-md-6">
+                <div class="well">
+
+                    <h3>{{ group.name }} - <a href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a></h3>
+{#                    <h4>#}
+{#                        <a href="https://cse-software.slack.com/messages/{{ group.slack_channel }}/">#{{ group.slack_channel }}</a><br/>#}
+{#                    </h4>#}
+
+                    {% for video in group.video_set.all reversed %}
+                        {% if forloop.first %}
+                            <div class="embed-responsive embed-responsive-4by3"
+                                 onclick="loadVideo(this, '{{ video.link }}')">
+                                <img style="cursor: pointer;"
+                                     src="http://img.youtube.com/vi/{{ video.link }}/0.jpg"/>
+                            </div>
+                        {% else %}
+                            <h5><a href="https://www.youtube.com/watch?v={{ video.link }}">{{ video.occasion }}</a></h5>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    <p>{{ group.description }}</p>
+
+
+                    <p>
+                        Devs:<br/>
+                        {% for member in group.developer_set.all %}
+                            <a href="http://www.acsu.buffalo.edu/~{{ member.ubit }}"><span
+                                    class="label label-primary">{{ member.ubit }}</span></a>
+                        {% endfor %}&nbsp;
+                    </p>
+                    <p>
+                        TA:<br/>
+
+                        <a href="http://www.acsu.buffalo.edu/~{{ group.ta }}"><span
+                                class="label label-info">{{ group.ta }}</span></a> &nbsp;
+                        {#                        Private: {{ group.private }}#}
+                    </p>
+
+
+                    {% if not group.private %}
+                        <hr/>
+                        {% for repo in group.repository_set.all %}
+                            <h4><a href="{{ repo.link }}">Source
+                                {% if not forloop.counter0 == 0 %}{{ forloop.counter }}{% endif %}</a></h4>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
 {% endblock %}
+
+<!--class Group(models.Model):-->
+<!--course = models.ForeignKey(Course, blank=True, null=True)-->
+<!--name = models.CharField(max_length=100)-->
+<!--slack_channel = models.CharField(max_length=40)-->
+<!--description = models.TextField()-->
+<!--ta = models.CharField(max_length=100)-->
+<!--private = models.BooleanField(default=False)-->
+
+
+<!--class Repository(models.Model):-->
+<!--group = models.ForeignKey(Group, blank=True, null=True)-->
+<!--link = models.CharField(max_length=100)-->
+
+
+<!--class Developer(models.Model):-->
+<!--group = models.ForeignKey(Group, blank=True, null=True)-->
+<!--name = models.CharField(max_length=100)-->
+<!--ubit = models.CharField(max_length=20)-->
+
+
+<!--class Video(models.Model):-->
+<!--group = models.ForeignKey(Group, blank=True, null=True)-->
+<!--occasion = models.CharField(max_length=20)-->
+<!--link = models.CharField(max_length=100)-->

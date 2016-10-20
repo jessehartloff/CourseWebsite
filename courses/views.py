@@ -11,7 +11,7 @@ from django.utils import timezone
 
 from .forms import CommentForm
 
-from .models import Course, Content, Comment
+from .models import Course, Content, Comment, Group
 
 
 def comment_answered(request, course_number, comment_id):
@@ -33,14 +33,8 @@ def comment_form(request, course_number):
 
         # check whether it's valid:
         if form.is_valid():
-        # if True:
-            # jhvg;
             # form.cleaned_data.comment
             comment_object = Comment.objects.create(comment_text=str(form.cleaned_data.get("comment")))
-
-            ### !!!*** CAUTION: Intentional Security Hole ***!!! ###
-            # comment_object = Comment.objects.create(comment_text=str(form.get("comment")))
-
 
             # comment_object.time_submitted = timezone.now()
             comment_object.save()
@@ -65,6 +59,24 @@ def course_home(request, course_number):
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     context = {'lectures': lectures, 'assignments': assignments, 'course': course}
     return render(request, 'courses/index.html', context)
+
+
+def projects(request, course_number):
+    course = Course.objects.get(course_number=course_number)
+    lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
+    assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
+    # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments}
+    return render(request, 'courses/projects.html', context)
+
+
+def project(request, course_number, project_id):
+    course = Course.objects.get(course_number=course_number)
+    groups = Group.objects.filter(course=course).order_by('name')
+    # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    context = {'groups': groups, 'course': course, 'project': project_id}
+    return render(request, 'courses/single_project.html', context)
 
 
 def index(request):

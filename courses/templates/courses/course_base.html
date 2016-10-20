@@ -26,19 +26,22 @@
             </ul>
         </li>
 
-{#        <li class="dropdown">#}
-{#            <a class="dropdown-toggle" data-toggle="dropdown"#}
-{#               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span#}
-{#                    class="caret"></span></a>#}
-{#            <ul class="dropdown-menu">#}
-{#                {% for lesson in lectures %}#}
-{#                    <li>#}
-{#                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>#}
-{#                    </li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        </li>#}
+        {% if course.course_project == True %}
+            <li><a href="{% url 'courses:projects' course.course_number %}">Projects</a></li>
+        {% endif %}
 
+        {#        <li class="dropdown">#}
+        {#            <a class="dropdown-toggle" data-toggle="dropdown"#}
+        {#               href="{% url 'courses:course_home' course.course_number %}">Knowledge<span#}
+        {#                    class="caret"></span></a>#}
+        {#            <ul class="dropdown-menu">#}
+        {#                {% for lesson in lectures %}#}
+        {#                    <li>#}
+        {#                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>#}
+        {#                    </li>#}
+        {#                {% endfor %}#}
+        {#            </ul>#}
+        {#        </li>#}
 
 
         <!--<li class="dropdown">-->
@@ -59,7 +62,8 @@
             <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
             <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
             <h4>&nbsp;{{ course.course_number }}</h4>
-            &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}">&#x2022; Syllabus</a><br/>
+            &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}">&#x2022;
+            Syllabus</a><br/>
             &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
             <br/>
             <h4>&nbsp;Earn Points</h4>
@@ -70,12 +74,12 @@
                 <br/>
             {% endfor %}
 
-{#            <h4>&nbsp;Gain Knowledge</h4>#}
-{#            {% for lecture in lectures %}#}
-{#                &nbsp;<a class="menu_link"#}
-{#                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">#}
-{#                &#x2022; {{ lecture.title }}</a><br/>#}
-{#            {% endfor %}#}
+            {#            <h4>&nbsp;Gain Knowledge</h4>#}
+            {#            {% for lecture in lectures %}#}
+            {#                &nbsp;<a class="menu_link"#}
+            {#                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">#}
+            {#                &#x2022; {{ lecture.title }}</a><br/>#}
+            {#            {% endfor %}#}
         </div>
     </div>
 {% endblock %}
@@ -123,8 +127,10 @@
                         <span class="glyphicon glyphicon-ok-circle" style="font-size: 22px; color: #aaaaaa;"></span>
                     {% endif %}
                     {% if comment.answered == False %}
-                        <a href="{% url 'courses:comment_answered' course.course_number comment.comment_id %}" title="This has been answered or is irrelevant.">
-                            <span class="glyphicon glyphicon-ok-circle pull-left" style="font-size: 22px; color: #156ad2;"></span></a>
+                        <a href="{% url 'courses:comment_answered' course.course_number comment.comment_id %}"
+                           title="This has been answered or is irrelevant.">
+                            <span class="glyphicon glyphicon-ok-circle pull-left"
+                                  style="font-size: 22px; color: #156ad2;"></span></a>
                     {% endif %}
 
                 </div>
@@ -132,7 +138,7 @@
                     {{ comment.comment_text }}
 
                     <div class="comment_time" style="font-size: 9px; color: #999999;">
-{#                        <br/>#}
+                        {#                        <br/>#}
                         <b>{{ comment.time_submitted }}</b></div>
                 </div>
             </div>
