@@ -36,6 +36,9 @@ def parse_groups():
             if "\t" not in line:
                 print("bad group format: " + str(line))
                 continue
+            if line[0] == '#':
+                print("skipping: " + line)
+                continue
             split_line = line.split("\t")
             group_name = split_line[0]
             group_members = split_line[1]
@@ -136,11 +139,11 @@ def parse_group_videos(groups_objects):
     with open(group_video_file, "r") as group_video:
         for line in group_video.readlines():
             # print(line)
-            if "," not in line:
-                print("no comma found: " + str(line))
+            if "\t" not in line:
+                print("no tab found: " + str(line))
                 continue
             line = line.strip()
-            line_split = line.split(",")
+            line_split = line.split("\t")
             group_name = line_split[2]
             video_occasion = line_split[3]
             video_link = line_split[4]
