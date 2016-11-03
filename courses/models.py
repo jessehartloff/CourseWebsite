@@ -18,6 +18,7 @@ class Comment(models.Model):
     # defaults to time submitted. Update before setting answered to True
     time_answered = models.DateTimeField(default=timezone.now())
 
+
 ### Courses ###
 
 class Course(models.Model):
@@ -67,6 +68,7 @@ class SubSection(models.Model):
     def __str__(self):
         return self.sectionTitle
 
+
 ### Group Projects ###
 
 class Group(models.Model):
@@ -76,6 +78,7 @@ class Group(models.Model):
     description = models.TextField()
     ta = models.CharField(max_length=100)
     private = models.BooleanField(default=False)
+    has_extras = models.BooleanField(default=False)
 
 
 class Repository(models.Model):
@@ -93,3 +96,10 @@ class Video(models.Model):
     group = models.ForeignKey(Group, blank=True, null=True)
     occasion = models.CharField(max_length=20)
     link = models.CharField(max_length=100)
+
+
+class Extra(models.Model):
+    group = models.ForeignKey(Group, blank=True, null=True)
+    type = models.CharField(max_length=100)
+    info = models.TextField(default="")
+    link = models.CharField(max_length=100, default="")

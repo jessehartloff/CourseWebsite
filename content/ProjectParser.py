@@ -5,7 +5,7 @@ import re
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
 
-from courses.models import Course, Group, Repository, Developer, Video
+from courses.models import Course, Group, Repository, Developer, Video, Extra
 
 directory = "content/cse442-groups/"
 
@@ -20,6 +20,8 @@ class Group_O:
         self.repos = []
         self.videos = {}
         self.private = False
+        self.has_extra = False
+        self.extra = {}
 
 
 def parse_groups():
@@ -154,6 +156,25 @@ def parse_group_videos(groups_objects):
             groups_objects[group_name].videos[video_occasion] = video_id
 
 
+def parse_extra(groups_objects, file, type):
+    group_extra_file = directory + file
+    with open(group_extra_file, "r") as group_extra:
+        for line in group_extra.readlines():
+            # print(line)
+            if "," not in line:
+                print("no comma found: " + str(line))
+                continue
+            line = line.strip()
+            line_split = line.split(",")
+            group_name = line_split[0].strip()
+            extra_link = line_split[1].strip()
+            if group_name not in groups_objects:
+                print("Not a real group (Extra " + type + "): " + group_name)
+                continue
+            groups_objects[group_name].has_extra = True
+            groups_objects[group_name].extra[type] = extra_link
+
+
 def parse_files():
     [students_in_groups, groups, groups_o] = parse_groups()
 
@@ -161,6 +182,8 @@ def parse_files():
     parse_group_ta(groups_o)
     parse_group_repos(groups_o)
     parse_group_videos(groups_o)
+    parse_extra(groups_o, "beta_testing", "Beta Testing")
+    parse_extra(groups_o, "content_creation", "Content Creation")
 
     return groups_o
 
@@ -183,6 +206,7 @@ def process_projects(course_number):
         group.description = group_o.project_description
         group.ta = group_o.ta
         group.private = group_o.private
+        group.has_extras = group_o.has_extra
         for member in group_o.members:
             developer = Developer.objects.create(group=group)
             developer.ubit = member
@@ -197,6 +221,11 @@ def process_projects(course_number):
             video.occasion = occasion
             video.link = link
             video.save()
+        for [type, link] in group_o.extra.items():
+            extra = Extra.objects.create(group=group)
+            extra.type = type
+            extra.link = link
+            extra.save()
         group.save()
 
         # course = Course.objects.create(course_number=course_number, course_title=course_title)
