@@ -74,12 +74,12 @@
                 <br/>
             {% endfor %}
 
-                        <h4>&nbsp;Gain Knowledge</h4>
-                        {% for lecture in lectures %}
-                            &nbsp;<a class="menu_link"
-                                     href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
-                            &#x2022; {{ lecture.title }}</a><br/>
-                        {% endfor %}
+            <h4>&nbsp;Gain Knowledge</h4>
+            {% for lecture in lectures %}
+                &nbsp;<a class="menu_link"
+                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
+                &#x2022; {{ lecture.title }}</a><br/>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
@@ -97,36 +97,21 @@
 
             {% for comment in all_comments %}
                 <div class="well question-well">
-                {#                    {{ comment.name }} | #}
-                {#                    :{{ comment.time_submitted.minute }} |#}
-                {#                    :{{ comment.time_submitted.time }} |#}
+                {#                                    {{ comment.name }} |#}
+                {#                                    :{{ comment.time_submitted.minute }} |#}
+                {#                                    :{{ comment.time_submitted.time }} |#}
                 {% if comment.answered %}
                     <div class="comment_text" style="font-size: 11px; color: #aaaaaa;">
+                {% else %}
+                    <div class="comment_text" style="font-size: 11px; color: #000000;">
                 {% endif %}
-            {% if comment.answered == False %}
-                <div class="comment_text" style="font-size: 11px; color: #000000;">
-            {% endif %}
 
-            {#            <form action="{% url 'courses:comment_answered' course.course_number comment.comment_id %}" method="post">#}
-            {#                {% csrf_token %}#}
-            {#                <input type="submit" value="Addressed"/>#}
-            {#            </form>#}
-
-            {#  <div class="row">#}
-            {#    <div class="col-sm-6 custom">#}
-            {#      <i class="fa fa-camera-retro fa-3x pull-left"></i>#}
-            {#      <div class="text">#}
-            {#        <h6 class="cust-margin">Unlimited Support</h6>#}
-            {#          We're here to help! Just ask away...</div>#}
-            {#    </div>#}
-            {#  </div>#}
             <div class="row" style="width: 100%">
                 <div class="col-xs-2">
 
                     {% if comment.answered %}
                         <span class="glyphicon glyphicon-ok-circle" style="font-size: 22px; color: #aaaaaa;"></span>
-                    {% endif %}
-                    {% if comment.answered == False %}
+                    {% else %}
                         <a href="{% url 'courses:comment_answered' course.course_number comment.comment_id %}"
                            title="This has been answered or is irrelevant.">
                             <span class="glyphicon glyphicon-ok-circle pull-left"

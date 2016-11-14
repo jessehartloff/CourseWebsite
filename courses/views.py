@@ -66,16 +66,18 @@ def projects(request, course_number):
     lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('-has_extras', 'lower_name')
+    form = CommentForm()
     # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
-    context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments}
+    context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments, 'form' : form}
     return render(request, 'courses/projects.html', context)
 
 
 def project(request, course_number, project_id):
     course = Course.objects.get(course_number=course_number)
     groups = Group.objects.filter(course=course).order_by('name')
+    form = CommentForm()
     # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
-    context = {'groups': groups, 'course': course, 'project': project_id}
+    context = {'groups': groups, 'course': course, 'project': project_id, 'form': form}
     return render(request, 'courses/single_project.html', context)
 
 
