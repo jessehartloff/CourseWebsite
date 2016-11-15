@@ -68,7 +68,7 @@ def projects(request, course_number):
     groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('-has_extras', 'lower_name')
     form = CommentForm()
     # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
-    context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments, 'form' : form}
+    context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments, 'form': form}
     return render(request, 'courses/projects.html', context)
 
 
