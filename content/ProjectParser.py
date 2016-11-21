@@ -217,11 +217,19 @@ def process_projects(course_number):
             repository.link = repo
             repository.save()
         for [occasion, link] in group_o.videos.items():
+            # print(group_o.name)
+            # print(occasion)
+            # print(link)
+            # print()
             video = Video.objects.create(group=group)
             video.occasion = occasion
             video.link = link
             video.save()
         for [type, link] in group_o.extra.items():
+            # print(group_o.name)
+            # print(type)
+            # print(link)
+            # print()
             extra = Extra.objects.create(group=group)
             extra.type = type
             extra.link = link
