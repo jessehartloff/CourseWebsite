@@ -97,6 +97,9 @@ class Video(models.Model):
     occasion = models.CharField(max_length=20)
     link = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ['occasion']
+
 
 class Extra(models.Model):
     group = models.ForeignKey(Group, blank=True, null=True)

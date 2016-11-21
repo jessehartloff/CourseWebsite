@@ -198,7 +198,7 @@ def process_projects(course_number):
     course.save()
 
     all_groups = parse_files()
-    Group.objects.all().delete()
+    # Group.objects.all().delete()
 
     for group_o in all_groups.values():
         group = Group.objects.create(course=course)
