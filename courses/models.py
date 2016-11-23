@@ -79,6 +79,8 @@ class Group(models.Model):
     ta = models.CharField(max_length=100)
     private = models.BooleanField(default=False)
     has_extras = models.BooleanField(default=False)
+    has_landing = models.BooleanField(default=False)
+    landing_link = models.CharField(max_length=200, blank=True, null=True)
 
 
 class Repository(models.Model):

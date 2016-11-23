@@ -22,6 +22,8 @@ class Group_O:
         self.private = False
         self.has_extra = False
         self.extra = {}
+        self.has_landing = False
+        self.landing_link = ""
 
 
 def parse_groups():
@@ -120,6 +122,23 @@ def parse_group_repos(groups_objects):
                 groups_objects[group_name].private = True
 
 
+def parse_group_landing_pages(groups_objects):
+    landing_pages_file = directory + "landing_pages"
+    with open(landing_pages_file, "r") as landing_pages:
+        for line in landing_pages.readlines():
+            line = line.strip()
+            # print(line)
+            # print()
+            line_split = line.split(",")
+            group_name = line_split[0].strip()
+            landing_link = line_split[1].strip()
+            if group_name not in groups_objects:
+                print("Not a real group (Landing Page): " + group_name)
+                continue
+            groups_objects[group_name].has_landing = True
+            groups_objects[group_name].landing_link = landing_link
+
+
 # source: http://stackoverflow.com/questions/4705996/python-regex-convert-youtube-url-to-youtube-video
 def youtube_url_validation(url):
     youtube_regex = (
@@ -184,6 +203,7 @@ def parse_files():
     parse_group_videos(groups_o)
     parse_extra(groups_o, "beta_testing", "Beta Testing")
     parse_extra(groups_o, "content_creation", "Content Creation")
+    parse_group_landing_pages(groups_o)
 
     return groups_o
 
@@ -208,6 +228,9 @@ def process_projects(course_number):
         group.ta = group_o.ta
         group.private = group_o.private
         group.has_extras = group_o.has_extra
+        if group_o.has_landing:
+            group.has_landing = True
+            group.landing_link = group_o.landing_link
         for member in group_o.members:
             developer = Developer.objects.create(group=group)
             developer.ubit = member
