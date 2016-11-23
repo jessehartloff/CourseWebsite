@@ -1,1 +1,0 @@
-<WSGIRequest: GET '/courses/CSE442-Fall/hook'>

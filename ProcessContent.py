@@ -14,6 +14,3 @@ process_course('CSE115', "Introduction to Computer Science", image_destination_d
 process_course('CSE442', "Software Engineering", image_destination_directory)
 
 process_projects('CSE442')
-
-
-# It worked?!
