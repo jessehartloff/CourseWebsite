@@ -26,9 +26,13 @@
             </ul>
         </li>
 
+        <li><a href="{% url 'courses:resources' course.course_number %}">Resources</a></li>
+
+
         {% if course.course_project == True %}
             <li><a href="{% url 'courses:projects' course.course_number %}">Projects</a></li>
         {% endif %}
+
 
         {#        <li class="dropdown">#}
         {#            <a class="dropdown-toggle" data-toggle="dropdown"#}
@@ -65,6 +69,8 @@
             &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}">&#x2022;
             Syllabus</a><br/>
             &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}">&#x2022; Schedule</a>
+            <br/>
+            &nbsp; <a class="menu_link" href="{% url 'courses:resources' course.course_number %}">&#x2022; Resources</a>
             <br/>
             <h4>&nbsp;Earn Points</h4>
             {% for assignment in assignments %}

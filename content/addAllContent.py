@@ -92,6 +92,8 @@ def process_course(course_number, course_title, image_destination_directory):
                   'syllabus')
     populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'schedule.html',
                   'schedule')
+    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'resources.html',
+                  'resources')
 
     sort_lesson_type(course, 'lecture')
     sort_lesson_type(course, 'assignment')

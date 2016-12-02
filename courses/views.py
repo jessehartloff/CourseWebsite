@@ -132,10 +132,10 @@ def syllabus(request, course_number):
 
 def schedule(request, course_number):
     return render_content(request, course_number, 'schedule', 'courses/schedule.html')
-    # course = Course.objects.get(course_number=course_number)
-    # this_lesson = Content.objects.get(course=course, page_type='schedule')
-    # context = {'course': course, 'this_lesson': this_lesson}
-    # return render(request, 'courses/schedule.html', context)
+
+
+def resources(request, course_number):
+    return render_content(request, course_number, 'resources', 'courses/resources.html')
 
 
 def sys_call(the_call):
