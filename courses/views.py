@@ -65,7 +65,8 @@ def projects(request, course_number):
     course = Course.objects.get(course_number=course_number)
     lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
-    groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('-has_extras', 'lower_name')
+    # groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('-has_extras', 'lower_name')
+    groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
     form = CommentForm()
     # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     context = {'groups': groups, 'course': course, 'lectures': lectures, 'assignments': assignments, 'form': form}
