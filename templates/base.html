@@ -11,37 +11,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{% static 'courses/functions.js' %}"></script>
     <script>
-        var bars = true;
+{#        var bars = true;#}
+{##}
+{#        function toggle_bars() {#}
+{#            if (bars) {#}
+{#                hide_bars();#}
+{#            } else {#}
+{#                show_bars();#}
+{#            }#}
+{#        }#}
 
-        function toggle_bars() {
-            if (bars) {
-                hide_bars();
-            } else {
-                show_bars();
-            }
-        }
-
-        function hide_bars() {
-            document.getElementById("left_sidebar").className = "hidden";
-            document.getElementById("right_sidebar").className = "hidden";
-            document.getElementById("center_content").className = "col-sm-12 padded";
-            bars = false;
-        }
-
-        function show_bars() {
-            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";
-            document.getElementById("right_sidebar").className = "col-sm-2 less-padding";
-            document.getElementById("center_content").className = "col-sm-8 less-padding";
-            bars = true;
-        }
-
-
-        function no_left_bar() {
-            document.getElementById("left_sidebar").className = "hidden";
-            document.getElementById("right_sidebar").className = "col-sm-3 less-padding";
-            document.getElementById("center_content").className = "col-sm-9";
-            bars = true;
-        }
+{#        function hide_bars() {#}
+{#            document.getElementById("left_sidebar").className = "hidden";#}
+{#            document.getElementById("right_sidebar").className = "hidden";#}
+{#            document.getElementById("center_content").className = "col-sm-12 padded";#}
+{#            bars = false;#}
+{#        }#}
+{##}
+{#        function show_bars() {#}
+{#            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";#}
+{#            document.getElementById("right_sidebar").className = "col-sm-2 less-padding";#}
+{#            document.getElementById("center_content").className = "col-sm-8 less-padding";#}
+{#            bars = true;#}
+{#        }#}
+{##}
+{##}
+{#        function no_left_bar() {#}
+{#            document.getElementById("left_sidebar").className = "hidden";#}
+{#            document.getElementById("right_sidebar").className = "col-sm-3 less-padding";#}
+{#            document.getElementById("center_content").className = "col-sm-9";#}
+{#            bars = true;#}
+{#        }#}
 
         //        function hide_question_bar() {
         //            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";
@@ -87,9 +87,9 @@
 
             {% block navbar %}{% endblock %}
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="toggle_bars(); return false;">Sidebars</a></li>
-            </ul>
+{#            <ul class="nav navbar-nav navbar-right">#}
+{#                <li><a href="#" onclick="toggle_bars(); return false;">Sidebars</a></li>#}
+{#            </ul>#}
         </div>
     </div>
 </nav>
@@ -100,58 +100,25 @@
         <div class="row">
             <div id="left_sidebar" class="col-sm-2 less-padding">
                 {% block left_sidebar %}
-                    {#                    <div class="left-side-bar">#}
-                    {#                        <div class="well sidebar-well">#}
-                    {#                            <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->#}
-                    {#                            <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->#}
-                    {#                            <h4>Earn Points</h4>#}
-                    {#                            {% for assignment in all_assignments %}#}
-                    {#                                &nbsp;<a class="menu_link"#}
-                    {#                                         href="{% url 'courses:assignment' 'cse' assignment.title %}">#}
-                    {#                                <span class="glyphicon glyphicon-minus"></span> #}
-                    {#                                &#x2022; {{ assignment.title }}</a>#}
-                    {#                                <br/>#}
-                    {#                            {% endfor %}#}
-                    {#                            <br/>#}
-                    {#                            <h4>Gain Knowledge</h4>#}
-                    {#                            {% for lecture in all_lectures %}#}
-                    {#                                &nbsp;<a class="menu_link"#}
-                    {#                                         href="{% url 'courses:lecture' 'cse' lecture.title %}">#}
-                    {#                                <span class="glyphicon glyphicon-minus"></span> #}
-                    {#                               &#x2022; {{ lecture.title }}</a><br/>#}
-                    {#                            {% endfor %}#}
-                    {#                        </div>#}
-                    {#                    </div>#}
                 {% endblock %}
             </div>
 
 
-            <div id="center_content" class="col-sm-8 less-padding">
+            <div id="center_content" class="col-sm-10 less-padding">
                 <div class="content-area">
                     {% block content %}{% endblock %}
                 </div>
             </div>
 
 
-            <div id="right_sidebar" class="col-sm-2 less-padding">
+{#            <div id="right_sidebar" class="col-sm-2 less-padding">#}
                 {% block right_sidebar %}
-                    <div class="right-side-bar">
-                        <div class="well sidebar-well">
-                            <!--<button onclick="toggle_bars(); return false;">Hide Sidebars</button>-->
-                            {#                                                <p>#}
-                            {#                                                    Questions/Comments:#}
-                            {#                                                </p>#}
-                            {#                                                <div class="well question-well"></div>#}
-                            {#                                                <div class="well question-well">What it do?</div>#}
-                            {#                                                <div class="well question-well">We aint got all day</div>#}
-                            {#                                                <div class="well question-well">You ever wonder why we're here?</div>#}
-                            {#                                                <div class="well question-well">If the asymptotic runtime of quick sort is O(n^2) then why would we ever use#}
-                            {#                                                    that over merge sort?#}
-                            {#                                                </div>#}
-                        </div>
-                    </div></div>
+{#                    <div class="right-side-bar">#}
+{#                        <div class="well sidebar-well">#}
+{#                        </div>#}
+{#                    </div></div>#}
                 {% endblock %}
-        </div>
+{#        </div>#}
     {% endblock %}
 </div>
 

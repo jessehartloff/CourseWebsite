@@ -139,7 +139,7 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 # STATIC_ROOT = '/http://www.cse.buffalo.edu/~hartloff/CourseWebsite/lecture/'
 
-#STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/static/'
 # STATIC_URL = 'http://google.com'
 

@@ -11,6 +11,10 @@ div.hidden {
     /*color: #777777;*/
 /*}*/
 
+iframe.primary{
+    height: 100%;
+    width: 100%;
+}
 
 div.sidebar-well {
     border-radius: 0;

@@ -55,7 +55,7 @@ def comment_form(request, course_number):
 def course_home(request, course_number):
     course = Course.objects.get(course_number=course_number)
     # should check if course was found
-    lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
+    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     context = {'lectures': lectures, 'assignments': assignments, 'course': course}
     return render(request, 'courses/index.html', context)
@@ -63,7 +63,7 @@ def course_home(request, course_number):
 
 def projects(request, course_number):
     course = Course.objects.get(course_number=course_number)
-    lectures = Content.objects.filter(course=course, page_type='lecture').order_by('index')
+    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
     # groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('-has_extras', 'lower_name')
     groups = Group.objects.filter(course=course).extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
@@ -137,6 +137,24 @@ def schedule(request, course_number):
 
 def resources(request, course_number):
     return render_content(request, course_number, 'resources', 'courses/resources.html')
+
+
+def autolab(request, course_number):
+    course = Course.objects.get(course_number=course_number)
+    # should check if course was found
+    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
+    assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    context = {'lectures': lectures, 'assignments': assignments, 'course': course}
+    return render(request, 'courses/autolab.html', context)
+
+
+def qa(request, course_number):
+    course = Course.objects.get(course_number=course_number)
+    # should check if course was found
+    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
+    assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    context = {'lectures': lectures, 'assignments': assignments, 'course': course}
+    return render(request, 'courses/qa.html', context)
 
 
 def sys_call(the_call):
