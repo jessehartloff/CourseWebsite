@@ -3,7 +3,7 @@
 
 {% block title %} {{ course.course_number }}: {{ course.course_title }} {% endblock %}
 {#{% block corner_title %}{{ course.course_number }}{% endblock %}#}
-{% block corner_title %}Courses{% endblock %}
+{% block corner_title %}{{ course.course_number }}{% endblock %}
 
 {% block navbar %}
     <ul class="nav navbar-nav">
@@ -22,9 +22,11 @@
             <ul class="dropdown-menu">
                 <li><a class="menu_link" href="{% url 'courses:autolab' course.course_number %}"> Autolab</a></li>
                 {% for lesson in assignments %}
-                    <li>
-                        <a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
-                    </li>
+                    {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
+                        <li>
+                            <a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </li>
@@ -36,9 +38,11 @@
                     class="caret"></span></a>
             <ul class="dropdown-menu">
                 {% for lesson in lectures %}
-                    <li>
-                        <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
-                    </li>
+                    {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
+                        <li>
+                            <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </li>
@@ -81,19 +85,26 @@
             <br/>
 
             {% for assignment in assignments %}
-                &nbsp;<a class="menu_link"
-                         href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
-                <!--&#x2022;--> {{ assignment.title }}</a>
-                <br/>
+                {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
+                    &nbsp;<a class="menu_link"
+                             href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
+                    <!--&#x2022;--> {{ assignment.title }}</a><br/>
+                {% else %}
+                    &nbsp; {{ assignment.title }}<br/>
+                {% endif %}
             {% endfor %}
 
             <h4>&nbsp;Learn Concepts</h4>
 
             &nbsp;<a href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>
             {% for lecture in lectures %}
-                &nbsp;<a class="menu_link"
-                         href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
-                {{ forloop.counter }}. {{ lecture.title }}</a><br/>
+                {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
+                    &nbsp;<a class="menu_link"
+                             href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
+                    {{ forloop.counter }}. {{ lecture.title }}</a><br/>
+                {% else %}
+                    &nbsp; {{ forloop.counter }}. {{ lecture.title }}<br/>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
