@@ -12,6 +12,7 @@
         {#                <li><a href="{% url 'lecture:detail' '5' %}">Question</a></li>#}
         <li><a href="{% url 'courses:syllabus' course.course_number %}">Syllabus</a></li>
         <li><a href="{% url 'courses:schedule' course.course_number %}">Schedule</a></li>
+        <li><a href="{% url 'courses:assistance' course.course_number %}">Office Hours</a></li>
         <li><a href="{% url 'courses:resources' course.course_number %}">Resources</a></li>
 
         <li class="dropdown">
@@ -70,6 +71,8 @@
             <h4>&nbsp;{{ course.course_number }}</h4>
             &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}"> Syllabus</a><br/>
             &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}"> Schedule</a>
+            <br/>
+            &nbsp; <a class="menu_link" href="{% url 'courses:assistance' course.course_number %}"> Office Hours</a>
             <br/>
             &nbsp; <a class="menu_link" href="{% url 'courses:resources' course.course_number %}"> Resources</a>
             <br/>

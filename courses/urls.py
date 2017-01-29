@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^(?P<course_number>.+)/assignments/(?P<assignment_short_title>.+)/$', views.assignment, name='assignment'),
     url(r'^(?P<course_number>.+)/syllabus/$', views.syllabus, name='syllabus'),
     url(r'^(?P<course_number>.+)/schedule/$', views.schedule, name='schedule'),
+    url(r'^(?P<course_number>.+)/assistance/$', views.assistance, name='assistance'),
     url(r'^(?P<course_number>.+)/resources/$', views.resources, name='resources'),
     url(r'^(?P<course_number>.+)/autolab/$', views.autolab, name='autolab'),
     url(r'^(?P<course_number>.+)/qa/$', views.qa, name='qa'),

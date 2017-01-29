@@ -139,6 +139,10 @@ def resources(request, course_number):
     return render_content(request, course_number, 'resources', 'courses/resources.html')
 
 
+def assistance(request, course_number):
+    return render_content(request, course_number, 'assistance', 'courses/assistance.html')
+
+
 def autolab(request, course_number):
     course = Course.objects.get(course_number=course_number)
     # should check if course was found

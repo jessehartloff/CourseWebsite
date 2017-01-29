@@ -98,13 +98,13 @@
 
     {% block body %}
         <div class="row">
-            <div id="left_sidebar" class="col-sm-2 less-padding">
+            <div id="left_sidebar" class="hidden-xs col-sm-2 less-padding">
                 {% block left_sidebar %}
                 {% endblock %}
             </div>
 
 
-            <div id="center_content" class="col-sm-10 less-padding">
+            <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
                 <div class="content-area">
                     {% block content %}{% endblock %}
                 </div>
