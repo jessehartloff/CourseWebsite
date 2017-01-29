@@ -11,6 +11,12 @@ div.hidden {
     /*color: #777777;*/
 /*}*/
 
+.ta-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .table-skinny{
     width: auto;
 }
