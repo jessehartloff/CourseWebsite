@@ -96,7 +96,7 @@
 
             <h4>&nbsp;Learn Concepts</h4>
 
-            &nbsp;<a href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>
+            &nbsp;<a class="menu_link" href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>
             {% for lecture in lectures %}
                 {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
