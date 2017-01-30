@@ -37,6 +37,8 @@
                href="{% url 'courses:course_home' course.course_number %}">Concepts<span
                     class="caret"></span></a>
             <ul class="dropdown-menu">
+
+            <li><a href="{% url 'courses:qa' course.course_number %}"> Questions</a></li>
                 {% for lesson in lectures %}
                     {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
                         <li>
