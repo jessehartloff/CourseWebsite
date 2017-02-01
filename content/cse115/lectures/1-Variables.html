@@ -5,6 +5,22 @@ next_content_short: if
 previous_content_short: none
 ---
 
+
+== Terms
+
+<ul>
+    <li>development environment</li>
+    <li>variable</li>
+    <li>print</li>
+    <li>int</li>
+    <li>double</li>
+    <li>boolean</li>
+    <li>string</li>
+    {#    <li>assignment</li>#}
+    {#    <li>expression</li>#}
+</ul>
+
+
 == Classes
 
 <ul>
@@ -12,26 +28,48 @@ previous_content_short: none
     <li>String</li>
 </ul>
 
-== Terms
 
-<ul>
-    <li>Development environment</li>
-    <li>variable</li>
-    <li>int</li>
-    <li>double</li>
-    <li>boolean</li>
-    <li>assignment</li>
-    <li>expression</li>
-</ul>
+{#== Development Environment#}
+{##}
+{#IDE's, text editors, and the command line [oh my]#}
 
 
+== Variables
 
-== Development Environment
+{% load staticfiles %}
 
-IDE's, text editors, and the command line [oh my]
+<a href="{% static "courses/115Slides/1-Variables.pptx" %}">Variables Concept Slides</a>
+
+<code>
+    int myFirstVariable; // Declare a variable
+    myFirstVariable = 7; // Assign a variable
+    // int myFirstVariable = 7; // Do it in one line
+</code>
+
+[type] [name];
+[name] = [value];
+
+Program can have many variables.
+
+Show the debugger. See the current value of each variable.
+
+Variables can have different types.
+
+String hey;
+hey = "Hello World!";
+System.out.println(hey);
+
+Valid variable names
+Camelcase
+No keywords
+
+Variable used many times and need to change the value? No worries! Only change the value once in the code.
 
 
-== Hello World!
+== Printing to the screen
+
+If want to see the values of our variables.
+If we want to talk to the human user.
 
 What are we doing here? Everything you run on your computer is software.
 Word processors, spell check, every app on your phone, your operating system, email,
@@ -52,31 +90,6 @@ System.out.println(5+6);
 
 Ok.. so you're not that impressed.. Let's keep going.
 
-== Variables
-
-int myFirstVariable; // Declare a variable
-myFirstVariable = 7; // Assign a variable
-// int myFirstVariable = 7; // Do it in one line
-System.out.println(myFirstVariable);
-
-[type] [name];
-[name] = [expression];
-
-Program can have many variables.
-
-Show the debugger. See the current value of each variable.
-
-Variables can have different types.
-
-String hey;
-hey = "Hello World!";
-System.out.println(hey);
-
-Valid variable names
-Camelcase
-No keywords
-
-Variable used many times and need to change the value? No worries! Only change the value once in the code.
 
 == Variable Types
 
@@ -110,12 +123,6 @@ Order of Operations (At least mention)
 Control flow starts with the main function.
 
 We'll use static functions. These can be called from main which will help you test your submissions locally.
-
-{#== User IO#}
-{##}
-{#Prompt the user for input#}
-{#<br/>#}
-{#System! Out me some printed lines.#}
 
 
 {#== String Manipulation#}
