@@ -11,11 +11,12 @@ previous_content_short: none
 <ul>
     <li>development environment</li>
     <li>variable</li>
-    <li>print</li>
     <li>int</li>
     <li>double</li>
     <li>boolean</li>
+    <li>comments</li>
     <li>string</li>
+    <li>print</li>
     {#    <li>assignment</li>#}
     {#    <li>expression</li>#}
 </ul>
@@ -24,8 +25,8 @@ previous_content_short: none
 == Classes
 
 <ul>
-    <li>System</li>
-    <li>String</li>
+    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html">String</a></li>
+    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>
 </ul>
 
 
@@ -39,92 +40,182 @@ previous_content_short: none
 {% load staticfiles %}
 
 <a href="{% static "courses/115Slides/1-Variables.pptx" %}">Variables Concept Slides</a>
+<br/><br/>
 
-<code>
-    int myFirstVariable; // Declare a variable
-    myFirstVariable = 7; // Assign a variable
-    // int myFirstVariable = 7; // Do it in one line
-</code>
+Syntax:
+<pre>
+    int myFirstVariable;
+    myFirstVariable = 7;
+</pre>
+<pre>
+    int myFirstVariable = 7;
+</pre>
 
-[type] [name];
-[name] = [value];
+<p>
+    Both examples have the same result and follow these three steps
+</p>
+<ol>
+    <li><b>int</b> - Create a variable of type int</li>
+    <li><b>myFirstVariable</b> - name the variable myFirstVariable</li>
+    <li><b>= 7</b> - Store the value 7 in the new variable</li>
+</ol>
 
-Program can have many variables.
+<br/>
+General structure:
+<pre>
+    [type] [name];
+    [name] = [value];
+</pre>
+<pre>
+    [type] [name] = [value];
+</pre>
+<br/>
 
-Show the debugger. See the current value of each variable.
-
-Variables can have different types.
-
-String hey;
-hey = "Hello World!";
-System.out.println(hey);
-
-Valid variable names
-Camelcase
-No keywords
-
-Variable used many times and need to change the value? No worries! Only change the value once in the code.
+<ul>
+    <li>A program can have many variables</li>
+    <li>Only 1 variable per name</li>
+    <li>Names cannot contain spaces. Use camelCase</li>
+    <li>Start names with a lowercase letter</li>
+</ul>
 
 
-== Printing to the screen
+{#No keywords#}
 
-If want to see the values of our variables.
-If we want to talk to the human user.
-
-What are we doing here? Everything you run on your computer is software.
-Word processors, spell check, every app on your phone, your operating system, email,
-web browsers and the servers that provide sites, the IDE you'll be using, PowerPoint (or whatever I'm using for this).
-
-Software has changed the world and how we interact with it. [Try going 1 day without using any software]
-
-Where did all this software come from? People like you wrote it all. Let's learn how it's done!
-
-But first, we need some fundamentals. We'll start with an empty black box called "the console" where we can display
-text. This is where all the software began. and it is where our story will begin.
-
-System.out.println("Hello World!");
-
-We can even do math here.
-
-System.out.println(5+6);
-
-Ok.. so you're not that impressed.. Let's keep going.
+{#Variable used many times and need to change the value? No worries! Only change the value once in the code.#}
 
 
 == Variable Types
 
-int, boolean, double, String
+<p>
+    Every variable in java must have a type. A variable can only stores values matching its type.
+</p>
 
-Let's stick with the for now.
+<dl>
+    <dt>int</dt>
+    <dd>Stores integer values (whole numbers). Can store values that are negative, positive, or 0.</dd>
+    <dt>double</dt>
+    <dd>Stores numbers with decimals (ex. 3.1415). Can store values that are negative, positive, or 0. Some precision
+        is lost so int is used if only whole numbers are needed.
+    </dd>
+    <dt>String</dt>
+    <dd>Stores text values. Text values must be provided in "double quotes" to be a string(ex. "115" is a String, 115
+        is an int).
+    </dd>
+    <dt>boolean</dt>
+    <dd>Can only be true or false. Will be used extensively for control flow.</dd>
+</dl>
 
-Each variable must have a type. A variable can only contain a value that matches it's type.
 
-A variable is like a container that con only hold a certain type.
+<p>There are many more variable types in java. We will stick with these 4 for now.</p>
 
-== Expressions
+<pre>
+    int items = 3;
+    double price = 19.95;
+    String salesPitch = "Buy one get two free! *additional charges may apply";
+    boolean goodDeal = false;
+</pre>
 
-int price;
-price = 2+2;
 
--Expressions always evaluate to a single value
--Assignment operator. Left side variable. Right side expression.
--If take an expression that evaluates to a boolean
--A variable where an expression should go gives its value
+== Printing to the console
 
-Order of Operations (At least mention)
+<ul>
+    <li>When you want to communicate with the human user</li>
+    <li>Can print any String to the console</li>
+    <li>Printing a variable will automatically convert a copy of its value to a String</li>
+</ul>
+
+Syntax:
+<pre>
+    System.out.println("Hello World!");
+</pre>
+
+<p>
+    Will print <kbd>Hello World!</kbd> to the console.
+</p>
+
+<p>
+    Printing the value of a variable:
+</p>
+
+<pre>
+    String hello;
+    hello = "Hello World!";
+    System.out.println(hello);
+</pre>
+
+<p>
+    Same output as he previous example.
+</p>
+
+
+{#We can even do math here.#}
+{##}
+{#System.out.println(5+6);#}
+{##}
+{#Ok.. so you're not that impressed.. Let's keep going.#}
+
+
+{#What are we doing here? Everything you run on your computer is software.#}
+{#Word processors, spell check, every app on your phone, your operating system, email,#}
+{#web browsers and the servers that provide sites, the IDE you'll be using, PowerPoint (or whatever I'm using for this).#}
+
+{#Software has changed the world and how we interact with it. [Try going 1 day without using any software]#}
+
+{#Where did all this software come from? People like you wrote it all. Let's learn how it's done!#}
+
+{#But first, we need some fundamentals. We'll start with an empty black box called "the console" where we can display#}
+{#text. This is where all the software began. and it is where our story will begin.#}
+
 
 == Comments
 
-//
-/**/
 
-== Structure
+<pre>
+    //
+</pre>
+<pre>
+    /**/
+</pre>
 
-Control flow starts with the main function.
+<pre>
+    int age;
 
-We'll use static functions. These can be called from main which will help you test your submissions locally.
+    // This line will be ignored the computer
+    /*
+      Comments allow us to leave notes for each other in our code.
+      The computer will ignore all this text
+    */
+
+    age = 18;
+
+    // Comments are used to describe the code
+    // The following line displays the value of age to the user
+    System.out.println(age);
+</pre>
+
+{#== Expressions#}
+{##}
+{#int price;#}
+{#price = 2+2;#}
+{##}
+{#-Expressions always evaluate to a single value#}
+{#-Assignment operator. Left side variable. Right side expression.#}
+{#-If take an expression that evaluates to a boolean#}
+{#-A variable where an expression should go gives its value#}
+{##}
+{#Order of Operations (At least mention)#}
+{##}
+
+{#Statement. Ends with a semicolon#}
+
+{#== Structure#}
+{##}
+{#Control flow starts with the main function.#}
+{##}
+{#We'll use static functions. These can be called from main which will help you test your submissions locally.#}
 
 
 {#== String Manipulation#}
+{#Concatonation#}
 {##}
 {#Is this an email address?#}
