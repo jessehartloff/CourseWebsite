@@ -20,7 +20,8 @@
                href="{% url 'courses:course_home' course.course_number %}">Points<span
                     class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a class="menu_link" href="{% url 'courses:autolab' course.course_number %}"> Autolab</a></li>
+{#                <li><a href="{% url 'courses:autolab' course.course_number %}"> Autolab</a></li>#}
+                <li><a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank"> Autolab</a></li>
                 {% for lesson in assignments %}
                     {% if forloop.counter0 < 0 or course.course_number != "CSE115" %}
                         <li>
@@ -38,7 +39,8 @@
                     class="caret"></span></a>
             <ul class="dropdown-menu">
 
-            <li><a href="{% url 'courses:qa' course.course_number %}"> Questions</a></li>
+{#            <li><a href="{% url 'courses:qa' course.course_number %}"> Questions</a></li>#}
+            <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank"> Questions</a></li>
                 {% for lesson in lectures %}
                     {% if forloop.counter0 < 1 or course.course_number != "CSE115" %}
                         <li>
@@ -49,8 +51,10 @@
             </ul>
         </li>
 
-        <li><a href="{% url 'courses:autolab' course.course_number %}">Autolab</a></li>
-        <li><a href="{% url 'courses:qa' course.course_number %}">Questions</a></li>
+{#        <li><a href="{% url 'courses:autolab' course.course_number %}">Autolab</a></li>#}
+{#        <li><a href="{% url 'courses:qa' course.course_number %}">Questions</a></li>#}
+        <li><a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank">Autolab</a></li>
+        <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">Questions</a></li>
 
 
         {% if course.course_project == True %}
@@ -83,7 +87,8 @@
             &nbsp; <a class="menu_link" href="{% url 'courses:resources' course.course_number %}"> Resources</a>
             <br/>
             <h4>&nbsp;Earn Points</h4>
-            &nbsp;<a class="menu_link" href="{% url 'courses:autolab' course.course_number %}"> Autolab</a>
+{#            &nbsp;<a class="menu_link" href="{% url 'courses:autolab' course.course_number %}"> Autolab</a>#}
+            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank"> Autolab</a>
             <br/>
 
             {% for assignment in assignments %}
@@ -98,7 +103,8 @@
 
             <h4>&nbsp;Learn Concepts</h4>
 
-            &nbsp;<a class="menu_link" href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>
+{#            &nbsp;<a class="menu_link" href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>#}
+            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank"> Questions</a><br/>
             {% for lecture in lectures %}
                 {% if forloop.counter0 < 1 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
