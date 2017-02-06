@@ -5,43 +5,82 @@ next_content_short: functions
 previous_content_short: variables
 ---
 
-== User Input
+== Terms
 
-Get data from the user. Make a decision based on the input. But how do we ask questions in code?
+<ul class="list-inline list-group">
+    {#    <li>development environment</li>#}
+    <li class="list-inline-item list-group-item">if statement</li>
+    <li class="list-inline-item list-group-item">else</li>
+    <li class="list-inline-item list-group-item">while loop</li>
+    <li class="list-inline-item list-group-item">for loop</li>
+</ul>
 
-How to code flow charts.
 
-== Boolean Values
+== Classes
 
-True / False
+<ul>
+    <li>None</li>
+{#    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>#}
+</ul>
+
+
+{#== User Input#}
+{##}
+{#Get data from the user. Make a decision based on the input. But how do we ask questions in code?#}
+{##}
+{#How to code flow charts.#}
+
+{#== Boolean Values#}
+{##}
+{#True / False#}
 
 == If
 
-The if statement
+<p>
+    Check a boolean value. If true, run optional code. If false, skip the optional code.
+</p>
+
+
+
+
+
 
 == Boolean Expressions
 
 Greater than, less than, equal.
 geq, leq, neq.
 
+
+
 == Else
 
-What else?
+<p>
+    Sometimes we want to run optional code on a false condition.
+</p>
+
+
+<pre>
+    boolean value = true;
+    boolean value2 = true;
+    if(value && value2){
+        System.out.println("both true");
+    } else {
+        System.out.println("At least 1 false");
+    }
+</pre>
+
 
 == Else If
 
+<p>
+    Combination of else and if. Chains blocks together.
+    </p>
 Lots of checking
 
-At most 1 block is executed in a large if.
+At most 1 block is executed in a large if/else.
 
-== Nested Ifs
+{#== Nested Ifs#}
 
-{
-{
-{
-}
-}
-}
 
 == Boolean Logic
 
@@ -56,57 +95,58 @@ Truth tables
 
 if(random() > 0.5);
 
-== Switch/Case
-
-Might come later, if ever.
+{#== Switch/Case#}
+{##}
+{#Might come later, if ever.#}
 
 
 == Scope
 
 Variables declared inside the if are destroyed at the end.
 
-== Example: Maze
 
-Ask user which direction to move. Move in that direction.
-
-Provide GUI so they can see the movement
-
-
-
-== Motivation
-
-We can skip blocks of code, what if we want to repeat a block.
-
-== While Loops
-
-While
-
-Requires a boolean expression. When it's false, stop the loop.
-
-Similar to an if statement, but keeps executing until the condition is false.
-
-Condition is checked before each iteration. If the condition is false when the loop is first reached it will never execute.
-
-Guessing game. Track number of guesses. While the user hasn't guessed correctly, ask for another guess.
-Print number of guesses and correct answer. [Need user input]
-
-Use examples that motivate the syntax of for loops.
-
-
-== For Loops
-
-For
-
-3 optional expressions.
-
-Syntactical sugar.
-
-Simple format for a very common loop setup.
-
-== Continue and Break
-
-When you want to make an exception.
-
-{#== For Each Loops#}
+{#== Example: Maze#}
 {##}
-{#Too soon? I guess we need data structures first.#}
+{#Ask user which direction to move. Move in that direction.#}
+{##}
+{#Provide GUI so they can see the movement#}
+
+
+
+
+{#== Loop Motivation#}
+{##}
+{#We can skip blocks of code, what if we want to repeat a block.#}
+{##}
+{##}
+{#== While Loops#}
+{##}
+{#While#}
+{##}
+{#Requires a boolean expression. When it's false, stop the loop.#}
+{##}
+{#Similar to an if statement, but keeps executing until the condition is false.#}
+{##}
+{#Condition is checked before each iteration. If the condition is false when the loop is first reached it will never execute.#}
+{##}
+{#Guessing game. Track number of guesses. While the user hasn't guessed correctly, ask for another guess.#}
+{#Print number of guesses and correct answer. [Need user input]#}
+{##}
+{#Use examples that motivate the syntax of for loops.#}
+{##}
+{##}
+{#== For Loops#}
+{##}
+{#For#}
+{##}
+{#3 optional expressions.#}
+{##}
+{#Syntactical sugar.#}
+{##}
+{#Simple format for a very common loop setup.#}
+{##}
+{##}
+{#== Continue and Break#}
+{##}
+{#When you want to make an exception.#}
+
