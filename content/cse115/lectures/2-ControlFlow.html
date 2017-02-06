@@ -20,7 +20,7 @@ previous_content_short: variables
 
 <ul>
     <li>None</li>
-{#    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>#}
+    {#    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>#}
 </ul>
 
 
@@ -36,73 +36,172 @@ previous_content_short: variables
 
 == If
 
+{% load staticfiles %}
+
+<a href="{% static "courses/115Slides/2-ifElse.pptx" %}">If/Else Concept Slides</a>
+<br/><br/>
+
+
 <p>
     Check a boolean value. If true, run optional code. If false, skip the optional code.
 </p>
 
+Syntax:
+<pre>
+    boolean condition = true;
+    if(condition){
+        System.out.println("This line will be executed");
+    }
+</pre>
 
 
+<p>
+    Output: <kbd>This line will be executed</kbd>
+</p>
 
+<p>
+    Since the boolean value in the if statement is true, the code in the {}'s will be executed.
+</p>
+<hr/>
+
+<pre>
+    boolean condition = false;
+    if(condition){
+        System.out.println("This line will not be executed");
+    }
+    System.out.println("Control skips to here when the condition is false");
+</pre>
+
+
+<p>
+    Output: <kbd>Control skips to here when the condition is false</kbd>
+</p>
+
+<p>
+    Since the boolean value in the if statement is false, the code in the {}'s will not be executed.
+</p>
 
 
 == Boolean Expressions
 
-Greater than, less than, equal.
-geq, leq, neq.
+<p>
+    The boolean value in the if statement can be a boolean expression that evaluates to a single boolean value.
+</p>
+
+<p>
+    Common boolean operators:
+</p>
+<ul>
+    <li>Greater than: ></li>
+    <li>Less than: <</li>
+    <li>Equal: ==</li>
+    <li>Greater than or equal: >=</li>
+    <li>Less than or equal: <=</li>
+    <li>Not equal: !=</li>
+</ul>
+
+<br/>
+<pre>
+    boolean comparison = 5 > 10;
+    System.out.println(comparison);
+</pre>
+
+<p>
+    Output: <kbd>false</kbd>
+</p>
 
 
 
 == Else
 
 <p>
-    Sometimes we want to run optional code on a false condition.
+    Code to be executed on a false condition.
 </p>
 
+<br/>
 
 <pre>
-    boolean value = true;
-    boolean value2 = true;
-    if(value && value2){
-        System.out.println("both true");
+    double priceOfDinner = 40.0;
+    double currentCash = 20.0;
+    System.out.println("Getting hungry");
+    if(currentCash >= priceOfDinner){
+        System.out.println("Eating a nice dinner!");
     } else {
-        System.out.println("At least 1 false");
+        System.out.println("Eating Ramen");
     }
+    System.out.println("Sleeping");
 </pre>
+
+<p>
+    Output:</p><kbd>Getting hungry<br/>Eating Ramen<br/>Sleeping</kbd>
+
+
 
 
 == Else If
 
 <p>
-    Combination of else and if. Chains blocks together.
-    </p>
-Lots of checking
+    Combination of else and if. Check multiple conditions.
+</p>
 
-At most 1 block is executed in a large if/else.
+
+<pre>
+    double priceOfDinner = 40.0;
+    double priceOfFastFood = 10.0;
+    double currentCash = 20.0;
+    System.out.println("Getting hungry");
+    if(currentCash >= priceOfDinner){
+        System.out.println("Eating a nice dinner!");
+    } else if(currentCash >= priceOfFastFood{
+        System.out.println("Eating Fast food");
+    } else {
+        System.out.println("Eating Ramen");
+    }
+    System.out.println("Sleeping");
+</pre>
+
+<p>
+    Output:</p><kbd>Getting hungry<br/>Eating Fast food<br/>Sleeping</kbd>
+
+
+<p>At most 1 block is executed in an if/else section.</p>
+
 
 {#== Nested Ifs#}
 
 
-== Boolean Logic
+{#== Boolean Logic#}
+{##}
+{#and or else not#}
+{##}
+{#More complex boolean expressions#}
+{##}
+{#Truth tables#}
+{##}
+{##}
 
-and or else not
+{#<pre>#}
+{#    boolean value = true;#}
+{#    boolean value2 = true;#}
+{#    if(value && value2){#}
+{#        System.out.println("both true");#}
+{#    } else {#}
+{#        System.out.println("At least 1 false");#}
+{#    }#}
+{#</pre>#}
 
-More complex boolean expressions
-
-Truth tables
-
-
-== RNG
-
-if(random() > 0.5);
+{#== RNG#}
+{##}
+{#if(random() > 0.5);#}
 
 {#== Switch/Case#}
 {##}
 {#Might come later, if ever.#}
 
 
-== Scope
-
-Variables declared inside the if are destroyed at the end.
+{#== Scope#}
+{##}
+{#Variables declared inside the if are destroyed at the end.#}
 
 
 {#== Example: Maze#}
@@ -110,8 +209,6 @@ Variables declared inside the if are destroyed at the end.
 {#Ask user which direction to move. Move in that direction.#}
 {##}
 {#Provide GUI so they can see the movement#}
-
-
 
 
 {#== Loop Motivation#}
