@@ -8,9 +8,10 @@ previous_content_short: variables
 == Terms
 
 <ul class="list-inline list-group">
-    {#    <li>development environment</li>#}
     <li class="list-inline-item list-group-item">if statement</li>
     <li class="list-inline-item list-group-item">else</li>
+    <li class="list-inline-item list-group-item">scope</li>
+    <li class="list-inline-item list-group-item">block</li>
     <li class="list-inline-item list-group-item">while loop</li>
     <li class="list-inline-item list-group-item">for loop</li>
 </ul>
@@ -89,7 +90,7 @@ Syntax:
 </p>
 
 <p>
-    Common boolean operators:
+    Common boolean comparisons:
 </p>
 <ul>
     <li>Greater than: ></li>
@@ -109,7 +110,6 @@ Syntax:
 <p>
     Output: <kbd>false</kbd>
 </p>
-
 
 
 == Else
@@ -136,8 +136,6 @@ Syntax:
     Output:</p><kbd>Getting hungry<br/>Eating Ramen<br/>Sleeping</kbd>
 
 
-
-
 == Else If
 
 <p>
@@ -152,7 +150,7 @@ Syntax:
     System.out.println("Getting hungry");
     if(currentCash >= priceOfDinner){
         System.out.println("Eating a nice dinner!");
-    } else if(currentCash >= priceOfFastFood{
+    } else if(currentCash >= priceOfFastFood){
         System.out.println("Eating Fast food");
     } else {
         System.out.println("Eating Ramen");
@@ -170,39 +168,60 @@ Syntax:
 {#== Nested Ifs#}
 
 
-{#== Boolean Logic#}
-{##}
-{#and or else not#}
-{##}
-{#More complex boolean expressions#}
-{##}
-{#Truth tables#}
-{##}
-{##}
+== Random Number Generator (RNG)
 
-{#<pre>#}
-{#    boolean value = true;#}
-{#    boolean value2 = true;#}
-{#    if(value && value2){#}
-{#        System.out.println("both true");#}
-{#    } else {#}
-{#        System.out.println("At least 1 false");#}
-{#    }#}
-{#</pre>#}
+<p>
+    Math.random() will return a pseudo-random double between 0.0 and 1.0.
+</p>
 
-{#== RNG#}
-{##}
-{#if(random() > 0.5);#}
+<pre>
+    if(Math.random() > 0.5){
+        System.out.println("There is a 50% chance this line will be printed");
+    }
+</pre>
+<p>
+    Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
+</p>
+<hr/>
+<p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
+    result!</p>
+
+<pre>
+    double randomNumber = Math.random()*100;
+    System.out.println("The random value is: " + randomNumber);
+</pre>
+
+<p>The output will be a random double between 0.0 and 100.0</p>
 
 {#== Switch/Case#}
 {##}
 {#Might come later, if ever.#}
 
 
-{#== Scope#}
-{##}
-{#Variables declared inside the if are destroyed at the end.#}
+== Block and Scope
 
+<p>
+    Any time a section of code is surrounded by {braces} we call this section a code block. We saw code blocks
+    corresponding to if statements and we will see them in loops as well. Code blocks are most commonly used in control
+    flow to tell the program which section of code to run after checking a conditional. When the conditional of an
+    if statement is true, the following block of code is executed. When the conditional of an if statement is false,
+    the following block of code is skipped.
+</p>
+
+<p>
+    Variables created inside a block or code are destroyed at the end of that block.
+</p>
+
+<pre>
+    int number = 5;
+    if(number > 3){
+        double secondNumber = 7.43; // create a double variable and name it secondNumber
+    } // secondNumber is destroyed here since it was created inside the block that is ending
+    System.out.println(secondNumber); // This will cause an error since secondNumber has been destroyed
+</pre>
+<p>
+    This code will cause a compiler error (the computer cannot understand how to run the code).
+</p>
 
 {#== Example: Maze#}
 {##}
@@ -211,27 +230,213 @@ Syntax:
 {#Provide GUI so they can see the movement#}
 
 
+== Boolean Logic
+
+<p>
+    More boolean operators:
+</p>
+<dl>
+    <dt>and: &&</dt>
+    <dd>Returns true only if both sides are true</dd>
+    <dt>or: ||</dt>
+    <dd>Returns true if either side is true</dd>
+    <dt>not: !</dt>
+    <dd>Returns the inverse of the following boolean value</dd>
+</dl>
+
+<pre>
+    System.out.println(true && true); // true
+    System.out.println(true && false); // false
+    System.out.println(true || false); // true
+    System.out.println(false || false); // false
+    System.out.println(!true); // false
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>true<br/>false<br/>true<br/>false<br/>false</kbd>
+
+<hr/>
+
+<pre>
+    int number = 8;
+    if(5 < number && number < 10){
+        System.out.println("number is between 5 and 10");
+    }
+</pre>
+
+<p>
+    Output:
+    <kbd>number is between 5 and 10</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
+    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
+    <li><code>if(true && 8 < 10)</code></li>
+    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
+    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true</li>
+    <li><code>{...}</code> Execute the following code block</li>
+</ol>
+
 {#== Loop Motivation#}
 {##}
 {#We can skip blocks of code, what if we want to repeat a block.#}
-{##}
-{##}
-{#== While Loops#}
-{##}
-{#While#}
-{##}
-{#Requires a boolean expression. When it's false, stop the loop.#}
-{##}
-{#Similar to an if statement, but keeps executing until the condition is false.#}
-{##}
-{#Condition is checked before each iteration. If the condition is false when the loop is first reached it will never execute.#}
-{##}
+
+
+== While Loop
+
+<p>
+    Repeat a block of code while a condition is true. Once the condition is false, stop repeating the code.
+</p>
+
+
+<p>
+    Example: We want to set a thermostat to a desired temperature, but we can only increase the temperature 1 degree
+    at a time.
+</p>
+<pre>
+    int temperature=65;
+    while(temperature<70){
+        System.out.println("Temperature set to: " + temperature);
+        temperature = temperature+1;
+    }
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>Temperature set to: 65<br/>
+    Temperature set to: 66<br/>
+    Temperature set to: 67<br/>
+    Temperature set to: 68<br/>
+    Temperature set to: 69<br/>
+    Final Temperature: 70<br/>
+</kbd>
+
+<p>
+    This could be done without a loop:
+</p>
+
+<pre>
+    int temperature=65;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    This is repetitive, but it isn't too bad. However, this code is much less flexible than our code that uses a while
+    loop. Let's assume we want o set the temperature to 75 instead of 70. With a while loop our example becomes:
+</p>
+
+
+<pre>
+    int temperature=65;
+    while(temperature<75){
+        System.out.println("Temperature set to: " + temperature);
+        temperature = temperature+1;
+    }
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>Temperature set to: 65<br/>
+    Temperature set to: 66<br/>
+    Temperature set to: 67<br/>
+    Temperature set to: 68<br/>
+    Temperature set to: 69<br/>
+    Temperature set to: 70<br/>
+    Temperature set to: 71<br/>
+    Temperature set to: 72<br/>
+    Temperature set to: 73<br/>
+    Temperature set to: 74<br/>
+    Final Temperature: 75<br/>
+</kbd>
+<p>
+    We barely had to change any code to have a large impact on the output. If we want the same output in the
+    example without a loop we will have to change much more code:
+</p>
+
+
+<pre>
+    int temperature=65;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    This code is less flexible and less readable than the code using a loop. What's worse is that we can't even write
+    this code if we don't know how many degrees the temperature needs to be increased by. What if we want to write
+    code that sets the temperature to 70 degrees regardless of the current temperature setting? How many times do we
+    write "temperature = temperature+1;"?
+</p>
+
+<hr/>
+<ul>
+    <li>Condition is checked before each iteration. If the condition is false when the loop is first reached it will
+        never execute.
+    </li>
+    <li>Condition should be false eventually! If the condition is never false the loop with run forever!</li>
+</ul>
+
+<hr/>
+
+<pre>
+    int i=1;
+    while(i<3){
+        i++;
+    }
+    System.out.println("The value stored in i is " + i);
+</pre>
+
+<p>
+    Output: <kbd>The value stored in i is 3</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>int i=1;</code> create an int variable, name it i, store the value 1</li>
+    <li><code>while(i<3)</code> Evaluate the boolean expression</li>
+    <li><code>while(1<3)</code></li>
+    <li><code>while(true)</code> The condition is true so we will run the following block of code, then check this condition again</li>
+    <li><code>{i++;}</code> Run the block of code which increments i (add 1 to the value of i)</li>
+    <li><code>while(i<3)</code> After the end of the block, recheck the condition</li>
+    <li><code>while(2<3)</code></li>
+    <li><code>while(true)</code> The condition is true so we will run the block of code again, then check this condition again</li>
+    <li><code>{i++;}</code> Run the block of code which increments i</li>
+    <li><code>while(i<3)</code> After the end of the block, recheck the condition</li>
+    <li><code>while(3<3)</code></li>
+    <li><code>while(false)</code> The condition is false so the loop ends and control skips over the following block of code</li>
+    <li><code>System.out.println("The value stored in i is " + i);</code> Replace the variable name i with its value</li>
+    <li><code>System.out.println("The value stored in i is " + 3);</code> Convert the int value 3 to a String value</li>
+    <li><code>System.out.println("The value stored in i is " + "3");</code> Concatenate the 2 String values</li>
+    <li><code>System.out.println("The value stored in i is 3");</code> Display the resulting String value to the screen</li>
+</ol>
+
 {#Guessing game. Track number of guesses. While the user hasn't guessed correctly, ask for another guess.#}
 {#Print number of guesses and correct answer. [Need user input]#}
-{##}
-{#Use examples that motivate the syntax of for loops.#}
-{##}
-{##}
+
+
 {#== For Loops#}
 {##}
 {#For#}
