@@ -9,6 +9,37 @@
 
     {% block extra %}{% endblock %}
 
+    <div class="well lecture-section-well">
+
+
+        {#    <ul class="list-inline list-group">#}
+
+
+        <div class="btn-group">
+            {% for section in this_lecture.section_set.all %}
+
+
+
+                <a href="#section{{ forloop.counter0 }}" class="btn btn-primary">{{ section.sectionTitle }}</a>
+                {#  <button type="button" class="btn btn-primary" href="#section{{ forloop.counter0 }}">{{ section.sectionTitle }}</button>#}
+
+                {#                <form action="#section{{ forloop.counter0 }}">#}
+                {#                    <input type="submit" class="btn btn-primary" value="{{ section.sectionTitle }}"/>#}
+                {#                </form>#}
+
+
+
+                {#            <li class="list-inline-item list-group-item"><a href="#section{{ forloop.counter0 }}">#}
+                {#                {{ section.sectionTitle }}</a>#}
+                {#            </li>#}
+            {% endfor %}
+        </div>
+        {#    </ul>#}
+
+    <div id="section0"></div>
+    </div>
+
+
     {% for section in this_lecture.section_set.all %}
         <div class="well lecture-section-well">
             <h3>{{ section.sectionTitle }}</h3>
@@ -18,6 +49,10 @@
                 <h4>{{ subsection.subSectionTitle }}</h4>
                 {% render_as_template subsection.html_content %}
             {% endfor %}
+            <div id="section{{ forloop.counter }}"></div>
         </div>
     {% endfor %}
+
+
+
 {% endblock %}
