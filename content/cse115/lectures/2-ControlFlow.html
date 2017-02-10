@@ -1,0 +1,652 @@
+---
+title: Control Flow
+short_title: if
+next_content_short: functions
+previous_content_short: variables
+---
+
+== Terms
+
+<ul class="list-inline list-group">
+    <li class="list-inline-item list-group-item">if statement</li>
+    <li class="list-inline-item list-group-item">else</li>
+    <li class="list-inline-item list-group-item">scope</li>
+    <li class="list-inline-item list-group-item">block</li>
+    <li class="list-inline-item list-group-item">while loop</li>
+    <li class="list-inline-item list-group-item">for loop</li>
+</ul>
+
+
+== Classes
+
+<ul>
+    <li>None</li>
+    {#    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>#}
+</ul>
+
+
+{#== User Input#}
+{##}
+{#Get data from the user. Make a decision based on the input. But how do we ask questions in code?#}
+{##}
+{#How to code flow charts.#}
+
+{#== Boolean Values#}
+{##}
+{#True / False#}
+
+== If
+
+{% load staticfiles %}
+
+<a href="{% static "courses/115Slides/2-ifElse.pptx" %}">If/Else Concept Slides</a>
+<br/><br/>
+
+
+<p>
+    Check a boolean value. If true, run optional code. If false, skip the optional code.
+</p>
+
+Syntax:
+<pre>
+    boolean condition = true;
+    if(condition){
+        System.out.println("This line will be executed");
+    }
+</pre>
+
+
+<p>
+    Output: <kbd>This line will be executed</kbd>
+</p>
+
+<p>
+    Since the boolean value in the if statement is true, the code in the {}'s will be executed.
+</p>
+<hr/>
+
+<pre>
+    boolean condition = false;
+    if(condition){
+        System.out.println("This line will not be executed");
+    }
+    System.out.println("Control skips to here when the condition is false");
+</pre>
+
+
+<p>
+    Output: <kbd>Control skips to here when the condition is false</kbd>
+</p>
+
+<p>
+    Since the boolean value in the if statement is false, the code in the {}'s will not be executed.
+</p>
+
+
+== Boolean Expressions
+
+<p>
+    The boolean value in the if statement can be a boolean expression that evaluates to a single boolean value.
+</p>
+
+<p>
+    Common boolean comparisons:
+</p>
+<ul>
+    <li>Greater than: ></li>
+    <li>Less than: <</li>
+    <li>Equal: ==</li>
+    <li>Greater than or equal: >=</li>
+    <li>Less than or equal: <=</li>
+    <li>Not equal: !=</li>
+</ul>
+
+<br/>
+<pre>
+    boolean comparison = 5 > 10;
+    System.out.println(comparison);
+</pre>
+
+<p>
+    Output: <kbd>false</kbd>
+</p>
+
+
+== Else
+
+<p>
+    Code to be executed on a false condition.
+</p>
+
+<br/>
+
+<pre>
+    double priceOfDinner = 40.0;
+    double currentCash = 20.0;
+    System.out.println("Getting hungry");
+    if(currentCash >= priceOfDinner){
+        System.out.println("Eating a nice dinner!");
+    } else {
+        System.out.println("Eating Ramen");
+    }
+    System.out.println("Sleeping");
+</pre>
+
+<p>
+    Output:</p><kbd>Getting hungry<br/>Eating Ramen<br/>Sleeping</kbd>
+
+
+== Else If
+
+<p>
+    Combination of else and if. Check multiple conditions.
+</p>
+
+
+<pre>
+    double priceOfDinner = 40.0;
+    double priceOfFastFood = 10.0;
+    double currentCash = 20.0;
+    System.out.println("Getting hungry");
+    if(currentCash >= priceOfDinner){
+        System.out.println("Eating a nice dinner!");
+    } else if(currentCash >= priceOfFastFood){
+        System.out.println("Eating Fast food");
+    } else {
+        System.out.println("Eating Ramen");
+    }
+    System.out.println("Sleeping");
+</pre>
+
+<p>
+    Output:</p><kbd>Getting hungry<br/>Eating Fast food<br/>Sleeping</kbd>
+
+<hr/>
+
+<p>At most 1 block is executed in an if/else section.</p>
+
+<pre>
+    int number = 45;
+    if(number < 30){
+        System.out.println("number is less than 30");
+    } else if(number < 40){
+        System.out.println("number is less than 40");
+    } else if(number < 50){
+        System.out.println("number is less than 50");
+    } else if(number < 60){
+        System.out.println("number is less than 60");
+    } else {
+        System.out.println("number is greater than, or equal to, 60");
+    }
+</pre>
+
+<p>
+    Output:<kbd>number is less than 50</kbd>
+</p>
+
+<br/>
+<p>
+    The last condition <code>number < 60</code> is true, but is never checked since a previous condition was true. Once
+    a true condition is found the corresponding block of code is executed and <b>control moves to the end of the
+    entire group of conditionals.</b>
+</p>
+
+{#== Nested Ifs#}
+
+
+== Random Number Generator (RNG)
+
+<p>
+    Math.random() will return a pseudo-random double between 0.0 and 1.0.
+</p>
+
+<pre>
+    if(Math.random() > 0.5){
+        System.out.println("There is a 50% chance this line will be printed");
+    }
+</pre>
+<p>
+    Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
+</p>
+<hr/>
+<p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
+    result!</p>
+
+<pre>
+    double randomNumber = Math.random()*100;
+    System.out.println("The random value is: " + randomNumber);
+</pre>
+
+<p>The output will be a random double between 0.0 and 100.0</p>
+
+{#== Switch/Case#}
+{##}
+{#Might come later, if ever.#}
+
+
+== Block and Scope
+
+<p>
+    Any time a section of code is surrounded by {braces} we call this section a code block. We saw code blocks
+    corresponding to if statements and we will see them in loops as well. Code blocks are most commonly used in control
+    flow to tell the program which section of code to run after checking a conditional. When the conditional of an
+    if statement is true, the following block of code is executed. When the conditional of an if statement is false,
+    the following block of code is skipped.
+</p>
+
+<p>
+    Variables created inside a block or code are destroyed at the end of that block.
+</p>
+
+<pre>
+    int number = 5;
+    if(number > 3){
+        double secondNumber = 7.43; // create a double variable and name it secondNumber
+    } // secondNumber is destroyed here since it was created inside the block that is ending
+    System.out.println(secondNumber); // This will cause an error since secondNumber has been destroyed
+</pre>
+<p>
+    This code will cause a compiler error (the computer cannot understand how to run the code).
+</p>
+
+{#== Example: Maze#}
+{##}
+{#Ask user which direction to move. Move in that direction.#}
+{##}
+{#Provide GUI so they can see the movement#}
+
+
+== Boolean Logic
+
+<p>
+    More boolean operators:
+</p>
+<dl>
+    <dt>and: &&</dt>
+    <dd>Returns true only if both sides are true</dd>
+    <dt>or: ||</dt>
+    <dd>Returns true if either side is true</dd>
+    <dt>not: !</dt>
+    <dd>Returns the inverse of the following boolean value</dd>
+</dl>
+
+<pre>
+    System.out.println(true && true); // true
+    System.out.println(true && false); // false
+    System.out.println(true || false); // true
+    System.out.println(false || false); // false
+    System.out.println(!true); // false
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>true<br/>false<br/>true<br/>false<br/>false</kbd>
+
+<hr/>
+
+<pre>
+    int number = 8;
+    if(5 < number && number < 10){
+        System.out.println("number is between 5 and 10");
+    }
+</pre>
+
+<p>
+    Output:
+    <kbd>number is between 5 and 10</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
+    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
+    <li><code>if(true && 8 < 10)</code></li>
+    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
+    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true
+    </li>
+    <li><code>{...}</code> Execute the following code block</li>
+</ol>
+
+== Loop Concept
+
+<p>
+    We can skip blocks of code, what if we want to repeat a block?
+</p>
+{% load staticfiles %}
+
+<a href="{% static "courses/115Slides/2-Loops.pptx" %}">Loops Concept Slides</a>
+<br/><br/>
+
+== While Loop
+
+<p>
+    Repeat a block of code while a condition is true. Once the condition is false, stop repeating the code.
+</p>
+
+
+<p>
+    Example: We want to set a thermostat to a desired temperature, but we can only increase the temperature 1 degree
+    at a time.
+</p>
+<pre>
+    int temperature=65;
+    while(temperature<70){
+        System.out.println("Temperature set to: " + temperature);
+        temperature = temperature+1;
+    }
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>Temperature set to: 65<br/>
+    Temperature set to: 66<br/>
+    Temperature set to: 67<br/>
+    Temperature set to: 68<br/>
+    Temperature set to: 69<br/>
+    Final Temperature: 70
+</kbd>
+
+<p>
+    This could be done without a loop:
+</p>
+
+<pre>
+    int temperature=65;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    This is repetitive, but it isn't too bad. However, this code is much less flexible than our code that uses a while
+    loop. Let's assume we want o set the temperature to 75 instead of 70. With a while loop our example becomes:
+</p>
+
+
+<pre>
+    int temperature=65;
+    while(temperature<75){
+        System.out.println("Temperature set to: " + temperature);
+        temperature = temperature+1;
+    }
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>Temperature set to: 65<br/>
+    Temperature set to: 66<br/>
+    Temperature set to: 67<br/>
+    Temperature set to: 68<br/>
+    Temperature set to: 69<br/>
+    Temperature set to: 70<br/>
+    Temperature set to: 71<br/>
+    Temperature set to: 72<br/>
+    Temperature set to: 73<br/>
+    Temperature set to: 74<br/>
+    Final Temperature: 75
+</kbd>
+<p>
+    We barely had to change any code to have a large impact on the output. If we want the same output in the
+    example without a loop we will have to change much more code:
+</p>
+
+
+<pre>
+    int temperature=65;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    temperature = temperature+1;
+    System.out.println("Final Temperature: " + temperature);
+</pre>
+
+<p>
+    This code is less flexible and less readable than the code using a loop. What's worse is that we can't even write
+    this code if we don't know how many degrees the temperature needs to be increased by. What if we want to write
+    code that sets the temperature to 70 degrees regardless of the current temperature setting? How many times do we
+    write "temperature = temperature+1;"?
+</p>
+
+<hr/>
+<ul>
+    <li>Condition is checked before each iteration. If the condition is false when the loop is first reached it will
+        never execute.
+    </li>
+    <li>Condition should be false eventually! If the condition is never false the loop with run forever!</li>
+</ul>
+
+<hr/>
+
+<pre>
+    int i=1;
+    while(i<3){
+        i++;
+    }
+    System.out.println("The value stored in i is " + i);
+</pre>
+
+<p>
+    Output: <kbd>The value stored in i is 3</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>int i=1;</code> create an int variable, name it i, store the value 1</li>
+    <li><code>while(i<3)</code> Evaluate the boolean expression</li>
+    <li><code>while(1<3)</code></li>
+    <li><code>while(true)</code> The condition is true so we will run the following block of code, then check this
+        condition again
+    </li>
+    <li><code>{i++;}</code> Run the block of code which increments i (add 1 to the value of i)</li>
+    <li><code>while(i<3)</code> After the end of the block, recheck the condition</li>
+    <li><code>while(2<3)</code></li>
+    <li><code>while(true)</code> The condition is true so we will run the block of code again, then check this condition
+        again
+    </li>
+    <li><code>{i++;}</code> Run the block of code which increments i</li>
+    <li><code>while(i<3)</code> After the end of the block, recheck the condition</li>
+    <li><code>while(3<3)</code></li>
+    <li><code>while(false)</code> The condition is false so the loop ends and control skips over the following block of
+        code
+    </li>
+    <li><code>System.out.println("The value stored in i is " + i);</code> Replace the variable name i with its value
+    </li>
+    <li><code>System.out.println("The value stored in i is " + 3);</code> Convert the int value 3 to a String value</li>
+    <li><code>System.out.println("The value stored in i is " + "3");</code> Concatenate the 2 String values</li>
+    <li><code>System.out.println("The value stored in i is 3");</code> Display the resulting String value to the screen
+    </li>
+</ol>
+
+{#Guessing game. Track number of guesses. While the user hasn't guessed correctly, ask for another guess.#}
+{#Print number of guesses and correct answer. [Need user input]#}
+
+
+== For Loops
+
+<p>
+    Has the same power as while loops with different syntax.
+</p>
+
+<pre>
+    for([initialization]; [condition]; [increment]){
+        // body
+    }
+</pre>
+
+<p>
+    Where a while loop only needs a condition, for loops need 3 separate expressions, initialization code to be
+    executed before the loop starts, the condition to be checked before each iteration, and an increment statement
+    executed after each iteration.
+</p>
+<ul>
+    <li><b>Initialization</b>: A statement that is executed before the loop begins. Initialization is only executed
+        once.
+    </li>
+    <li><b>Condition</b>: The boolean expression that controls the number of iterations. The loop will run until the
+        condition is false.
+    </li>
+    <li><b>increment</b>: Code to be executed each time the end of the loop is reached. This most commonly alters a
+        value that is used in the condition to control the number of times the loop is executed.
+    </li>
+</ul>
+
+<hr>
+<pre>
+    for(int i=0; i<3; i++){
+        System.out.println("The value stored in i is " + i);
+    }
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>The value stored in i is 0<br/>The value stored in i is 1<br/>The value stored in i is 2</kbd>
+
+<br/>
+<p>
+    In this example we are initializing an int variable names i and setting it to 0 before the loop starts, Checking the
+    condition "i<3" to control the loop, and increasing i by 1 after each iteration. This code is equivalent to the
+    following.
+</p>
+
+<pre>
+    {
+        int i=0;
+        System.out.println("The value stored in i is " + i);
+        i++;
+        System.out.println("The value stored in i is " + i);
+        i++;
+        System.out.println("The value stored in i is " + i);
+        i++;
+    }
+</pre>
+<p>
+    Note that since the variable i is declared in the loop it will fall out of scope (be destroyed) when the loop is
+    finished.
+</p>
+
+<hr/>
+
+
+<pre>
+    for(int i=3; i<5; i++){
+        System.out.println(i*i);
+    }
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>9<br/>16</kbd>
+
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>int i=3;</code> create an int variable, name it i, store the value 3</li>
+    <li><code>i<5;</code> Evaluate the boolean expression</li>
+    <li><code>3<5</code></li>
+    <li><code>true</code> The condition is true so we will run the following block of code</li>
+    <li><code>System.out.println(i*i);</code> Evaluate the expression to a String</li>
+    <li><code>System.out.println(3*3);</code></li>
+    <li><code>System.out.println(9);</code></li>
+    <li><code>System.out.println("9");</code> Print "9" to the screen</li>
+    <li><code>i++</code> The end of the block was reached so we run the increment code and increase the value of i by 1
+    </li>
+    <li><code>i = i+1</code></li>
+    <li><code>i = 3+1</code></li>
+    <li><code>i = 4</code></li>
+    <li><code>3</code> Included for completeness [Post increment evaluates to the original value. We can safely ignore
+        this fact if we're careful]
+    </li>
+    <li><code>i<5</code> The end of the loop was reached so the condition is rechecked</li>
+    <li><code>4<5</code></li>
+    <li><code>true</code> The condition is true so the loop runs again</li>
+    <li><code>System.out.println(i*i);</code> Evaluate the expression to a String</li>
+    <li><code>System.out.println(4*4);</code></li>
+    <li><code>System.out.println(16);</code></li>
+    <li><code>System.out.println("16");</code> Print "16" to the screen</li>
+    <li><code>i++</code> The end of the block was reached so we run the increment code and increase the value of i by 1
+    </li>
+    <li><code>i = i+1</code></li>
+    <li><code>i = 4+1</code></li>
+    <li><code>i = 5</code></li>
+    <li><code>i<5</code> The end of the loop was reached so the condition is rechecked</li>
+    <li><code>5<5</code></li>
+    <li><code>false</code> The condition is false so the loop ends and control moves to the end of the loop's code block
+    </li>
+    <li><code></code> The variable i falls out of scope and is destroyed</li>
+</ol>
+
+
+<p>Supplementary source:</p>
+<ul>
+    <li><a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html">Javadocs: For Statement</a></li>
+</ul>
+
+
+== Continue and Break
+
+<p>
+    When you want to make an exception to the loops condition.
+</p>
+
+<ul>
+    <li><b>Continue</b>: Skips the rest of the current iteration and moves to the increment statement</li>
+    <li><b>Break</b>: Exit the loop entirely even if the condition is still met</li>
+</ul>
+
+<hr/>
+
+<pre>
+    for(int i=0; i<7; i++){
+        if(i == 4){
+            continue;
+        }
+        System.out.println("The value stored in i is " + i);
+    }
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>The value stored in i is 0<br/>The value stored in i is 1<br/>The value stored in i is 2<br/>The value stored in i is 3<br/>The value stored in i is 5<br/>The value stored in i is 6</kbd>
+
+<p>
+    When i is 4 the continue is executed which skips to the end of the block without printing to the screen, then the continues as usual.
+</p>
+<hr/>
+<pre>
+    for(int i=0; i<7; i++){
+        if(i == 4){
+            break;
+        }
+        System.out.println("The value stored in i is " + i);
+    }
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>The value stored in i is 0<br/>The value stored in i is 1<br/>The value stored in i is 2<br/>The value stored in i is 3</kbd>
+
+<p>
+    When i is 4 the break is executed which immediately exits the loop even though <code>i<7</code> is still true.
+</p>
+<hr/>

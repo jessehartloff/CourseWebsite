@@ -1,48 +1,68 @@
 ---
-title: Basics: Homework 1
+title: HW1: Eat. Sleep. Drink.
 short_title: hw1
-next_content_short: ps3
-previous_content_short: ps2
-due_date: Monday, February 12 @ 8am
+next_content_short: hw2
+previous_content_short: none
+due_date: Wednesday, March 1 @ 11am
 ---
 
-== Estimated Time
 
-<h3>6 Hours</h3>
-
+== Estimated Time: 6 Hours
 
 == Objectives
 <ul>
-    <li>All the basics</li>
-    <li>A taste of objects</li>
+    <li>Combine variables, control flow, and functions to create a full program</li>
+    <li>Determine if a given college lifestyle is feasible or not</li>
 </ul>
 
 
-== Technical Terms
+== Description
+
+<a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments/homework1eatsleepdrink">Autolab Page</a>
+
+<p>
+    In this program we will determine if any given lifestyle is feasible for a college student. Our goal is to tell the
+    computer how luxuriously you like to eat, how much time you want to spend sleeping
+    and relaxing, and how much you want to drink and have it tell you if you can afford that lifestyle. To complete the
+    result you will also have to provide you current pay rate and how classes you are taking. The program wil determine
+    if there is enough time for you complete all your coursework and relax with time left to work enough hours to afford
+    you food and drink.
+</p>
 
 
+== Questions
+<p>
+    All question descriptions and point values are provided as comments in the handout file.
+</p>
 
-== Resources
+== Testing
 
-== Introduction
+<p>
+    You are strongly encouraged to use the main method to test your code. Below is an example for testing the
+    maximumCredits method. Autolab will provide 1 test case and expected result for each incorrect question. To help
+    you arrive at the correct solution, you should add this test case to your main method so you can check your result
+    in eclipse without having to resubmit. When you have the correct output on all known test cases you should resubmit.
+</p>
 
+<pre>
+    public static void main(String[] args) {
+        double hourlyPayRate = 10;
+        double tipRate = 0.2;
+        double dailyFoodCost = 10;
+        double dailyBeverageCost = 5;
+        int dailySleepAndChill = 16;
+        double startingCash = 0;
+        double randomSpending = 50;
 
-
-
-== Lab Question (1 point)
-
-
-
-== Independent Questions (3 point)
-
-
-
-== Code
-
-
-
-== Submission
-
-
-
+        int maxCredits = maximumCredits(hourlyPayRate, tipRate, dailyFoodCost, dailyBeverageCost, dailySleepAndChill,
+                                        startingCash, randomSpending);
+        int expectedResult = 14;
+        if(maxCredits == expectedResult){
+            System.out.println("Passed the test case!");
+        } else{
+            System.out.println("The test case did not pass. Try again.");
+            System.out.println("The course TAs are always happy to help in office hours.");
+        }
+    }
+</pre>
 

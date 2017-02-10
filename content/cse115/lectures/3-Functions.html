@@ -1,0 +1,85 @@
+---
+title: Functions
+short_title: functions
+next_content_short: ds
+previous_content_short: loops
+---
+
+
+[Monday - Calling methods (Math, String)]
+[Wednesday - Writing methods (explain main method)]
+[Friday - Complex functions (multiple parameters. Maybe show some grading code and my main method/why their main is ignored)]
+
+== Encapsulation
+
+_technically_ you can do anything with what you now know (exaggeration, but not nearly as much as you'd think).
+You have at your disposal what's called a turing complete language, a language that can do anything that can be
+done by any computer. Everything else we will do in this course will be exploring what can be done with this power.
+Much of this will include using code that other people have written.. but how to use their code? They package them in
+methods and we call their code.
+
+Reuse functions. Programmers are lazy/efficient.
+
+So we can think at a higher level and ignore some details.
+To start a car. Sit down, insert key, turn key.. no. Just start the car
+
+Have a piece of code that we often? Put it in a function! Then use it anywhere in your code.
+
+Lets you stay focused on writing software without always thinking about how every single piece is working.
+Write it once, use it often.
+
+Helps us organize code.
+
+
+== Functions
+
+Like variables, but stores code instead of a value. Code is inserted into you program inside a separate block when a
+function is called.
+
+
+[access] [return type] name([parameters]){
+  [body]
+}
+
+[access] is optional.
+
+[variable name] = functionName([arguments]);
+
+Function stores all the fixed code. Parameters are the only part that might change.
+
+We've been using one function all along. void System.out.println(String text); or just println.
+System.out is called the package.
+
+Let's see more functions. Math! [Show the code without function calls by inserting the function code inline.
+-abs
+-pow
+
+Function calls are expressions, or part of an expression, that evaluates to a value of its return type.
+
+Functions called on an object (what's an object? Don't worry about it?..)
+-String.length();
+-String.toLower();
+
+The hidden line of code:
+parameters = arguments;
+
+Now let's make our own functions!
+
+-Void with no parameters (I want to print this message whenever called)
+-Void with parameters (Print hello to the parameter) (the hidden lines of code)
+-Non-void with parameters (Simple math function)
+-Multiple parameters. Stress the order.
+-Non-void without parameters? Foreshadow getters?
+
+Scope. Parameters don't exist outside the function.
+
+== Code Style
+
+Using functions is essential to writing readable/debuggable code. Large programs that don't use functions are messy.
+
+Example code. Identify which parts could benefit from being functions and factor out that code.
+
+== End Part 1 [Fundamentals]
+
+You now know how to code! Congrats!
+
