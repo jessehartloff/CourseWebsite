@@ -10,7 +10,9 @@ previous_content_short: loops
 [Wednesday - Writing methods (explain main method)]
 [Friday - Complex functions (multiple parameters. Maybe show some grading code and my main method/why their main is ignored)]
 
-== Encapsulation
+== Functions
+
+{#Slides#}
 
 _technically_ you can do anything with what you now know (exaggeration, but not nearly as much as you'd think).
 You have at your disposal what's called a turing complete language, a language that can do anything that can be
@@ -30,56 +32,122 @@ Write it once, use it often.
 
 Helps us organize code.
 
-
-== Functions
-
 Like variables, but stores code instead of a value. Code is inserted into you program inside a separate block when a
 function is called.
 
 
-[access] [return type] name([parameters]){
-  [body]
-}
 
-[access] is optional.
+== Methods
 
-[variable name] = functionName([arguments]);
+<p>We are covering the concept of functions, but there are no functions in java! Don't panic, we will still use
+    everything we're learning about functions but in java we will apply our knowledge to methods.</p>
 
-Function stores all the fixed code. Parameters are the only part that might change.
+<ul>
+    <li><b>Method</b>: A procedure that is defined within a class.</li>
+</ul>
 
-We've been using one function all along. void System.out.println(String text); or just println.
+<p>
+    In java every line of code we write is part of a class (except imports and package declarations). It is not possible
+    to define a function since all our code must be defined within a class.
+</p>
+
+<p>Calling a method:</p>
+
+<pre>
+[variable name] = methodName([arguments]);
+</pre>
+
+method stores all the fixed code. Parameters are the only part that might change.
+
+We've been using one method all along. void System.out.println(String text); or just println.
 System.out is called the package.
 
-Let's see more functions. Math! [Show the code without function calls by inserting the function code inline.
+Let's see more methods. Math! [Show the code without method calls by inserting the method code inline.
 -abs
 -pow
 
-Function calls are expressions, or part of an expression, that evaluates to a value of its return type.
+method calls are expressions, or part of an expression, that evaluates to a value of its return type.
 
-Functions called on an object (what's an object? Don't worry about it?..)
+methods called on an object (what's an object? Don't worry about it?..)
 -String.length();
 -String.toLower();
+
+<hr/>
+<h4>Random Number Generator (RNG)</h4>
+
+<p>
+    Math.random() will return a pseudo-random double between 0.0 and 1.0.
+</p>
+
+<pre>
+    if(Math.random() > 0.5){
+        System.out.println("There is a 50% chance this line will be printed");
+    }
+</pre>
+<p>
+    Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
+</p>
+<hr/>
+<p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
+    result!</p>
+
+<pre>
+    double randomNumber = Math.random()*100;
+    System.out.println("The random value is: " + randomNumber);
+</pre>
+
+<p>The output will be a random double between 0.0 and 100.0</p>
+
+
+== Defining Methods
+
+<pre>
+[access] [return type] methodName([parameters]){
+  [body]
+}
+</pre>
+
+<dl>
+    <dt>access</dt>
+    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.
+        For now, we've been using "static" which allows us to call the method without creating an instance of the class
+        (object).
+    </dd>
+    <dt>return type</dt>
+    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of
+        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.
+    </dd>
+    <dt>methodName</dt>
+    <dd>The name used to call the method.</dd>
+    <dt>parameters</dt>
+    <dd>Comma-separated list of the methods input variables.</dd>
+</dl>
+
+
 
 The hidden line of code:
 parameters = arguments;
 
-Now let's make our own functions!
+Now let's make our own methods!
 
 -Void with no parameters (I want to print this message whenever called)
 -Void with parameters (Print hello to the parameter) (the hidden lines of code)
--Non-void with parameters (Simple math function)
+-Non-void with parameters (Simple math method)
 -Multiple parameters. Stress the order.
 -Non-void without parameters? Foreshadow getters?
 
-Scope. Parameters don't exist outside the function.
+Scope. Parameters don't exist outside the method.
 
-== Code Style
 
-Using functions is essential to writing readable/debuggable code. Large programs that don't use functions are messy.
 
-Example code. Identify which parts could benefit from being functions and factor out that code.
 
-== End Part 1 [Fundamentals]
+{#== Code Style#}
+{##}
+{#Using methods is essential to writing readable/debuggable code. Large programs that don't use methods are messy.#}
+{##}
+{#Example code. Identify which parts could benefit from being methods and factor out that code.#}
 
-You now know how to code! Congrats!
+{#== End Part 1 [Fundamentals]#}
+{##}
+{#You now know how to code! Congrats!#}
 

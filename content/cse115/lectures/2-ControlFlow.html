@@ -5,24 +5,24 @@ next_content_short: functions
 previous_content_short: variables
 ---
 
-== Terms
+{#== Terms#}
+{##}
+{#<ul class="list-inline list-group">#}
+{#    <li class="list-inline-item list-group-item">if statement</li>#}
+{#    <li class="list-inline-item list-group-item">else</li>#}
+{#    <li class="list-inline-item list-group-item">scope</li>#}
+{#    <li class="list-inline-item list-group-item">block</li>#}
+{#    <li class="list-inline-item list-group-item">while loop</li>#}
+{#    <li class="list-inline-item list-group-item">for loop</li>#}
+{#</ul>#}
 
-<ul class="list-inline list-group">
-    <li class="list-inline-item list-group-item">if statement</li>
-    <li class="list-inline-item list-group-item">else</li>
-    <li class="list-inline-item list-group-item">scope</li>
-    <li class="list-inline-item list-group-item">block</li>
-    <li class="list-inline-item list-group-item">while loop</li>
-    <li class="list-inline-item list-group-item">for loop</li>
-</ul>
 
-
-== Classes
-
-<ul>
-    <li>None</li>
+{#== Classes#}
+{##}
+{#<ul>#}
+{#    <li>None</li>#}
     {#    <li><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a></li>#}
-</ul>
+{#</ul>#}
 
 
 {#== User Input#}
@@ -35,7 +35,91 @@ previous_content_short: variables
 {##}
 {#True / False#}
 
-== If
+== Boolean Expressions
+
+<p>
+    The boolean value in the if statement can be a boolean expression that evaluates to a single boolean value.
+</p>
+
+<p>
+    Common boolean comparisons:
+</p>
+<ul>
+    <li>Greater than: ></li>
+    <li>Less than: <</li>
+    <li>Equal: ==</li>
+    <li>Greater than or equal: >=</li>
+    <li>Less than or equal: <=</li>
+    <li>Not equal: !=</li>
+</ul>
+
+<br/>
+<pre>
+    boolean comparison = 5 > 10;
+    System.out.println(comparison);
+</pre>
+
+<p>
+    Output: <kbd>false</kbd>
+</p>
+
+
+<hr/>
+
+<h4>Boolean operators</h4>
+
+<p>
+    More boolean operators:
+</p>
+<dl>
+    <dt>and: &&</dt>
+    <dd>Returns true only if both sides are true</dd>
+    <dt>or: ||</dt>
+    <dd>Returns true if either side is true</dd>
+    <dt>not: !</dt>
+    <dd>Returns the inverse of the following boolean value</dd>
+</dl>
+
+<pre>
+    System.out.println(true && true); // true
+    System.out.println(true && false); // false
+    System.out.println(true || false); // true
+    System.out.println(false || false); // false
+    System.out.println(!true); // false
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>true<br/>false<br/>true<br/>false<br/>false</kbd>
+
+<hr/>
+
+<pre>
+    int number = 8;
+    if(5 < number && number < 10){
+        System.out.println("number is between 5 and 10");
+    }
+</pre>
+
+<p>
+    Output:
+    <kbd>number is between 5 and 10</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
+    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
+    <li><code>if(true && 8 < 10)</code></li>
+    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
+    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true
+    </li>
+    <li><code>{...}</code> Execute the following code block</li>
+</ol>
+
+== If/else
 
 {% load staticfiles %}
 
@@ -83,36 +167,12 @@ Syntax:
 </p>
 
 
-== Boolean Expressions
-
-<p>
-    The boolean value in the if statement can be a boolean expression that evaluates to a single boolean value.
-</p>
-
-<p>
-    Common boolean comparisons:
-</p>
-<ul>
-    <li>Greater than: ></li>
-    <li>Less than: <</li>
-    <li>Equal: ==</li>
-    <li>Greater than or equal: >=</li>
-    <li>Less than or equal: <=</li>
-    <li>Not equal: !=</li>
-</ul>
-
-<br/>
-<pre>
-    boolean comparison = 5 > 10;
-    System.out.println(comparison);
-</pre>
-
-<p>
-    Output: <kbd>false</kbd>
-</p>
 
 
-== Else
+{#== Else#}
+<hr/>
+
+<h4>Else</h4>
 
 <p>
     Code to be executed on a false condition.
@@ -135,8 +195,9 @@ Syntax:
 <p>
     Output:</p><kbd>Getting hungry<br/>Eating Ramen<br/>Sleeping</kbd>
 
-
-== Else If
+<hr/>
+<h4>Else if</h4>
+{#== Else If#}
 
 <p>
     Combination of else and if. Check multiple conditions.
@@ -194,60 +255,13 @@ Syntax:
 {#== Nested Ifs#}
 
 
-== Random Number Generator (RNG)
-
-<p>
-    Math.random() will return a pseudo-random double between 0.0 and 1.0.
-</p>
-
-<pre>
-    if(Math.random() > 0.5){
-        System.out.println("There is a 50% chance this line will be printed");
-    }
-</pre>
-<p>
-    Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
-</p>
-<hr/>
-<p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
-    result!</p>
-
-<pre>
-    double randomNumber = Math.random()*100;
-    System.out.println("The random value is: " + randomNumber);
-</pre>
-
-<p>The output will be a random double between 0.0 and 100.0</p>
 
 {#== Switch/Case#}
 {##}
 {#Might come later, if ever.#}
 
 
-== Block and Scope
 
-<p>
-    Any time a section of code is surrounded by {braces} we call this section a code block. We saw code blocks
-    corresponding to if statements and we will see them in loops as well. Code blocks are most commonly used in control
-    flow to tell the program which section of code to run after checking a conditional. When the conditional of an
-    if statement is true, the following block of code is executed. When the conditional of an if statement is false,
-    the following block of code is skipped.
-</p>
-
-<p>
-    Variables created inside a block or code are destroyed at the end of that block.
-</p>
-
-<pre>
-    int number = 5;
-    if(number > 3){
-        double secondNumber = 7.43; // create a double variable and name it secondNumber
-    } // secondNumber is destroyed here since it was created inside the block that is ending
-    System.out.println(secondNumber); // This will cause an error since secondNumber has been destroyed
-</pre>
-<p>
-    This code will cause a compiler error (the computer cannot understand how to run the code).
-</p>
 
 {#== Example: Maze#}
 {##}
@@ -256,60 +270,11 @@ Syntax:
 {#Provide GUI so they can see the movement#}
 
 
-== Boolean Logic
+{#== Boolean Logic#}
 
-<p>
-    More boolean operators:
-</p>
-<dl>
-    <dt>and: &&</dt>
-    <dd>Returns true only if both sides are true</dd>
-    <dt>or: ||</dt>
-    <dd>Returns true if either side is true</dd>
-    <dt>not: !</dt>
-    <dd>Returns the inverse of the following boolean value</dd>
-</dl>
 
-<pre>
-    System.out.println(true && true); // true
-    System.out.println(true && false); // false
-    System.out.println(true || false); // true
-    System.out.println(false || false); // false
-    System.out.println(!true); // false
-</pre>
 
-<p>
-    Output:
-</p>
-<kbd>true<br/>false<br/>true<br/>false<br/>false</kbd>
-
-<hr/>
-
-<pre>
-    int number = 8;
-    if(5 < number && number < 10){
-        System.out.println("number is between 5 and 10");
-    }
-</pre>
-
-<p>
-    Output:
-    <kbd>number is between 5 and 10</kbd>
-</p>
-
-<br/><br/>
-<p>Breakdown:</p>
-<ol>
-    <li><code>if(5 < number && number < 10)</code> Replace all variable names with their stored values</li>
-    <li><code>if(5 < 8 && 8 < 10)</code> Evaluate comparisons before boolean operators from left to right</li>
-    <li><code>if(true && 8 < 10)</code></li>
-    <li><code>if(true && true)</code> Evaluate the boolean operator (and)</li>
-    <li><code>if(true)</code> The boolean expression results in true making the conditional for the if statement true
-    </li>
-    <li><code>{...}</code> Execute the following code block</li>
-</ol>
-
-== Loop Concept
+== Loops
 
 <p>
     We can skip blocks of code, what if we want to repeat a block?
@@ -319,7 +284,9 @@ Syntax:
 <a href="{% static "courses/115Slides/2-Loops.pptx" %}">Loops Concept Slides</a>
 <br/><br/>
 
-== While Loop
+{#== While Loop#}
+<hr/>
+<h4>While loop</h4>
 
 <p>
     Repeat a block of code while a condition is true. Once the condition is false, stop repeating the code.
@@ -477,7 +444,9 @@ Syntax:
 {#Print number of guesses and correct answer. [Need user input]#}
 
 
-== For Loops
+{#== For Loops#}
+<hr/>
+<h4>For loop</h4>
 
 <p>
     Has the same power as while loops with different syntax.
@@ -601,7 +570,10 @@ Syntax:
 </ul>
 
 
-== Continue and Break
+{#== Continue and Break#}
+
+<hr/>
+<h4>Continue and Break</h4>
 
 <p>
     When you want to make an exception to the loops condition.
@@ -650,3 +622,30 @@ Syntax:
     When i is 4 the break is executed which immediately exits the loop even though <code>i<7</code> is still true.
 </p>
 <hr/>
+
+
+
+== Scope
+
+<p>
+    Any time a section of code is surrounded by {braces} we call this section a code block. We saw code blocks
+    corresponding to if statements and we will see them in loops as well. Code blocks are most commonly used in control
+    flow to tell the program which section of code to run after checking a conditional. When the conditional of an
+    if statement is true, the following block of code is executed. When the conditional of an if statement is false,
+    the following block of code is skipped.
+</p>
+
+<p>
+    Variables created inside a block or code are destroyed at the end of that block.
+</p>
+
+<pre>
+    int number = 5;
+    if(number > 3){
+        double secondNumber = 7.43; // create a double variable and name it secondNumber
+    } // secondNumber is destroyed here since it was created inside the block that is ending
+    System.out.println(secondNumber); // This will cause an error since secondNumber has been destroyed
+</pre>
+<p>
+    This code will cause a compiler error (the computer cannot understand how to run the code).
+</p>
