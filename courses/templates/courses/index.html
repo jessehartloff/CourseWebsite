@@ -12,12 +12,12 @@
 {#                         href="{% url 'courses:assignment' course.course_number assignment.title %}">{{ assignment.title }}</a><br/>#}
 {#            </h4>#}
 {#        {% endfor %}#}
-        <h2>Lessons</h2>
-        {% for lecture in lectures %}
-            <h4>&nbsp;<a class="menu_link"
-                         href="{% url 'courses:lecture' course.course_number lecture.title %}">{{ lecture.title }}</a><br/>
-            </h4>
-        {% endfor %}
+{#        <h2>Lessons</h2>#}
+{#        {% for lecture in lectures %}#}
+{#            <h4>&nbsp;<a class="menu_link"#}
+{#                         href="{% url 'courses:lecture' course.course_number lecture.title %}">{{ lecture.title }}</a><br/>#}
+{#            </h4>#}
+{#        {% endfor %}#}
     <br/>
 {#    <h2><a href="#" onclick="toggle_bars(); return false;">Hide/Show Sidebars</a></h2>#}
     </div>
