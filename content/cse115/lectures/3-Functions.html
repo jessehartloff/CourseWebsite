@@ -14,28 +14,61 @@ previous_content_short: loops
 
 {#Slides#}
 
-_technically_ you can do anything with what you now know (exaggeration, but not nearly as much as you'd think).
-You have at your disposal what's called a turing complete language, a language that can do anything that can be
-done by any computer. Everything else we will do in this course will be exploring what can be done with this power.
-Much of this will include using code that other people have written.. but how to use their code? They package them in
-methods and we call their code.
+{#_technically_ you can do anything with what you now know (exaggeration, but not nearly as much as you'd think).#}
+{#You have at your disposal what's called a turing complete language, a language that can do anything that can be#}
+{#done by any computer. Everything else we will do in this course will be exploring what can be done with this power.#}
+{#Much of this will include using code that other people have written.. but how to use their code? They package them in#}
+{#methods and we call their code.#}
 
-Reuse functions. Programmers are lazy/efficient.
+<p>
+    Functions provide a way for us to store lines of code to be used later. The code stored in a function can be reused
+    as many times as we'd like making functions a great way to store commonly needed code and using whenever it's
+    needed without having to rewrite, or even revisit, the code. Taking this one step further, it also allows us to
+    easily share code with others. If someone has shared a function that does what we need, we can use that function
+    instead of writing our own code to do the same thing. In this case, we don't even have to think about how to solve
+    the problem. We just use the function that is available to us.
+</p>
 
-So we can think at a higher level and ignore some details.
-To start a car. Sit down, insert key, turn key.. no. Just start the car
+<p>Functions allow us to:</p>
+<ul>
+    <li>Reuse code</li>
+    <li>Ignore details</li>
+    <li>Organize code</li>
+    <li>Get more done faster</li>
+</ul>
 
-Have a piece of code that we often? Put it in a function! Then use it anywhere in your code.
+<hr>
+<h4>Parameters</h4>
+<p>We don't always a function to perform the exact same action every time it's called. For instance, what if we want to
+    write a function to compute the cube of any given number. Here we will use parameters (input variables) in the
+    function to get the value of the number to cube.</p>
+<p>
+    A function must be correct on every possible input value.
+</p>
 
-Lets you stay focused on writing software without always thinking about how every single piece is working.
-Write it once, use it often.
-
-Helps us organize code.
-
-Like variables, but stores code instead of a value. Code is inserted into you program inside a separate block when a
-function is called.
-
-
+<hr/>
+<h4>Return value</h4>
+<p>
+    Functions can optionally return a value. This value is given back to whomever called the function. In the example
+    above, the cube of the input would be returned to the caller.
+</p>
+{##}
+{#Reuse functions. Programmers are lazy/efficient.#}
+{##}
+{#So we can think at a higher level and ignore some details.#}
+{#To start a car. Sit down, insert key, turn key.. no. Just start the car#}
+{##}
+{#Have a piece of code that we often? Put it in a function! Then use it anywhere in your code.#}
+{##}
+{#Lets you stay focused on writing software without always thinking about how every single piece is working.#}
+{#Write it once, use it often.#}
+{##}
+{#Helps us organize code.#}
+{##}
+{#Like variables, but stores code instead of a value. Code is inserted into you program inside a separate block when a#}
+{#function is called.#}
+{##}
+{#Must be correct on all inputs#}
 
 == Methods
 
@@ -43,34 +76,135 @@ function is called.
     everything we're learning about functions but in java we will apply our knowledge to methods.</p>
 
 <ul>
-    <li><b>Method</b>: A procedure that is defined within a class.</li>
+    <li><b>Method</b>: A procedure defined within a class.</li>
 </ul>
 
 <p>
-    In java every line of code we write is part of a class (except imports and package declarations). It is not possible
-    to define a function since all our code must be defined within a class.
+    In java every line of code we write is part of a class, with very few exceptions. Since all our code is contained
+    within a class we are writing methods, not functions.
 </p>
 
-<p>Calling a method:</p>
+<hr/>
+<h4>Calling a method</h4>
+
+<p>
+    There are many different ways to call a method. We will analyze this common format first.
+</p>
 
 <pre>
 [variable name] = methodName([arguments]);
 </pre>
 
-method stores all the fixed code. Parameters are the only part that might change.
 
-We've been using one method all along. void System.out.println(String text); or just println.
-System.out is called the package.
+<ul>
+    <li><b>variable name</b>: The variable where the return value of the method will be stored</li>
+    <li><b>methodName</b>: The name of the method to be called</li>
+    <li><b>arguments</b>: The inputs to the method. The order of the arguments is important.</li>
+</ul>
 
-Let's see more methods. Math! [Show the code without method calls by inserting the method code inline.
--abs
--pow
+<hr/>
 
-method calls are expressions, or part of an expression, that evaluates to a value of its return type.
+<pre>
+[variable name] = [class].methodName([arguments]);
+</pre>
+<pre>
+[variable name] = [object].methodName([arguments]);
+</pre>
 
-methods called on an object (what's an object? Don't worry about it?..)
--String.length();
--String.toLower();
+<p>
+    In this lesson we will call methods that are part of a class (Math) or part of an object (String instance). In
+    these cases we will use the dot operator (.) to access the methods of the class/object.
+</p>
+
+
+{#We've been using one method all along. void System.out.println(String text); or just println.#}
+{#System.out is called the package.#}
+
+
+== Math Methods
+
+<p>
+    <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html#method_summary">Math Methods</a>
+</p>
+
+<p>
+    Java provides a variety of methods to perform common mathematical operations contained in the Math class. We will
+    see a few example methods below. See the link above for a full reference of methods in the Math class.
+</p>
+
+<hr/>
+<h4>Square Root</h4>
+<p>
+    Math.sqrt(double input) returns the square root of the input double.
+</p>
+<pre>
+    double input = 9.0;
+    double result = Math.sqrt(input);
+    System.out.println(result);
+</pre>
+
+<p>
+    Output: <kbd>3.0</kbd>
+</p>
+
+
+<hr/>
+<h4>Absolute Value</h4>
+<p>
+    Math.abs(double input) returns the square root of the input double. The abs method will also work with int,
+    long, and float types.
+</p>
+<pre>
+    double input = 9.0;
+    double negativeInput = -9.0;
+    double result = Math.abs(input);
+    double negativeResult = Math.abs(negativeInput);
+    System.out.println(result);
+    System.out.println(negativeResult);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>9.0<br/>9.0</kbd>
+
+
+<p>
+    Absolute value is useful for distance calculations. Here we compute the distance between two numbers with the same
+    result regardless of the order of the subtraction. This allows us to compute distance even if we don't know which
+    value is larger.
+</p>
+<pre>
+    double a = 15.0;
+    double b = 10.0;
+    double distance = Math.abs(a-b);
+    double reverseDistance = Math.abs(b-a);
+    System.out.println(distance);
+    System.out.println(reverseDistance);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>5.0<br/>5.0</kbd>
+
+
+<hr/>
+<h4>Exponentiation</h4>
+<p>
+    Math.pow(double a, double b) return a raised to the b power. This method takes 2 inputs separated by a comma and
+    their order is important.
+</p>
+<pre>
+    double base = 2.0;
+    double exponent = 8.0;
+    double result = Math.pow(base, exponent);
+    System.out.println(result);
+</pre>
+
+<p>
+    Output: <kbd>256.0</kbd>
+</p>
 
 <hr/>
 <h4>Random Number Generator (RNG)</h4>
@@ -87,7 +221,6 @@ methods called on an object (what's an object? Don't worry about it?..)
 <p>
     Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
 </p>
-<hr/>
 <p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
     result!</p>
 
@@ -99,46 +232,110 @@ methods called on an object (what's an object? Don't worry about it?..)
 <p>The output will be a random double between 0.0 and 100.0</p>
 
 
-== Defining Methods
+== String Methods
 
+<p>
+    <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#method_summary">String Methods</a>
+</p>
+
+<p>
+    The String methods are slightly different that Math methods in that they are called on a specific instance of a
+    String value using the . operator (dot operator). This means we must have a String in our control to use these
+    methods. Below are a few common String methods. See the link above for a complete list of String methods.
+</p>
+
+
+<hr/>
+<h4>Length</h4>
+<p>
+    length() returns the number of characters in the String. This includes spaces and other white space characters.
+</p>
 <pre>
-[access] [return type] methodName([parameters]){
-  [body]
-}
+    String input = "a String";
+    int inputLength = input.length();
+    System.out.println(inputLength);
 </pre>
 
-<dl>
-    <dt>access</dt>
-    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.
-        For now, we've been using "static" which allows us to call the method without creating an instance of the class
-        (object).
-    </dd>
-    <dt>return type</dt>
-    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of
-        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.
-    </dd>
-    <dt>methodName</dt>
-    <dd>The name used to call the method.</dd>
-    <dt>parameters</dt>
-    <dd>Comma-separated list of the methods input variables.</dd>
-</dl>
+<p>
+    Output: <kbd>8</kbd>
+</p>
 
 
+<hr/>
+<h4>Contains</h4>
+<p>
+    contains(String pattern) returns true if the String contains pattern as a sub string, false otherwise.
+</p>
+<pre>
+    String url = "buffalo.edu";
+    System.out.println(url.contains(".com");
+    System.out.println(url.contains(".edu");
+</pre>
 
-The hidden line of code:
-parameters = arguments;
-
-Now let's make our own methods!
-
--Void with no parameters (I want to print this message whenever called)
--Void with parameters (Print hello to the parameter) (the hidden lines of code)
--Non-void with parameters (Simple math method)
--Multiple parameters. Stress the order.
--Non-void without parameters? Foreshadow getters?
-
-Scope. Parameters don't exist outside the method.
+<p>
+    Output:
+</p>
+<kbd>false<br/>true</kbd>
 
 
+<hr/>
+<h4>Lower Case</h4>
+<p>
+    toLowerCase() returns a copy of the String in all lower case letters. Note that this method does not change the
+    value of the String itself.
+</p>
+<pre>
+    String input = "STOP YELLING";
+    String output = input.toLowerCase();
+    System.out.println(input);  // The original value is unchanged
+    System.out.println(output); // The method call returns the lowercase String
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>STOP YELLING<br/>stop yelling</kbd>
+
+
+{#== Defining Methods#}
+{##}
+{#<pre>#}
+{#[access] [return type] methodName([parameters]){#}
+{#  [body]#}
+{# }#}
+{#</pre>#}
+{##}
+{#<dl>#}
+{#    <dt>access</dt>#}
+{#    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.#}
+{#        For now, we've been using "static" which allows us to call the method without creating an instance of the class#}
+{#        (object).#}
+{#    </dd>#}
+{#    <dt>return type</dt>#}
+{#    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of#}
+{#        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.#}
+{#    </dd>#}
+{#    <dt>methodName</dt>#}
+{#    <dd>The name used to call the method.</dd>#}
+{#    <dt>parameters</dt>#}
+{#    <dd>Comma-separated list of the methods input variables.</dd>#}
+{#</dl>#}
+{##}
+{##}
+{#The hidden line of code:#}
+{#parameters = arguments;#}
+{##}
+{#Now let's make our own methods!#}
+{##}
+{#-Void with no parameters (I want to print this message whenever called)#}
+{#-Void with parameters (Print hello to the parameter) (the hidden lines of code)#}
+{#-Non-void with parameters (Simple math method)#}
+{#-Multiple parameters. Stress the order.#}
+{#-Non-void without parameters? Foreshadow getters?#}
+{##}
+{#Scope. Parameters don't exist outside the method.#}
+
+{#method stores all the fixed code. Parameters are the only part that might change.#}
 
 
 {#== Code Style#}

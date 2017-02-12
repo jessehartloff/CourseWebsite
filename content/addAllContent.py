@@ -2,6 +2,7 @@ import os
 import django
 import ContentParser
 import shutil
+import distutils.dir_util
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "courseWebsite.settings")
 django.setup()
@@ -14,6 +15,12 @@ assignments_directory = "assignments/"
 extra_directory = "extra/"
 lectures_directory = "lectures/"
 image_directory = "media/"
+
+media_directory = content_directory + "common_media"
+
+
+def copy_common_media(destination_directory):
+    distutils.dir_util.copy_tree(media_directory, destination_directory)
 
 
 def delete_all_courses():
@@ -74,9 +81,7 @@ def sort_lesson_type(course, page_type):
 
 
 def copy_files(course, source_directory, destination_directory):
-    for the_file in os.listdir(content_directory + course.course_number.lower() + "/" + source_directory):
-        shutil.copyfile(content_directory + course.course_number.lower() + "/" + source_directory + the_file,
-                        destination_directory + the_file)
+    distutils.dir_util.copy_tree(content_directory + course.course_number.lower() + "/" + source_directory, destination_directory)
 
 
 def process_course(course_number, course_title, image_destination_directory):
