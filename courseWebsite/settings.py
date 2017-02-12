@@ -23,7 +23,7 @@ SECRET_KEY = 'i&to3#n$g0k$hmvvhb9*_&jszk!p^1g9oc=$@(hn=p5hycgr@q'
 #SECRET_KEY = os.environ['DJANGO_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['yeager.cse.buffalo.edu', 'fury.cse.buffalo.edu']
 
@@ -141,7 +141,8 @@ USE_TZ = True
 # STATIC_ROOT = '/http://www.cse.buffalo.edu/~hartloff/CourseWebsite/lecture/'
 
 # STATIC_URL = '/static/'
-STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/static/'
+# STATIC_URL = 'http://www.cse.buffalo.edu/~hartloff/CourseWebsite/static/'
+STATIC_URL = 'http://fury.cse.buffalo.edu/media/'
 # STATIC_URL = 'http://google.com'
 
 # STATICFILES_DIRS = [
