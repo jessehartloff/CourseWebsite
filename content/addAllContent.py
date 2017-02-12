@@ -13,12 +13,12 @@ content_directory = "content/"
 assignments_directory = "assignments/"
 extra_directory = "extra/"
 lectures_directory = "lectures/"
-image_directory = "images/"
+image_directory = "media/"
 
 
 def delete_all_courses():
-    pass
-    # Course.objects.all().delete()
+    # pass
+    Course.objects.all().delete()
 
 
 def delete_course(course_number):
@@ -28,6 +28,11 @@ def delete_course(course_number):
 def populate_file(course, the_file, page_type):
     print(course.course_number + ": " + the_file)
     ContentParser.parse_lesson(course, the_file, page_type)
+
+
+# def populate_extra_directory(course, directory):
+#     for the_file in os.listdir(content_directory + course.course_number.lower() + "/" + directory):
+#         populate_file(course, content_directory + course.course_number.lower() + "/" + directory + the_file, "extra")
 
 
 def populate_directory(course, directory, page_type):
@@ -87,18 +92,20 @@ def process_course(course_number, course_title, image_destination_directory):
 
     populate_directory(course, lectures_directory, 'lecture')
     populate_directory(course, assignments_directory, 'assignment')
+    populate_directory(course, extra_directory, 'extra')
 
-    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'syllabus.html',
-                  'syllabus')
-    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'schedule.html',
-                  'schedule')
-    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'resources.html',
-                  'resources')
-    populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'assistance.html',
-                  'assistance')
+    # populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'syllabus.html',
+    #               'syllabus')
+    # populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'schedule.html',
+    #               'schedule')
+    # populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'resources.html',
+    #               'resources')
+    # populate_file(course, content_directory + course.course_number.lower() + "/" + extra_directory + 'assistance.html',
+    #               'assistance')
 
     sort_lesson_type(course, 'lecture')
     sort_lesson_type(course, 'assignment')
+    sort_lesson_type(course, 'extra')
 
     course.save()
 

@@ -85,6 +85,8 @@ def parse_lesson(course, filename, page_type):
                                 lesson.previous_content_short_title = result[1]
                             if result[0] == 'due_date':
                                 lesson.due_date = result[1]
+                            # if result[0] == 'page_type':
+                            #     lesson.page_type = result[1]
 
             if section_index != 0:
                 current_section.save()

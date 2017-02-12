@@ -99,11 +99,12 @@ def render_content(request, course_number, page_type, template, short_title=""):
     course = Course.objects.get(course_number=course_number)
     lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
     assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    extras = Content.objects.filter(course=course, page_type='extra').order_by('index')
     this_lecture = Content.objects.get(course=course, page_type=page_type, short_title=short_title) if short_title != "" \
         else Content.objects.get(course=course, page_type=page_type)
     form = CommentForm()
     context = {'lectures': lectures, 'assignments': assignments, 'course': course, 'this_lecture': this_lecture,
-               'form': form}
+               'form': form, 'extras': extras}
     return render(request, template, context)
 
 
@@ -117,6 +118,14 @@ def lecture(request, course_number, lecture_short_title):
 
 def assignment(request, course_number, assignment_short_title):
     return render_content(request, course_number, 'assignment', 'courses/assignment.html', assignment_short_title)
+    # course = Course.objects.get(course_number=course_number)
+    # this_assignment = Content.objects.get(course=course, title=assignment_short_title, page_type='assignment')
+    # context = {'course': course, 'this_assignment': this_assignment}
+    # return render(request, 'courses/assignment.html', context)
+
+
+def extra(request, course_number, extra_short_title):
+    return render_content(request, course_number, 'extra', 'courses/extra.html', extra_short_title)
     # course = Course.objects.get(course_number=course_number)
     # this_assignment = Content.objects.get(course=course, title=assignment_short_title, page_type='assignment')
     # context = {'course': course, 'this_assignment': this_assignment}
