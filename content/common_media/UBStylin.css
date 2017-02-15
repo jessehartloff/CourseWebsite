@@ -2,6 +2,11 @@ ul.plain {
     list-style-type: none;
 }
 
+img.artwork{
+    max-width: 60%;
+    margin: 0 auto;
+}
+
 div.hidden {
     width: 0;
 }
