@@ -53,12 +53,13 @@ def comment_form(request, course_number):
 
 
 def course_home(request, course_number):
-    course = Course.objects.get(course_number=course_number)
-    # should check if course was found
-    lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
-    assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
-    context = {'lectures': lectures, 'assignments': assignments, 'course': course}
-    return render(request, 'courses/index.html', context)
+    return render_content(request, course_number, 'extra', 'courses/extra.html', "syllabus")
+    # course = Course.objects.get(course_number=course_number)
+    # # should check if course was found
+    # lectures = Content.objects.filter(course=course, page_type='lecture', index__gte=0).order_by('index')
+    # assignments = Content.objects.filter(course=course, page_type='assignment').order_by('index')
+    # context = {'lectures': lectures, 'assignments': assignments, 'course': course}
+    # return render(request, 'courses/index.html', context)
 
 
 def projects(request, course_number):

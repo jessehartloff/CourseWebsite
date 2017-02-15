@@ -301,36 +301,108 @@ previous_content_short: loops
 <kbd>STOP YELLING<br/>stop yelling</kbd>
 
 
-{#== Defining Methods#}
-{##}
-{#<pre>#}
-{#[access] [return type] methodName([parameters]){#}
-{#  [body]#}
-{# }#}
-{#</pre>#}
-{##}
-{#<dl>#}
-{#    <dt>access</dt>#}
-{#    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.#}
-{#        For now, we've been using "static" which allows us to call the method without creating an instance of the class#}
-{#        (object).#}
-{#    </dd>#}
-{#    <dt>return type</dt>#}
-{#    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of#}
-{#        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.#}
-{#    </dd>#}
-{#    <dt>methodName</dt>#}
-{#    <dd>The name used to call the method.</dd>#}
-{#    <dt>parameters</dt>#}
-{#    <dd>Comma-separated list of the methods input variables.</dd>#}
-{#</dl>#}
-{##}
-{##}
-{#The hidden line of code:#}
-{#parameters = arguments;#}
-{##}
-{#Now let's make our own methods!#}
-{##}
+== Defining Methods
+
+<p>
+    Method definition:
+</p>
+<pre>
+[access] [return type] methodName([parameters]){
+  [body]
+ }
+</pre>
+
+<dl>
+    <dt>access</dt>
+    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.
+        For now, we've been using "static" which allows us to call the method without creating an instance of the class
+        (object).
+    </dd>
+    <dt>return type</dt>
+    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of
+        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.
+    </dd>
+    <dt>methodName</dt>
+    <dd>The name used to call the method.</dd>
+    <dt>parameters</dt>
+    <dd>Comma-separated list of the methods input variables.</dd>
+</dl>
+
+<p>
+    Calling a method:
+</p>
+<pre>
+    methodName([arguments])
+</pre>
+<dl>
+    <dt>methodName</dt>
+    <dd>The name used to define the method.</dd>
+    <dt>arguments</dt>
+    <dd>Comma-separated list of the methods input values. The values will assigned to the parameters in the method
+        definition. The types and order must match between the arguments and parameters.
+    </dd>
+    <dt>return value</dt>
+    <dd>A method call is an expression that evaluates to a value matching the return type of the method. This is the
+        value that is returned with the <code>return</code> keyword inside the body of the method.
+    </dd>
+</dl>
+
+
+
+<hr/>
+
+<p>
+    Let's examine a java program and trace through its execution.
+</p>
+
+<pre>
+    static int myMethod(int input){
+        int result = input*10;
+        return result;
+    }
+
+    public static void main(String[] args){
+        int returnValue = myMethod(5);
+        System.out.println(returnValue);
+    }
+</pre>
+
+<p>
+    Output: <kbd>50</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>public static void main(String[] args){</code> Execution starts with the main method</li>
+    <li><code>int returnValue = myMethod(5);</code> The right side of the equal sign need to be evaluated to a single
+        int value
+    </li>
+    <li><code>myMethod(5)</code> Look for a method named myMethod and call it with an argument of 5 as an int</li>
+    <li><code>static int myMethod(int input){</code> Shift control to myMethod to resolve the method call</li>
+    <li><code>int input = 5;</code> <b>The hidden line</b>. Create an int variable, name it input, and assign it the
+        argument value of 5
+    </li>
+    <li><code>int result = input*10;</code> Create an int variable, name it result, and assign it the result of input*10
+    </li>
+    <li><code>int result = 5*10;</code></li>
+    <li><code>int result = 50;</code></li>
+    <li><code>return result;</code> Return the value of result back to the main method</li>
+    <li><code>return 50;</code> *The return value must match the return type from the method header</li>
+    <li><code>int returnValue = 50;</code> Back in the main method, the call to myMethod(5) is replaced by its return
+        value
+    </li>
+    <li><code>System.out.println(returnValue);</code> Print the value of returnValue</li>
+    <li><code>System.out.println(50);</code></li>
+    <li><code>System.out.println("50");</code></li>
+    <li><code>}</code> The end of the main method is reached and the program ends</li>
+</ol>
+
+
+
+
+<hr/>
+
 {#-Void with no parameters (I want to print this message whenever called)#}
 {#-Void with parameters (Print hello to the parameter) (the hidden lines of code)#}
 {#-Non-void with parameters (Simple math method)#}
@@ -338,8 +410,11 @@ previous_content_short: loops
 {#-Non-void without parameters? Foreshadow getters?#}
 {##}
 {#Scope. Parameters don't exist outside the method.#}
-
+{##}
 {#method stores all the fixed code. Parameters are the only part that might change.#}
+
+
+
 
 
 {#== Code Style#}
