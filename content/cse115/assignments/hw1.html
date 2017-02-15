@@ -11,54 +11,65 @@ due_date: Wednesday, March 1 @ 11am
 
 <h2>6 Hours</h2>
 
-== Objectives
-<ul>
-    <li>Determine if a given college lifestyle is feasible or not</li>
-    <li>Combine variables, control flow, and functions to create a full program</li>
-</ul>
+{#== Objectives#}
+{#<ul>#}
+{#    <li>Determine if a given college lifestyle is feasible or not</li>#}
+{#    <li>Combine variables, control flow, and functions to create a full program</li>#}
+{#</ul>#}
 
 
-== Problem Definitions
+== Sally
 
-<p>
-    Specific details on what need to be completed for the assignment are provided as comments in the handout code.
-</p>
+{% load staticfiles %}
 
-<p>
-    <a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments/homework1eatsleepdrink">Autolab</a>
-</p>
 
-{#== Real World Description#}
-{##}
-{#<p>#}
-{#    This is Sally:#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Sally is a college freshman adjusting to her new lifestyle. Wanting to limit her student loan debt, Sally is working#}
-{#    part-time as a server at local chain restaurant. Sally knows her base pay and expected tip rate, but she is unsure#}
-{#    how many hours she needs to work each week and if she has enough free time to work that many hours. She also knows#}
-{#    which lifestyle she would like to live and wants to know if that lifestyle is feasible while taking classes.#}
-{#</p>#}
-{##}
-{##}
+<img class="img-responsive" src="{% static "courses/paragraph_1.png" %}"/>
+<br/>
+<h4>
+    Sally is a college freshman adjusting to her new environment. Sally enjoys eating at restaurants
+    with her friends, hanging out over a few drinks (juice of course), and getting plenty of sleep. To pay for this,
+    Sally works
+    part-time as a server, but she's not sure if there's enough time to live this same
+    lifestyle in college. Between classes, sleep, and relaxing, will she be able to work enough hours to pay for her
+    food and drink each week? Or will Sally have homemade rice and water every day?
+
+    {#    Sally is working#}
+    {#    part-time as a server at local chain restaurant. Sally knows her base pay and expected tip rate, but she is unsure#}
+    {#    how many hours she needs to work each week and if she has enough free time to work that many hours. She also knows#}
+    {#    which lifestyle she would like to live and wants to know if that lifestyle is feasible while taking classes.#}
+</h4>
+<br/>
+<img class="img-responsive" src="{% static "courses/paragraph_2.png" %}"/>
+<br/>
+<h4>
+    Sally plans to enjoy more than just the next 4 years and will learn how to
+    start a career that will fund a more luxurious lifestyle after graduation. During orientation she heard
+    the recommended time she should spend on her courses and she plans to budget this much time for her studies.
+</h4>
 {#<p>#}
 {#    Sally takes her academics seriously and must earn high marks in all her courses. Sally heard during orientation that#}
 {#    to do well in her courses she must plan to spend 2 hours working per credit hour per week outside of class time in#}
 {#    addition to 1 hour per credit hour per week in class. She believes that if she spends 3 hours per week per credit#}
 {#    hour working on her education she can earn the grades she desires.#}
 {#</p>#}
-{##}
-{#<p>#}
+
+<br/>
+<img class="img-responsive" src="{% static "courses/paragraph_3.png" %}"/>
+<br/>
+<h4>
+    Sally is determined to balance all aspects of he life and make the next 4 years as enjoyable as possible without
+    sacrificing her future. With only 24 hours each day, she's not sure if she'll have enough time to do everything.
+</h4>
+{#<h4>#}
 {#    Sally would like to run a variety of scenarios to determine which lifestyles are feasible so she can make an#}
 {#    informed decision on how to live during her time at college.#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Your task is to write a program where Sally can test different lifestyle choices to determine which are possible and#}
-{#    which are not.#}
-{#</p>#}
+{#</h4>#}
 
+<h4>
+    Your task is to write a program where Sally can test different lifestyle choices and determine how well she can live
+    during her college years which achieving her short-term and long-term goals.
+</h4>
+<br/>
 {#<p>#}
 {#    She wishes she could just get away.#}
 {#</p>#}
@@ -72,6 +83,16 @@ due_date: Wednesday, March 1 @ 11am
 {#    you food and drink.#}
 {#</p>#}
 
+
+== Problem Definitions
+
+<p>
+    Specific details on what need to be completed for the assignment are provided as comments in the handout code:
+</p>
+
+<p>
+    <a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments/homework1eatsleepdrink">Autolab</a>
+</p>
 
 == Testing
 
