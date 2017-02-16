@@ -348,7 +348,6 @@ previous_content_short: loops
 </dl>
 
 
-
 <hr/>
 
 <p>
@@ -390,7 +389,7 @@ previous_content_short: loops
     <li><code>return result;</code> Return the value of result back to the main method</li>
     <li><code>return 50;</code> *The return value must match the return type from the method header</li>
     <li><code>int returnValue = 50;</code> Back in the main method, the call to myMethod(5) is replaced by its return
-        value
+        value. All variable declared within the method fall out of scope and are destroyed
     </li>
     <li><code>System.out.println(returnValue);</code> Print the value of returnValue</li>
     <li><code>System.out.println(50);</code></li>
@@ -399,9 +398,8 @@ previous_content_short: loops
 </ol>
 
 
-
-
 <hr/>
+
 
 {#-Void with no parameters (I want to print this message whenever called)#}
 {#-Void with parameters (Print hello to the parameter) (the hidden lines of code)#}
@@ -413,9 +411,57 @@ previous_content_short: loops
 {##}
 {#method stores all the fixed code. Parameters are the only part that might change.#}
 
+== Multiple Parameters
 
+<p>
+    If a method requires multiple parameters, their types and names are given as a comma-separated list. It is important
+    to note the order of these parameters when calling a method with multiple parameters.
+</p>
 
+<pre>
+    static int subtract(int firstParameter, int secondParameter){
+        return firstParameter - secondParameter;
+    }
 
+    public static void main(String[] args){
+        System.out.println(subtract(5,3));
+        System.out.println(subtract(3,5));
+    }
+</pre>
+
+<p>
+    Output: </p>
+<kbd>2<br/>-2</kbd>
+
+<p>
+    In the case of calling <code>subtract(5,3)</code> there are now 2 hidden lines of code that executed before running
+    the method's code, <code>int firstParameter = 5;</code> and <code>int secondParameter = 3;</code>.
+</p>
+<p>
+    When calling <code>subtract(3,5)</code> the hidden lines are <code>int firstParameter = 3;</code> and <code>int
+    secondParameter = 5;</code>.
+</p>
+
+<p>A method may contain any number of parameters, even 0. Many of the early methods in this course didn't have any
+    parameters and took the form of <code>Q1()</code>. Even with no parameters, method calls and definitions must
+    include the parentheses. In this way Java can distinguish between a method with no parameters, and a variable name.
+</p>
+
+== void
+
+<p>
+    Defining a method with a return type of void means the method doesn't return anything when it is called. These are
+    typically methods that perform an action, as opposed to computing a value. An example of a method with return type
+    void is <code>System.out.println</code>. We use his method to print text to the screen for the user to read and we
+    don't need any return value.
+</p>
+
+<p>
+    When defining methods with a void return type, including a return statement is optional. If a return statement is
+    used in a void method it must be used with no value <code>return;</code> and functions similar to
+    <code>break;</code> in a loop in that it immediately exits the function call and returns control to the calling
+    method.
+</p>
 
 {#== Code Style#}
 {##}
