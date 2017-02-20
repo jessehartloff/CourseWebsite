@@ -104,24 +104,66 @@ previous_content_short: functions
 {#size()#}
 {#isEmpty()#}
 
-{#<hr/>#}
-{#<h4>add</h4>#}
-{#<p>#}
-{#    toLowerCase() returns a copy of the String in all lower case letters. Note that this method does not change the#}
-{#    value of the String itself.#}
-{#</p>#}
-{#<pre>#}
-{#    String input = "STOP YELLING";#}
-{#    String output = input.toLowerCase();#}
-{#    System.out.println(input);  // The original value is unchanged#}
-{#    System.out.println(output); // The method call returns the lowercase String#}
-{#</pre>#}
-{##}
-{#<p>#}
-{#    Output:#}
-{#</p>#}
-{#<kbd>STOP YELLING<br/>stop yelling</kbd>#}
+<hr/>
+<h4>new</h4>
+<p>
+    To create an ArrayList, we can't simply type a value. We must use the new keyword as well as specify the type
+    parameter. Here we create a new ArrayList of Integers and name it listOfIntegers.
+</p>
+<pre>
+        ArrayList&lt;Integer&gt; listOfIntegers = new ArrayList&lt;Integer&gt;();
+        System.out.println(listOfIntegers);
+</pre>
 
+<p>
+    Output: <kbd>[]</kbd>
+</p>
+
+<p>
+    When we print the list we will see that it is empty.
+</p>
+
+<hr/>
+<h4>add</h4>
+<p>
+    The add method will add an element to the end of an ArrayList. Using our list from the previous example we'll add 50
+    to the end of the list.
+</p>
+<pre>
+        listOfIntegers.add(50);
+        System.out.println(listOfIntegers);
+</pre>
+
+<p>
+    Output: <kbd>[50]</kbd>
+</p>
+
+<hr/>
+<h4>get</h4>
+<p>
+    We'll also use the get method which returns a value at a particular index. Indexing in lists range from 0 to the
+    number of elements minus 1.
+</p>
+<pre>
+        System.out.println(returnedList.get(0));
+</pre>
+
+<p>
+    Output: <kbd>50</kbd>
+</p>
+
+<hr/>
+<h4>size</h4>
+<p>
+    The size method returns the number of elements in the ArrayList.
+</p>
+<pre>
+        System.out.println(returnedList.size());
+</pre>
+
+<p>
+    Output: <kbd>1</kbd>
+</p>
 
 <hr/>
 <pre>
