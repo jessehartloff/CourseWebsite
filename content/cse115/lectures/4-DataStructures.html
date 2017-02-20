@@ -6,59 +6,205 @@ previous_content_short: functions
 ---
 
 
-== Data Structures
+[Monday - Using ArrayList including as input to their method (unknown number of unknown values!)]
+[Wednesday - Using Map]
+[Friday - For-each]
 
-Slides
 
-When we want to store multiple related values.
-
-Don't know how many we want to store.
-
-Even if we know, what if we need to store 10000 values? Declare 10000 variables all with different names?
+{#== Data Structures#}
+{##}
+{#Slides? (I don't have a lot of individual things. I have a group of things. This is my collection of video games.#}
+{#I can perform acts on my things. I clean all my dishes. I don't say I clean plate1, plate2, plate3, spoon1, spoon2, etc.#}
+{#I clean my collection of nameless dishes. I launder all my clothes. While I some plates with certain scratches that I#}
+{#recognize, I don't name each one as we would with variables. I just have plates. Sometimes they do all have names but we#}
+{#to do something to all of them anyway. This class has 32 named TAs and sometimes you want to ask all of them a question#}
+{#on the question site to maximize the chance of a quick response.)#}
+{##}
+{#When we want to store multiple related values.#}
+{##}
+{#Don't know how many we want to store.#}
+{##}
+{#Even if we know, what if we need to store 10000 values? Declare 10000 variables all with different names?#}
 
 
 == Import
 
-Let's learn: import, package
 
-Before we start using data structures in java we will need to learn one more aspect of the language. The import statement.
-
-many classes that come with java are not available by default. Only classes
-in <a heref="https://docs.oracle.com/javase/7/docs/api/java/lang/package-summary.html">java.lang</a> are available
-by default. The rest of the classes must be imported before they are used to let the compiler know to load the
-additional classes.
-
-== Sequential
-
-
-ArrayList [and Array(?)]
-
-Must have a type. It's a collection of values of that type.
-
-Elements each have an index. Access data by its index. Indexing starts at 0.
-(side note, we can get a char from a String by index. String is an array of char)
-
-add(e)
-get(index)
-delete(index)
-
-for(int i=0; i< ds.size(); i++);
-for(int i=0; i< aString.length(); i++);
+<p>
+    Before we start using data structures in java we will need to learn one more aspect of the language. The import
+    statement. We add our import statements before the beginning of the class definition for our program. In the
+    upcoming lesson we will add <code>import java.util.ArrayList;</code> to give us access to the <a
+        href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a> class.
+</p>
+<p>
+    There are many classes like ArrayList that are packaged with java, but must be added with an import statement to be
+    used. Only classes
+    in <a heref="https://docs.oracle.com/javase/7/docs/api/java/lang/package-summary.html">java.lang</a> are available
+    by default as these classes have been determined to be so fundamental that every program should have immediate
+    access to them. The rest of the classes must be imported to let the compiler know to load the
+    additional classes. If a class is used without being imported the program will not run. For example if we attempt to
+    use the ArrayList class without importing it first we will see the error <code>ArrayList cannot be resolved to a
+    type</code>.
+</p>
 
 
-== For-Each Loop
+== Type Parameters
 
-Print all elements in the ArrayList.
+<p>
+    When we crate a data structure in Java we must specify which type the data structure can store. This type must be a
+    <a href="https://docs.oracle.com/javase/tutorial/java/concepts/class.html">class</a> and the data structure can only
+    store objects of that class type. By java naming convention, if a type starts with a capital letter it is a class
+    and if it starts with a lowercase letter it is a primitive. A primitive is a data type that only stores a value
+    where an object can contain many values as well as methods. We have been using objects of type String throughout the
+    course and we noticed that String starts with a capital S and we also have access to many methods by using the
+    dot-operator on a String value.
+</p>
 
-Add all these ints.
+<p>
+    This sets up a big problem in that int, double, and boolean are all primitive types and therefor cannot be used as
+    the type for data structures. This means we can never create a data structure that stores int, doubles, or boolean
+    types. Luckily there is a very simple solution to this limitation by using wrapper classes.
+</p>
+
+<dl>
+    <dt>Wrapper Class</dt>
+    <dd>A class that can be used in place of a primitive type.</dd>
+</dl>
+
+<p>Instead of using the primitive types int, double, and boolean we will use the wrapper classes Integer, Double, and
+    Boolean. These wrapper classes can be used <em>nearly</em> interchangeably with their primitive counterparts. Using
+    these wrapper classes will allow us to store primitive values in data structures as well as give us access to a
+    variety of methods that can be used in the same way as the String methods we've been using.
+</p>
+
+== ArrayList
+
+<p>
+    Armed with import statements and wrapper classes we are ready to use our first data structure, the ArrayList.
+</p>
+{#new keyword#}
+{##}
+{#Create a variable to store an ArrayList of a particular type.#}
+{#Name the variable.#}
+{#Create a new ArrayList of that type.#}
+{#Store the new ArrayList in the variable.#}
+{#-Do whatever we need to do with the ArrayList.#}
+{##}
+{#ArrayList#}
+
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">Javadocs: ArrayList</a>
+
+{#Must have a type. It's a collection of values of that type.#}
+{##}
+{#Elements each have an index. Access data by its index. Indexing starts at 0.#}
+{#(side note, we can get a char from a String by index. String is an array of char)#}
+
+{#add(e)#}
+{#get(index)#}
+{#size()#}
+{#isEmpty()#}
+
+{#<hr/>#}
+{#<h4>add</h4>#}
+{#<p>#}
+{#    toLowerCase() returns a copy of the String in all lower case letters. Note that this method does not change the#}
+{#    value of the String itself.#}
+{#</p>#}
+{#<pre>#}
+{#    String input = "STOP YELLING";#}
+{#    String output = input.toLowerCase();#}
+{#    System.out.println(input);  // The original value is unchanged#}
+{#    System.out.println(output); // The method call returns the lowercase String#}
+{#</pre>#}
+{##}
+{#<p>#}
+{#    Output:#}
+{#</p>#}
+{#<kbd>STOP YELLING<br/>stop yelling</kbd>#}
 
 
-== Key-Value Store
+<hr/>
+<pre>
+import java.util.ArrayList;
 
-Map/TreeMap/HashMap
+public class DataStructureExample {
 
-insert/put
-get(key)
+    static ArrayList&lt;Integer&gt; getList(){
+        ArrayList&lt;Integer&gt; listOfIntegers = new ArrayList&lt;Integer&gt;();
+        listOfIntegers.add(50);
+        listOfIntegers.add(20);
+        return listOfIntegers;
+    }
+    
+    public static void main(String[] args){
+        ArrayList&lt;Integer&gt; returnedList = getList();
+        System.out.println(returnedList);
+        System.out.println(returnedList.get(0));
+        System.out.println(returnedList.get(1));
+    }
+}
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>[50, 20]<br/>50<br/>20</kbd>
+
+<p>
+    This example shows everything we need to get started with ArrayList. Let's analyze this example.
+</p>
+<br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>import java.util.ArrayList;</code> Let the compiler know that we will use the ArrayList class</li>
+    <li><code>ArrayList&lt;Integer&gt; returnedList = getList();</code> Control starts with the main method. In the
+        first line we create a variable that can store an ArrayList of Integers, name it returnedList, and set it equal
+        to the return value of the getList() method which has a return type of ArrayList&lt;Integer&gt;.
+    </li>
+    <li><code>getList()</code> To set the value of returnedList, the call to getList() must be resolved. There are not
+        arguments or parameters to handle so control moves directly to the first line of the method.
+    </li>
+    <li><code>ArrayList&lt;Integer&gt; listOfIntegers = ...</code> Similar to the first line
+        of main, we create a variable that can store an ArrayList of Integers and name it listOfIntegers.
+    </li>
+    <li><code>... = new ArrayList&lt;Integer&gt;();</code> Create a new instance of an ArrayList of Integers using the
+        new keyword.
+    </li>
+    <li><code>listOfIntegers.add(50);</code> Add the value 50 to the end of the ArrayList. Since 50 is the first element
+        added to the list it is placed at index 0.
+    </li>
+    <li><code>return listOfIntegers;</code> Return the ArrayList back to the main method.</li>
+    <li><code>ArrayList&lt;Integer&gt; returnedList = getList();</code> Return to the main method and set the value of
+        returnedList equal to the list returned from getList()
+    </li>
+    <li><code>System.out.println(returnedList);</code> Print the contents of returnedList in order "[50, 20]"</li>
+    <li><code>System.out.println(returnedList.get(0));</code> Print the value at index 0 in the list "50"</li>
+    <li><code>System.out.println(returnedList.get(1));</code> Print the value at index 1 in the list "20"
+    </li>
+    <li><code>}</code> The end of the main method is reached and the program ends.
+    </li>
+</ol>
+
+
+{#== HashMap#}
+{##}
+{#Map/TreeMap/HashMap#}
+{##}
+{#insert/put#}
+{#get(key)#}
+{##}
+{##}
+{##}
+{#== Iteration and the For-Each Loop#}
+{##}
+{##}
+{#for(int i=0; i< ds.size(); i++);#}
+{#for(int i=0; i< aString.length(); i++);#}
+{##}
+{#Print all elements in the ArrayList.#}
+{##}
+{#Add all these ints.#}
+
 
 {#== Databases#}
 {##}
