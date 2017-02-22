@@ -80,7 +80,10 @@ previous_content_short: functions
 == ArrayList
 
 <p>
-    Armed with import statements and wrapper classes we are ready to use our first data structure, the ArrayList.
+    Armed with import statements and wrapper classes we are ready to use our first data structure, the ArrayList. An
+    ArrayList is used to store multiple values of a provided type. The order of these values is preserved and their
+    positions are indexed by integers starting at 0. This means the first value in an ArrayList is stored at index 0,
+    the second at index 1, the third at index 2, and so on.
 </p>
 {#new keyword#}
 {##}
@@ -99,15 +102,11 @@ previous_content_short: functions
 {#Elements each have an index. Access data by its index. Indexing starts at 0.#}
 {#(side note, we can get a char from a String by index. String is an array of char)#}
 
-{#add(e)#}
-{#get(index)#}
-{#size()#}
-{#isEmpty()#}
 
 <hr/>
 <h4>new</h4>
 <p>
-    To create an ArrayList, we can't simply type a value. We must use the new keyword as well as specify the type
+    To create an ArrayList, we can't simply give it a value. We must use the new keyword as well as specify the type
     parameter. Here we create a new ArrayList of Integers and name it listOfIntegers.
 </p>
 <pre>
@@ -145,7 +144,7 @@ previous_content_short: functions
     number of elements minus 1.
 </p>
 <pre>
-        System.out.println(returnedList.get(0));
+        System.out.println(listOfIntegers.get(0));
 </pre>
 
 <p>
@@ -158,7 +157,7 @@ previous_content_short: functions
     The size method returns the number of elements in the ArrayList.
 </p>
 <pre>
-        System.out.println(returnedList.size());
+        System.out.println(listOfIntegers.size());
 </pre>
 
 <p>
@@ -166,6 +165,24 @@ previous_content_short: functions
 </p>
 
 <hr/>
+<h4>contains</h4>
+<p>
+    Similar to the contains method for Strings, ArrayList has a contains method that returns true only if the element is
+    in the list.
+</p>
+<pre>
+        System.out.println(listOfIntegers.contains(50));
+        System.out.println(listOfIntegers.contains(70));
+</pre>
+
+<p>
+    Output: </p>
+<kbd>true<br/>false</kbd>
+
+<hr/>
+<h4>Full Example</h4>
+
+
 <pre>
 import java.util.ArrayList;
 
@@ -183,6 +200,7 @@ public class DataStructureExample {
         System.out.println(returnedList);
         System.out.println(returnedList.get(0));
         System.out.println(returnedList.get(1));
+        System.out.println(returnedList.size());
     }
 }
 </pre>
@@ -190,10 +208,10 @@ public class DataStructureExample {
 <p>
     Output:
 </p>
-<kbd>[50, 20]<br/>50<br/>20</kbd>
+<kbd>[50, 20]<br/>50<br/>20<br/>2</kbd>
 
 <p>
-    This example shows everything we need to get started with ArrayList. Let's analyze this example.
+    This example shows everything we need to get started with ArrayList. Let's analyze this example one step at a time.
 </p>
 <br/>
 <p>Breakdown:</p>
@@ -223,21 +241,164 @@ public class DataStructureExample {
     <li><code>System.out.println(returnedList.get(0));</code> Print the value at index 0 in the list "50"</li>
     <li><code>System.out.println(returnedList.get(1));</code> Print the value at index 1 in the list "20"
     </li>
+    <li><code>System.out.println(returnedList.size());</code> Print the number of elements in the list "2"
+    </li>
     <li><code>}</code> The end of the main method is reached and the program ends.
     </li>
 </ol>
 
 
-{#== HashMap#}
-{##}
-{#Map/TreeMap/HashMap#}
-{##}
-{#insert/put#}
-{#get(key)#}
-{##}
-{##}
-{##}
+== HashMap
+
+
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">Javadocs: HashMap</a>
+
+<p>
+    Java's HashMap is similar to the ArrayList, except instead of indexing its values by sequential integers starting at
+    0 the values are indexed by any type chosen by the programmer with no meaningful ordering. Thus when we store a
+    value in a HashMap we must also provide an index value known as a key. We then call an element in a HashMap a
+    key-value pair.
+</p>
+
+<p>
+    As with ArrayList, we will need to import the HashMap class with <code>import java.util.HashMap;</code> before it
+    can be used or we will see this error <code>HashMap cannot be resolved to a type</code>.
+</p>
+
+<hr/>
+<h4>new</h4>
+<p>
+    Just like an ArrayList, we must use the new keyword to create a new instance of a HashMap. Since a HashMap need a
+    type for its keys as well as it's values we must provide 2 types when creating a HashMap. The first type will
+    specify the type for the keys and the second will determine the type of the values.
+</p>
+<pre>
+        HashMap&lt;String, Integer&gt; mapOfStringsToDoubles = new HashMap&lt;String, Integer&gt;();
+        System.out.println(mapOfStringsToDoubles);
+</pre>
+
+<p>
+    Output: <kbd>{}</kbd>
+</p>
+
+<p>
+    Here we have created a HashMap that maps String keys to Integer values and stored it in a variable named
+    mapOfStringsToDoubles. When we print the map we see that it is empty. Let's add key-value pairs into the map using
+    the put method.
+</p>
+
+<hr/>
+<h4>put</h4>
+<p>
+    To insert key-value pairs into a HashMap we will call its put method. The put method takes 2 arguments. The first
+    argument is the key and the second is the value to be stored. The types of these arguments must match the types of
+    the HashMap.
+</p>
+<pre>
+        mapOfStringsToDoubles.put("watch", 850);
+        mapOfStringsToDoubles.put("luggage", 1099);
+        mapOfStringsToDoubles.put("home theatre", 2100);
+        System.out.println(mapOfStringsToDoubles);
+</pre>
+
+<p>
+    Output: <kbd>{home theatre=2100, watch=850, luggage=1099}</kbd>
+</p>
+
+<p>
+    Here we add 3 key-value pairs into the map print the map. Notice that when the map is printed the order is different
+    that the order in which the values were inserted. Unlike ArrayLists, HashMaps do not store data in any meaningful
+    order. We will get the values by providing their keys.
+</p>
+
+
+<hr/>
+<h4>get</h4>
+<p>
+    To access the values in a HashMap we will call the get method with the key for the value as an argument.
+</p>
+<pre>
+        int luggagePrice = mapOfStringsToDoubles.get("luggage");
+        System.out.println(luggagePrice);
+        System.out.println(mapOfStringsToDoubles.get("home theatre"));
+</pre>
+
+<p>
+    Output: </p>
+<kbd>1099<br/>2100</kbd>
+
+
+<p>
+    This allows us to access any of the stored data by providing the corresponding keys. In this case we want to store
+    the prices of a variety of items. We don't want to memorize each price, but we do remember the items themselves.
+    This makes it appropriate to store the prices as values and the item names as keys.
+</p>
+
+<p>
+    Note: since the values are stored by their keys, a key can only appear in a map at most once. For example if we
+    could put another home theatre into the map with a different price, which price would be returned when we call
+    get("home theatre")?
+</p>
+
+<hr/>
+<h4>size</h4>
+<p>
+    We can also get the number of key-value pairs stored in a HashMap we use its size method.
+</p>
+<pre>
+        int numberOfEntries = mapOfStringsToDoubles.size();
+        System.out.println(numberOfEntries);
+</pre>
+
+<p>
+    Output: <kbd>3</kbd>
+</p>
+
+<p>
+    Since we put 3 key-value pairs in this HashMap it will return 3 as its size.
+</p>
+
+
+<hr/>
+<p>
+    Putting the entire example together we have this program.
+</p>
+
+<pre>
+import java.util.HashMap;
+
+public class HashMapExample {
+
+    static void example(){
+        HashMap&lt;String, Integer&gt; mapOfStringsToDoubles = new HashMap&lt;String, Integer&gt;();
+        System.out.println(mapOfStringsToDoubles);
+
+        mapOfStringsToDoubles.put("watch", 850);
+        mapOfStringsToDoubles.put("luggage", 1099);
+        mapOfStringsToDoubles.put("home theatre", 2100);
+        System.out.println(mapOfStringsToDoubles);
+
+        int luggagePrice = mapOfStringsToDoubles.get("luggage");
+        System.out.println(luggagePrice);
+        System.out.println(mapOfStringsToDoubles.get("home theatre"));
+
+        int numberOfEntries = mapOfStringsToDoubles.size();
+        System.out.println(numberOfEntries);
+    }
+
+    public static void main(String[] args){
+        example();
+    }
+}
+</pre>
+
+<p>
+    Output: </p>
+<kbd>{}<br/>{home theatre=2100, watch=850, luggage=1099}<br/>1099<br/>2100<br/>3</kbd>
+
+
 {#== Iteration and the For-Each Loop#}
+{##}
 {##}
 {##}
 {#for(int i=0; i< ds.size(); i++);#}
@@ -246,6 +407,15 @@ public class DataStructureExample {
 {#Print all elements in the ArrayList.#}
 {##}
 {#Add all these ints.#}
+{##}
+{#But wait, how can we iterate over all the elements of a HashMap? Visiting all the ints from 0 to size-1 doesn't do #}
+{#us any good when the values are indexed by keys that don't follow this convention.#}
+{##}
+{#keySet()#}
+{#values()#}
+{##}
+{#These return an abstract data structure called a Collection. #}
+{#If we use these in for-each loops we treat these like ArrayLists.#}
 
 
 {#== Databases#}
