@@ -5,7 +5,45 @@ next_content_short: libraries
 previous_content_short: algos
 ---
 
-[This might come sooner]
+[The last huge fundamental leap. This one will be tough. It's no mistake that I'm giving you spring break to digest]
+[I've been forcing java to act like a functional language, but actually java is build from the ground up to
+be object-oriented. This week I will remove that veil and we'll be working with java as intended]
+[To students who've used java before, after this week we will be inline with your prior experience]
+
+[Monday - So what is a class anyway? What's an object? Instance variables and state (multiple values in one variable). Non-static method]
+[Monday Questions - I provide a class. They create an instance and call it's methods. Not much different from using DS's. Get them used to seeing the Classes code]
+[Wednesday -  Non-static methods explained. Constructors]
+[Wednesday Questions - Fill in methods/constructors for a class. They're on the other side of the fence from Monday.]
+[Friday - Pointers. Putting it all together and driving all the points home.]
+
+[Custom sorting anyone? lol. no time]
+
+
+== Java
+
+Java was designed to be object-oriented. I have been forcing it to act like a functional language. We now need to fix
+that.
+
+A functional language revolves around functions that are called to accomplish what you need. So why have we been calling
+them methods? And what does static mean? Something has seemed a little... off.
+
+What would a non-static method look like? How would it be different from a static method?
+
+Looks like we can't call that method.
+
+Let's use new to create an instance of our class called an object, just like with did with data structures and Files.
+Now we can call those methods.
+
+Let's see instance variables! These can be different for each object. Ain't that neat!
+
+Creating this thing and calling setValue is a lot. Constructors to the rescue!
+
+Calling an object method from within that object? this.
+
+How did I grade that? Know your pointers.
+
+[This is a lot. If they survive this they will do just fine.]
+
 
 == Class
 
@@ -44,13 +82,13 @@ Member variables / fields / state
 this.doSomething();
 
 
-== Error Handling
-
-[This needs to be introduced in file IO]
-
-When connecting to your classmate's API's you might get bad data or no response. How do we handle that?
-
-When you can anticipate an error, but want your program to keep running. You can catch the error and write specific
-code that handle the situation.
-
-[Might introduce this earlier. Maybe with file IO to catch invalid file names.]
+{#== Error Handling#}
+{##}
+{#[This needs to be introduced in file IO]#}
+{##}
+{#When connecting to your classmate's API's you might get bad data or no response. How do we handle that?#}
+{##}
+{#When you can anticipate an error, but want your program to keep running. You can catch the error and write specific#}
+{#code that handle the situation.#}
+{##}
+{#[Might introduce this earlier. Maybe with file IO to catch invalid file names.]#}
