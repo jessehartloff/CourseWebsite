@@ -397,26 +397,262 @@ public class HashMapExample {
 <kbd>{}<br/>{home theatre=2100, watch=850, luggage=1099}<br/>1099<br/>2100<br/>3</kbd>
 
 
-{#== Iteration and the For-Each Loop#}
+== Iteration
+
+<p>
+    We now have 2 data structures that we can use to store and recall data, but what if we want to work with all the
+    data in a data structure? In this lesson we will visit every element in a data structure using iteration.
+</p>
+
+<p>
+    We already have the tools we need to iterate over an ArrayList by combining the size method, the get method, and a
+    for loop.
+</p>
+
+<pre>
+    static String charsToString(ArrayList&lt;Character&gt; inputList){
+        // Concatenate all the Characters in the list into a single String.
+        String result = "";
+        for(int i=0; i&lt;inputList.size(); i++){
+            result = result + inputList.get(i);
+        }
+        return result;
+    }
+</pre>
+
+<p>
+    In this method we are given an ArrayList of Characters, but we have no information about the list. To learn about
+    the the ArrayList we will call its methods and use the return values in our code. First, we know we'll need a loop
+    that run once for each element of the ArrayList so we will ask inputList to tell us its size and use this value to
+    setup our loop. We carefully setup this loop so the index variable <code>i</code> will exactly match the index
+    values of the ArrayList. This way we can call <code>inputList.get(i)</code> in the loop and know it will be called
+    for every element of the list.
+</p>
+
+<p>
+    We can create an ArrayList and call this method as follows:
+</p>
+
+<pre>
+        ArrayList&lt;Character&gt; letters = new ArrayList&lt;Character&gt;();
+        letters.add('l');
+        letters.add('u');
+        letters.add('c');
+        letters.add('k');
+        letters.add('y');
+        String returnedString = charsToString(letters);
+        System.out.println(returnedString);
+</pre>
+
+<p>Output: <kbd>lucky</kbd></p>
+
+<p>
+    When <code>charToString(letters)</code> is called in this example it will run the code in the method with letters as
+    inputList. Then the method code is executed.
+</p>
+
+<pre>
+    String result = "";
+    for(int i=0; i&lt;inputList.size(); i++){
+        result = result + inputList.get(i);
+    }
+    return result;
+</pre>
+
+<p>
+    Since the inputList for this call contains 5 elements, its size method will return 5 and the code will become:
+</p>
+
+<pre>
+    String result = "";
+    for(int i=0; i&lt;5; i++){
+        result = result + inputList.get(i);
+    }
+    return result;
+</pre>
+
+<p>
+    Simplifying this loop will yield:
+</p>
+
+<pre>
+    String result = "";
+    result = result + inputList.get(0);
+    result = result + inputList.get(1);
+    result = result + inputList.get(2);
+    result = result + inputList.get(3);
+    result = result + inputList.get(4);
+    return result;
+</pre>
+
+<p>
+    Then accessing the elements of the list will result in the final code that will be executed.
+</p>
+
+<pre>
+    String result = "";
+    result = result + 'l';
+    result = result + 'u';
+    result = result + 'c';
+    result = result + 'k';
+    result = result + 'y';
+    return result;
+</pre>
+
+<p>
+    Showing 1 step further we can see how the String result is being constructed 1 character at a time.
+</p>
+
+<pre>
+    String result = "";
+    result = "" + 'l';
+    result = "l" + 'u';
+    result = "lu" + 'c';
+    result = "luc" + 'k';
+    result = "luck" + 'y';
+    return "lucky";
+</pre>
+
+<p>
+    This example shows how iterating over a data structure is accomplished. Next we will see a few more examples along
+    with alternate syntax will be necessary to iterate over HashMaps which are not indexed in this predictable manner.
+</p>
+
+<hr/>
+
+<p>
+    Before we iterate over a HashMap, let's revisit Strings and explain something we've seen earlier in the course.
+</p>
+
+<pre>
+    static String reverse(String input){
+        // return the reverse of the string
+
+        String reversed = "";
+        for(int i=input.length()-1; i>=0; i--){
+            reversed = reversed + input.charAt(i);
+        }
+        return reversed;
+    }
+</pre>
+
+<p>
+    Here we see how we can reverse a String using the tools we've seen earlier in the course. We are reversing the input
+    String by iterating over its chars in reverse order while building a new String. This is very similar to the
+    previous example except we don't use ArrayList and we iterate from the length of the String minus 1 to 0 instead
+    from 0 to the length of the String minus 1.
+</p>
+
+
+== For-Each Loop
+
+<p>
+    We've seen that we can iterate over an ArrayList by relying on its values being indexed from 0 to size-1 making it
+    possible to use the index of a for loop to access the elements, but how can we do this with keys in a HashMap that
+    don't have to follow any convention? As the title suggests, we will use what's called a For-Each Loop.
+</p>
+
+<p>
+    A For-Each Loop is a loop that executes once for each element in a given data structure and follows this syntax:
+</p>
+
+<pre>
+    for([type] [name] : [dataStructure]){
+        // Body of the loop
+    }
+</pre>
+
+<p>
+    We can rewrite the previous ArrayList example using a For-Each Loop to generate the same result, but without needing
+    an index variable or calling the get method. The loop will automatically get each element, store it in a variable
+    with the type and name we provide, and execute the body of the loop.
+</p>
+
+<pre>
+    static String charsToStringForEach(ArrayList&lt;Character&gt; inputList){
+        // Concatenate all the Characters in the list into a single String.
+        String result = "";
+        for(Character ch : inputList){
+            result = result + ch;
+        }
+        return result;
+    }
+</pre>
+
+<p>
+    This For-Each Loop is read "For each Character ch in inputList, append ch to the end of result."
+</p>
+
+<br/>
+
+<h3>keySet</h3>
+
+<p>
+    With the For-Each Loop we are prepared to iterate over the data in a HashMap using its keySet method. KeySet will
+    return a Set containing all the keys contained in the HashMap. If we use this Set in a For-Each Loop, we can access
+    all the data in the HashMap.
+</p>
+
+<p>
+    Note: We can iterate over the <a
+        href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html">Entries</a> of
+    a HashMap, but we have all the tools we need to access the data without having to explore this additional class.
+</p>
+
+<pre>
+    HashMap&lt;String, Integer&gt; itemPrices = new HashMap&lt;String, Integer&gt;();
+    itemPrices.put("watch", 850);
+    itemPrices.put("luggage", 1099);
+    itemPrices.put("home theatre", 2100);
+
+    for(String item : itemPrices.keySet()){
+        System.out.println("The " + item + " costs $" + itemPrices.get(item));
+    }
+</pre>
+
+<p>
+    Output: </p>
+<kbd>The home theatre costs $2100<br/>The watch costs $850<br/>The luggage costs $1099</kbd>
+
+
+<p>
+    In this example we combine the For-Each Loop, the keySet method, and the get method to iterate over all the data in
+    a HashMap. Recall that a HashMap does not preserve the order of its key-value pairs.
+</p>
+
+<hr/>
+<h3>values</h3>
+
+<p>
+    In certain cases we are only concerned with the values in HashMap and want to bypass the keys entirely. In these
+    situations we can use the values method which returns a Collection containing all the values that we can iterate
+    through with a For-Each Loop.
+</p>
+
+<pre>
+    HashMap&lt;String, Integer&gt; itemPrices = new HashMap&lt;String, Integer&gt;();
+    itemPrices.put("watch", 850);
+    itemPrices.put("luggage", 1099);
+    itemPrices.put("home theatre", 2100);
+
+    for(int price : itemPrices.values()){
+        System.out.println("$" + price);
+    }
+</pre>
+
+<p>
+    Output: </p>
+<kbd>$2100<br/>$850<br/>$1099</kbd>
+
+
 {##}
-{##}
-{##}
-{#for(int i=0; i< ds.size(); i++);#}
-{#for(int i=0; i< aString.length(); i++);#}
-{##}
-{#Print all elements in the ArrayList.#}
-{##}
-{#Add all these ints.#}
-{##}
-{#But wait, how can we iterate over all the elements of a HashMap? Visiting all the ints from 0 to size-1 doesn't do #}
-{#us any good when the values are indexed by keys that don't follow this convention.#}
-{##}
-{#keySet()#}
-{#values()#}
-{##}
-{#These return an abstract data structure called a Collection. #}
+{#keySet(): returns Set#}
+{#values(): returns Collection#}
+
 {#If we use these in for-each loops we treat these like ArrayLists.#}
 
+{#Add all these ints.#}
+{##}
 
 {#== Databases#}
 {##}
