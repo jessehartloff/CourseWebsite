@@ -10,38 +10,203 @@ previous_content_short: ds
 [Friday - Clean up of what wasn't covered between writing files and parsing csv]
 
 
-== Files
+{#== Files#}
+{##}
+{#Using long-term memory. Files last longer than our program. Persistance#}
 
-Brief intro
+== Exceptions
 
-try/catch
-arrays
-iterating over a file
+<p>
+    So far everything in the programs we've written have been within our control and any errors have been caused by our
+    code. This is no longer true when we start working with files that may not have been written by our code. When
+    working with files we will write code to interact with the file system of different machines with different
+    operating systems and file permissions to read an write files that can be modified, or even deleted, by other
+    programs and users. Needless to say, there's a lot can go wrong and our code must be able to handle any situation
+    without crashing. We will accomplish this using exceptions along with try/catch blocks.
+</p>
 
-== File IO
+<pre>
+    try{
+        // risky code
+    } catch ([Expected Exception type] [exception name]){
+        // code to run if the exception is thrown
+    }
+</pre>
 
-Read/write
-<br/>
-Persistence
+<p>
+    This is the basic syntax we will see when writing code that can cause errors (throw exceptions). When working with
+    files we will catch the IOException.
+</p>
 
-String to int/double
+<pre>
+    try{
+        // code to open a file
+    } catch (IOException ex){
+        ex.printStackTrace();
+    }
+</pre>
 
-== CSV/Excel
+<p>
+    In this example we write all the code to interact with a file within the try block. If anything causes an error
+    while trying to open the file, an IOException will be thrown and control will immediately move to the catch block.
+    In this block we will write any code needed to handle the situation and after the code is executed the program will
+    continue after the try/catch blocks. In this case if there is an error opening the file we print the error message
+    to the
+    screen and continue with the program.
+</p>
 
-CSV
+<p>
+    The most common cause of an IOException that we'll see is trying to open a file that doesn't exist.
+</p>
 
-.. this could be a good place to introduce user objects. Processing sales in a spreadsheet might need multiple values.
-Dare we use JSON for such a thing? I think not. Not in Java anyway.
+== Reading Files
 
 
-String[] splits = string.split(",");
+<pre>
+    String filename = "src/test.txt";
+    for(String line : Files.readAllLines(Paths.get(filename))){
+        System.out.println(line);
+    }
+</pre>
 
-If you don't wanna mess with arrays for some reason, Arrays.asList()
+<p>
+    This code snippet will read a file in the folder "src" named "test.txt" and iterate over each line in a for-each
+    loop. Inside the loop we print each line to the screen. This is the syntax we will use to read files in this course.
+</p>
 
-== Navigating directories
+<p>
+    Note: There are many ways to open files in java that you are free to explore. Each has certain advantages and
+    disadvantages though you can complete all the assignments for this course using the method shown in this section
+</p>
 
-os.walk
+<p>
+    We've explored most of the concepts in this snippet except <code>Files.readAllLines(Paths.get(filename))</code>. In
+    this code we see 2 more java classes (Files and Paths) that contain more methods that help us accomplish our goals.
+    First, the Paths.get method converts a String into a Path to a file. To us, the String already told us the path to a
+    file, but this methods converts that String into a Path that java will understand. Once we have a Path to a file we
+    call Files.readAllLines which reads a Path and returned a List of Strings containing all the lines of the given
+    file. We use this list in a for-each loop to iterate over the lines one at a time.
+</p>
 
-Format every file in a directory
-<br/>
-Aggregate data across multiple files. The first interesting HW assignment.
+<p>
+    Since we used 2 more java classes we must remember to import these classes.
+</p>
+
+<pre>
+    import java.nio.file.Files;
+    import java.nio.file.Paths;
+</pre>
+
+<p>
+    To complete this example we need to add a try/catch block. As mentioned earlier, reading from a file can cause
+    errors that are out of our control and we need to specify how our program will react to an error in a catch
+    block.
+</p>
+
+<pre>
+    try{
+        String filename = "src/test.txt";
+        for(String line : Files.readAllLines(Paths.get(filename))){
+            System.out.println(line);
+        }
+    } catch (IOException ex){
+        ex.printStackTrace();
+    }
+</pre>
+
+<p>
+    Now if there is an error it will be caught and we will print the error message to the screen. If we don't handle
+    this error the program will not run! It will instead alert you of an <code>Unhandled Exception</code> and refuse to
+    run.
+</p>
+
+<p>
+    Since IOException is another java class it too must be imported for this program to run. Putting everything together
+    we have the following program.
+</p>
+
+<pre>
+    import java.nio.file.Files;
+    import java.nio.file.Paths;
+    import java.io.IOException;
+
+    public class FileReadExample {
+
+        public static void main(String[] args){
+            try{
+                String filename = "src/test.txt";
+                for(String line : Files.readAllLines(Paths.get(filename))){
+                    System.out.println(line);
+                }
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+
+    }
+</pre>
+
+<p>
+    This program will attempt to read <code>src/test.txt</code> and print its contents to the screen. If an error occurs
+    while reading the file (ex. the file doesn't exist) the catch block will execute and the error will be printed
+    <em>without</em> crashing the program.
+</p>
+
+<hr/>
+
+<h3>String to number</h3>
+
+<p>
+    We will often want to read numbers from files, but we read data from files as Strings. Recall that when we use the
+    wrapper classes for primitives we gain access to methods that can help us work with these values. We can use one of
+    these methods to create Integers and Doubles from Strings.
+</p>
+
+<pre>
+    int j = new Integer("10");
+    double number = new Double("1.55");
+</pre>
+
+<p>
+    By creating a new Integer or Double and providing a String in the proper format for each type of number we can
+    convert the String to number. The method we are using is called a constructor which is a special type of method that
+    is called when a new object is created. Note that even though we are creating new objects (the type starts with an
+    uppercase
+    letter) we can store the values in primitive variable (the type starts with a lowercase letter) and java will
+    automatically convert between the two types.
+</p>
+
+{#== Writing Files#}
+{##}
+{#write#}
+{##}
+{#        //write#}
+{#        Files.write(Paths.get("src/goop.txt"), "text".getBytes());#}
+{##}
+{#        //append#}
+{#        Files.write(Paths.get("src/goop.txt"), "text".getBytes(), StandardOpenOption.APPEND);#}
+
+
+{#== CSV/Excel#}
+{##}
+{#CSV#}
+{##}
+{##}
+{##}
+{#String[] splits = string.split(",");#}
+{#// could bypass [] with foreach.. no I can't. For csv they need [k]. (Check size before accessing data for safety)#}
+{##}
+{#If you don't wanna mess with arrays for some reason, Arrays.asList()#}
+
+{#arrays#}
+
+{#.. this could be a good place to introduce user objects. Processing sales in a spreadsheet might need multiple values.#}
+
+
+{#== Navigating directories#}
+{##}
+{#os.walk#}
+{##}
+{#Format every file in a directory#}
+{#<br/>#}
+{#Aggregate data across multiple files. The first interesting HW assignment.#}
