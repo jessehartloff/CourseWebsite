@@ -298,16 +298,78 @@ previous_content_short: ds
 </p>
 
 
-{#== Writing Files#}
-{##}
-{#write#}
-{##}
-{#        //write#}
-{#        Files.write(Paths.get("src/goop.txt"), "text".getBytes());#}
-{##}
-{#        //append#}
-{#        Files.write(Paths.get("src/goop.txt"), "text".getBytes(), StandardOpenOption.APPEND);#}
+== Writing Files
 
+<p>
+    To create a and write to a file in java we will use the follow method calls which are similar to the way we read
+    files.
+</p>
+
+<pre>
+    String filename = "src/example.txt";
+    String textToWrite = "This will be written to the file";
+    Files.write(Paths.get(filename), textToWrite.getBytes());
+</pre>
+
+<div class="alert alert-warning">
+    If a file with the give name already exists, Files.write will overwrite the existing file without warning.
+</div>
+
+<p>
+    Here we use the Files.write method which takes a file Path and the text to write to the file as arguments. The file
+    must be specified as a Path just like it did for reading files so we will the filename as a String to the Paths.get
+    method to covert it to a Path. Next, the method requires an array of bytes to write to the file. Conveniently, the
+    String class contains a method called getBytes that will return an array of bytes representing the value of the
+    String. By calling both Paths.get and getBytes we convert the inputs into the format expected by Files.write.
+</p>
+
+
+<p>
+    Adding all our import statements, try catch, and class definition will yield the following java program.
+</p>
+
+<pre>
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class Example {
+
+    public static void main(String[] args){
+        
+        try{
+            String filename = "src/example.txt";
+            String textToWrite = "This will be written to the file";
+            Files.write(Paths.get(filename), textToWrite.getBytes());
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
+    
+}
+</pre>
+
+<p>
+    If we know a file with the given name already and we want to add to the end of the file without overwriting the
+    original we can use the append option as follows.
+</p>
+
+<pre>
+    Files.write(Paths.get(filename), textToWrite.getBytes(), StandardOpenOption.APPEND);
+</pre>
+
+<p>
+    This append option is part of a class we haven't used yet so we also need to import this class <code>import
+    java.nio.file.StandardOpenOption;</code> before use. If the append option is used and the file does not already
+    exist a <code>NoSuchFileException</code> will be thrown.
+</p>
+
+<p>
+    Note: As with reading from files, there are many different ways to write files in java. This methods provides simple
+    syntax making it a good choice for writing your first files and you are encouraged to explore other methods once you
+    are comfortable with Files.write.
+</p>
 
 {#== Navigating directories#}
 {##}
