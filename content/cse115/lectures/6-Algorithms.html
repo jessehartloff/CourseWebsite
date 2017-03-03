@@ -14,7 +14,41 @@ previous_content_short: files
 
 == Basic
 
-Min/max/average
+Average
+
+Min/max
+
+<p>
+    Tracking a significant value.
+</p>
+
+<pre>
+    [initialize element]
+    [initialize value]
+    [iterate while updating the most significant element/value]
+    [return the most significant element/value]
+</pre>
+
+== Runtime
+
+<p>
+    We will rarely talk about runtime efficiency in this course. This course is primarily about solving problems. As you
+    progress through computer science you will become increasingly aware of the efficiency of the software you write.
+    Solving all the worlds problems with software is not helpful if that software takes thousands of years to
+    run, and this is not an exaggeration (if anything, this is an understatement).
+</p>
+<p>
+    Movie graphics are much higher quality than video game graphics not because they have better technology or bigger
+    budgets, but because they can spend much more time letting their algorithms render their models instead of the 1/30
+    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited
+    time requires
+    highly sophisticated algorithms as well as powerful hardware.
+</p>
+
+<p>
+    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh?
+</p>
+
 
 == Search
 
@@ -26,7 +60,88 @@ Give em a taste of O(log(n))
 
 == Sort
 
-Binary search was cool, but we need to be sorted first
+<p>
+    Binary search was cool, but we need to be sorted first
+</p>
+
+<p>
+    We'll discuss sorting with a fair amount of depth, though there will at most be a few exam questions on the topic.
+    For any assignment in this class you will be able to use the following method to sort an ArrayList.
+</p>
+
+<pre>
+    Collections.sort(data);
+</pre>
+
+<p>
+    Recall that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. Let's see an
+    example using this sorting method.
+</p>
+
+<pre>
+    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
+    data.add(5);
+    data.add(1);
+    data.add(8);
+    data.add(3);
+
+    System.out.println(data);
+    Collections.sort(data);
+    System.out.println(data);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>
+
+<p>
+    Here we see that Collections.sort did sort the elements of data from smallest to largest.
+</p>
+
+<p>
+    It works with Strings too!
+</p>
+
+<pre>
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("wing");
+    words.add("coach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>
+
+<p>
+    Sorting Strings does not always behave how you might expect since the characters are ordered by their
+    <a href="http://www.asciitable.com/">ASCII</a> values. One important __ of this is that every capital letter will be
+    ordered before any lower-case letter as shown in the following example.
+</p>
+
+<pre>
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>
+
+
+Custom sorting.
 
 {#== A Taste of Trees#}
 {##}
