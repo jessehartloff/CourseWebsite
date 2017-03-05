@@ -12,136 +12,348 @@ previous_content_short: files
 [Friday - Sorting]
 
 
-== Basic
-
-Average
-
-Min/max
+== Algorithms
 
 <p>
-    Tracking a significant value.
+    We now know the fundamental concepts of programming (Variables, Control Flow, Functions) and we know how to access
+    and store data (Data Structures, Files). Now we will process this data by training computers to extract certain
+    information from the data through algorithms.
+</p>
+
+
+== Significant Values
+
+<p>
+    First we will explore several algorithms to extract information from a data structure. We will explore finding the
+    average value contained in a data structure as well as the maximum and minimum values it contains.
+</p>
+
+<hr/>
+<h4>
+    Average
+</h4>
+
+<p>
+    We have seen how to compute the sum of a data structure. Let's take that concept one step further and find the
+    average by dividing by the number of values in the structure.
+</p>
+<pre>
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(1);
+    numbers.add(2);
+    numbers.add(2);
+    numbers.add(2);
+
+    int sum = 0;
+    for(int value : numbers){
+        sum += value;
+    }
+
+    double average = sum*1.0/numbers.size();
+    System.out.println(average);
+</pre>
+<p>
+    Output: <kbd>1.75</kbd>
+</p>
+
+<p>
+    Here we see that we iterate over the ArrayList while adding to a running sum. After the loop, we divide the sum by
+    the number of values to find the average.
+</p>
+<p>
+    Note that <code>sum</code> and <code>numbers.size()</code> are both
+    integers and dividing them directly would perform integer division which would drop the decimal and return 1 instead
+    of 1.75. A simple way to avoid this is by first multiplying the sum by the double 1.0 (not 1) which will convert the
+    sum to a
+    double without changing the value. Since the division is now a double divided an int the result will be a double.
+</p>
+
+<hr/>
+<h4>
+    Maximum Value
+</h4>
+
+<p>
+    The next algorithm we will see is finding the most significant value in a data structure. We will introduce this
+    concept by finding the maximum value, though the concept can be applied to any measure of significance.
+</p>
+
+{#<pre>#}
+{#    [initialize element]#}
+{#    [initialize value]#}
+{#    [iterate while updating the most significant element/value]#}
+{#    [return the most significant element/value]#}
+{#</pre>#}
+
+<pre>
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(32);
+    numbers.add(79);
+    numbers.add(100);
+    numbers.add(53);
+
+    int max = 0;
+    for(int value : numbers){
+        if(value > max){
+            max = value;
+        }
+    }
+    System.out.println(max);
+</pre>
+<p>
+    Output: <kbd>100</kbd>
+</p>
+
+<p>
+    Here we can see the typical steps to find the most significant value in a data structure. First, we initialize a
+    variable that will store the maximum. Then we iterate over the data structure while checking if each value is is the
+    largest we've seen so far. If it is, store it in max. After iterating through all the data, max will be storing the
+    maximum value of the entire data structure.
+</p>
+
+<p>
+    However, there is something that can go wrong with this code. It works for the data provided, but consider what it
+    would find for the max value in the following ArrayList.
 </p>
 
 <pre>
-    [initialize element]
-    [initialize value]
-    [iterate while updating the most significant element/value]
-    [return the most significant element/value]
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(-32);
+    numbers.add(-79);
+    numbers.add(-100);
+    numbers.add(-53);
 </pre>
 
-== Runtime
-
 <p>
-    We will rarely talk about runtime efficiency in this course. This course is primarily about solving problems. As you
-    progress through computer science you will become increasingly aware of the efficiency of the software you write.
-    Solving all the worlds problems with software is not helpful if that software takes thousands of years to
-    run, and this is not an exaggeration (if anything, this is an understatement).
-</p>
-<p>
-    Movie graphics are much higher quality than video game graphics not because they have better technology or bigger
-    budgets, but because they can spend much more time letting their algorithms render their models instead of the 1/30
-    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited
-    time requires
-    highly sophisticated algorithms as well as powerful hardware.
-</p>
-
-<p>
-    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh?
-</p>
-
-
-== Search
-
-Linear/binary
-
-Revisit number guessing for binary search.
-
-Give em a taste of O(log(n))
-
-== Sort
-
-<p>
-    Binary search was cool, but we need to be sorted first
-</p>
-
-<p>
-    We'll discuss sorting with a fair amount of depth, though there will at most be a few exam questions on the topic.
-    For any assignment in this class you will be able to use the following method to sort an ArrayList.
+    If we run our code to find max value on this ArrayList it will return 0 when it should return -32. Our mistake is
+    initializing the max value to be higher than the actual max in the data. Care must be taken to make sure this
+    doesn't happen which can be tricky when writing methods with unknown inputs. To avoid these issues we will
+    initialize max to be so small that it can't possibly interfere with the data. We do this by using constants provided
+    by java for purposes like these.
 </p>
 
 <pre>
-    Collections.sort(data);
-</pre>
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(-32);
+    numbers.add(-79);
+    numbers.add(-100);
+    numbers.add(-53);
 
+    int max = Integer.MIN_VALUE;
+    for(int value : numbers){
+        if(value > max){
+            max = value;
+        }
+    }
+    System.out.println(max);
+</pre>
 <p>
-    Recall that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. Let's see an
-    example using this sorting method.
+    Output: <kbd>-32</kbd>
 </p>
 
+<p>
+    Here we use java's Integer.MIN_VALUE constant to initialize max to the smallest possible value that can be stored in
+    an int. This allows to us to find the true max of the ArrayList. This constant is an actual number that is stored in
+    max. We can print out this value to see the limits of int values.
+</p>
 <pre>
-    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
-    data.add(5);
-    data.add(1);
-    data.add(8);
-    data.add(3);
-
-    System.out.println(data);
-    Collections.sort(data);
-    System.out.println(data);
+    int minValue = Integer.MIN_VALUE;
+    System.out.println(minValue);
+    int maxValue = Integer.MAX_VALUE;
+    System.out.println(maxValue);
 </pre>
-
 <p>
     Output: </p>
-<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>
+<kbd>-2147483648<br/>2147483647</kbd>
 
 <p>
-    Here we see that Collections.sort did sort the elements of data from smallest to largest.
+    It is important to note that an int cannot store values outside of this range. Attempting to do so will cause
+    odd behaviour. For example.
 </p>
-
-<p>
-    It works with Strings too!
-</p>
-
 <pre>
-    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
-    words.add("wing");
-    words.add("coach");
-    words.add("kettle");
-    words.add("camp");
-
-    System.out.println(words);
-    Collections.sort(words);
-    System.out.println(words);
+    int maxValue = Integer.MAX_VALUE;
+    System.out.println(maxValue);
+    System.out.println(maxValue+1);
 </pre>
-
 <p>
     Output: </p>
-<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>
+<kbd>2147483647<br/>-2147483648</kbd>
 
 <p>
-    Sorting Strings does not always behave how you might expect since the characters are ordered by their
-    <a href="http://www.asciitable.com/">ASCII</a> values. One important __ of this is that every capital letter will be
-    ordered before any lower-case letter as shown in the following example.
+    We see that going above the max value of an int will "wrap around" to the min value. When this happens in software
+    it can cause many errors that are difficult to debug.
 </p>
 
-<pre>
-    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
-    words.add("Wing");
-    words.add("cOach");
-    words.add("kettle");
-    words.add("camp");
-
-    System.out.println(words);
-    Collections.sort(words);
-    System.out.println(words);
-</pre>
+<p>
+    When finding maximum and minimum values we will use the following constants:
+</p>
+<dl>
+    <dt>Integer.MIN_VALUE</dt>
+    <dd>The minimum value that can be stored in an int (-2147483648)</dd>
+    <dt>Integer.MAX_VALUE</dt>
+    <dd>The maximum value that can be stored in an int (2147483647)</dd>
+    <dt>Double.NEGATIVE_INFINITY</dt>
+    <dd>The greatest magnitude negative number that can be stored in a double</dd>
+    <dt>Double.POSITIVE_INFINITY</dt>
+    <dd>The largest value that can be stored in a double</dd>
+</dl>
 
 <p>
-    Output: </p>
-<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>
+    Note that doubles can store much larger numbers than int, though they lose accuracy due to truncation. Also, there
+    is a MIN_VALUE for doubles, but it stores the smallest positive value that a double can store.
+</p>
 
+<br/>
 
-Custom sorting.
+<p>
+    When we are not only concerned with the maximum value, but also want to know what index stores that value we can
+    track both pieces of information. Now when we update the max value found we will also update the index where it was
+    found.
+</p>
+<pre>
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(0);
+    numbers.add(-47);
+    numbers.add(92);
+    numbers.add(-3);
+
+    int max = Integer.MIN_VALUE;
+    int index = -1;
+    for(int i=0; i < numbers.size(); i++){
+        if(numbers.get(i) > max){
+            max = numbers.get(i);
+            index = i;
+        }
+    }
+    System.out.println("The max value of " + max + " was found at index " + index);
+</pre>
+<p>
+    Output: <kbd>The max value of 92 was found at index 2</kbd>
+</p>
+
+<p>
+    Following the same concept as for max and min value, we initialize the index to impossible value (-1). This is not a
+    proper index and will be overwritten once the first value is read. By using -1 we can also check for this value
+    elsewhere in the code if we have concerns that there might be an error. For example, if you initialize the index to
+    -1 in a method that returns an index we can check if it returns -1 when it's called and know if something went wrong
+    (ex. the data structure was empty).
+</p>
+
+{#== Runtime#}
+{##}
+{#<p>#}
+{#    We will rarely talk about runtime efficiency in this course. This course is primarily about solving problems. As you#}
+{#    progress through computer science you will become increasingly aware of the efficiency of the software you write.#}
+{#    Solving all the worlds problems with software is not helpful if that software takes thousands of years to#}
+{#    run, and this is not an exaggeration (if anything, this is an understatement).#}
+{#</p>#}
+{#<p>#}
+{#    Movie graphics are much higher quality than video game graphics not because they have better technology or bigger#}
+{#    budgets, but because they can spend much more time letting their algorithms render their models instead of the 1/30#}
+{#    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited#}
+{#    time requires#}
+{#    highly sophisticated algorithms as well as powerful hardware.#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh?#}
+{#</p>#}
+{##}
+{##}
+{#== Search#}
+{##}
+{#Linear/binary#}
+{##}
+{#Revisit number guessing for binary search.#}
+{##}
+{#Give em a taste of O(log(n))#}
+{##}
+{#== Sort#}
+{##}
+{#<p>#}
+{#    Binary search was cool, but we need to be sorted first#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    We'll discuss sorting with a fair amount of depth, though there will at most be a few exam questions on the topic.#}
+{#    For any assignment in this class you will be able to use the following method to sort an ArrayList.#}
+{#</p>#}
+{##}
+{#<pre>#}
+{#    Collections.sort(data);#}
+{#</pre>#}
+{##}
+{#<p>#}
+{#    Recall that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. Let's see an#}
+{#    example using this sorting method.#}
+{#</p>#}
+{##}
+{#<pre>#}
+{#    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();#}
+{#    data.add(5);#}
+{#    data.add(1);#}
+{#    data.add(8);#}
+{#    data.add(3);#}
+{##}
+{#    System.out.println(data);#}
+{#    Collections.sort(data);#}
+{#    System.out.println(data);#}
+{#</pre>#}
+{##}
+{#<p>#}
+{#    Output: </p>#}
+{#<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>#}
+{##}
+{#<p>#}
+{#    Here we see that Collections.sort did sort the elements of data from smallest to largest.#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    It works with Strings too!#}
+{#</p>#}
+{##}
+{#<pre>#}
+{#    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();#}
+{#    words.add("wing");#}
+{#    words.add("coach");#}
+{#    words.add("kettle");#}
+{#    words.add("camp");#}
+{##}
+{#    System.out.println(words);#}
+{#    Collections.sort(words);#}
+{#    System.out.println(words);#}
+{#</pre>#}
+{##}
+{#<p>#}
+{#    Output: </p>#}
+{#<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>#}
+{##}
+{#<p>#}
+{#    Sorting Strings does not always behave how you might expect since the characters are ordered by their#}
+{#    <a href="http://www.asciitable.com/">ASCII</a> values. One important __ of this is that every capital letter will be#}
+{#    ordered before any lower-case letter as shown in the following example.#}
+{#</p>#}
+{##}
+{#<pre>#}
+{#    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();#}
+{#    words.add("Wing");#}
+{#    words.add("cOach");#}
+{#    words.add("kettle");#}
+{#    words.add("camp");#}
+{##}
+{#    System.out.println(words);#}
+{#    Collections.sort(words);#}
+{#    System.out.println(words);#}
+{#</pre>#}
+{##}
+{#<p>#}
+{#    Output: </p>#}
+{#<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>#}
+{##}
+{#<p>#}
+{#    Custom sorting.#}
+{#</p>#}
+
 
 {#== A Taste of Trees#}
 {##}
