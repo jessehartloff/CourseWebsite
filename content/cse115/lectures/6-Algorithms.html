@@ -239,125 +239,281 @@ previous_content_short: files
     (ex. the data structure was empty).
 </p>
 
-{#== Runtime#}
-{##}
+
+== Linear Search
+
+<p>
+    Search: Does a given data structure contain a particular element?
+</p>
+
+<p>
+    This is a question we have to answer very often when writing software. We will see two different algorithms to
+    answer this question. First, linear search which iterates over the data and checks every element for equality one at
+    a time. If any element is equal to the value we are looking for, return true. If every single element is checked and
+    the value is not found, we can conclude that the value is not in the data structure and we can return false.
+</p>
+
+<pre>
+public static boolean linearSearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+    for(int value : numbers){
+        if(value == toFind){
+            return true;
+        }
+    }
+    return false;
+}
+
+public static void main(String[] args){
+    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+    for(int i=1; i<100; i++){
+        squares.add(i*i);
+    }
+    System.out.println(linearSearch(squares, 9));
+    System.out.println(linearSearch(squares, 23));
+}
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>true<br/>false</kbd>
+
+<p>
+    In this main method we populate an ArrayList with the first 100 perfect squares and search for 2 different values.
+    Since 9 is a perfect square, the method finds it in the ArrayList and returns true. Likewise, 23 is not a perfect
+    square so the search checks every element without finding 23 and returns false after the loop concludes.
+</p>
+
+
+== Runtime
+
+<p>
+    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh? Would you
+    play the greatest game ever made if it lagged constantly? It's not always enough to write software that works. We
+    also have to be concerned with the efficiency of our programs. While there are many different types of efficiency to
+    consider, we will only analyze runtime here. As you
+    progress through computer science you will become increasingly aware of the efficiency of the software you write.
+</p>
+
+<p>
+    Example: Movie graphics are much higher quality than video game graphics not because they have better technology,
+    but because they can spend much more time letting their algorithms render their models instead of the 1/30
+    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited
+    time requires highly sophisticated algorithms as well as powerful hardware.
+</p>
+
+
+== Binary Search
+
+<p>
+    Example Repository: <a href="https://github.com/hartloff/Search.git">https://github.com/hartloff/Search.git</a>
+</p>
+
+<p>
+    Linear search found the correct answer, but can we find the value faster? What if have a large data set that we need
+    to search frequently? We don't want to visit every element of the data to search for a particular value. We'll now
+    see binary search which is an search algorithm that takes advantage of the structure of a sorted data structure.
+    Note that if the data is not sorted, linear search is the most efficient way to find a particular element, but if
+    the data is sorted we can drastically reduce the runtime of finding an element.
+</p>
+
+<p>
+    Binary search follows these general steps when looking for a value we'll call <var>x</var>:
+</p>
+
+<ol>
+    <li>Initialize the lower and upper bounds of the search space to the first and last elements respectively</li>
+    <li>Compare the middle element of the search space to <var>x</var></li>
+    <ul>
+        <li>If <var>x</var> is equal to the middle element, return true</li>
+        <li>If <var>x</var> is greater than the middle element, set the lower bound equal to the middle element</li>
+        <li>If <var>x</var> is less than the middle element, set the upper bound equal to the middle element</li>
+        <li>Continue comparing <var>x</var> with the middle element until either <var>x</var> is found or the search
+            space is empty
+        </li>
+    </ul>
+    <li>If the search space is empty without finding <var>x</var>, return false</li>
+</ol>
+
+<p>
+    The key to this algorithm that it takes advantage of the sorted order, and the transitive property, to cut the
+    search space in half each time the middle element is compared with <var>x</var>. Since the data is sorted, we know
+    that the center element is greater than, or equal to, every element that come before it. Then if <var>x</var> is
+    greater than the middle element, we know that it must be greater than all element in the first half of the data. In
+    just 1 comparison we can eliminate half of the possible location of <var>x</var> and move our lower bound to the
+    middle of the search space with confidence. Likewise, if <var>x</var> is less that the middle element we know it
+    must be less that every element in the second half of the search space. We repeatedly check the middle element while
+    reducing the search space in half until we either find <var>x</var> and return true, or run out of possible
+    locations and return false.
+</p>
+
+
+<pre>
+public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+    if(numbers.size() == 0){
+        return false;
+    }
+
+    int lowerBound = 0;
+    int upperBound = numbers.size() - 1;
+
+    // check the end points first
+    if(numbers.get(lowerBound) == toFind || numbers.get(upperBound) == toFind){
+        return true;
+    }
+
+    while(upperBound - lowerBound > 1){
+        // Dividing 2 ints so this is integer division and returns the floor of the result
+        int midPoint = (upperBound + lowerBound) / 2;
+        int midValue = numbers.get(midPoint);
+
+        if(midValue == toFind){
+            return true;
+        }else if(toFind < midValue){
+            upperBound = midPoint;
+        }else{
+            // It's not equal to or less than so it must be greater than
+            lowerBound = midPoint;
+        }
+    }
+
+    return false;
+}
+</pre>
+
+<p>
+    Binary search is fast, but it assumed that the values in the ArrayList were sorted. To be able to use binary search
+    we must first sort our data.
+</p>
+
+<pre>
+public static void main(String[] args){
+    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+    for(int i=1; i<100; i++){
+        squares.add(i*i);
+    }
+    System.out.println(binarySearch(squares, 9));
+    System.out.println(binarySearch(squares, 23));
+}
+</pre>
+<p>
+    Output:
+</p>
+<kbd>true<br/>false</kbd>
+
+<p>
+    In this example we are careful to make sure the ArrayList contains sorted data, but what if we have unsorted data?
+    If we know we'll have to search the data often we will consider sorting the ArrayList so we can use binary search.
+</p>
+
 {#<p>#}
-{#    We will rarely talk about runtime efficiency in this course. This course is primarily about solving problems. As you#}
-{#    progress through computer science you will become increasingly aware of the efficiency of the software you write.#}
-{#    Solving all the worlds problems with software is not helpful if that software takes thousands of years to#}
-{#    run, and this is not an exaggeration (if anything, this is an understatement).#}
+{#    Great.. so we wrote a lot more code to do the same thing and added a constraint that the data must be sorted.#}
 {#</p>#}
-{#<p>#}
-{#    Movie graphics are much higher quality than video game graphics not because they have better technology or bigger#}
-{#    budgets, but because they can spend much more time letting their algorithms render their models instead of the 1/30#}
-{#    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited#}
-{#    time requires#}
-{#    highly sophisticated algorithms as well as powerful hardware.#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh?#}
-{#</p>#}
-{##}
-{##}
-{#== Search#}
-{##}
-{#Linear/binary#}
-{##}
-{#Revisit number guessing for binary search.#}
-{##}
-{#Give em a taste of O(log(n))#}
-{##}
-{#== Sort#}
-{##}
+
+== Sort
+
 {#<p>#}
 {#    Binary search was cool, but we need to be sorted first#}
 {#</p>#}
 {##}
-{#<p>#}
-{#    We'll discuss sorting with a fair amount of depth, though there will at most be a few exam questions on the topic.#}
-{#    For any assignment in this class you will be able to use the following method to sort an ArrayList.#}
-{#</p>#}
-{##}
-{#<pre>#}
-{#    Collections.sort(data);#}
-{#</pre>#}
-{##}
-{#<p>#}
-{#    Recall that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. Let's see an#}
-{#    example using this sorting method.#}
-{#</p>#}
-{##}
-{#<pre>#}
-{#    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();#}
-{#    data.add(5);#}
-{#    data.add(1);#}
-{#    data.add(8);#}
-{#    data.add(3);#}
-{##}
-{#    System.out.println(data);#}
-{#    Collections.sort(data);#}
-{#    System.out.println(data);#}
-{#</pre>#}
-{##}
-{#<p>#}
-{#    Output: </p>#}
-{#<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>#}
-{##}
-{#<p>#}
-{#    Here we see that Collections.sort did sort the elements of data from smallest to largest.#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    It works with Strings too!#}
-{#</p>#}
-{##}
-{#<pre>#}
-{#    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();#}
-{#    words.add("wing");#}
-{#    words.add("coach");#}
-{#    words.add("kettle");#}
-{#    words.add("camp");#}
-{##}
-{#    System.out.println(words);#}
-{#    Collections.sort(words);#}
-{#    System.out.println(words);#}
-{#</pre>#}
-{##}
-{#<p>#}
-{#    Output: </p>#}
-{#<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>#}
-{##}
-{#<p>#}
-{#    Sorting Strings does not always behave how you might expect since the characters are ordered by their#}
-{#    <a href="http://www.asciitable.com/">ASCII</a> values. One important __ of this is that every capital letter will be#}
-{#    ordered before any lower-case letter as shown in the following example.#}
-{#</p>#}
-{##}
-{#<pre>#}
-{#    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();#}
-{#    words.add("Wing");#}
-{#    words.add("cOach");#}
-{#    words.add("kettle");#}
-{#    words.add("camp");#}
-{##}
-{#    System.out.println(words);#}
-{#    Collections.sort(words);#}
-{#    System.out.println(words);#}
-{#</pre>#}
-{##}
-{#<p>#}
-{#    Output: </p>#}
-{#<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>#}
-{##}
+
+<p>
+    For programming assignments in this course you can use java built in sort method to sort data.
+</p>
+
+<pre>
+    Collections.sort(data);
+</pre>
+
+<p>
+    Note that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. However, we can
+    sort ArrayLists which does preserve the order of it's elements. This order is reflected by the index for each value.
+    For example, the element at index 3 is always the 4th element in the ordering. By rearranging the elements we can
+    achieve sorted order in an ArrayList.
+</p>
+
+<pre>
+    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
+    data.add(5);
+    data.add(1);
+    data.add(8);
+    data.add(3);
+
+    System.out.println(data);
+    Collections.sort(data);
+    System.out.println(data);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>
+
+<p>
+    Here we see that Collections.sort did sort the elements of data from smallest to largest.
+</p>
+
+<p>
+    It works with Strings too!
+</p>
+
+<pre>
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("wing");
+    words.add("coach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>
+
+<p>
+    Sorting Strings does not always behave how you might expect since the characters are ordered by their
+    <a href="http://www.asciitable.com/">ASCII</a> values. One important aspect of this is that every capital letter
+    will be ordered before any lower-case letter as shown in the following example.
+</p>
+
+<pre>
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>
+
+<p>
+    If we're not thinking in terms of ASCII values, this is not the ordering we would expect.
+</p>
+
 {#<p>#}
 {#    Custom sorting.#}
 {#</p>#}
 
+{#== Selection/Insertion sort#}
+{#Here's how it works#}
+
+{#but it's slow#}
+
+{#Could we do this faster?#}
+
+{#Show timing results of this sort compared to Collections.sort#}
 
 {#== A Taste of Trees#}
 {##}
-{#Mention that TreeSet keeps things sorted for fast lookup (Even mention log(n) for the serious)#}
+{#Mention that TreeSet keeps things sorted#}
 
 
 {#== End of Part 2#}
