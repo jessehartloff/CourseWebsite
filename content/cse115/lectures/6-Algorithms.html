@@ -418,7 +418,7 @@ public static void main(String[] args){
 {##}
 
 <p>
-    For programming assignments in this course you can use java built in sort method to sort data.
+    For programming assignments in this course you can use java's built in sort method to sort data.
 </p>
 
 <pre>
@@ -502,8 +502,31 @@ public static void main(String[] args){
 {#    Custom sorting.#}
 {#</p>#}
 
-{#== Selection/Insertion sort#}
+
+== Selection Sort
 {#Here's how it works#}
+
+<pre>
+public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
+    for(int i = 0; i < numbers.size(); i++){
+
+        // Find the min value from index i to numbers.size()-1
+        int minValue = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for(int j = i; j < numbers.size(); j++){
+            int currentValue = numbers.get(j);
+            if(currentValue < minValue){
+                minValue = currentValue;
+                minIndex = j;
+            }
+        }
+
+        // swap the values in i and minIndex
+        numbers.set(minIndex, numbers.get(i));
+        numbers.set(i, minValue);
+    }
+}
+</pre>
 
 {#but it's slow#}
 
