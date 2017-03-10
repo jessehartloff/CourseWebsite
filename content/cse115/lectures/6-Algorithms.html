@@ -497,8 +497,8 @@ public static void main(String[] args){
     and plan accordingly.
 </p>
 
-<hr/>
 <br/>
+<hr/>
 
 <h3>Custom Sorting</h3>
 
@@ -521,7 +521,7 @@ public static void main(String[] args){
 
     System.out.println(words);
 
-    Collections.sort(bigData, new Comparator&lt;String&gt;(){
+    Collections.sort(words, new Comparator&lt;String&gt;(){
         @Override
         public int compare(String o1, String o2){
             return o1.compareToIgnoreCase(o2);
