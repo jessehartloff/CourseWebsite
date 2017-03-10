@@ -425,13 +425,6 @@ public static void main(String[] args){
     Collections.sort(data);
 </pre>
 
-<p>
-    Note that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. However, we can
-    sort ArrayLists which does preserve the order of it's elements. This order is reflected by the index for each value.
-    For example, the element at index 3 is always the 4th element in the ordering. By rearranging the elements we can
-    achieve sorted order in an ArrayList.
-</p>
-
 <pre>
     ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
     data.add(5);
@@ -448,12 +441,17 @@ public static void main(String[] args){
     Output: </p>
 <kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>
 
-<p>
-    Here we see that Collections.sort did sort the elements of data from smallest to largest.
-</p>
 
 <p>
-    It works with Strings too!
+    Note that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. However, we can
+    sort ArrayLists which do preserve the order of its elements. This order is reflected by the index for each value.
+    For example, the element at index 3 is always the 4th element in the ordering. By rearranging the elements we can
+    achieve sorted order in an ArrayList.
+</p>
+
+
+<p>
+    Collections.sort works with Strings too!
 </p>
 
 <pre>
@@ -495,16 +493,68 @@ public static void main(String[] args){
 <kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>
 
 <p>
-    If we're not thinking in terms of ASCII values, this is not the ordering we would expect.
+    If we're not thinking in terms of ASCII values, this is not the ordering we would expect. We must be aware of this
+    and plan accordingly.
 </p>
 
-{#<p>#}
-{#    Custom sorting.#}
-{#</p>#}
+<hr/>
+<br/>
 
+<h3>Custom Sorting</h3>
+
+<p>
+    Since we don't always want to sort data from smallest to largest, we need a way to define different orderings. We'll
+    see an example of ignoring case when sorting Strings to address the behaviour from the previous example.
+</p>
+
+<div class="alert alert-info">
+    Note: This example is included for completeness only. It contains several concepts that we have not yet covered so
+    this is beyond the current expectation of the course.
+</div>
+
+<pre>
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+
+    Collections.sort(bigData, new Comparator&lt;String&gt;(){
+        @Override
+        public int compare(String o1, String o2){
+            return o1.compareToIgnoreCase(o2);
+        }
+    });
+
+    System.out.println(words);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>[Wing, cOach, kettle, camp]<br/>[camp, cOach, kettle, Wing]</kbd>
+
+<p>
+    Within the compare method we can define any ordering we chose. Sorting decisions will be made based on the return
+    value of compare. If compare returns 0 the inputs are treated as equal, if it returns a negative value the first
+    parameter (o1) is smaller than the second (o2), and if it returns a positive value o1 is larger than o2. In this
+    example, the compareToIgnoreCase method follows these conditions.
+</p>
 
 == Selection Sort
-{#Here's how it works#}
+
+<p>
+    Example Repository: <a href="https://github.com/hartloff/Sort.git">https://github.com/hartloff/Sort.git</a>
+</p>
+
+<p>
+    Beyond this course it will be important to understand how to sort data, even if you're not writing your own
+    sorting methods. This understanding will helps us make more informed design decision when writing software. To this
+    end, let's explore how we could sort data with our own method by implementing a sorting algorithm called selection
+    sort.
+</p>
+
 
 <pre>
 public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
@@ -528,11 +578,21 @@ public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
 }
 </pre>
 
-{#but it's slow#}
+<p>
+    Selection sort works by repeatedly finding the smallest unsorted element and adding to a sorted portion of the data
+    structure. All the data begins unsorted, so the algorithm first finds the minimum value of all the data and swaps
+    it with the value in index 0. Putting this value in index 0 starts the sorted portion of the the data. We know this
+    minimum value end up in index 0, so we put it there and never visit index 0 again. We then look at the remaining
+    elements, find the minimum value among them, and put that value in index 1. Now the first 2 elements are sorted and
+    we only consider the elements from index 2 to the end of the list. We continue to find the minimum value in the
+    unsorted portion and adding it to the sorted portion until the entire data set is sorted.
+</p>
 
-{#Could we do this faster?#}
+<p>
+    Selection sort does sort the data, but it's quite slow. How can we sort data faster? Of course the answer is yes. In
+    fact Collections.sort is much faster than selection sort. The bigger question is <em>how</em> can we sort faster?..
+</p>
 
-{#Show timing results of this sort compared to Collections.sort#}
 
 {#== A Taste of Trees#}
 {##}
