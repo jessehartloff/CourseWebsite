@@ -37,7 +37,7 @@ previous_content_short: files
     We have seen how to compute the sum of a data structure. Let's take that concept one step further and find the
     average by dividing by the number of values in the structure.
 </p>
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
     numbers.add(1);
     numbers.add(2);
@@ -51,7 +51,7 @@ previous_content_short: files
 
     double average = sum*1.0/numbers.size();
     System.out.println(average);
-</pre>
+</code></pre>
 <p>
     Output: <kbd>1.75</kbd>
 </p>
@@ -85,7 +85,7 @@ previous_content_short: files
 {#    [return the most significant element/value]#}
 {#</pre>#}
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
     numbers.add(32);
     numbers.add(79);
@@ -99,7 +99,7 @@ previous_content_short: files
         }
     }
     System.out.println(max);
-</pre>
+</code></pre>
 <p>
     Output: <kbd>100</kbd>
 </p>
@@ -116,13 +116,13 @@ previous_content_short: files
     would find for the max value in the following ArrayList.
 </p>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
     numbers.add(-32);
     numbers.add(-79);
     numbers.add(-100);
     numbers.add(-53);
-</pre>
+</code></pre>
 
 <p>
     If we run our code to find max value on this ArrayList it will return 0 when it should return -32. Our mistake is
@@ -132,7 +132,7 @@ previous_content_short: files
     by java for purposes like these.
 </p>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
     numbers.add(-32);
     numbers.add(-79);
@@ -146,7 +146,7 @@ previous_content_short: files
         }
     }
     System.out.println(max);
-</pre>
+</code></pre>
 <p>
     Output: <kbd>-32</kbd>
 </p>
@@ -156,12 +156,12 @@ previous_content_short: files
     an int. This allows to us to find the true max of the ArrayList. This constant is an actual number that is stored in
     max. We can print out this value to see the limits of int values.
 </p>
-<pre>
+<pre><code class="java">
     int minValue = Integer.MIN_VALUE;
     System.out.println(minValue);
     int maxValue = Integer.MAX_VALUE;
     System.out.println(maxValue);
-</pre>
+</code></pre>
 <p>
     Output: </p>
 <kbd>-2147483648<br/>2147483647</kbd>
@@ -170,11 +170,11 @@ previous_content_short: files
     It is important to note that an int cannot store values outside of this range. Attempting to do so will cause
     odd behaviour. For example.
 </p>
-<pre>
+<pre><code class="java">
     int maxValue = Integer.MAX_VALUE;
     System.out.println(maxValue);
     System.out.println(maxValue+1);
-</pre>
+</code></pre>
 <p>
     Output: </p>
 <kbd>2147483647<br/>-2147483648</kbd>
@@ -210,7 +210,7 @@ previous_content_short: files
     track both pieces of information. Now when we update the max value found we will also update the index where it was
     found.
 </p>
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
     numbers.add(0);
     numbers.add(-47);
@@ -226,7 +226,7 @@ previous_content_short: files
         }
     }
     System.out.println("The max value of " + max + " was found at index " + index);
-</pre>
+</code></pre>
 <p>
     Output: <kbd>The max value of 92 was found at index 2</kbd>
 </p>
@@ -253,7 +253,7 @@ previous_content_short: files
     the value is not found, we can conclude that the value is not in the data structure and we can return false.
 </p>
 
-<pre>
+<pre><code class="java">
 public static boolean linearSearch(ArrayList&lt;Integer&gt; numbers, int toFind){
     for(int value : numbers){
         if(value == toFind){
@@ -271,7 +271,7 @@ public static void main(String[] args){
     System.out.println(linearSearch(squares, 9));
     System.out.println(linearSearch(squares, 23));
 }
-</pre>
+</code></pre>
 
 <p>
     Output:
@@ -348,7 +348,7 @@ public static void main(String[] args){
 </p>
 
 
-<pre>
+<pre><code class="java">
 public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind){
     if(numbers.size() == 0){
         return false;
@@ -379,14 +379,14 @@ public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind)
 
     return false;
 }
-</pre>
+</code></pre>
 
 <p>
     Binary search is fast, but it assumed that the values in the ArrayList were sorted. To be able to use binary search
     we must first sort our data.
 </p>
 
-<pre>
+<pre><code class="java">
 public static void main(String[] args){
     ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
     for(int i=1; i<100; i++){
@@ -395,7 +395,7 @@ public static void main(String[] args){
     System.out.println(binarySearch(squares, 9));
     System.out.println(binarySearch(squares, 23));
 }
-</pre>
+</code></pre>
 <p>
     Output:
 </p>
@@ -421,11 +421,11 @@ public static void main(String[] args){
     For programming assignments in this course you can use java's built in sort method to sort data.
 </p>
 
-<pre>
+<pre><code class="java">
     Collections.sort(data);
-</pre>
+</code></pre>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
     data.add(5);
     data.add(1);
@@ -435,7 +435,7 @@ public static void main(String[] args){
     System.out.println(data);
     Collections.sort(data);
     System.out.println(data);
-</pre>
+</code></pre>
 
 <p>
     Output: </p>
@@ -454,7 +454,7 @@ public static void main(String[] args){
     Collections.sort works with Strings too!
 </p>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
     words.add("wing");
     words.add("coach");
@@ -464,7 +464,7 @@ public static void main(String[] args){
     System.out.println(words);
     Collections.sort(words);
     System.out.println(words);
-</pre>
+</code></pre>
 
 <p>
     Output: </p>
@@ -476,7 +476,7 @@ public static void main(String[] args){
     will be ordered before any lower-case letter as shown in the following example.
 </p>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
     words.add("Wing");
     words.add("cOach");
@@ -486,7 +486,7 @@ public static void main(String[] args){
     System.out.println(words);
     Collections.sort(words);
     System.out.println(words);
-</pre>
+</code></pre>
 
 <p>
     Output: </p>
@@ -512,7 +512,7 @@ public static void main(String[] args){
     this is beyond the current expectation of the course.
 </div>
 
-<pre>
+<pre><code class="java">
     ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
     words.add("Wing");
     words.add("cOach");
@@ -529,7 +529,7 @@ public static void main(String[] args){
     });
 
     System.out.println(words);
-</pre>
+</code></pre>
 
 <p>
     Output: </p>
@@ -556,7 +556,7 @@ public static void main(String[] args){
 </p>
 
 
-<pre>
+<pre><code class="java">
 public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
     for(int i = 0; i < numbers.size(); i++){
 
@@ -576,7 +576,7 @@ public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
         numbers.set(i, minValue);
     }
 }
-</pre>
+</code></pre>
 
 <p>
     Selection sort works by repeatedly finding the smallest unsorted element and adding to a sorted portion of the data
