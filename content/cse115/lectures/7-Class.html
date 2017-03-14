@@ -407,16 +407,74 @@ public class PersonExample{
     additional variables for each person instead of adding 3 variables to the class once.
 </p>
 
+{#[Wednesday - (Using those values) Lots of non-static methods with and without parameters. (Distance between two points)]#}
+{#[Friday - References, Overrides (toString, Sorting objects)]#}
 
-{#== Methods#}
+== Methods
 
-{#We've seen getters and setters which are methods.#}
-{#Non-Static! Takes advantage of the state of the object.#}
+<p>
+    Static methods belong to the class. Non-static methods belong to each object.
+</p>
+
+<h4>Non-Static Methods</h4>
+
+<p>
+     Non-static methods are called from objects.
+</p>
+<p>
+    Non-static methods, or just methods, are called from a specific instance of a class (an object). We've used these
+    methods when we have Strings, ArrayList, and HashMaps. These methods use the instance variables of the object to
+    accomplish a task.
+</p>
+
+<pre><code class="java">
+    String paris = "fr,paris,a8,48.866667,2.333333";
+    String[] splits = paris.split(",");
+    int lineLength = paris.length();
+</code></pre>
+
+<p>
+    When we call the split and length methods we call them from a particular String object. The split method reads the
+    instance variable
+    stored in this instance of the String class and returns the value separated by the delimiter, by commas in this
+    example. The length method accesses the instance variables and returns the number of characters stored in this
+    instance. Since these methods need to access the instance variables of a particular String object, they are written
+    as a
+    non-static method.
+</p>
+
+<hr/>
+<h4>Static Methods</h4>
+
+<p>
+    Static methods are called from Classes.
+</p>
+<p>
+    To call static methods we use the name of its class, then the dot operator to access the method. We do not need an
+    object of this class to call these methods.
+</p>
+
+<pre><code class="java">
+    double x = String.valueOf("5.5");
+    double xSquared = Math.pow(x, 2.0);
+</code></pre>
+
+<p>
+    Here we see 2 difference calls of static methods. From the String class we call valueOf, which is effectively the
+    same <code>new Double("5.5")</code> to create a new double value from a String. We then call pow which is a static
+    method in the Math class. We call these static methods by using their class names directly instead of instances of
+    the classes. In fact, we don't even have instances of String or Math in this example.
+</p>
+
+{#<hr/>#}
+{#<h4>Example Non-Static Methods</h4>#}
 {##}
+{#<p>#}
 {##}
-{#"".splits#}
-{##}
+{#</p>#}
+
 {#Overloading methods. Just give them different parameter lists. Different name/parameters combination are different methods.#}
+
 
 
 {#== Static#}
