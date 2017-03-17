@@ -408,7 +408,7 @@ public class PersonExample{
 </p>
 
 {#[Wednesday - (Using those values) Lots of non-static methods with and without parameters. (Distance between two points)]#}
-{#[Friday - References, Overrides (toString, Sorting objects)]#}
+
 
 == Methods
 
@@ -419,7 +419,7 @@ public class PersonExample{
 <h4>Non-Static Methods</h4>
 
 <p>
-     Non-static methods are called from objects.
+    Non-static methods are called from objects.
 </p>
 <p>
     Non-static methods, or just methods, are called from a specific instance of a class (an object). We've used these
@@ -466,37 +466,153 @@ public class PersonExample{
     the classes. In fact, we don't even have instances of String or Math in this example.
 </p>
 
-{#<hr/>#}
-{#<h4>Example Non-Static Methods</h4>#}
-{##}
-{#<p>#}
-{##}
-{#</p>#}
 
 {#Overloading methods. Just give them different parameter lists. Different name/parameters combination are different methods.#}
 
 
+{#[Friday - References, Overrides (toString)]#}
 
-{#== Static#}
-{##}
-{#Static methods#}
-{#Static variables (Class variables)#}
-{##}
+== Override
+
+<p>
+    There are times when we want to change the default behaviour of a classes methods. To do this, we will use the
+    @Override annotation. We will see more overrides when we explore OOP (Object-Oriented Programming) and for now we
+    override the toString method. Every class has a toString method, even if it is not explicitly defined, which is
+    called to convert an instance of the class to a String. This method is implicitly called when we print an object to
+    the screen. We saw this when we printed instances of the Person class which displayed something that looks like
+    <kbd>Person@610455d6</kbd>. This default behaviour of toString is to print the name of the class along with an
+    identifier for the particular instance of the class. This identifier tells java where to look in memory to find this
+    instance.
+</p>
+
+<p>
+    If we don't want this default behaviour we will override the toString method and replace it's definition with
+    a new way to print objects of this type.
+</p>
+
+<pre><code class="java">
+    @Override
+    public String toString(){
+        return this.firstName + " " + this.lastName;
+    }
+</code></pre>
+
+<p>
+    With this new definition of the toString method we can print a person's name directly by printing the variable
+    directly. Now the statement <code>System.out.println(rocco);</code> in our previous example will now print
+    <kbd>Rocco Jimenez</kbd> instead of <kbd>Person@610455d6</kbd>.
+</p>
 
 
-{#== Pointers#}
-{##}
-{#Remote controls#}
-{##}
-{#In the DS PS we saw this:#}
-{##}
-{#<pre><code class="java">#}
-{#    static void Q2(ArrayList&lt;String&gt; input){#}
-{#        // add the String "movie" to the end of the input list#}
-{#    }#}
-{#</code></pre>#}
-{##}
-{#.. how did I grade this?#}
-{##}
-{##}
+== References
 
+<p>
+    On the data structures problem set we saw this question:
+</p>
+
+<pre><code class="java">
+    static void Q2(ArrayList&lt;String&gt; input){
+        // add the String "movie" to the end of the input list
+        input.add("movie");
+    }
+</code></pre>
+
+<p>
+    How did I grade this? The return type is void and nothing is printed to the screen. There is not output from this
+    method that can be read by the grading code.
+</p>
+
+<p>
+    The answer is a very important feature of java. Objects are passed by reference. That is, when a method is called
+    that takes an object as an argument that object is not copied inside the method. The method called instead has the
+    <em>same exact object</em> as the calling method. Recall the default value printed from toString <kbd>Person@610455d6</kbd>.
+    This is the only value that is passed when a method is called that takes an object (Technically java is
+    pass-by-value and that value happens to be a reference). This tells the method that it was given an object of type
+    Person and it can be found at 610455d6 which is interpreted by java to find the exact location of the object in
+    memory.
+</p>
+<p>
+    This means that in the example above the Q2 method is receiving instructions to find an ArrayList and those
+    instructions are stored in the variable <code>input</code>. The grading code also has these instructions and can see
+    any changes made to the that particular ArrayList.
+</p>
+
+<p>
+    Passing references to objects has a variety of implications to consider when writing java code:
+</p>
+
+<ul>
+    <li>
+        Any changes made to an object by a method will also change the object in the calling method.
+    </li>
+    <li>
+        Setting an object equal to another object does not make a copy of the object. Instead, both variable manipulate
+        the same object.
+    </li>
+    <li>
+        When calling == to compare two objects it only returns true if the variables point to the same instance. This is
+        why we can't use == to compare Strings and instead use .compareTo.
+    </li>
+</ul>
+
+
+<p>
+    Let's see these features in a code example using instances of our Person class. For this example we will use the
+    default toString method.
+</p>
+
+<pre><code class="java">
+public class References{
+
+
+    public static void toInitials(Person person){
+        person.setFirstName(person.getFirstName().substring(0,1));
+        person.setLastName(person.getLastName().substring(0,1));
+    }
+
+    public static void main(String[] args){
+
+        // Create 2 instances of the Person class
+        Person veronika = new Person("Veronika", "Kimberley");
+        Person anotherVeronika = new Person("Veronika", "Kimberley");
+
+        // Return false since veronika and anotherVeronika store references to different objects
+        System.out.println(veronika == anotherVeronika);
+        System.out.println(veronika);
+        System.out.println(anotherVeronika);
+        System.out.println();
+
+
+        anotherVeronika = veronika;
+
+        // Return true since veronika and anotherVeronika now store references to the same objects
+        System.out.println(veronika == anotherVeronika);
+        System.out.println(veronika);
+        System.out.println(anotherVeronika);
+        System.out.println();
+
+
+        // Calling toInitials with either variable will change the
+        // values of both since they control the same instance
+        toInitials(anotherVeronika);
+        System.out.println(veronika.getFullName());
+        System.out.println(anotherVeronika.getFullName());
+
+    }
+
+}
+</code></pre>
+<p>
+    Output:
+</p>
+<kbd>false<br/>
+Person@610455d6<br/>
+Person@511d50c0<br/>
+<br/>
+true<br/>
+Person@610455d6<br/>
+Person@610455d6<br/>
+<br/>
+V K<br/>
+V K
+</kbd>
