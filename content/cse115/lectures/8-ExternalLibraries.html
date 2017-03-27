@@ -6,40 +6,121 @@ previous_content_short: class
 ---
 
 
-[Monday - Let's just cool down after covering objects. Plus many of us are probably hung over. Maybe have a review day]
+[Monday - Let's just cool down after covering objects. Maybe have a review day]
 [Wednesday - Importing a jar]
 [Friday - Exporting jars. Packages]
 
 [At some point, show them that they can see the whole java library in their IDE]
 
 
-{#== Sharing Code#}
-{##}
-{#Many libraries are installed with Java and come with the#}
-{#language itself. We can freely use these libraries knowing that every user will have the code for the functions being#}
-{#called in their environment.#}
-{##}
-{#What happens when we have a need for a function that doesn't come with Java? Write it ourselves!.. but wait. That seems#}
-{#tedious AF. There are many developers who have written common functions that don't come with the language and shared#}
-{#them... for free!! Developers are amazing!#}
-{##}
-{#Let's see what this looks like.#}
-{##}
-{##}
-{#== External Libraries#}
-{##}
-{#.jar#}
-{##}
-{#Add the jar to your project as a library. Then use it! Pretty much that simple.#}
-{##}
-{#Give them a simple library so they can get the hang of it before throwing them into HTTP and JSON.#}
-{##}
-{#== Sharing Your Code#}
-{##}
-{#How to package your code as a jar and share it with others.#}
-{##}
-{#== Packages#}
-{##}
+== Java Libraries
+
+<p>
+    Java itself, along with any programming language, does not have many directly useful features. Java provides the
+    means for us to create variables and arrays of variables, control program flow with conditionals and loops, create
+    classes and methods, and gives us a way to define a main method as a starting point for the execution of our code.
+    These features are essential to the language, but with only these features it would be difficult to write useful
+    programs. We would all find ourselves writing basic functionality that most developers will need. To save time we
+    could share the classes and methods we write with others so they don't have to rewrite the same common
+    functionality. This idea of sharing code is the fundamental concept behind libraries and a library is simply a
+    collection of code that has been shared by its author(s).
+</p>
+
+<p>
+    The most prominent library java code is the JRE System Library. This is the standard library for the language and it
+    contains every class we've use so far in this course (String, ArrayList, HashMap, Files, Paths, Collections, etc).
+    None of
+    these classes are fundamentally part of the language and it would be possible to write a java program that doesn't
+    use the JRE System Library at all. However, it's extremely useful to use this library instead writing a program from
+    complete scratch. The authors of these classes made them available to us for free. Let's make use of them!
+</p>
+<p>
+    In eclipse you can see the JRE System Library in your project folder and you can explore the multitudes of classes
+    provided to us. Most of the common features we want are included in this library, but what if we want to do
+    something that isn't built-in to this library? The straight-forward answer is "write it yourself", but this can be
+    tedious at best if we're always writing programs that only use classes built-in to the JRE. In this section we will
+    explore an alternate solution to writing everything ourselves. We will import libraries written by other developers
+    and use their classes instead of writing our own.
+</p>
+
+
+== External Libraries
+
+<p>
+    We will use external libraries to use classes written by other developers. To do this we will import jar (Java
+    ARchive) files that contain the classes we want to use. When a developer wants to release their code for other to
+    use they can create a jar file of all their classes and share this archive, as opposed to sharing their .java files
+    individually. We will add these jar files to our projects as external libraries and we'll have all the contained
+    classes available in our programs. These classes can be used just the same as if the .java files were in the project
+    directly, or if they were in the JRE library. There's no magic here. We're merely injecting someone else's classes
+    into our program.
+</p>
+
+<p>
+    Side note: When a program uses many external libraries it is useful to use build tools such as Maven, ant, or
+    Groovy, but we will import the jar files directly in this course.
+</p>
+
+== Packages
+
+<p>
+    When adding external libraries it is important to be aware of the packages contained in these libraries. Packages
+    are
+    a way of organizing classes and functions similar to directory structures in a filesystem. Thus, the package is the
+    location of a class. Using the package name along with the class name in called the classes fully-qualified name.
+    This may seem a bit abstract so let's look at an example.
+</p>
+
+<p>
+    We've been using the Class <code>ArrayList</code> throughout this course. This class is located in the package
+    <code>java.util</code> making its fully-qualified name <code>java.util.ArrayList</code>. We can use ArrayLists with
+    this fully-qualified name, but we commonly <code>import</code> the class and call it by its class name only. By
+    adding the line <code>import java.util.ArrayList;</code> before our class definition we can use
+    <code>ArrayList</code>
+    without specifying it's package every time we use it. This is not required and the following is a valid complete
+    program with no imports.
+</p>
+
+<pre><code class="java">
+public class NoImports{
+
+    public static void main(String[] args){
+        java.util.ArrayList&lt;Integer&gt; numbers = new java.util.ArrayList&lt;&gt;();
+        numbers.add(3);
+        numbers.add(6);
+        System.out.println(numbers.size());
+    }
+
+}
+</code></pre>
+
+<p>
+    Though we tend to prefer the following:
+</p>
+
+<pre><code class="java">
+import java.util.ArrayList;
+
+public class WithImport{
+
+    public static void main(String[] args){
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;&gt;();
+        numbers.add(3);
+        numbers.add(6);
+        System.out.println(numbers.size());
+    }
+
+}
+</code></pre>
+
+
+<p>
+    When using external libraries we have the same choice, though we do need to check the library to know which packages
+    contain the classes we want to use. We can either import them and use the class name, or skip the import and use the
+    fully-qualified name but either way we have to tell our program where to find the classes we want to use.
+</p>
+
+
 {#We've been using the default package. This is NOT something you will do outside a classroom environment (or courses with#}
 {#other instructors for that matter). We have used default to#}
 {#reduce silly errors that gives students undeserved 0's from Autolab (Thanks Tom!). We can get away with this with small#}
@@ -48,10 +129,38 @@ previous_content_short: class
 {#same name as you and neither are using packages? Broken program.#}
 
 
-{#== Package Management?#}
-{##}
-{#Maven or Groovy.#}
-{##}
-{#Cleaner and better way to manage all your libraries as the project grows.#}
-{##}
-{#Mention these, don't require them.#}
+== CSE115 Library
+
+<p>
+    For the assignments this week we will use the CSE115 library. This is a small library with 3 classes:
+</p>
+
+<dl>
+    <dt>cse115.math.NormalDistribution</dt>
+    <dd>Instances of this class store the mean and standard deviation of a normal distribution and contains a method to
+        determine the z-score of a provided value.
+    </dd>
+    <dt>cse115.math.Polynomial</dt>
+    <dd>Objects of this class represent polynomials and contain several methods to analyze them.
+    </dd>
+    <dt>cse115.words.Words</dt>
+    <dd>This class is a collection of static methods used for analyzing and comparing words. This class uses the CMU
+        pronunciation dictionary and the Princeton parts of speech dictionaries for it's methods.
+    </dd>
+</dl>
+
+
+<p>
+    *** If you don't understand some of the concepts in this library you can still complete the assignments this week.
+    A major advantage of using libraries is that you don't have to know how they work. If a question asks you to return
+    a z-score and you find a method in a library that computes z-score, you can call that method with knowing a single
+    thing about statistics. We have been taking advantage of this powerful idea throughout the semester. You don't need
+    to understand how an ArrayList or HashMap is coded to use them to store values, You don't have to understand file
+    systems to call Files.readAllLines, and next week you won't need to understand how the Internet works to make an
+    HTTP request. Abstracting out these low-level details is what allows us to write complex programs.
+</p>
+
+<p>
+    For the assignments this week you must look through these classes and read the methods that have been implemented,
+    then call the methods needed to answer each question.
+</p>
