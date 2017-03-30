@@ -116,7 +116,7 @@ due_date: Wednesday, April 26 @ 11am
 == The API
 
 <p>
-    Documentation: <a href="http://fury.cse.buffalo.edu/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/musicRatings</a>
+    GET / (<a href="http://fury.cse.buffalo.edu/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/musicRatings</a>)
 </p>
 
 <p>
@@ -127,37 +127,39 @@ due_date: Wednesday, April 26 @ 11am
 <hr/>
 
 <p>
-    GET /getAllSongs: <a href="http://fury.cse.buffalo.edu/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/musicRatings/getAllSongs</a>
+    GET /getAllSongs (<a href="http://fury.cse.buffalo.edu/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/musicRatings/getAllSongs</a>)
 </p>
 
 <p>
-    Making a post request to /getAllSongs will return every song and rating that has been added using the API. Since
-    this is a GET request it can be easily accessed through a web browser by clicking the link. This will also show you
-    the format used to return the information which will need to be parsed. For this assignment you make requests to
+    Making a GET request to /getAllSongs will return every song and rating that has been added using the API. Since
+    this is a GET request it can easily be accessed through a web browser by clicking the link. This will also show
+    the format used to return the information which will need to be parsed. For this assignment you will make requests to
     /getAllSongs and process the returned data.
 </p>
 
 <hr/>
 
 <p>
-    POST /addSong: <a href="http://fury.cse.buffalo.edu/musicRatings/addSong">http://fury.cse.buffalo.edu/musicRatings/addSong</a>
+    POST /addSong (<a href="http://fury.cse.buffalo.edu/musicRatings/addSong">http://fury.cse.buffalo.edu/musicRatings/addSong</a>)
 </p>
 
 <p>
     Use /addSong to add a new song to the API's database. Check the documentation to see an example of the JSON format
-    used to add a song. Any song added in this way must have a valid YouTube video ID (not the YouTube link) for a video
-    of the song. To add songs you must use the API key that has been emailed to you.
+    used to add a song. Any song added must have a valid
+    <a href="http://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video">YouTube video ID</a>
+    (this is not the YouTube link) of a video
+     for the song. To add songs you must use the API key that has been emailed to you.
 </p>
 
 <p>
-    You will add songs as part of lab 10 (<a href="goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab is released and can
+    You will add songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released and can be
     completed before its designated lab section.
 </p>
 
 <hr/>
 
 <p>
-    POST /rateSong: <a href="http://fury.cse.buffalo.edu/musicRatings/addSong">http://fury.cse.buffalo.edu/musicRatings/rateSong</a>
+    POST /rateSong (<a href="http://fury.cse.buffalo.edu/musicRatings/rateSong">http://fury.cse.buffalo.edu/musicRatings/rateSong</a>)
 </p>
 
 <p>
@@ -168,6 +170,6 @@ due_date: Wednesday, April 26 @ 11am
 </p>
 
 <p>
-    You will rate songs as part of lab 10 (<a href="goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab is released and can
+    You will rate songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released and can be
     completed before its designated lab section.
 </p>
