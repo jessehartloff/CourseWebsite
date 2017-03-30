@@ -116,12 +116,18 @@ due_date: Wednesday, April 26 @ 11am
 == The API
 
 <p>
+    This API serves as a way for the everyone in the class to used a shared database. The API handles all the database
+    interactions and exposes the following functionality through HTTP requests.
+</p>
+
+<hr/>
+
+<p>
     GET / (<a href="http://fury.cse.buffalo.edu/musicRatings">http://fury.cse.buffalo.edu/musicRatings</a>)
 </p>
 
 <p>
-    The API contains minimal documentation at its root url above. The API contains the following three functions which
-    will be used to interact with the API's database.
+    The API contains minimal documentation at its root url above.
 </p>
 
 <hr/>
@@ -133,7 +139,8 @@ due_date: Wednesday, April 26 @ 11am
 <p>
     Making a GET request to /getAllSongs will return every song and rating that has been added using the API. Since
     this is a GET request it can easily be accessed through a web browser by clicking the link. This will also show
-    the format used to return the information which will need to be parsed. For this assignment you will make requests to
+    the format used to return the information which will need to be parsed. For this assignment you will make requests
+    to
     /getAllSongs and process the returned data.
 </p>
 
@@ -148,11 +155,12 @@ due_date: Wednesday, April 26 @ 11am
     used to add a song. Any song added must have a valid
     <a href="http://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video">YouTube video ID</a>
     (this is not the YouTube link) of a video
-     for the song. To add songs you must use the API key that has been emailed to you.
+    for the song. To add songs you must use the API key that has been emailed to you.
 </p>
 
 <p>
-    You will add songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released and can be
+    You will add songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released
+    and can be
     completed before its designated lab section.
 </p>
 
@@ -170,6 +178,7 @@ due_date: Wednesday, April 26 @ 11am
 </p>
 
 <p>
-    You will rate songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released and can be
+    You will rate songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been
+    released and can be
     completed before its designated lab section.
 </p>
