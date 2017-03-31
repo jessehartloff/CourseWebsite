@@ -27,7 +27,7 @@ previous_content_short: libraries
 {#We'll use an external library with functions that help us to connect to the Internet.#}
 {##}
 {#Get HTML from a url#}
-{##}
+{#client-server#}
 {#We need an HTTP client in our programs. The most common HTTP client software? Web browsers.#}
 {##}
 {##}
@@ -43,6 +43,33 @@ previous_content_short: libraries
 {#Get a website.#}
 {##}
 {##}
+
+{#    public static String getRequest(String url){#}
+{#        String response = "";#}
+{##}
+{#        try{#}
+{#            response = Request.Get(url).execute().returnContent().asString();#}
+{#        }catch(IOException ex){#}
+{#            ex.printStackTrace();#}
+{#        }#}
+{#        return response;#}
+{#    }#}
+{##}
+{##}
+{#    public static String postRequest(String url, String params){#}
+{#        String response = "";#}
+{##}
+{#        try{#}
+{#            response = Request.Post(url)#}
+{#                    .bodyString(params, ContentType.APPLICATION_JSON)#}
+{#                    .execute().returnContent().asString();#}
+{#        }catch(IOException ex){#}
+{#            ex.printStackTrace();#}
+{#        }#}
+{##}
+{#        return response;#}
+{#    }#}
+
 {##}
 {##}
 {#== HTTP POST#}
