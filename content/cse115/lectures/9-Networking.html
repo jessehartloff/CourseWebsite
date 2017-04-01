@@ -54,7 +54,7 @@ previous_content_short: libraries
 
 <p>
     HTTP is the protocol used to send messages between clients and servers. Each server on the Internet will be
-    listening for HTTP requests from an client on the Internet. The full details of HTTP could fill an entire course,
+    listening for HTTP requests from any client on the Internet. The full details of HTTP could fill an entire course,
     though for this course we will cover only 2 aspects of HTTP.
 </p>
 
@@ -88,26 +88,29 @@ previous_content_short: libraries
 <p>
     We typically interact with the internet by making HTTP GET
     requests
-    through a web browser. The response of these GET requests is mostly a mix of HTML, CSS, and JavaScript that tells
+    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
     the browser how to display the requested web page. These pages can contain links that we click to make a GET request
     for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
-    write software that will interact with the Internet? What if we want to write a bot to automate posts on social
+    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
+    social
     media, an
     app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
     all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
-    can be tedious to write code that reads pages make for humans. If you are interested in these applications search
+    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
     for tutorials about web crawlers and explore what you can do with you new programming skills.
 </p>
 
 <p>
-    We won't explore web crawlers in this course, but there is another way to write software for the Internet through
-    the use of Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
+    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
+    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
     software instead of
-    viewed in a browser. To this end, when web API receives an HTTP request, the response will only contain the
+    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
     requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
     software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
-    web site intended to be viewed through a browser.
+    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
+    the Internet.
 </p>
+
 
 == The Library
 
@@ -119,7 +122,7 @@ previous_content_short: libraries
 </p>
 
 <p>
-    This library will be setup in the repository of any assignment that needs it.
+    This library will be setup in the repository of any assignment for which it's required.
 </p>
 {#We'll use an external library with functions that help us to connect to the Internet.#}
 {##}
@@ -133,8 +136,8 @@ previous_content_short: libraries
 
 <p>
     To make an HTTP GET request using the Apache HttpComponents library we will use the following method. This method
-    can be used directly in all of you assignments. This is one case where you can cut and paste this code when it's
-    needed.
+    can be used directly in all of your assignments. This is one case where you can cut and paste this code wherever you
+    need it.
 </p>
 
 
@@ -153,15 +156,15 @@ public static String getRequest(String url){
 </code></pre>
 
 <p>
-    This method will use the library to connect to a url (link). The Request class from library is used to send a GET
+    This method will use the library to connect to a url (link). The Request class from the library is used to send a GET
     request to the url and return the response as a String. As with files, connecting to a website can go wrong (ex. if
-    an invalid link is used), so the method call is wrapped in a try/catch block.
+    an invalid link is used), so the method calls are wrapped in a try/catch block.
 </p>
 
 <p>
     Notice that 4 method calls are chained together in this method. This is a way of calling a method on the returned
     value of another method without having to store the intermediate results in variables. The static method Get
-    returns an object of type Request which has a non-static method named execute which return an object of type
+    returns an object of type Request which has a non-static method named execute which returns an object of type
     Response which has a non-static method named returnContent which returns an object of type Content which has a
     non-static method named asString. Through these calls the Request is created, executed to obtain a Response from the
     server, the Content is extracted from the response, then the Content is converted to a String which is returned to
@@ -173,8 +176,8 @@ public static String getRequest(String url){
 <p>
     Similar to the get method this method will send a POST request with the provided params to the provided url. The
     params String is the data to be sent to the server identified by the url. This method
-    can be used directly in all of you assignments. This is one case where you can cut and paste this code when it's
-    needed.
+    can be used directly in all of your assignments. This is one case where you can cut and paste this code wherever you
+    need it.
 </p>
 
 <pre><code class="java">
@@ -195,7 +198,7 @@ public static String postRequest(String url, String params){
 
 <p>
     This method is written in much the same way as the get method with only a few differences. First, the method calls
-    are on separate lines which is only a matter of formatting. It can be easier to read chained method calls if they
+    are on separate lines which is a matter of formatting. It can be easier to read chained method calls if they
     are on separate lines and this is still valid syntax. Second, there is a call to bodyString which adds our params to
     the POST request in the format expected by the server (The format used by HTTP).
 </p>
