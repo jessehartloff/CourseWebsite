@@ -156,7 +156,8 @@ public static String getRequest(String url){
 </code></pre>
 
 <p>
-    This method will use the library to connect to a url (link). The Request class from the library is used to send a GET
+    This method will use the library to connect to a url (link). The Request class from the library is used to send a
+    GET
     request to the url and return the response as a String. As with files, connecting to a website can go wrong (ex. if
     an invalid link is used), so the method calls are wrapped in a try/catch block.
 </p>
@@ -211,5 +212,52 @@ public static String postRequest(String url, String params){
 </p>
 
 <p>
-    More details on the origin of these two methods can be found here: <a href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html">https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html</a>
+    More details on the origin of these two methods can be found here: <a
+        href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html">https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html</a>
+</p>
+
+
+== Query Strings
+
+<p>
+    Some pages are setup to take arguments in the page's url to be used with a GET request. These arguments are
+    contained in a part of the url called
+    the query string. Query strings are used so a singe web page can display a wide variety of different content without
+    using different paths (note: many sites simply use different paths for this purpose). When
+    the page is served a different version of the page is sent based on the specific query provided, though most of the
+    page is typically the same and the same code is executed on the server for different queries. Let's look at an
+    example to see how this works.
+</p>
+
+<h4>https://www.youtube.com/watch?v=5jmN_tBS0t4</h4>
+
+<p>
+    This string represents a url for a YouTube video. If we break it into it's different parts we can see that it will
+    send a request using the https protocol (an encrypted http request) to the server(s) named "www.youtube.com" at the
+    path "/watch" with the query string "v=5jmN_tBS0t4". To append a query string to a url we use a single question
+    mark. The server will look for this question mark and interpret everything after it as the query string. The query
+    string itself will contain any number of key-value pairs separated by &'s. In this example we have 1 key (v) with
+    the value (5jmN_tBS0t4). This tells youtube that you want to watch the video with the video ID "5jmN_tBS0t4" and the
+    server will respond with the usual YouTube interface with this specific video in the player, along with
+    recommendations related (or unrelated in some cases) to this video.
+</p>
+
+<h4>
+    https://www.google.com/search?q=cats&as_filetype=gif&lr=lang_ja
+</h4>
+
+<p>
+    This is an example of a query string containing multiple key-value pairs. In this case we have three pairs:
+</p>
+
+<ul>
+    <li>The key "q" (query) contains the value "cats"</li>
+    <li>The key "as_filetype" contains the value "gif"</li>
+    <li>The key "lr" contains the value "lang_ja"</li>
+</ul>
+
+<p>
+    Interpreting this query, we are requesting a Google search for gifs of cats from web sites that are in Japanese.
+    (For more information about Google search parameters see <a
+        href="https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters">https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters</a>)
 </p>
