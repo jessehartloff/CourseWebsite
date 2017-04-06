@@ -17,14 +17,91 @@ we need more power. Java doesn't have us covered, let's look for external code t
 
 == JSON
 
-JSON
+{#JSON#}
+{##}
+{#Using a library for JSON#}
+{##}
+{#This will take a while in a strongly typed language. [That's why it's a full week]#}
+{##}
+{#List vs ArrayList#}
+{#Object vs HashMap#}
 
-Using a library for JSON
+<h4>
+    JavaScript Object Notation
+</h4>
 
-This will take a while in a strongly typed language. [That's why it's a full week]
+<p>
+    JSON is a way to store complex information as strings which is commonly used as a way to communicate information
+    over the Internet. When sending information over the Internet we cannot rely on the data types available to us
+    through a particular language since the server may be using a different language. For example, how do we send a java
+    ArrayList to a server running python? Python has no knowledge of java types and how they are represented at the byte
+    level so it would not be able to read the data. However, every language has a way to interpret text by using
+    standard encodings (ex. ASCII, Unicode). This allows us to use these encodings to communicate with a server without
+    even knowing what language was used to write its code. Since we can send text but not more complex data types we are
+    in need of a standard way to encode complex information as text. This is the problem JSON helps us to solve. When
+    communicating with a server that "speaks" JSON we will convert our data to a JSON string before sending it to the
+    server and expect a JSON string in response which we will parse to convert it into the data types we want to use.
+</p>
 
-List vs ArrayList
-Object vs HashMap
+<p>
+    JSON only has 4 types of data that we will use in this course (There are only 6 total, but the remaining 2 are less
+    useful
+    than the 4 we'll cover). Each of these types is marked using characters in the string itself. These 4 types are:
+</p>
+
+<dl>
+    <dt>
+        String
+    </dt>
+    <dd>
+        Any value in a JSON string in double quotes will be interpreted as a String literal. ex: "this is a string"
+    </dd>
+    <dt>
+        Number
+    </dt>
+    <dd>
+        Any (most) values that are not in quotes will be interpreted as numbers. ex: 5
+    </dd>
+    <dt>
+        Array
+    </dt>
+    <dd>
+        An array in JSON is a comma separated list of values surrounded by []. ex: [5, 8, "data", "elements"]
+    </dd>
+    <dt>
+        Object
+    </dt>
+    <dd>
+        Not to confused with objects in java, a JSON object is a comma separated collection of key-value pairs
+        surrounded by {}. The keys in these pairs must be strings. ex: {"department":"cse", "course":115}
+    </dd>
+</dl>
+
+<p>
+    With these 4 types we can represent astonishingly complex information. The key to this is that the values in arrays
+    and objects
+    can themselves be arrays and objects which allows multiple levels of nested data. For example, when connected to the
+    Music Reviews API to get every song we will receive a string in this format:
+</p>
+
+<h5>
+    [{"title":"God Am (Live 1996)","artist":"Alice in
+    Chains","ratings":[5,4],"youtubeID":"74P4W_okEqA"},{"title":"Fade to
+    Black","artist":"Metallica","ratings":[5,2],"youtubeID":"WEQnzs8wl6E"}]
+</h5>
+
+<p>
+    Now we can see how nesting multiple lists and objects allows us to represent information with quite a bit of
+    organization in a single string. On the top level, this JSON sting is an array signified by the []'s. This happens
+    to be an array of objects where each object represents a song. For each song there are keys for title, artist,
+    ratings, and youtubeID mapping to values related to the specific song for that object. The value stored at the
+    "ratings" key is another array which contains numbers (no quotes) representing the rating values for that song.
+    Once this format is known we can parse these values to retrieve the information for every song through our code.
+</p>
+
+<p>
+    Further reading: <a href="https://www.w3schools.com/js/js_json_intro.asp">https://www.w3schools.com/js/js_json_intro.asp</a>
+</p>
 
 
 == The Library
@@ -32,8 +109,133 @@ Object vs HashMap
 <a href="https://github.com/ralfstx/minimal-json">https://github.com/ralfstx/minimal-json</a>
 
 <p>
-    We will use the minimal-json library for all our JSON needs.
+    We will use the minimal-json library for all our JSON needs. This library is much smaller and more accessible than
+    the library used to make HTTP requests.
+</p>
+
+{#<p>#}
+{#    If you want#}
+{#</p>#}
+
+
+== Writing JSON
+
+<p>
+    Once we have the library added to our project we can begin writing and reading JSON strings in our java programs.
+    We will write these strings by adding our data into instances of the JsonObject and JsonArray classes from the
+    library. Once our data has been added to these instances we can call a method to convert it into a String with the
+    proper formatting. Since there are both ways of storing key-value pairs, using JsonObject will be similar to using
+    HashMap. Likewise, using JsonArray will be similar to using an ArrayList since both are ways of storing an ordered
+    list of elements.
+</p>
+
+<pre><code class="java">
+import com.eclipsesource.json.JsonObject;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        JsonObject data = new JsonObject();
+        data.add("department", "cse");
+        data.add("course", 115);
+        System.out.println(data);
+
+    }
+}
+</code></pre>
+<p>
+    Output: <kbd>{"department":"cse","course":115}</kbd>
+</p>
+
+<p>
+    In this example we added two key-value pairs into a JsonObject and printed it to the screen. The toString methods of
+    the classes in this library have been overridden such that their instances will print as JSON formatted strings.
+</p>
+<p>
+    Notice that, unlike java, JSON allows data types to be mixed in its arrays and objects. In this example one value is
+    a string ("cse") while the other is a number (115).
+</p>
+
+<pre><code class="java">
+import com.eclipsesource.json.JsonArray;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        JsonArray data = new JsonArray();
+        data.add(5);
+        data.add(8);
+        data.add("data");
+        data.add("elements");
+        System.out.println(data);
+
+    }
+}
+</code></pre>
+<p>
+    Output: <kbd>[5,8,"data","elements"]</kbd>
+</p>
+
+<p>
+    In this example we add data into a new JsonArray and print it to the screen.
+</p>
+
+<p>
+    With objects and arrays we can now start building more complex JSON strings. The following example show how we
+    combine these types to add complex information into a single string.
+</p>
+
+<pre><code class="java">
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        JsonObject cse115Object = new JsonObject();
+        cse115Object.add("department", "cse");
+        cse115Object.add("course", 115);
+
+        JsonObject cse116Object = new JsonObject();
+        cse116Object.add("department", "cse");
+        cse116Object.add("course", 116);
+
+        JsonArray data = new JsonArray();
+        data.add(5);
+        data.add(8);
+        data.add("data");
+        data.add("elements");
+        data.add(cse115Object);
+        data.add(cse116Object);
+
+        System.out.println(data);
+
+    }
+}
+
+</code></pre>
+<p>
+    Output: <kbd>[5,8,"data","elements",{"department":"cse","course":115},{"department":"cse","course":116}]</kbd>
 </p>
 
 == Reading JSON
-== Writing JSON
+
+<p>
+    Reading JSON with this library follows the same concepts as writing JSON, but in reverse. Given a String that
+    follows JSON we can convert it into an instance of JsonValue by calling Json.parse and reading the values from this
+    instance. When reading JSON it is important to know the format used for the String being read. With this known
+    format we can read the appropriate values from the JsonValue instance by first converting it into the type we have.
+    Once we know the type of the value we can convert it to that type. Specifically, a JSON String will either be an
+    array or an object at it's top level. If it is an object we can call to .asObject() to convert the JsonValue into a
+    JsonObject, then read the values by providing the appropriate keys. If it is an array we'll call .asArray(), then
+    iterate over its values. Let's see an example of each by reading the JSON String created in the previous examples.
+</p>
+
+
+<pre><code class="java">
+    Json.parse();
+</code></pre>
+
