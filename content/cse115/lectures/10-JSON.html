@@ -157,6 +157,8 @@ public class Example{
     a string ("cse") while the other is a number (115).
 </p>
 
+<hr/>
+
 <pre><code class="java">
 import com.eclipsesource.json.JsonArray;
 
@@ -181,6 +183,8 @@ public class Example{
 <p>
     In this example we add data into a new JsonArray and print it to the screen.
 </p>
+
+<hr/>
 
 <p>
     With objects and arrays we can now start building more complex JSON strings. The following example show how we
@@ -236,6 +240,201 @@ public class Example{
 
 
 <pre><code class="java">
-    Json.parse();
-</code></pre>
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 
+public class Example{
+
+    public static void main(String[] args){
+
+        // The double quotes need to be escaped with the \ character. This tells java
+        // that we want the " character instead of ending the String.
+        String jsonString = "{\"department\":\"cse\",\"course\":115}";
+        JsonValue jsonValue = Json.parse(jsonString);
+        JsonObject jsonObject = jsonValue.asObject();
+
+        JsonValue departmentValue = jsonObject.get("department");
+        String department = departmentValue.asString();
+
+        JsonValue courseValue = jsonObject.get("course");
+        int courseNumber = courseValue.asInt();
+
+        System.out.println(department + courseNumber);
+
+    }
+}
+</code></pre>
+<p>
+    Output: <kbd>cse115</kbd>
+</p>
+
+<p>
+    In this example we parse the JSON String {"department":"cse","course":115} to read each value. There is a quite a
+    bit going on here so let's analyze this example in a breakdown.
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>String jsonString = "{\"department\":\"cse\",\"course\":115}";</code> Initialize a JSON String to be
+        parsed.
+    </li>
+    <li><code>JsonValue jsonValue = Json.parse(jsonString);</code> Call parse which is a static method in the Json
+        class. This method converts the String into an instance of the JsonValue class giving access to its non-static
+        methods.
+    </li>
+    <li><code>JsonObject jsonObject = jsonValue.asObject();</code> Since we know the format of this JSON String, we know
+        that the outermost value is a JSON object. This means we can safely call asObject to convert this JsonValue into
+        a JsonObject.
+    </li>
+    <li><code>JsonValue departmentValue = jsonObject.get("department");</code> Now that our data is contained in an
+        instance of hte JsonObject class we can read the information similar to how we read a HashMap. In this line we
+        call the get method to retrieve the value stored at the key "department" and store it in a JsonValue variable.
+    </li>
+    <li><code>String department = departmentValue.asString();</code> Since we know the value stored at the "department"
+        key is a String, we can safely call asString to convert the value into a java String. Now that we have the data
+        as a java String we can work with it just like any other String value.
+    </li>
+    <li><code>JsonValue courseValue = jsonObject.get("course");</code> Similar to the value at the "department" key,
+        we'll access the value at hte "course" key.
+    </li>
+    <li><code>int courseNumber = courseValue.asInt();</code> Since we know the value stored at hte "course" key is an
+        int, we can safely call asInt to convert it into a java int.
+    </li>
+    <li><code>System.out.println(department + courseNumber);</code> Print the two values extracted from the JSON String.
+    </li>
+</ol>
+
+<p>
+    You'll notice that in this example we relied on the fact that we know the format of the JSON String we received.
+    This is an important part of working with JSON. JSON gives us a way to communicate by providing the notation, but it
+    is up to us to agree on the ways we'll use this notation. For example in lab 10 you are submitting song in a JSON
+    String with the format:
+</p>
+<h5>{"title":"Roar", "artist":"Katy Perry", "rating":5, "youtubeID":"CevxZvSJLk8",
+    "key":"rf3498phfwqvwlie457fghwlriq347fl"}</h5>
+<p>
+    When submitting your songs you must follow this format of a JSON object containing key "title", "artist", "rating",
+    "youtubeID", and "key" with values related to your song and your API key. Also, the value for rating must be an
+    integer with the other values being Strings. It is important to follow this exact format as this is what's expected
+    by the server. Likewise, when you get all songs from the server the server will always send the data in the same
+    format so you can rely on that format in you parsing code for HW3.
+</p>
+
+
+<hr/>
+
+<pre><code class="java">
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        // The double quotes need to be escaped with the \ character. This tells java
+        // that we want the " character instead of ending the String.
+        String jsonString = "[5,8,\"data\",\"elements\"]";
+        JsonValue jsonValue = Json.parse(jsonString);
+        JsonArray jsonArray = jsonValue.asArray();
+
+        JsonValue index0 = jsonArray.get(0);
+        int firstValue = index0.asInt();
+
+        JsonValue index1 = jsonArray.get(1);
+        int secondValue = index1.asInt();
+
+        JsonValue index2 = jsonArray.get(2);
+        String thirdValue = index2.asString();
+
+        JsonValue index3 = jsonArray.get(3);
+        String fourthValue = index3.asString();
+
+        System.out.println("firstValue:  " + firstValue);
+        System.out.println("secondValue: " + secondValue);
+        System.out.println("thirdValue:  " + thirdValue);
+        System.out.println("fourthValue: " + fourthValue);
+
+    }
+}
+</code></pre>
+<p>
+    Output:</p>
+<kbd>firstValue: 5<br/>secondValue: 8<br/>thirdValue: data<br/>fourthValue: elements</kbd>
+
+<p>
+    This example is quite similar to the previous example, but show how we read data from JsonArrays by index just like
+    we would an ArrayList. However, this is only useful if we know how many elements are in the list which often is not
+    the case. When we want to access every element without knowing how many elements it contains, we can use a for each
+    loop.
+</p>
+
+<pre><code class="java">
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonValue;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        // The double quotes need to be escaped with the \ character. This tells java
+        // that we want the " character instead of ending the String.
+        String jsonString = "[5,8,\"data\",\"elements\"]";
+        JsonValue jsonValue = Json.parse(jsonString);
+        JsonArray jsonArray = jsonValue.asArray();
+
+        for(JsonValue value : jsonArray){
+            System.out.println(value);
+        }
+
+    }
+}
+
+</code></pre>
+<p>
+    Output:</p>
+<kbd>5<br/>8<br/>"data"<br/>"elements"</kbd>
+
+<p>
+    However, when we access the elements of an array in this way have to be careful about hte types of the data. We can
+    no longer use asString or asInt in this example since the data types are mixed.
+</p>
+
+<br/>
+
+
+<pre><code class="java">
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
+public class Example{
+
+    public static void main(String[] args){
+
+        // The double quotes need to be escaped with the \ character. This tells java
+        // that we want the " character instead of ending the String.
+        String jsonString = "[5,8,\"data\",\"elements\",{\"department\":\"cse\",\"course\":115},{\"department\":\"cse\",\"course\":116}]";
+        JsonValue jsonValue = Json.parse(jsonString);
+        JsonArray jsonArray = jsonValue.asArray();
+
+        JsonObject thisCourse = jsonArray.get(4).asObject();
+        int courseNumber = thisCourse.get("course").asInt();
+
+        System.out.println(courseNumber);
+
+    }
+}
+</code></pre>
+<p>
+    Output: <kbd>115</kbd>
+</p>
+
+<p>
+    This example shows a combination of the previous examples to show how we can access data from an object which is an
+    element of an array. You will need to combine these concepts in similar ways throughout homework 3 and lab 10.
+</p>
