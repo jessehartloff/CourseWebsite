@@ -49,7 +49,7 @@
                 {#            <li><a href="{% url 'courses:qa' course.course_number %}"> Questions</a></li>#}
                 <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank"> Questions</a></li>
                 {% for lesson in lectures %}
-                    {% if forloop.counter0 < 10 or course.course_number != "CSE115" %}
+                    {% if forloop.counter0 < 11 or course.course_number != "CSE115" %}
                         <li>
                             <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
                         </li>
@@ -120,7 +120,7 @@
             &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
             Questions</a><br/>
             {% for lecture in lectures %}
-                {% if forloop.counter0 < 10 or course.course_number != "CSE115" %}
+                {% if forloop.counter0 < 11 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
                              href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
                     {{ forloop.counter }}. {{ lecture.title }}</a><br/>
