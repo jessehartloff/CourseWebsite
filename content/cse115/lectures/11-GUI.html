@@ -8,19 +8,135 @@ previous_content_short: json
 [This will get big. Might be split into 2 or more lessons]
 [update: will it? There are tougher concepts earlier in the course and we're not going very deep into GUIs]
 
-[Monday - Basic JFrame with labels n' shit]
-[Wednesday - Let's add buttons with action listeners!]
-[Friday - Layouts? Concurrency?]
+[Monday - Basic JFrame with labels n' shit (images)]
+[Wednesday - Let's add buttons with action listeners! (drop down [combo box], radio buttons, text field)]
+[Friday - Layouts]
 
 
-{#== GUI#}
+== GUI
+
+<p>
+    So far everything we've done has lived in the command line. Whenever we wanted to output something to the users of
+    our software we have been using <code>System.out.println</code> to display text to the console, and inputs needed to
+    be made in code or through other files. In this section we will build GUIs (Graphical User Interfaces) to interact
+    with our users more intuitively.
+</p>
+
+
+== JFrame
+
+<p>
+    It all starts with a JFrame. We will use javas built-in swing components to build GUIs. The base component in this
+    library is the JFrame which creates a window for our applications.
+</p>
+
+<pre><code class="java">
+import javax.swing.*;
+
+public class Example{
+
+    public static void runGUI(){
+        JFrame frame = new JFrame("First GUI");
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                runGUI();
+            }
+        });
+    }
+
+}
+</code></pre>
+
+<p>
+    Our first JFrame isn't very interesting, but this example shows the important aspects of setting up a GUI. First,
+    we'll notice that the main method calls <code>SwingUtilities.invokeLater</code> on a new instance of the Runnable
+    class. We Override this classes run method with a call to a method that initializes our GUI using syntax similar
+    custom sorting using the Comparator class. This will run our GUI on a separate thread allowing us to continue our
+    program while the GUI interacts with the user separately. This is called multi-threading and is a topic beyond the
+    scope of this class so we will this conversation for a later course.
+</p>
+
+<p>
+    Now let's look at the <code>runGUI</code> method that sets up the GUI itself. First, we need a JFrame so we create
+    one using one of the JFrame's constructors. We call that constructor that takes a String as input which will be the
+    title of the frame. This text will display in the title bar of the created window. Next, we set the size of the
+    window in terms of pixels (600 pixels wide and 400 pixels for the height). Next we define what should happen when
+    the window is closed. In this example we want our program to end so we'll set the close operation to exit. The final
+    step is to actually display the GUI by setting its visibility to true. After all these steps we will have a GUI in
+    the form of a JFrame with no components. In the rest of this section we will see a variety of components we can add
+    to this frame to achieve the desired look and feel of our programs.
+</p>
+
+== Output Components
+
+<p>
+    We will not add components to our JFrame directely, but instead to its content pane which we'll access through its
+    getter method <code>getContentPane()</code>. Once we have the content pane we can start adding components.
+</p>
+
+<pre><code class="java">
+    frame.getContentPane().add(new JLabel("First Label"));
+</code></pre>
+
+<p>
+    The first component we're adding is a JLabel. This JLabel provides a way to display text to our GUI by provided the
+    String to be displayed in its constructor call. Here we are adding a new JLabel with the text "First Label" to the
+    JFrame's content pane.
+</p>
+
+<p>
+    We can also add images to our GUI by adding an ImageIcon to our JLabel:
+</p>
+
+<pre><code class="java">
+    ImageIcon image = new ImageIcon("path/to/image");
+    frame.getContentPane().add(new JLabel(image));
+</code></pre>
+
+<p>
+    Here we create a new ImageIcon by providing the location of an image file, then adding a new JLabel to the content
+    pane while providing the image in the constructor of the JLabel.
+</p>
+
+<p>
+    We can also add images from the Internet by providing a url. Since reading the url can throw an exception we must
+    use a try/catch block to get the image.
+</p>
+
+<pre><code class="java">
+    ImageIcon image = null;
+        try{
+            URL url = new URL("http://www.buffalo.edu/UBT/UBT-archives/volume25number1/images/sports01.jpg");
+            image = new ImageIcon(url);
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+
+    frame.getContentPane().add(new JLabel(image));
+</code></pre>
+
+<p>
+    In this example we download a jpg image from the Internet and display it on our GUI.
+</p>
+
+{#== Input Components#}
 {##}
-{#Let's get GUI with swing.#}
-{##}
-{#== Concurrency#}
-{##}
-{#Listeners#}
-{##}
+{#<p>#}
+{#    Action listeners.#}
+{#</p>#}
+
+
+{#== Layouts#}
+
+
 {#== Making a Web#}
 {##}
 {#GUI's that connect to API's and each other.#}
