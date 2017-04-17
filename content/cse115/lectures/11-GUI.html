@@ -127,6 +127,80 @@ public class Example{
     In this example we download a jpg image from the Internet and display it on our GUI.
 </p>
 
+<hr/>
+
+<h4>JPanel</h4>
+
+<p>
+    In the previous examples we added GUI components directly to the content pane of our JFrame which works, but can
+    become difficult to maintain as our GUIs grow in complexity. For this reason we will add components to a JPanel,
+    then add the JPanel to the JFrame's content pane. We will add components to a JPanel in a very similar way to adding
+    them to a JFrame.
+</p>
+
+<pre><code class="java">
+    JPanel panel = new JPanel();
+    panel.add(new JLabel("First Label"));
+    panel.add(new JLabel("Another Label"));
+    frame.getContentPane().add(panel);
+</code></pre>
+
+<p>
+    Here we create a new JPanel, add 2 new JLabels to it, then add the JPanel to our JFrame's content pane. This will
+    display both labels on the GUI from left-to-right in the order they were added (This is the default behaviour of
+    JPanel).
+</p>
+
+<hr/>
+
+<h4>BorderLayout</h4>
+
+<p>
+    What if we want more control over the location of each element added to our GUI? For this, there are several
+    different Layout Managers that can be used. We will only explore one of these, BorderLayout, which is the default
+    layout for a JFrame. Alternatively the left-to-right behaviour of a JPanel is called FlowLayout. FlowLayout will
+    automatically place the elements left-to-right as they are added, but with BorderLayout we must specify where each
+    component should be displayed as either NORTH (top), SOUTH (bottom), EAST (right), WEST (left), or CENTER (default
+    location).
+</p>
+
+
+<pre><code class="java">
+    JPanel northPanel = new JPanel();
+    northPanel.add(new JLabel("north"));
+    frame.getContentPane().add(northPanel, BorderLayout.NORTH);
+
+    JPanel southPanel = new JPanel();
+    southPanel.add(new JLabel("south"));
+    frame.getContentPane().add(southPanel, BorderLayout.SOUTH);
+
+    JPanel eastPanel = new JPanel();
+    eastPanel.add(new JLabel("east"));
+    frame.getContentPane().add(eastPanel, BorderLayout.EAST);
+
+    JPanel westPanel = new JPanel();
+    westPanel.add(new JLabel("west"));
+    frame.getContentPane().add(westPanel, BorderLayout.WEST);
+
+    JPanel centerPanel = new JPanel();
+    centerPanel.add(new JLabel("center"));
+    frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
+</code></pre>
+
+<p>
+    When we add components to the JFrame using the BorderLayout we will specify its location using the BorderLayout
+    constants (ie. BorderLayout.NORTH) as a second argument to the add method. In this example we add a different panel
+    to each of the 5 areas of the GUI. If we add another element without providing a location it will be placed in the
+    center of the GUI.
+</p>
+
+<p>
+    CAUTION: Only one element can be placed in each of these 5 areas. Adding a second element to an area will overwrite
+    the first component.
+</p>
+
+{#Panels and graphics?#}
+
 {#== Input Components#}
 {##}
 {#<p>#}
