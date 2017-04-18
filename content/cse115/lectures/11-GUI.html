@@ -204,11 +204,53 @@ public class Example{
 {#== Input Components#}
 {##}
 {#<p>#}
-{#    Action listeners.#}
 {#</p>#}
 
+{#Buttons#}
+{#Action listeners#}
 
-{#== Layouts#}
+{#    JButton button = new JButton("Submit");#}
+{#    button.addActionListener(new ActionListener(){#}
+{#        @Override#}
+{#        public void actionPerformed(ActionEvent e){#}
+{#            makeGuess();#}
+{#        }#}
+{#    });#}
+
+
+{#TextField#}
+{#-getting it's text#}
+{#inputText.setColumns(5);#}
+{#Key Listeners#}
+
+{#    inputText.addKeyListener(new KeyListener(){#}
+{#        @Override#}
+{#        public void keyTyped(KeyEvent e){#}
+{##}
+{#        }#}
+{##}
+{#        @Override#}
+{#        public void keyPressed(KeyEvent e){#}
+{#            if(e.getKeyCode() == KeyEvent.VK_ENTER){#}
+{#                makeGuess();#}
+{#            }#}
+{#        }#}
+{##}
+{#        @Override#}
+{#        public void keyReleased(KeyEvent e){#}
+{##}
+{#        }#}
+{#    });#}
+
+
+{#JLabel#}
+{#-Setting the text/image#}
+
+{#ComboBox with any type#}
+{#-Calls toString for the display text#}
+{#-Selects objects of the type used#}
+{#-array (or vector aparently)#}
+{#dropDown.getSelectedItem()#}
 
 
 {#== Making a Web#}
