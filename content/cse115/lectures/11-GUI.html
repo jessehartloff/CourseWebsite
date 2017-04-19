@@ -199,61 +199,167 @@ public class Example{
     the first component.
 </p>
 
-{#Panels and graphics?#}
 
-{#== Input Components#}
-{##}
-{#<p>#}
-{#</p>#}
+== Input Components
 
-{#Buttons#}
-{#Action listeners#}
+<p>
+    We can create a new window through a JFrame, add text and images with JLabels, and organize components with JPanels
+    and BorderLayout, but our users still can't interact with our GUIs. Let's give our users the ability to use these
+    interfaces and make the most out of software.
+</p>
 
-{#    JButton button = new JButton("Submit");#}
-{#    button.addActionListener(new ActionListener(){#}
-{#        @Override#}
-{#        public void actionPerformed(ActionEvent e){#}
-{#            makeGuess();#}
-{#        }#}
-{#    });#}
+<pre><code class="java">
+    JPanel panel = new JPanel();
+    JTextField textField = new JTextField(5);
+    panel.add(textField);
+</code></pre>
+
+<pre><code class="java">
+    JPanel panel = new JPanel();
+    JButton button = new JButton("Click Me!");
+    panel.add(button);
+</code></pre>
+
+<p>
+    With syntax nearly identical to that of JLabels, these examples show us how to add a new button and a text field to
+    a panel. The text field gives users an area to type and the int in the constructor determines its width in terms of
+    number of columns. The String in the constructor of the button is the text to appear on the button.
+</p>
+<p>
+    That wasn't so bad, but there's one huge problem here. Our button doesn't do anything! This shouldn't be surprising
+    since we didn't tell our button to do anything so it shouldn't know what we would expect to happen when it's
+    clicked. Let's tell our new button what to do. For this, we will use an ActionListener.
+</p>
+
+<hr/>
+
+<h4>Action Listeners</h4>
+
+<p>
+    To add functionality to our button we will add an action listener to it with the same style of syntax we've seen
+    for custom <a href="http://fury.cse.buffalo.edu/learn/courses/CSE115/lectures/algos/#section5">sorting</a> and
+    running our GUIs with invokeLater.
+</p>
+
+<pre><code class="java">
+    JButton button = new JButton("Click Me!");
+    button.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            // code to be executed when the button is clicked
+        }
+    });
+</code></pre>
+
+<p>
+    This will add an action listener to the button that will "listen" for clicks on the button. When the button is
+    clicked the action listener will know and will call its actionPreformed method with an ActionEvent containing
+    information about the action (location of mouse, right/left click, clicked via space bar, etc). If we want to
+    perform the same action for all types of events we can ignore the ActionEvent, but it's there if we want to add more
+    flexibility later.
+</p>
+
+<p>
+    Now that we have an action listener, we can run any code we'd like whenever our button is clicked. Let's use this
+    code to interact with other components on our GUI and learn how to interact with them.
+</p>
+
+<pre><code class="java">
+    JLabel label = new JLabel("hello!");
+    JButton button = new JButton("Click Me!");
+    button.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            label.setText("goodbye!");
+        }
+    });
+</code></pre>
+
+<p>
+    JLabels and JTextFields have getter and setter methods for the text they currently display. We can take advantage of
+    these methods in our action listeners to build features into out interface. In this example we are changing the text
+    of a label when the button is clicked.
+</p>
+
+<pre><code class="java">
+    JTextField textField = new JTextField(5);
+    JButton button = new JButton("Click Me!");
+    button.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String input = textField.getText();
+        }
+    });
+</code></pre>
+
+<p>
+    Similar to the JLabel, we can get and set the text of a text field. By using a text field and a button in this way
+    we can allow the user to input and String for our program to use.
+</p>
+
+<hr/>
+
+<h4>Key Listeners</h4>
+
+<p>
+    Similar to listening for mouse clicks on a button, we can also listen for keyboard inputs on a text field. To do
+    this, we will use a key listener. Key listeners have three different actions that it listens to "key typed", "key
+    pressed", and "key released". In this example we will only use "key pressed" which is triggered as soon as a key is
+    pressed without waiting for it to be released.
+</p>
+
+<pre><code class="java">
+    JTextField textField = new JTextField(5);
+    textField.addKeyListener(new KeyListener(){
+        @Override
+        public void keyTyped(KeyEvent e){
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e){
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                // code to be executed when the enter key is pressed
+                // This is especially useful for text fields since it allows the user to hit
+                // enter to submit their text instead of having to click a button
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e){
+
+        }
+    });
+</code></pre>
 
 
-{#TextField#}
-{#-getting it's text#}
-{#inputText.setColumns(5);#}
-{#Key Listeners#}
+<p>
+    Unlike the action listener example we will read information from the event to find which key was pressed. We will
+    get the event's key code and compare it with the code for the key we want to listen to. Here we lister for an enter
+    key press which uses the constant <code>KeyEvent.VK_ENTER</code> for its code.
+</p>
 
-{#    inputText.addKeyListener(new KeyListener(){#}
-{#        @Override#}
-{#        public void keyTyped(KeyEvent e){#}
-{##}
-{#        }#}
-{##}
-{#        @Override#}
-{#        public void keyPressed(KeyEvent e){#}
-{#            if(e.getKeyCode() == KeyEvent.VK_ENTER){#}
-{#                makeGuess();#}
-{#            }#}
-{#        }#}
-{##}
-{#        @Override#}
-{#        public void keyReleased(KeyEvent e){#}
-{##}
-{#        }#}
-{#    });#}
-
-
-{#JLabel#}
-{#-Setting the text/image#}
 
 {#ComboBox with any type#}
 {#-Calls toString for the display text#}
 {#-Selects objects of the type used#}
-{#-array (or vector aparently)#}
+{#-array (or vector apparently)#}
 {#dropDown.getSelectedItem()#}
 
 
-{#== Making a Web#}
+{#        // Q5 (1 point): add an action listener to the button that reads the text of the text field and displays it on#}
+{#        //               the label in all capital letters#}
+
+
+{#++++#}
+{#        // Q1 (1 point): create and return a panel#}
+{#        // Q2 (1 point): add a text field to the panel and set its number of columns to 7#}
+{#        // Q3 (1 point): add a button to the panel with the text "Yell"#}
+{#        // Q4 (1 point): add a label to the panel containing only text (The initial text can be any String)#}
+{#++++#}
+
+
+{#== I'm going to do an Internet!#}
 {##}
 {#GUI's that connect to API's and each other.#}
 {##}
