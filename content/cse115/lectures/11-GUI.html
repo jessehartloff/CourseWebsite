@@ -25,7 +25,8 @@ previous_content_short: json
 
 <p>
     In this section we will cover a few components from the built-in java swing library. For a comprehensive swing
-    tutorial the official tutorial is recommended (<a href="http://docs.oracle.com/javase/tutorial/uiswing/components/index.html">http://docs.oracle.com/javase/tutorial/uiswing/components/index.html</a>).
+    tutorial the official tutorial is recommended (<a
+        href="http://docs.oracle.com/javase/tutorial/uiswing/components/index.html">http://docs.oracle.com/javase/tutorial/uiswing/components/index.html</a>).
 </p>
 
 == JFrame
@@ -345,23 +346,41 @@ public class Example{
 </p>
 
 
-{#ComboBox with any type#}
-{#-Calls toString for the display text#}
-{#-Selects objects of the type used#}
-{#-array (or vector apparently)#}
-{#dropDown.getSelectedItem()#}
+<hr/>
 
+<h4>Combo Box</h4>
 
-{#        // Q5 (1 point): add an action listener to the button that reads the text of the text field and displays it on#}
-{#        //               the label in all capital letters#}
+<p>
+    More commonly referred to as dropdown menus, we'll use the JComboBox to give our users a list of choices. We'll see
+    that combo boxes behave similar to ArrayLists in that they take a type parameter and we can add instances of that
+    type as the choices in the menu. The menu will display each choice as a String by calling its toString method,
+    though the instance itself is selected.
+</p>
 
+<pre><code class="java">
+    JComboBox&lt;Double&gt; dropdown = new JComboBox<>();
+    dropdown.addItem(Math.E);
+    dropdown.addItem(Math.PI);
+    panel.add(dropdown);
+</code></pre>
 
-{#++++#}
-{#        // Q1 (1 point): create and return a panel#}
-{#        // Q2 (1 point): add a text field to the panel and set its number of columns to 7#}
-{#        // Q3 (1 point): add a button to the panel with the text "Yell"#}
-{#        // Q4 (1 point): add a label to the panel containing only text (The initial text can be any String)#}
-{#++++#}
+<p>
+    We created a new combo box of Doubles and added two choices by calling the addItem method. This gives the user a
+    choice between e and pi (tough choice..). Then we can read this choice in a listener.
+</p>
+
+<pre><code class="java">
+    Double number = dropdown.getItemAt(dropdown.getSelectedIndex());
+//  -or-  Double number = (Double) dropdown.getSelectedItem();
+</code></pre>
+
+<p>
+    Just like an ArrayList, the combo box stores its choices indexed by integers starting at 0. We can get the index of
+    the selected item by calling getSelectedIndex() then call getItemAt(int) which returns the item at that index.
+    Alternatively we can call getSelectedItem() to get the item directly, though this returns it in an Object variable
+    which needs to cast to type Double using (Double).
+</p>
+
 
 
 {#== I'm going to do an Internet!#}
