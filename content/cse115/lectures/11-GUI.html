@@ -381,6 +381,34 @@ public class Example{
     which needs to cast to type Double using (Double).
 </p>
 
+<hr/>
+
+<h4>Text Area</h4>
+
+<p>
+    Text areas are very similar to text fields except they can contain more than one line. Instead of specifying only
+    the number of columns in its constructor as we did with the JTextField, we will provide ints for rows and columns.
+    The following example creates a text area with 5 rows and 30 columns.
+</p>
+
+<pre><code class="java">
+    JTextArea textArea = new JTextArea(5,30);
+    textArea.setText("text\ntext\ntext\ntext\ntext\ntext");
+    panel.add(new JScrollPane(textArea));
+</code></pre>
+
+<p>
+    We could have added this text area to the panel just like any other component, but instead we added
+    <code>new JScrollPane(textArea)</code> to add the text area to a scroll pane. By adding a scroll pane we will have
+    a scroll bar once the text area has more lines of text than rows to display. If we add the text area without the
+    scroll pane the numbers of rows will increase to the number of lines of text. Either behavior is fine, depending
+    on the situation and desired aesthetics.
+</p>
+
+<p>
+    Sometimes we want to use text areas strictly as an output component much like we did in the lab 9 chat room. In
+    these cases we can prevent users from entering text with <code>textArea.setEditable(false);</code>.
+</p>
 
 
 {#== I'm going to do an Internet!#}
