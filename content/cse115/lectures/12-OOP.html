@@ -6,9 +6,340 @@ previous_content_short: gui
 ---
 
 
-[Monday - Composition (This might be more explanation since we probably used this along the journey).]
-[Wednesday - Inheritance (extends). Abstract class. DS of base type (call .sound on a list of animals? Is this cliche at this point?)]
-[Friday - Interfaces. Comparators. Serialization.]
+{#[Monday - Composition (This might be more explanation since we probably used this along the journey).]#}
+{#[Wednesday - Inheritance (extends). Abstract class. DS of base type (call .sound on a list of animals? Is this cliche at this point?)]#}
+{#[Friday - Interfaces. Comparators. Serialization.]#}
+
+[Monday - Abstract Classes]
+[Wednesday - Interfaces]
+[Friday - Polymorphism]
+
+
+== Object-Oriented Programming
+
+<p>
+    We've been using objects throughout this course, but we haven't put much emphasis on the objects and instead used
+    them as a means to an end. We have been primarily focused on writing methods to accomplish a
+    particular goal in terms of input and output (given some values, return a particular value). In this section we
+    will take a step back and analyze how we organize code in a larger
+    object-oriented program. We'll see how different objects (and classes) interact with each other and how they are
+    related.
+</p>
+
+<p>
+    If you are not comfortable with Classes and Objects you may want to review the Classes concept before exploring OOP.
+</p>
+
+
+== Inheritance
+
+<p>
+    One of the primary concepts of the OOP paradigm is inheritance which provides a way for classes to "borrow" code
+    from other classes. When a class inherits another class, it gains all the features of the inherited class.
+    Specifically, it "inherits"
+    all the member variables and methods from the other class. This allows the inheriting class to add new features to
+    another class while reusing all the existing code from the first class. This may seem strange at first (why not just
+    use one class and keep adding features) but we'll see why this is a very powerful and useful concept.
+</p>
+
+<p>
+    Consider a case where you have two classes that have very similar functionality with a small number of important
+    differences:
+</p>
+
+<pre><code class="java">
+public class Car {
+
+    private String make;
+    private String model;
+    private boolean engineRunning;
+
+    public Car(String make, String model){
+        this.make = make;
+        this.model = model;
+        this.engineRunning = false;
+    }
+
+    public void start(){
+        engineRunning = true;
+    }
+
+    public void stop(){
+        engineRunning = false;
+    }
+
+    public void blowHorn(){
+        System.out.println("Beep Beep!");
+    }
+}
+</code></pre>
+
+<pre><code class="java">
+public class SemiTruck {
+
+    private String make;
+    private String model;
+    private boolean engineRunning;
+
+    public SemiTruck(String make, String model){
+        this.make = make;
+        this.model = model;
+        this.engineRunning = false;
+    }
+
+    public void start(){
+        engineRunning = true;
+    }
+
+    public void stop(){
+        engineRunning = false;
+    }
+
+    public void blowHorn(){
+        System.out.println("bwwAAAAAAHHHHH!!");
+    }
+
+}
+</code></pre>
+
+<p>
+    These classes work just fine, but we have quite a bit of duplicate code which is a sign that we could be doing
+    something better. In fact, we could add a multitude of methods that would be the same for both of these classes
+    (accelerate, brake, turn on radio, getters/setters, etc). Besides the extra
+    typing (or cut and paste) involved in writing these classes, it's also more difficult to make changes to the common
+    code since we have to be careful to change it in both classes. Even worse, imagine if we had 10 similar classes that
+    all have the same shared code. We would like a way to eliminate this duplicate code by writing it once and allowing
+    each class to use the shared code.
+</p>
+
+<p>
+    In cases like this we will factor out the common code into a new class that will be inherited by both of these
+    classes. The purpose of the third class is to store all the common code in one place so it can be easily maintained.
+    With this setup we could have any number of classes inheriting the common class and still only have to make a single
+    change to alter the behavior of all the inheriting classes. Let's explore an example of this using abstract classes.
+</p>
+
+
+{#<p>#}
+{#    Let's go over our options:#}
+{#    Make one class with instance variables that store the differences.#}
+{#    Write a library that stores the different functionality in separate methods with one class of common code.#}
+{#    Those two didn't work very well.. it's almost as if this example was contrived specifically to introduce#}
+{#    inheritance.#}
+{#</p>#}
+
+{#<p>#}
+{#    If it is simple to represent these differences in an instance variable then that is usually a better choice than#}
+{#    using inheritance as it will control the complexity of the software. However, when changes can't easily be#}
+{#    represented in a variable it can be better to use inheritance.#}
+{#</p>#}
+
+{#<p>#}
+{#    Can't instantiate Interfaces or Abstract Classes.#}
+{#</p>#}
+
+
+== Abstract Classes
+
+
+{#    // Q1: Create and abstract class named "SuperClass"#}
+{##}
+{#    // Q2: Add an int named "instanceNumber" as a instance variable with getter and setter methods#}
+{#    //     (getNumber() and setNumber(int)) to SuperClass (Do not define a constructor for SuperClass)#}
+{##}
+{#    // Q3: Create an abstract method in SuperClass called "action(int)" that returns an int#}
+{##}
+{#    // Q4: Create a concrete class named "Adder" that extends SuperClass and overrides action(int) to return#}
+{#    //     the addition of the method's input and instanceNumber as an int#}
+{##}
+{#    // Q5: Create a concrete class named "Multiplier" that extends SuperClass and overrides action(int) to return#}
+{#    //     the input multiplied by instanceNumber as an int#}
+
+<p>
+    To apply inheritance to the example from the previous section we will create what's called an abstract class. An
+    abstract class is a class that is only partially defined and cannot be instantiate. We will add all our common
+    code into an abstract class and leave the code specific to the two classes undefined.
+</p>
+
+
+<pre><code class="java">
+public abstract class Vehicle {
+
+    private String make;
+    private String model;
+    private boolean engineRunning;
+
+    public Vehicle(String make, String model){
+        this.make = make;
+        this.model = model;
+        this.engineRunning = false;
+    }
+
+    public void start(){
+        engineRunning = true;
+    }
+
+    public void stop(){
+        engineRunning = false;
+    }
+
+    public abstract void blowHorn();
+
+}
+</code></pre>
+
+<pre><code class="java">
+public class Car extends Vehicle{
+
+    public Car(String make, String model) {
+        super(make, model);
+    }
+
+    @Override
+    public void blowHorn(){
+        System.out.println("Beep Beep!");
+    }
+}
+</code></pre>
+
+<pre><code class="java">
+public class SemiTruck extends Vehicle{
+
+    public SemiTruck(String make, String model) {
+        super(make, model);
+    }
+
+    @Override
+    public void blowHorn(){
+        System.out.println("bwwAAAAAAHHHHH!!");
+    }
+}
+</code></pre>
+
+<p>
+    Now we have a abstract Vehicle class that will store the common code for any type of Vehicle. We make this class as
+    abstract explicitly with the abstract keyword, as well as any abstract methods. We see that the blowHorn method
+    <code>public abstract void blowHorn();</code> is not defined in Vehicle and is marked as abstract. This method is
+    left to the inheriting classes to define. In our Car and SemiTruck classes we inherit the abstract Vehicle class
+    using the keyword <code>extends</code>. This add all the member variables and methods from the Vehicle class into
+    these classes as well as adding the requirement that these classes implement the blowHorn method. We implement this
+    method by overriding any previous definition using the @Override annotation.
+</p>
+
+<p>
+    We also see that we have explicit constructors for each of the inhering classes with the line
+    <code>super(make, model);</code>. Unless we're using the default constructor, this is a necessary addition to these
+    classes. This defines a constructor for each class that will call the constructor from the class it is extending
+    using the super keyword. The keyword <code>super</code> functions the same way as <code>this</code> except it refers
+    to the extended class instead of the current class.
+</p>
+
+<h5>Vocabulary:</h5>
+<dl>
+    <dt>Super Class</dt>
+    <dd>The class being extended</dd>
+    <dt>Sub Class</dt>
+    <dd>The class extending another class</dd>
+    <dt>Abstract Class</dt>
+    <dd>An incomplete class that cannot be instantiated</dd>
+    <dt>Concrete Class</dt>
+    <dd>A complete class that can be instantiated</dd>
+</dl>
+
+<p>
+    With our classes extended a common abstract class we can now use all the shared methods without redefining them for
+    each class.
+</p>
+
+<pre><code class="Java">
+    public static void main(String[] args){
+        Car car = new Car("Ford", "Focus");
+        SemiTruck semi = new SemiTruck("Mac", "Pinnacle");
+
+        car.start();
+        semi.start();
+
+        car.blowHorn();
+        semi.blowHorn();
+
+        car.stop();
+        semi.stop();
+    }
+</code></pre>
+
+<p>Output:</p>
+<kbd>Beep Beep!<br/>bwwAAAAAAHHHHH!!</kbd>
+
+{#<p>#}
+{#    protected; extends#}
+{#</p>#}
+
+{#Only extend 1 class to avoid multiple implementations of the same method#}
+
+{#<p>#}
+{#    Concrete class#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    subclass; superclass#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    super#}
+{#</p>#}
+
+
+{#Example Ideas:#}
+{#-Cars (Car, BMW, Ford, Truck, Vehicle)#}
+{#-People (Person, User, Admin, Moderator)#}
+{#-AI (AI, Player, move(), action(), AttackAI, SupportAI, TankAI, Character) Can tie into finale labs#}
+{#-Animal..#}
+{#-Swap out functionality (State) (In conjunction with AI?)#}
+
+
+{#== Interfaces#}
+{##}
+{#<p>#}
+{#    A contract of methods. Implementing an interface is a guarantee that it will have the methods from the interface.#}
+{#    This is also true with abstract classes.#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    Implements; Object#}
+{#</p>#}
+{##}
+{#Overriding equals and hashCode#}
+{##}
+{#<p>#}
+{#    ActionListener; KeyListener; Comparator of type (We used these as anonymous classes, but we can name and reuse them)#}
+{#    Need two buttons with the same listener? No problem. Custom sort multiple times? No problem!#}
+{#</p>#}
+{##}
+{##}
+{#Custom sorting of custom objects (Implements Comparator)#}
+{##}
+{#What about those listeners/comparators anyway? Can we create those as named classes? Yes!#}
+{##}
+
+
+{#== Polymorphism#}
+{##}
+{#<p>#}
+{#    ArrayList of Animal (Look for more current example)#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    Can have a DS of abstract type or interface with many different concrete classes. So powerful!#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    Could have an ArrayList of Objects, though you usually shouldn't.#}
+{#</p>#}
+{##}
+{#<p>#}
+{#    Tip: Code to the interface! Declare variable of most generic class possible. If you don't need the extra methods of#}
+{#    a subclass, declare your variable type as the superclass. List/Map#}
+{#</p>#}
 
 
 {#== Composition#}
@@ -17,6 +348,7 @@ previous_content_short: gui
 {##}
 {#A class as a member variable.#}
 {##}
+
 {#== Inheritance#}
 {##}
 {#Is-a#}
@@ -24,18 +356,9 @@ previous_content_short: gui
 {#More ways to reuse code.#}
 {#<br/>#}
 {#Abstract Class vs. Interface#}
-{#Extends vs. Implements#}
+{#Extends vs. Implements. Only extend 1 class to avoid multiple implementations of the same method#}
 {##}
-{#Can have a DS of abstract type or interface with many different concrete classes. Could have an ArrayList of Objects.#}
-{#Though you usually shouldn't.#}
-{##}
-{##}
-{#Overriding equals and hashCode#}
-{#Custom sorting of custom objects (Implements Comparator)#}
 
-{#What about those listeners/comparators anyway? Can we create those as named classes? Yes!#}
-
-{##}
 {#== Serialization#}
 {##}
 {#Inherit the Serializable interface. The rest is magic!#}
