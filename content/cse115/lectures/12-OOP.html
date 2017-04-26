@@ -327,7 +327,6 @@ public class SemiTruck extends Vehicle{
 </p>
 
 
-
 == Interfaces
 
 <p>
@@ -566,27 +565,83 @@ public class CompareToInt implements Comparator&lt;Integer&gt;{
 </p>
 
 
-{#== Polymorphism#}
-{##}
-{#<p>#}
-{#    Polymorphism is another major advantage to using object-oriented programming. We use polymorphism when we refer to #}
-{#    class by one of its inherited super classes or interfaces.#}
-{#</p>#}
+== Polymorphism
+
+<p>
+    Polymorphism is another major advantage of object-oriented programming. We are using polymorphism when we refer to a
+    class by one of its inherited super classes or interfaces. A instance of any class is also an instance of every
+    class and interface that it inherits. This allows us to store an instance of a class in a variable of any one of its
+    types. Let's see an example using our Edible classes:
+</p>
+
+<pre><code class="java">
+    public static void main(String[] args){
+        Edible waffle = new Waffle(200);
+        Edible cake = new Cake(8);
+
+        System.out.println("Eat waffles for " + waffle.getRecommendedMeal());
+        System.out.println("Eat cake for " + cake.getRecommendedMeal());
+        System.out.println();
+        System.out.println("The waffle has " + waffle.getCalories() + " calories");
+        System.out.println("The cake has " + cake.getCalories() + " calories");
+    }
+</code></pre>
+
+<p>
+    Here we store instances of the Waffle and Cake class in variables of type Edible. There are no compiler errors here
+    and we can happily call any methods from the Edible interface. However, we can no longer call the eatPiece() method
+    from the Cake class since it is not part of the Edible interface. The Edible variables do not know about the Cake
+    class and any extra methods it declared so we cannot call the additional methods from an Edible variable. We could
+    take this all the way up the inheritance hierarchy and store every instance of any class in a variable of type
+    Object, but we would only be able to call methods defined in the Object class. For this reason, we typically use the
+    most specific type for our variable, but there are cases where we don't mind losing functionality in order to gain
+    flexibility. Consider a bakery that wants to track how many total calories it has in stock (I'm not sure why, they
+    just do). For this we will use a very powerful ability of polymorphism. Data structures of mixed types.
+</p>
+
+<pre><code class="java">
+    public static void main(String[] args){
+        ArrayList&lt;Edible&gt; edibles = new ArrayList&lt;&gt;();
+        edibles.add(new Waffle(201));
+        edibles.add(new Waffle(210));
+        edibles.add(new Waffle(170));
+        edibles.add(new Cake(8));
+        edibles.add(new Cake(4));
+        edibles.add(new Cake(16));
+
+        int totalCalories = 0;
+        for(Edible edible : edibles){
+            totalCalories += edible.getCalories();
+        }
+
+        System.out.println("total calories: " + totalCalories);
+    }
+</code></pre>
+
+<p>Output:</p>
+<kbd>total calories: 8421</kbd>
+
+<p>
+    We have seemingly done the impossible. We have Waffles and Cakes stored in a single ArrayList. We can manipulate
+    any of the elements in this ArrayList as long as we only use methods defined in the Edible interface. Only classes
+    that implement the Edible interface can be added to this ArrayList, and since all those classes must implement the
+    methods in that interface we can safely call them on every object in the ArrayList.
+</p>
+
+<p>
+    By using the Edible interface we are using a practice known as "coding to the interface." It is generally good
+    practice to use variable types that are higher up the class hierarchy as long as any additional methods (such as
+    eatPiece()) are not needed. It may be tempting for a bakery to store its inventory in an ArrayList of Waffles and an
+    ArrayList of Cakes, but this code would be difficult to maintain if more foods are added. If the bakery wants to
+    expand into Crepes, Muffins, and Pies they would need 3 more ArrayLists with additional code every time the entire
+    inventory is needed and we already know that duplicating code like this is bad. Instead, store them all in one
+    ArrayList of Edibles and maintenance is simple. Create the new classes, implement Edible, add the new inventory to
+    the existing ArrayList. Custom classes and easy storage.
+</p>
 
 
-{##}
-{#<p>#}
-{#    ArrayList of Animal (Look for more current example)#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Can have a DS of abstract type or interface with many different concrete classes. So powerful!#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Could have an ArrayList of Objects, though you usually shouldn't.#}
-{#</p>#}
-{##}
+{#== Coding to the Interface#}
+
 {#<p>#}
 {#    Tip: Code to the interface! Declare variable of most generic class possible. If you don't need the extra methods of#}
 {#    a subclass, declare your variable type as the superclass. List/Map#}
