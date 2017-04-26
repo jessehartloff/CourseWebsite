@@ -381,18 +381,18 @@ public class Cake implements Edible{
     calories<br/><br/>The cake has 1400 calories</kbd>
 
 <p>
-    In this example we have Edible as an interface that inherited by two classes, Waffle and Cake. to inherit an
-    interface we use the keyword implements instead of extends like we did for abstract classes. When each of these
-    classes "implements" the Edible interface, they are responsible for implementing the abstract methods from this
-    interface. We can see that both classes implement these methods, but they take different approaches in their
-    implementations. This is very important! When a class implements an interface we usually don't care <em>how</em>
+    In this example we have Edible as an interface that is inherited by two classes, Waffle and Cake. To inherit an
+    interface we use the keyword implements instead of extends like we did with abstract classes. When each of these
+    classes implements the Edible interface, they are responsible for implementing all the abstract methods from this
+    interface. We can see that both classes implement these methods, but they each take different approaches to
+    accomplish this. This is very important! When a class implements an interface we don't have to understand <em>how</em>
     it implements the interface methods, only <em>that</em> it implements them. When working with instances of these
-    classes we will rely on getCalories and getRecommendedMeal methods being available and returning the correct values,
+    classes we will rely on the getCalories() and getRecommendedMeal() methods being available and returning the correct values,
     but we don't have to ask how they arrived at those values. We might be curious and want to see how these classes are
     implemented, but more often we are working with projects that can be hundreds of thousands, or even millions, of
     lines of code. We simply cannot understand every implementation detail throughout a codebase of that magnitude and
-    will rely on these methods working as defined by the interface. A class you need inherits a known interface? You
-    have a guarantee that you call those interface methods without reading the source code.
+    will rely on these methods working as defined by the interface. Need to use a class that inherits a known interface?
+    You have a guarantee that you can call the interface methods without reading the source code.
 </p>
 
 
