@@ -289,10 +289,11 @@ public class SemiTruck extends Vehicle{
 == Interfaces
 
 <p>
-    An interface is similar to an abstract class except it cannot contain any instance variables or defined methods. The
+    An interface is similar to an abstract class except it cannot contain any instance variables or methods. The
     only non-static content an interface can contain are abstract methods. In essence, an interface is a contract that
     says any class inheriting the interface must implement all the abstract methods from the interface.
 </p>
+
 
 <pre><code class="java">
 public interface Edible {
@@ -379,15 +380,17 @@ public class Cake implements Edible{
 
 <kbd>Eat waffles for breakfast<br/>Eat cake for dessert<br/><br/>The waffle has 200 calories<br/>The cake has 2240
     calories<br/><br/>The cake has 1400 calories</kbd>
-
+<br/>
 <p>
     In this example we have Edible as an interface that is inherited by two classes, Waffle and Cake. To inherit an
     interface we use the keyword implements instead of extends like we did with abstract classes. When each of these
     classes implements the Edible interface, they are responsible for implementing all the abstract methods from this
     interface. We can see that both classes implement these methods, but they each take different approaches to
-    accomplish this. This is very important! When a class implements an interface we don't have to understand <em>how</em>
+    accomplish this. This is very important! When a class implements an interface we don't have to understand
+    <em>how</em>
     it implements the interface methods, only <em>that</em> it implements them. When working with instances of these
-    classes we will rely on the getCalories() and getRecommendedMeal() methods being available and returning the correct values,
+    classes we will rely on the getCalories() and getRecommendedMeal() methods being available and returning the correct
+    values,
     but we don't have to ask how they arrived at those values. We might be curious and want to see how these classes are
     implemented, but more often we are working with projects that can be hundreds of thousands, or even millions, of
     lines of code. We simply cannot understand every implementation detail throughout a codebase of that magnitude and
@@ -395,18 +398,110 @@ public class Cake implements Edible{
     You have a guarantee that you can call the interface methods without reading the source code.
 </p>
 
+<p>
+    So why would we ever use an interface instead of an abstract class if interfaces do the same thing but are more
+    limited? The answer is multiple inheritance. While a class can only extend 1 abstract class due to potential
+    definition and name conflicts, a class can implement any number of interfaces. Since variables and method
+    definitions can't be inherited through interfaces there can't be conflicts. If two interfaces contain identical
+    abstract methods they can still both be inherited by the same class because the class only inherits a promise to
+    implement the method. Implementing the method will satisfy both interfaces without conflict.
+</p>
 
-{##}
-{#<p>#}
-{#    A contract of methods. Implementing an interface is a guarantee that it will have the methods from the interface.#}
-{#    This is also true with abstract classes.#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    Implements#}
-{#</p>#}
-{##}
-{#Overriding equals and hashCode#}
+<hr/>
+
+<p>
+    We have used interfaces several times in this course without explicitly implementing. Recall this example of sorting
+    String while ignoring case:
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+
+    Collections.sort(words, new Comparator&lt;String&gt;(){
+        @Override
+        public int compare(String o1, String o2){
+            return o1.compareToIgnoreCase(o2);
+        }
+    });
+
+    System.out.println(words);
+</code></pre>
+
+<p>
+    In this example we used the Comparator interface to accomplish the custom sorting. The syntax we used is called
+    creating an anonymous class since we implemented this interface without naming a new class. Now that we know about
+    interfaces, let's write a comparator as a concrete class that implements Comparator.
+</p>
+
+<pre><code class="java">
+public class CompareIgnoreCase implements Comparator&lt;String&gt;{
+
+    @Override
+    public int compare(String o1, String o2) {
+        return o1.compareToIgnoreCase(o2);
+    }
+
+}
+</code></pre>
+
+<p>
+    Here we have a named concrete class that implements the Comparator interface to compare Strings. This interface
+    contains only the compare method that takes two objects of the specified type. Using this class
+    our sorting code is much more concise.
+</p>
+
+<pre><code class="java">
+    Collections.sort(words, new CompareIgnoreCase());
+</code></pre>
+
+<p>
+    This is especially useful if we want to perform the same custom sorting in many different places. As long as the
+    second argument of the sort method is a class that implements Comparator with a type matching the data structure
+    being sorted, the method will run. Inside the sort method, only the compare method is required to completely sort
+    a data structure so the guarantee provided by the Comparator interface (ie. that the compare method will be
+    implemented) is good enough for sort.
+</p>
+
+<p>
+    But why stop there? Now that we have a complete class that can be used for sorting by implementing one method we can
+    sort in any order we can dream up! Oooh it feels like the world is ours! Let's see an example of sorting ints by
+    their distance to a particular int. You might think this is too much power for us to wield, but it's not like anyone
+    can stop us!
+</p>
+
+<pre><code class="java">
+
+</code></pre>
+
+<pre><code class="java">
+    public static void main(String[] args){
+        ArrayList&lt;Integer&gt; numbers = new ArrayList<>();
+        numbers.addAll(Arrays.asList(12, 5, -58, -48, 0, 60, 35, 100, 4));
+
+        System.out.println(numbers);
+
+        Collections.sort(numbers, new CompareToInt(10));
+        System.out.println(numbers);
+
+        Collections.sort(numbers, new CompareToInt(-50));
+        System.out.println(numbers);
+    }
+</code></pre>
+
+<p>Output:</p>
+<kbd>[12, 5, -58, -48, 0, 60, 35, 100, 4]<br/>[12, 5, 4, 0, 35, 60, -48, -58, 100]<br/>[-48, -58, 0, 4, 5, 12, 35, 60, 100]</kbd>
+<br/>
+
+<hr/>
+
+
+
 {##}
 {#<p>#}
 {#    ActionListener; KeyListener; Comparator of type (We used these as anonymous classes, but we can name and reuse them)#}
@@ -414,10 +509,23 @@ public class Cake implements Edible{
 {#</p>#}
 {##}
 {##}
-{#Custom sorting of custom objects (Implements Comparator)#}
 {##}
 {#What about those listeners/comparators anyway? Can we create those as named classes? Yes!#}
 {##}
+
+
+== Class Hierarchy
+
+<p>
+    Every class in java extends exactly 1 other class, with only 1 exception. The Object class.
+</p>
+
+<p>
+
+</p>
+
+{#Overriding toString#}
+{#Overriding equals and hashCode#}
 
 
 {#== Polymorphism#}
