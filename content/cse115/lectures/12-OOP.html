@@ -271,22 +271,11 @@ public class SemiTruck extends Vehicle{
 <kbd>Beep Beep!<br/>bwwAAAAAAHHHHH!!</kbd>
 
 {#<p>#}
-{#    protected; extends#}
+{#    No explicit extends? It extends Object.#}
 {#</p>#}
+
 
 {#Only extend 1 class to avoid multiple implementations of the same method#}
-
-{#<p>#}
-{#    Concrete class#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    subclass; superclass#}
-{#</p>#}
-{##}
-{#<p>#}
-{#    super#}
-{#</p>#}
 
 
 {#Example Ideas:#}
@@ -297,7 +286,116 @@ public class SemiTruck extends Vehicle{
 {#-Swap out functionality (State) (In conjunction with AI?)#}
 
 
-{#== Interfaces#}
+== Interfaces
+
+<p>
+    An interface is similar to an abstract class except it cannot contain any instance variables or defined methods. The
+    only non-static content an interface can contain are abstract methods. In essence, an interface is a contract that
+    says any class inheriting the interface must implement all the abstract methods from the interface.
+</p>
+
+<pre><code class="java">
+public interface Edible {
+
+    int getCalories();
+    String getRecommendedMeal();
+
+}
+</code></pre>
+
+<pre><code class="java">
+public class Waffle implements Edible{
+
+    private int calories;
+    private String meal;
+
+    public Waffle(int calories) {
+        this.calories = calories;
+        this.meal = "breakfast";
+    }
+
+    @Override
+    public int getCalories() {
+        return this.calories;
+    }
+
+    @Override
+    public String getRecommendedMeal() {
+        return this.meal;
+    }
+
+}
+</code></pre>
+
+<pre><code class="java">
+public class Cake implements Edible{
+
+    private static int caloriesPerPiece = 280;
+    private static String meal = "dessert";
+    private int pieces;
+
+    public Cake(int pieces){
+        this.pieces = pieces;
+    }
+
+    public void eatPiece(){
+        if(this.pieces > 0){
+            this.pieces--;
+        }
+    }
+
+    @Override
+    public int getCalories() {
+        return this.pieces * Cake.caloriesPerPiece;
+    }
+
+    @Override
+    public String getRecommendedMeal() {
+        return Cake.meal;
+    }
+}
+</code></pre>
+
+<pre><code class="java">
+    public static void main(String[] args){
+        Waffle waffle = new Waffle(200);
+        Cake cake = new Cake(8);
+
+        System.out.println("Eat waffles for " + waffle.getRecommendedMeal());
+        System.out.println("Eat cake for " + cake.getRecommendedMeal());
+        System.out.println();
+        System.out.println("The waffle has " + waffle.getCalories() + " calories");
+        System.out.println("The cake has " + cake.getCalories() + " calories");
+
+        cake.eatPiece();
+        cake.eatPiece();
+        cake.eatPiece();
+
+        System.out.println("\nThe cake has " + cake.getCalories() + " calories");
+    }
+</code></pre>
+
+<p>Output:</p>
+
+<kbd>Eat waffles for breakfast<br/>Eat cake for dessert<br/><br/>The waffle has 200 calories<br/>The cake has 2240
+    calories<br/><br/>The cake has 1400 calories</kbd>
+
+<p>
+    In this example we have Edible as an interface that inherited by two classes, Waffle and Cake. to inherit an
+    interface we use the keyword implements instead of extends like we did for abstract classes. When each of these
+    classes "implements" the Edible interface, they are responsible for implementing the abstract methods from this
+    interface. We can see that both classes implement these methods, but they take different approaches in their
+    implementations. This is very important! When a class implements an interface we usually don't care <em>how</em>
+    it implements the interface methods, only <em>that</em> it implements them. When working with instances of these
+    classes we will rely on getCalories and getRecommendedMeal methods being available and returning the correct values,
+    but we don't have to ask how they arrived at those values. We might be curious and want to see how these classes are
+    implemented, but more often we are working with projects that can be hundreds of thousands, or even millions, of
+    lines of code. We simply cannot understand every implementation detail throughout a codebase of that magnitude and
+    will rely on these methods working as defined by the interface. A class you need inherits a known interface? You
+    have a guarantee that you call those interface methods without reading the source code.
+</p>
+
+
 {##}
 {#<p>#}
 {#    A contract of methods. Implementing an interface is a guarantee that it will have the methods from the interface.#}
@@ -305,7 +403,7 @@ public class SemiTruck extends Vehicle{
 {#</p>#}
 {##}
 {#<p>#}
-{#    Implements; Object#}
+{#    Implements#}
 {#</p>#}
 {##}
 {#Overriding equals and hashCode#}
@@ -325,6 +423,13 @@ public class SemiTruck extends Vehicle{
 {#== Polymorphism#}
 {##}
 {#<p>#}
+{#    Polymorphism is another major advantage to using object-oriented programming. We use polymorphism when we refer to #}
+{#    class by one of its inherited super classes or interfaces.#}
+{#</p>#}
+
+
+{##}
+{#<p>#}
 {#    ArrayList of Animal (Look for more current example)#}
 {#</p>#}
 {##}
@@ -341,6 +446,8 @@ public class SemiTruck extends Vehicle{
 {#    a subclass, declare your variable type as the superclass. List/Map#}
 {#</p>#}
 
+
+{#*** Not Used ***#}
 
 {#== Composition#}
 {##}
