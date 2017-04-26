@@ -270,13 +270,6 @@ public class SemiTruck extends Vehicle{
 <p>Output:</p>
 <kbd>Beep Beep!<br/>bwwAAAAAAHHHHH!!</kbd>
 
-{#<p>#}
-{#    No explicit extends? It extends Object.#}
-{#</p>#}
-
-
-{#Only extend 1 class to avoid multiple implementations of the same method#}
-
 
 {#Example Ideas:#}
 {#-Cars (Car, BMW, Ford, Truck, Vehicle)#}
@@ -284,6 +277,55 @@ public class SemiTruck extends Vehicle{
 {#-AI (AI, Player, move(), action(), AttackAI, SupportAI, TankAI, Character) Can tie into finale labs#}
 {#-Animal..#}
 {#-Swap out functionality (State) (In conjunction with AI?)#}
+
+
+== Class Hierarchy
+
+<p>
+    Every class in java extends exactly 1 other class, with only 1 exception. The
+    <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html">Object</a> class.
+</p>
+
+<p>
+    In order to avoid name conflicts, a class can only extend 1 other other class. If multiple classes can be extended
+    we risk facing the <a href="https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem">deadly diamond
+    of death</a>.
+    This occurs when 2 or more inherited classes contain different definitions for the same member variable or method.
+    When this variable or method is accessed in the sub class, which definition should be used? To avoid this, java
+    forbids extending multiple classes
+</p>
+
+<p>
+    On the other side, every new class must extend another class. If a class is not explicitly extended by a new class,
+    it automatically extends the Object class. Even if a class extends another class, it can be traced back to the
+    object class by repeatedly looking at the extended class. We might have to look at the super class of the super
+    classes super class... but we will eventually reach the Object class. As a result, every java class is connected
+    through the <a
+        href="https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html">class
+    hierarchy</a> the methods in the Object class are inherited by every single java class ever. We can now rely on
+    every class containing these methods, and we can override them in our classes to achieve our desired behaviour. So
+    what are these methods? Let's look at 3 of these methods that are commonly overridden:
+</p>
+
+<h5>Object methods:</h5>
+<dl>
+    <dt>String toString()</dt>
+    <dd>Defines how an instance of the class is represented as a String, typically to be printed to the console.</dd>
+    <dt>boolean equals(Object obj)</dt>
+    <dd>Determine if this instance is equal to another Object.</dd>
+    <dt>int hashCode()</dt>
+    <dd>Returns a hash value correlated to this instance. For proper behavior, hashCode must be overridden if equals is
+        overridden such that if 2 instance are equal according to the equals method they must also have the same
+        hashCode (the reverse does not have to be true).
+    </dd>
+</dl>
+
+<p>
+    These methods are not abstract in Object so they do have default behaviors that can be used if we don't need to
+    customize our classes. In this course you will only need to override toString(), though it's helpful to know that
+    you can override the other methods as well.
+</p>
+
 
 
 == Interfaces
@@ -476,7 +518,23 @@ public class CompareIgnoreCase implements Comparator&lt;String&gt;{
 </p>
 
 <pre><code class="java">
+public class CompareToInt implements Comparator&lt;Integer&gt;{
 
+    private int reference;
+
+    public CompareToInt(int reference){
+        this.reference = reference;
+    }
+
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return distanceFromReference(o1) - distanceFromReference(o2);
+    }
+
+    private int distanceFromReference(int value){
+        return Math.abs(value - this.reference);
+    }
+}
 </code></pre>
 
 <pre><code class="java">
@@ -495,37 +553,17 @@ public class CompareIgnoreCase implements Comparator&lt;String&gt;{
 </code></pre>
 
 <p>Output:</p>
-<kbd>[12, 5, -58, -48, 0, 60, 35, 100, 4]<br/>[12, 5, 4, 0, 35, 60, -48, -58, 100]<br/>[-48, -58, 0, 4, 5, 12, 35, 60, 100]</kbd>
+<kbd>[12, 5, -58, -48, 0, 60, 35, 100, 4]<br/>[12, 5, 4, 0, 35, 60, -48, -58, 100]<br/>[-48, -58, 0, 4, 5, 12, 35, 60,
+    100]</kbd>
 <br/>
 
-<hr/>
-
-
-
-{##}
-{#<p>#}
-{#    ActionListener; KeyListener; Comparator of type (We used these as anonymous classes, but we can name and reuse them)#}
-{#    Need two buttons with the same listener? No problem. Custom sort multiple times? No problem!#}
-{#</p>#}
-{##}
-{##}
-{##}
-{#What about those listeners/comparators anyway? Can we create those as named classes? Yes!#}
-{##}
-
-
-== Class Hierarchy
-
 <p>
-    Every class in java extends exactly 1 other class, with only 1 exception. The Object class.
+    We can also rewrite other examples where we used anonymous classes in a similar way. We've also used the interfaces
+    <code>ActionListener</code> and <code>KeyListener</code> that were used by GUI elements. The GUI elements would call
+    one of the interface methods when particular events occurred. The GUI itself isn't concerned with the contents of
+    those methods, it just knows that the methods will be there and that when to call them. By defining these listeners
+    as named classes we can add the same behavior to multiple GUI elements (or multiple GUIs) without duplicating code.
 </p>
-
-<p>
-
-</p>
-
-{#Overriding toString#}
-{#Overriding equals and hashCode#}
 
 
 {#== Polymorphism#}
