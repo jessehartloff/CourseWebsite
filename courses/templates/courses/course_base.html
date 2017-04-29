@@ -30,7 +30,7 @@
                 <li><a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank">
                     Autolab</a></li>
                 {% for lesson in assignments %}
-                    {% if forloop.counter0 < 3 or course.course_number != "CSE115" %}
+                    {% if forloop.counter0 < 4 or course.course_number != "CSE115" %}
                         <li>
                             <a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
                         </li>
@@ -105,7 +105,7 @@
             <br/>
 
             {% for assignment in assignments %}
-                {% if forloop.counter0 < 3 or course.course_number != "CSE115" %}
+                {% if forloop.counter0 < 4 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
                              href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
                     <!--&#x2022;--> {{ assignment.title }}</a><br/>
