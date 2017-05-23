@@ -1,0 +1,42 @@
+Tutr	tutr	Make an on demand tutoring app where students can request to be tutored and offer tutoring services.
+Pied Piper	Gemgineers	[unknown]
+Election-and-data-sci	election-and-data-sci (eds_private)	We will utilize machine learning and data science/analytics to predict the winner of the upcoming presidential election
+chYOUR	chyour	  A lot of us are told by someone at home to pick up groceries on the way or we live alone and wish to bring it on the way from school/work etc but we forget. No more. I want to make an app that will work and remember this for your. I wish to make an app that will give you an non alarming voice notification when you are near a store. The store will be inputted by the user he can also put in the grocery list right into the app. the gps notification will have 3 ranges 1 mile 5 miles and 8 miles. The user can select how far he/she wishes to detour for the groceries. The notification will only happen on back roads and not free ways.
+Roadside_Trash	roadside_trash	"What started off as an app to see who could find the most roadside trash has evolved into a sophisticated seeking bingo type application. i.e. Take pictures based on bingo boards and upload images to be the one to win! "
+Meal_Designer	meal_designer	Channel for creating an app that helps the user through the steps of creating  a meal. Includes tools for creating recipies, planning meals based on recipies, creating shopping lists, and cooking the meal itself.
+Maze Image Solver	maze-vision	A car on the ground will be situated in a maze. This will receive a bird's eye view and figure out where it can and can't go by processing the image and finding the fastest way to the end of the maze using that information.
+Ascension	ascension_private	We are developing a NES style tower ascension game, for release on steam.
+Event App Group	event_app	An app that lets you mark a location to meet with Friends
+Visual Construction	visual-construction	The Visual Construction Project. The project will implement either AR or VR technologies to aid in the proper construction of designs. This is a customer based project for LP Ciminelli, a Buffalo based company
+Artemis	artemis	Chat Bot that aids you in your hunt for information
+Scheduling Team	scheduling_app	This is a cross-platform (Android/iOS) app that solves the issue of groups or co-workers not being able to schedule meetings due to time conflicts.
+ParkingSwap	parkingswap	a mobile app to connect the parked with the unparked for spot swapping, chat and potential additional features.
+Memory1	memory1	Hi, my name is Michael Wehar.  I've been working with a professor at Carnegie Mellon in Pittsburgh, PA on a project related to human memorization.  We're trying to design a memory app.
+Memory2	memory2	Hi, my name is Michael Wehar.  I've been working with a professor at Carnegie Mellon in Pittsburgh, PA on a project related to human memorization.  We're trying to design a memory app.
+Memory3	memory3	Hi, my name is Michael Wehar.  I've been working with a professor at Carnegie Mellon in Pittsburgh, PA on a project related to human memorization.  We're trying to design a memory app.
+Biubiubiu	typing-biubiubiu	Typing game
+Team_PageMe	team-page-me	We are bringing back pagers as an android app.
+SecureChat	secure_chat	Encrypted messaging application allowing for secure text communication and file transmission.
+TA Logistics	ta_logistics	A web app that will streamline the hiring process for TAs in the CSE department by offering a single location for all things related to hiring CSE TAs.
+Wear Where	wear_where	An android app to suggest clothing and accessories based on the weather of your current location.
+Hackathon Manager	hackathon_manager	a piece of software that will ease the management of hackathons and other group-based meetings
+Sign Language Software	sign_language	Developing sign language recognition software for use with various types of camera
+Digidash	digidash	Automotive project for those interested in automotive software design. It will implement sensor monitoring in an automotive environment. We will be designed a PCB and software for microchip PIC MCU's.
+Achievelife	achievelife	achievelife is be a mobile app meant to gamify your life and lets you level up by completing real life achievements.
+EquipSavy	shared_equipments	Due to the extensive amount of equipments that are available in labs it is sometimes hard to keep track of all of the materials. To solve this problem, our group will be working on a web application that will be used to track all the materials in the lab. Our web application will showcase the available courses offered. Once the students selects the course the application will check to see if the student is registered into the course or not. If the student is registered into the course, the student will need to specify what is the piece of equipment that they are borrowing and for how long. If the requested piece of equipment is available then the student will be able to reserve it, if not the student will be told that the equipment is unavailable.
+Rent Rater	rentalrater	Yelp/Rate My Professor for renting apartments and landlords
+Schedule-web	schedule-web	"a individual webpage which allowed student create their own flowchart base on the course they chose and share with other people who enrolled in our system."
+Chromesthesia	music-player	A more intelligent music player. Chromesthesia is a music application that provide users with perfectly curated playlists for their daily lives. Finally, a music app that truly caters to the user’s mood and what their plans are for the day. Combining thoughtful playlists with vibrant visuals, Chromesthesia has the potential to be a leader in the music streaming service industry.
+Course Evaluation 2.0	course_eval-private	Course Evaluation Update for UB's course evaluations.
+Bar Hopping	bar-hopping	An Android app based on location data to help users attain information about which Bar is currently good in terms of location, gender and age.
+BoardGame	boardgame	A boardgame with a sci-fi theme created based around the idea of allowing a flexible amount of players
+Perfect Toilet Time	perfecttoilettime	help people get there most comfortable spot
+Beat_That	beat_that	Develop a game to test memorization of patterns via color, numbers, and music notes.
+Ascension	ascension	Ascension is an NES style tower ascention game, in development for release on steam.  We will be using C# for the game mechanics with SFML libraries for rendering.
+Team-JAM	cse442_jam	Tutor matchmaker app. An app that helps students find potential tutors nearby, and tutors to find potential students nearby. This app will also have functionality that integrates with social media, provide help on homework, and include payments from students to tutors.
+Flight_Simulator	flight_simulator	Basic flight simulator to test a plane in using a 2D display to simulate takeoff, landing, and mechanical issues.
+Segfaultforever_VR	3dvs2d_vr	Group making 2 player (one vr) interactive game on unity (C#)
+PKB	build-it	We are creating an app that uses your app to develop webpages.
+Pied Piper	gemgineers	We will be building a smart mirror to display everyday information and include a motion sensor and voice commands.
+AYA	psych_app	Inspired by the human brain, this app will start off knowing nothing but based upon its environment and all it sees, hears, feels and goes, it will collect data to learn and start making connections. It will sometimes get curious and ask questions and try to make sense of this world. It will basically start programming itself and will create its own ideology, philosophy and personality. As time goes on, the app will become smarter, more efficient and tailor itself specific to the user. As the inner workings of this app evolves to become more complex, it will be much more than just an app; it can be the friend someone never had.
+Project-Alpha	Project-Alpha	[Individual Side Project. Listed for Beta Testing] Project-Alpha is a 2D RPG dungeon crawler game. Fight your way through each floor while leveling up your character. As you progress through the dungeon you will come across bosses which must be defeated in order to progress in the game.

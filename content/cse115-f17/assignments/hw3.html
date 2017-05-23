@@ -1,0 +1,187 @@
+---
+title: HW3: Music Ratings
+short_title: hw3
+next_content_short: hw4
+previous_content_short: hw2
+due_date: Wednesday, April 26 @ 11am
+---
+
+== Estimated Time
+
+<h2>10 Hours</h2>
+
+
+== Sally's Songs
+
+{% load staticfiles %}
+
+<br/><br/>
+<img class="img-responsive artwork" src="{% static "courses/hw3/p1.jpg" %}"/>
+<br/><br/>
+
+<h4>
+    With a large part of her job being automated Sally has found herself with a lot of free time at work. Her boss
+    regularly asks her to process more trades which she handles with ease using your custom software.
+</h4>
+<h4>
+    With Sally's new found time she has been listening to a great deal of music and is constantly looking for new songs
+    to
+    enjoy. She has
+    time to browse the Internet looking for suggestions, but she hasn't found a music site that she really likes. Most
+    of them
+    are filled with ads, terrible recommendations, and 12 year old mentalities. Sally believes there should be a better
+    way for people to share opinions about music and decided to do something about it. Sally's
+    co-workers are also getting suspicious about her abundance of free time. Solving this music problem will
+    be useful while making it look like she's working.
+</h4>
+
+<br/><br/>
+<img class="img-responsive artwork" src="{% static "courses/hw3/p2.jpg" %}"/>
+<br/><br/>
+
+<h4>
+    Inspired by the programs you've written, Sally decides to learn how to program and write her own software that will
+    allow us to share songs with her. She worked through a few tutorials on web development and wrote an API for this
+    purpose. Her API allows us to recommend songs and rate songs submitted by others. Since Sally wants to listen to the
+    full songs her API requires a YouTube video for each recommended song.
+</h4>
+
+<br/><br/>
+<img class="img-responsive artwork" src="{% static "courses/hw3/p3.jpg" %}"/>
+<br/><br/>
+
+
+<h4>
+    This API serves its purpose, but some programming skill are needed in order to use it properly. Sally is hosting the
+    API on
+    her server, but it is up to you to write the client software to interact with the API. Sally has sent API keys to
+    select people which are required to share songs and ratings. With this API, your API key, and your new
+    programming skills you can share your song recommendations and process the results to find the best music
+    recommendations.
+</h4>
+
+
+<br/>
+<p>Art by <a href="http://anguslam.me/#/?_k=ddxgki">Angus Lam</a></p>
+
+{#1. Sally now has a bunch of free time. She learned to code and she is spending a lot of time talking with her friends#}
+{#about music and going to concerts. #}
+{##}
+{#2. They go to concerts and enjoy their time together and are looking for a good way to share their opinions#}
+{#on various songs. They want a simple way to find the best songs among their group. They tried several sites online, but#}
+{#found that their interest didn't align with any existing community. They would like a private solution that will allow #}
+{#them to quickly share new songs with each other and rate each song.#}
+{##}
+{#3. She has a proposal for you. With her new found programming skills she wants to collaborate with you to her this new #}
+{#idea. She will write the server side code and you will write the client side code. She will also host her code as an API #}
+{#on one of her servers.#}
+
+
+{#<h4>#}
+{#    Inspired by how helpful the Investing software was to Sally, she decided to learn more programming. She is now a#}
+{#    competent coder, but she has another problem. She wants to listen to music, but isn't sure what to listen to. She#}
+{#    wrote and is hosting a web API to collect music reviews, but hasn't been able to get much data to store. She gave#}
+{#    you the specs for the API and you must write code to interact with the API.#}
+{#</h4>#}
+{##}
+{#or it's a collaboration. She write the API and you write the client code.#}
+{##}
+{#<p>#}
+{#    Now that Sally has a lot of free time at work, she wants to spend that time listening to music! She wants to listen#}
+{#    to a new variety of#}
+{#    music, but she doesn't know where to even start looking. She's decided that she will ask for recommendations from#}
+{#    like-minded people. She wants to setup a way for these people to share their favorite songs online, but she can't#}
+{#    find a music review site that fits her needs. Sally setup a web API to help people share ratings. Can you help her#}
+{#    collect and process music reviews and recommend which#}
+{#    songs she should check out?#}
+{#</p>#}
+
+{#http://fury.cse.buffalo.edu/musicRatings#}
+
+
+== Problem Definitions
+
+<p>
+    Specific details on what needs to be completed for the assignment are provided as comments in the handout code:
+</p>
+
+<p>
+    <a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments/homework3musicratings">Autolab</a>
+</p>
+<p>
+    <a href="https://github.com/hartloff/MusicRatings">Repository</a>
+</p>
+
+<p>
+    This homework is correlated with <a href="https://goo.gl/I44oPz">Lab 10</a>.
+</p>
+
+== The API
+
+<p>
+    This API serves as a way for the everyone in the class to used a shared database. The API handles all the database
+    interactions and exposes the following functionality through HTTP requests.
+</p>
+
+<hr/>
+
+<p>
+    GET / (<a href="http://fury.cse.buffalo.edu/musicRatings">http://fury.cse.buffalo.edu/musicRatings</a>)
+</p>
+
+<p>
+    The API contains minimal documentation at its root url above.
+</p>
+
+<hr/>
+
+<p>
+    GET /getAllSongs (<a href="http://fury.cse.buffalo.edu/musicRatings/getAllSongs">http://fury.cse.buffalo.edu/musicRatings/getAllSongs</a>)
+</p>
+
+<p>
+    Making a GET request to /getAllSongs will return every song and rating that has been added using the API. Since
+    this is a GET request it can easily be accessed through a web browser by clicking the link. This will also show
+    the format used to return the information which will need to be parsed. For this assignment you will make requests
+    to
+    /getAllSongs and process the returned data.
+</p>
+
+<hr/>
+
+<p>
+    POST /addSong (<a href="http://fury.cse.buffalo.edu/musicRatings/addSong">http://fury.cse.buffalo.edu/musicRatings/addSong</a>)
+</p>
+
+<p>
+    Use /addSong to add a new song to the API's database. Check the documentation to see an example of the JSON format
+    used to add a song. Any song added must have a valid
+    <a href="http://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video">YouTube video ID</a>
+    (this is not the YouTube link) of a video
+    for the song. To add songs you must use the API key that has been emailed to you.
+</p>
+
+<p>
+    You will add songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been released
+    and can be
+    completed before its designated lab section.
+</p>
+
+<hr/>
+
+<p>
+    POST /rateSong (<a href="http://fury.cse.buffalo.edu/musicRatings/rateSong">http://fury.cse.buffalo.edu/musicRatings/rateSong</a>)
+</p>
+
+<p>
+    Use /rateSong to add rating to a song added by someone other than yourself (you rate your own songs when you add
+    them). Check the documentation to see an example of the JSON format
+    used to rate a song. Songs are identified by their YouTube ID's so there is no need to resend the title and artist
+    while rating a song. To add songs you must use the API key that has been emailed to you.
+</p>
+
+<p>
+    You will rate songs as part of lab 10 (<a href="https://goo.gl/I44oPz">goo.gl/I44oPz</a>). This lab has been
+    released and can be
+    completed before its designated lab section.
+</p>

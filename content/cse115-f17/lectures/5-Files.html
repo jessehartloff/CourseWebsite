@@ -1,0 +1,391 @@
+---
+title: Files
+short_title: files
+next_content_short: algos
+previous_content_short: ds
+---
+
+[Monday - Reading files line-by-line and store the Strings in a DataStructure. try/catch]
+[Wednesday - Guest lecturer. Time to spin the chamber Boris]
+[Friday - Clean up of what wasn't covered between writing files and parsing csv]
+
+
+{#== Files#}
+{##}
+{#Using long-term memory. Files last longer than our program. Persistance#}
+
+== Exceptions
+
+<p>
+    So far everything in the programs we've written have been within our control and any errors have been caused by our
+    code. This is no longer true when we start working with files that may not have been written by our code. When
+    working with files we will write code to interact with the file system of different machines with different
+    operating systems and file permissions to read an write files that can be modified, or even deleted, by other
+    programs and users. Needless to say, there's a lot can go wrong and our code must be able to handle any situation
+    without crashing. We will accomplish this using exceptions along with try/catch blocks.
+</p>
+
+<pre>
+    try{
+        // risky code
+    } catch ([Expected Exception type] [exception name]){
+        // code to run if the exception is thrown
+    }
+</pre>
+
+<p>
+    This is the basic syntax we will see when writing code that can cause errors (throw exceptions). When working with
+    files we will catch the IOException.
+</p>
+
+<pre>
+    try{
+        // code to open a file
+    } catch (IOException ex){
+        ex.printStackTrace();
+    }
+</pre>
+
+<p>
+    In this example we write all the code to interact with a file within the try block. If anything causes an error
+    while trying to open the file, an IOException will be thrown and control will immediately move to the catch block.
+    In this block we will write any code needed to handle the situation and after the code is executed the program will
+    continue after the try/catch blocks. In this case if there is an error opening the file we print the error message
+    to the
+    screen and continue with the program.
+</p>
+
+<p>
+    The most common cause of an IOException that we'll see is trying to open a file that doesn't exist.
+</p>
+
+== Reading Files
+
+
+<pre>
+    String filename = "src/test.txt";
+    for(String line : Files.readAllLines(Paths.get(filename))){
+        System.out.println(line);
+    }
+</pre>
+
+<p>
+    This code snippet will read a file in the folder "src" named "test.txt" and iterate over each line in a for-each
+    loop. Inside the loop we print each line to the screen. This is the syntax we will use to read files in this course.
+</p>
+
+<p>
+    Note: There are many ways to open files in java that you are free to explore. Each has certain advantages and
+    disadvantages though you can complete all the assignments for this course using the method shown in this section
+</p>
+
+<p>
+    We've explored most of the concepts in this snippet except <code>Files.readAllLines(Paths.get(filename))</code>. In
+    this code we see 2 more java classes (Files and Paths) that contain more methods that help us accomplish our goals.
+    First, the Paths.get method converts a String into a Path to a file. To us, the String already told us the path to a
+    file, but this methods converts that String into a Path that java will understand. Once we have a Path to a file we
+    call Files.readAllLines which reads a Path and returned a List of Strings containing all the lines of the given
+    file. We use this list in a for-each loop to iterate over the lines one at a time.
+</p>
+
+<p>
+    Since we used 2 more java classes we must remember to import these classes.
+</p>
+
+<pre>
+    import java.nio.file.Files;
+    import java.nio.file.Paths;
+</pre>
+
+<p>
+    To complete this example we need to add a try/catch block. As mentioned earlier, reading from a file can cause
+    errors that are out of our control and we need to specify how our program will react to an error in a catch
+    block.
+</p>
+
+<pre>
+    try{
+        String filename = "src/test.txt";
+        for(String line : Files.readAllLines(Paths.get(filename))){
+            System.out.println(line);
+        }
+    } catch (IOException ex){
+        ex.printStackTrace();
+    }
+</pre>
+
+<p>
+    Now if there is an error it will be caught and we will print the error message to the screen. If we don't handle
+    this error the program will not run! It will instead alert you of an <code>Unhandled Exception</code> and refuse to
+    run.
+</p>
+
+<p>
+    Since IOException is another java class it too must be imported for this program to run. Putting everything together
+    we have the following program.
+</p>
+
+<pre>
+    import java.nio.file.Files;
+    import java.nio.file.Paths;
+    import java.io.IOException;
+
+    public class FileReadExample {
+
+        public static void main(String[] args){
+            try{
+                String filename = "src/test.txt";
+                for(String line : Files.readAllLines(Paths.get(filename))){
+                    System.out.println(line);
+                }
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+
+    }
+</pre>
+
+<p>
+    This program will attempt to read <code>src/test.txt</code> and print its contents to the screen. If an error occurs
+    while reading the file (ex. the file doesn't exist) the catch block will execute and the error will be printed
+    <em>without</em> crashing the program.
+</p>
+
+<hr/>
+
+<h3>String to number</h3>
+
+<p>
+    We will often want to read numbers from files, but we read data from files as Strings. Recall that when we use the
+    wrapper classes for primitives we gain access to methods that can help us work with these values. We can use one of
+    these methods to create Integers and Doubles from Strings.
+</p>
+
+<pre>
+    int j = new Integer("10");
+    double number = new Double("1.55");
+</pre>
+
+<p>
+    By creating a new Integer or Double and providing a String in the proper format for each type of number we can
+    convert the String to number. The method we are using is called a constructor which is a special type of method that
+    is called when a new object is created. Note that even though we are creating new objects (the type starts with an
+    uppercase
+    letter) we can store the values in primitive variable (the type starts with a lowercase letter) and java will
+    automatically convert between the two types.
+</p>
+
+== Array
+
+<p>
+    Before we can explore CSV we'll need to learn about arrays. An array is a very basic data structure that does little
+    else besides store data. In fact an ArrayList uses an array to store data, but adds many useful methods such as add
+    and contains.
+</p>
+
+<p>
+    The following example shows all ways we interact with arrays.
+</p>
+<pre>
+    String[] stringArray = new String[3];
+
+    stringArray[0] = "firstElement";
+    stringArray[1] = "secondElement";
+    stringArray[2] = "thirdElement";
+
+    System.out.println(stringArray[1]);
+    System.out.println(stringArray.length);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>secondElement<br/>3</kbd>
+
+<p>
+    Here we notice that [] are used extensively when working with arrays and they are used where we usually expect ().
+    Here are the important points to note from the example above:
+</p>
+
+<ul>
+    <li>To create an array variable we add [] after the type we want to store.</li>
+    <li>When we create an array we must declare it's size in brackets. This size is the number of number of values of
+        the specified type that can be stored in the array.
+    </li>
+    <li>The size of an array cannot change.</li>
+    <li>We insert and access values using brackets with an index number. we can think of stringArray[0] being the
+        variable name for the first element of the array, as in [0] is part of the variable name and only the index
+        changes for each elements. This array really behaves as 3 separate variables.
+    </li>
+    <li>We can access the size of the array using stringArray.length. Note that this is not a method call since there is
+        no () at the end. This is accessing an int variable named length which is stored in the array.
+    </li>
+</ul>
+
+<p>
+    Since ArrayLists add many more features to arrays (most importantly a dynamic size) we tend to favor the ArrayList
+    over a plain array. We will however need to know how to work with arrays as we'll see when working with data stored
+    in the CSV format. In this case we will us a String method called split which will return an array of Strings which
+    we'll need to know how to access to read the data we need.
+</p>
+
+== Comma Separated Values (CSV)
+
+
+{% load staticfiles %}
+
+
+<h4>Alan's guest lecture material:</h4>
+<ul>
+    <li><a href="{% static "courses/CSVFiles.pptx" %}">CSV Slides</a></li>
+    <li><a href="{% static "courses/src.zip" %}">Code example</a></li>
+</ul>
+
+
+<p>
+    As we store data in files that can be read by a wide variety of programs we have a need to agree on common ways to
+    store our data. If we follow a common format it allows us to communicate across programs writen by other people and
+    possible in different languages. The first format we will is comma separated values or CSV (The next format we study
+    will be JSON, or JavaScript Object Notation). Data stored as CSV is, as the name implies, separated by commas. In a
+    csv file we can have each line contain several pieces of information separated by commas with each line representing
+    different data. A sample of a CSV file stores stock prices and volume could look like this.
+</p>
+
+<pre>
+    2016-12-06,109.949997,26075900
+    2016-12-05,109.110001,34037300
+    2016-12-02,109.900002,26409800
+    2016-12-01,109.489998,36825800
+</pre>
+
+<p>
+    This sample happens to contain the information about Apple's stock over the first few trading days in December 2016.
+    Here, the first value contains the date, the second value is the price of a share of the stock, and the third value
+    is the trading volume (number of shares traded that day). Each value is separated by comma to indicate that a new
+    value is starting. Since the values are separated in a predictable way we can write software that will look for
+    commas and split the data accordingly. We will accomplish this using the split method for Strings.
+</p>
+
+<pre>
+    String allValues = "2016-12-06,109.949997,26075900";
+    String[] data = allValues.split(",");
+    System.out.println(data[0]);
+    System.out.println(data[1]);
+    System.out.println(data[2]);
+</pre>
+
+<p>
+    Output: </p>
+<kbd>2016-12-06<br/>109.949997<br/>26075900</kbd>
+
+<p>
+    Using the split method allows us to split a string using any other string as a separator, in this case a comma. The
+    split method returns an array of Strings and its elements can be accessed using the array notation []. Care must be
+    taken to not attempt to access an element at an index that does not exist (For example, accessing the 4th element
+    when there are only 3 values).
+</p>
+
+<p>
+    If you prefer to not work with arrays you can add the data into an ArrayList using the Arrays.asList method as
+    follows.
+</p>
+
+<pre>
+    String allValues = "2016-12-06,109.949997,26075900";
+    String[] data = allValues.split(",");
+    ArrayList&lt;String&gt; dataInList = new ArrayList&lt;String&gt;(Arrays.asList(data));
+    System.out.println(dataInList.get(0));
+    System.out.println(dataInList.get(1));
+    System.out.println(dataInList.get(2));
+</pre>
+<p>
+    Output: </p>
+<kbd>2016-12-06<br/>109.949997<br/>26075900</kbd>
+
+<p>
+    This code accomplishes the same task as the previous example but adds the data into an ArrayList instead of using
+    the array. There is mostly no difference between the two samples, besides performance, so you can choose whether to
+    use arrays or ArrayLists.
+</p>
+
+
+== Writing Files
+
+<p>
+    To create a and write to a file in java we will use the follow method calls which are similar to the way we read
+    files.
+</p>
+
+<pre>
+    String filename = "src/example.txt";
+    String textToWrite = "This will be written to the file";
+    Files.write(Paths.get(filename), textToWrite.getBytes());
+</pre>
+
+<div class="alert alert-warning">
+    If a file with the give name already exists, Files.write will overwrite the existing file without warning.
+</div>
+
+<p>
+    Here we use the Files.write method which takes a file Path and the text to write to the file as arguments. The file
+    must be specified as a Path just like it did for reading files so we will the filename as a String to the Paths.get
+    method to covert it to a Path. Next, the method requires an array of bytes to write to the file. Conveniently, the
+    String class contains a method called getBytes that will return an array of bytes representing the value of the
+    String. By calling both Paths.get and getBytes we convert the inputs into the format expected by Files.write.
+</p>
+
+
+<p>
+    Adding all our import statements, try catch, and class definition will yield the following java program.
+</p>
+
+<pre>
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class Example {
+
+    public static void main(String[] args){
+        
+        try{
+            String filename = "src/example.txt";
+            String textToWrite = "This will be written to the file";
+            Files.write(Paths.get(filename), textToWrite.getBytes());
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
+    
+}
+</pre>
+
+<p>
+    If we know a file with the given name already and we want to add to the end of the file without overwriting the
+    original we can use the append option as follows.
+</p>
+
+<pre>
+    Files.write(Paths.get(filename), textToWrite.getBytes(), StandardOpenOption.APPEND);
+</pre>
+
+<p>
+    This append option is part of a class we haven't used yet so we also need to import this class <code>import
+    java.nio.file.StandardOpenOption;</code> before use. If the append option is used and the file does not already
+    exist a <code>NoSuchFileException</code> will be thrown.
+</p>
+
+<p>
+    Note: As with reading from files, there are many different ways to write files in java. This methods provides simple
+    syntax making it a good choice for writing your first files and you are encouraged to explore other methods once you
+    are comfortable with Files.write.
+</p>
+
+{#== Navigating directories#}
+{##}
+{#os.walk#}
+{##}
+{#Format every file in a directory#}
+{#<br/>#}
+{#Aggregate data across multiple files. The first interesting HW assignment.#}

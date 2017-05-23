@@ -1,0 +1,263 @@
+---
+title: Networking
+short_title: internet
+next_content_short: json
+previous_content_short: libraries
+---
+
+
+[Monday - Protocols, HTTP, the Internet. Introduce the library. HTTP GET]
+[Wednesday - Make an HTTP POST request]
+[Friday - Examples. OAuth?]
+
+
+== The Internet
+
+<p>
+    We've seen many of the capabilities of computers and programming in this course, but realistically
+</p>
+
+<h4>
+    the Internet is the reason why we carry computers in our pockets and backpacks.
+</h4>
+
+<p>
+    Computers are significantly less interesting without the ability to connect to the Internet. Let's
+    write code that connects our computers to the Internet.
+</p>
+
+{#Is great!#}
+{#It's the reason why most of us carry tiny computers in our pocket. Computers have revolutionized the world over the #}
+{#past 20 years, but they've been around a lot longer than that. They can crunch the hell out of numbers. Companies used #}
+{#them to manage and process their data to streamline logistics, but what of the home PC? Word processing and games? #}
+{#It wasn't until the Internet became common that the world changed. We can now communicate. Trying going a day without #}
+{#Internet. Would you even touch your computer or smart phone? The fundamentals were ok, but let's get connected.#}
+
+
+== HTTP
+
+<p>
+    HyperText Transfer Protocol. The language of the Internet.
+</p>
+
+{#<p>#}
+{#    It is easy to think of the Internet as an incredible piece of technology that works via magic. The Internet is#}
+{#    very physical.#}
+{#</p>#}
+
+<p>
+    The Internet is massive collection of devices connected to the same network. Any device can send messages to any
+    other connected device. Devices that are listening for messages are called servers, while devices sending messages
+    and called clients. With so many devices "talking" to each other there is a need to standardize the way they
+    communicate. Enter HTTP.
+</p>
+
+<p>
+    HTTP is the protocol used to send messages between clients and servers. Each server on the Internet will be
+    listening for HTTP requests from any client on the Internet. The full details of HTTP could fill an entire course,
+    though for this course we will cover only 2 aspects of HTTP.
+</p>
+
+<dl>
+    <dt>
+        HTTP GET Request
+    </dt>
+    <dd>
+        A client will send a GET request to ask a server to send data back to the client in response. Every time we
+        click a link we are sending a GET request to the server specified by that link. The response from the server is
+        the requested web page.
+    </dd>
+    <dt>
+        HTTP POST Request
+    </dt>
+    <dd>
+        A client sends a POST request to send data to a server. POST requests are commonly use in web forms. When we
+        fill out a form and click send, we are sending a POST request to a server containing the information we entered
+        into the form.
+    </dd>
+</dl>
+
+<p>
+    With these two types of requests we can ask a server for information and send information to a server. This enables
+    2-way communication over the Internet.
+</p>
+
+
+== Web API's
+
+<p>
+    We typically interact with the internet by making HTTP GET
+    requests
+    through a web browser. The response of these GET requests is a mix of HTML, CSS, and JavaScript that tells
+    the browser how to display the requested web page. These pages can contain links that we click to make a GET request
+    for another page, or forms with buttons that make POST requests containing the data we enter. But what if want to
+    interact with the Internet through the software we've written? What if we want to write a bot to automate posts on
+    social
+    media, an
+    app to get the current weather and notify us if it's going to rain soon, display only text from blog posts without
+    all the clutter, or watch the current bid on an online auction. All of these are possible with a little work, but it
+    can be tedious to write code that reads pages made for humans. If you are interested in these applications search
+    for tutorials about web crawlers and explore what you can do with you new programming skills.
+</p>
+
+<p>
+    We won't explore web crawlers in this course, but there is another way to write software for the Internet by using
+    Web APIs. A web API is a web application hosted on a server that is designed to be used directly through
+    software instead of
+    viewed in a browser. To this end, when a web API receives an HTTP request the response will only contain the
+    requested data without complex formatting. This raw data will be in a standardized format that is easily parsed with
+    software (ex. CSV, JSON). A web API will not return HTML, CSS, or Javascript. If it did, it would be a
+    web site intended to be viewed through a browser. We will connect to web APIs via java programs to communicate over
+    the Internet.
+</p>
+
+
+== The Library
+
+<a href="https://hc.apache.org/">https://hc.apache.org/</a>
+
+<p>
+    We will use Apache's HttpComponents library to help us make HTTP requests over the Internet. This library contains
+    a multitude of classes to explore, though we will only need to use a few of these for our purposes in this course.
+</p>
+
+<p>
+    This library will be setup in the repository of any assignment for which it's required.
+</p>
+{#We'll use an external library with functions that help us to connect to the Internet.#}
+{##}
+{#Get HTML from a url#}
+{#client-server#}
+{#We need an HTTP client in our programs. The most common HTTP client software? Web browsers.#}
+{##}
+
+
+== HTTP GET
+
+<p>
+    To make an HTTP GET request using the Apache HttpComponents library we will use the following method. This method
+    can be used directly in all of your assignments. This is one case where you can cut and paste this code wherever you
+    need it.
+</p>
+
+
+<pre><code class="java">
+public static String getRequest(String url){
+    String response = "";
+
+    try{
+        response = Request.Get(url).execute().returnContent().asString();
+    }catch(IOException ex){
+        ex.printStackTrace();
+    }
+
+    return response;
+}
+</code></pre>
+
+<p>
+    This method will use the library to connect to a url (link). The Request class from the library is used to send a
+    GET
+    request to the url and return the response as a String. As with files, connecting to a website can go wrong (ex. if
+    an invalid link is used), so the method calls are wrapped in a try/catch block.
+</p>
+
+<p>
+    Notice that 4 method calls are chained together in this method. This is a way of calling a method on the returned
+    value of another method without having to store the intermediate results in variables. The static method Get
+    returns an object of type Request which has a non-static method named execute which returns an object of type
+    Response which has a non-static method named returnContent which returns an object of type Content which has a
+    non-static method named asString. Through these calls the Request is created, executed to obtain a Response from the
+    server, the Content is extracted from the response, then the Content is converted to a String which is returned to
+    us for further processing.
+</p>
+
+== HTTP POST
+
+<p>
+    Similar to the get method this method will send a POST request with the provided params to the provided url. The
+    params String is the data to be sent to the server identified by the url. This method
+    can be used directly in all of your assignments. This is one case where you can cut and paste this code wherever you
+    need it.
+</p>
+
+<pre><code class="java">
+public static String postRequest(String url, String params){
+    String response = "";
+
+    try{
+        response = Request.Post(url)
+                .bodyString(params, ContentType.DEFAULT_TEXT)
+                .execute().returnContent().asString();
+    }catch(IOException ex){
+        ex.printStackTrace();
+    }
+
+    return response;
+}
+</code></pre>
+
+<p>
+    This method is written in much the same way as the get method with only a few differences. First, the method calls
+    are on separate lines which is a matter of formatting. It can be easier to read chained method calls if they
+    are on separate lines and this is still valid syntax. Second, there is a call to bodyString which adds our params to
+    the POST request in the format expected by the server (The format used by HTTP).
+</p>
+
+<p>
+    Most of this code will be the same every time you use this method, but you must specify the content type to match
+    the type of information being sent. When we start sending JSON strings in HTTP POST requests we will change this
+    value to ContentType.APPLICATION_JSON. This will tell the server how to handle the request. If the wrong content
+    type is used the request might not be handled as expected.
+</p>
+
+<p>
+    More details on the origin of these two methods can be found here: <a
+        href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html">https://hc.apache.org/httpcomponents-client-ga/tutorial/html/fluent.html</a>
+</p>
+
+
+== Query Strings
+
+<p>
+    Some pages are setup to take arguments in the page's url to be used with a GET request. These arguments are
+    contained in a part of the url called
+    the query string. Query strings are used so a singe web page can display a wide variety of different content without
+    using different paths (note: many sites simply use different paths for this purpose). When
+    the page is served a different version of the page is sent based on the specific query provided, though most of the
+    page is typically the same and the same code is executed on the server for different queries. Let's look at an
+    example to see how this works.
+</p>
+
+<h4>https://www.youtube.com/watch?v=5jmN_tBS0t4</h4>
+
+<p>
+    This string represents a url for a YouTube video. If we break it into it's different parts we can see that it will
+    send a request using the https protocol (an encrypted http request) to the server(s) named "www.youtube.com" at the
+    path "/watch" with the query string "v=5jmN_tBS0t4". To append a query string to a url we use a single question
+    mark. The server will look for this question mark and interpret everything after it as the query string. The query
+    string itself will contain any number of key-value pairs separated by &'s. In this example we have 1 key (v) with
+    the value (5jmN_tBS0t4). This tells youtube that you want to watch the video with the video ID "5jmN_tBS0t4" and the
+    server will respond with the usual YouTube interface with this specific video in the player, along with
+    recommendations related (or unrelated in some cases) to this video.
+</p>
+
+<h4>
+    https://www.google.com/search?q=cats&as_filetype=gif&lr=lang_ja
+</h4>
+
+<p>
+    This is an example of a query string containing multiple key-value pairs. In this case we have three pairs:
+</p>
+
+<ul>
+    <li>The key "q" (query) contains the value "cats"</li>
+    <li>The key "as_filetype" contains the value "gif"</li>
+    <li>The key "lr" contains the value "lang_ja"</li>
+</ul>
+
+<p>
+    Interpreting this query, we are requesting a Google search for gifs of cats from web sites that are in Japanese.
+    (For more information about Google search parameters see <a
+        href="https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters">https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters</a>)
+</p>

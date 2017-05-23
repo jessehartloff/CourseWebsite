@@ -1,0 +1,479 @@
+---
+title: Functions
+short_title: functions
+next_content_short: ds
+previous_content_short: loops
+---
+
+
+[Monday - Calling methods (Math, String)]
+[Wednesday - Writing methods (explain main method)]
+[Friday - Complex methods (multiple parameters. Maybe show some grading code and my main method/why their main is ignored)]
+
+[With hindsight: This week seemed fine, but students struggled in lab since they never had to write a method header
+until then. Next time have PS/Lecture questions that only have a comment that gives an english description of the
+method they should write without providing the skeleton]
+
+== Functions
+
+{% load staticfiles %}
+
+<a href="{% static "courses/115Slides/3-Functions.pptx" %}">Functions Concept Slides</a>
+<br/><br/>
+{#Slides#}
+
+{#_technically_ you can do anything with what you now know (exaggeration, but not nearly as much as you'd think).#}
+{#You have at your disposal what's called a turing complete language, a language that can do anything that can be#}
+{#done by any computer. Everything else we will do in this course will be exploring what can be done with this power.#}
+{#Much of this will include using code that other people have written.. but how to use their code? They package them in#}
+{#methods and we call their code.#}
+
+<p>
+    Functions provide a way for us to store lines of code to be used later. The code stored in a function can be reused
+    as many times as we'd like making functions a great way to store commonly needed code and using whenever it's
+    needed without having to rewrite, or even revisit, the code. Taking this one step further, it also allows us to
+    easily share code with others. If someone has shared a function that does what we need, we can use that function
+    instead of writing our own code to do the same thing. In this case, we don't even have to think about how to solve
+    the problem. We just use the function that is available to us.
+</p>
+
+<p>Functions allow us to:</p>
+<ul>
+    <li>Reuse code</li>
+    <li>Ignore details</li>
+    <li>Organize code</li>
+    <li>Get more done faster</li>
+</ul>
+
+<hr>
+<h4>Parameters</h4>
+<p>We don't always a function to perform the exact same action every time it's called. For instance, what if we want to
+    write a function to compute the cube of any given number. Here we will use parameters (input variables) in the
+    function to get the value of the number to cube.</p>
+<p>
+    A function must be correct on every possible input value.
+</p>
+
+<hr/>
+<h4>Return value</h4>
+<p>
+    Functions can optionally return a value. This value is given back to whomever called the function. In the example
+    above, the cube of the input would be returned to the caller.
+</p>
+{##}
+{#Reuse functions. Programmers are lazy/efficient.#}
+{##}
+{#So we can think at a higher level and ignore some details.#}
+{#To start a car. Sit down, insert key, turn key.. no. Just start the car#}
+{##}
+{#Have a piece of code that we often? Put it in a function! Then use it anywhere in your code.#}
+{##}
+{#Lets you stay focused on writing software without always thinking about how every single piece is working.#}
+{#Write it once, use it often.#}
+{##}
+{#Helps us organize code.#}
+{##}
+{#Like variables, but stores code instead of a value. Code is inserted into you program inside a separate block when a#}
+{#function is called.#}
+{##}
+{#Must be correct on all inputs#}
+
+== Methods
+
+<p>We are covering the concept of functions, but there are no functions in java! Don't panic, we will still use
+    everything we're learning about functions but in java we will apply our knowledge to methods.</p>
+
+<ul>
+    <li><b>Method</b>: A procedure defined within a class.</li>
+</ul>
+
+<p>
+    In java every line of code we write is part of a class, with very few exceptions. Since all our code is contained
+    within a class we are writing methods, not functions.
+</p>
+
+<hr/>
+<h4>Calling a method</h4>
+
+<p>
+    There are many different ways to call a method. We will analyze this common format first.
+</p>
+
+<pre>
+[variable name] = methodName([arguments]);
+</pre>
+
+
+<ul>
+    <li><b>variable name</b>: The variable where the return value of the method will be stored</li>
+    <li><b>methodName</b>: The name of the method to be called</li>
+    <li><b>arguments</b>: The inputs to the method. The order of the arguments is important.</li>
+</ul>
+
+<hr/>
+
+<pre>
+[variable name] = [class].methodName([arguments]);
+</pre>
+<pre>
+[variable name] = [object].methodName([arguments]);
+</pre>
+
+<p>
+    In this lesson we will call methods that are part of a class (Math) or part of an object (String instance). In
+    these cases we will use the dot operator (.) to access the methods of the class/object.
+</p>
+
+
+{#We've been using one method all along. void System.out.println(String text); or just println.#}
+{#System.out is called the package.#}
+
+
+== Math Methods
+
+<p>
+    <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html#method_summary">Math Methods</a>
+</p>
+
+<p>
+    Java provides a variety of methods to perform common mathematical operations contained in the Math class. We will
+    see a few example methods below. See the link above for a full reference of methods in the Math class.
+</p>
+
+<hr/>
+<h4>Square Root</h4>
+<p>
+    Math.sqrt(double input) returns the square root of the input double.
+</p>
+<pre>
+    double input = 9.0;
+    double result = Math.sqrt(input);
+    System.out.println(result);
+</pre>
+
+<p>
+    Output: <kbd>3.0</kbd>
+</p>
+
+
+<hr/>
+<h4>Absolute Value</h4>
+<p>
+    Math.abs(double input) returns the square root of the input double. The abs method will also work with int,
+    long, and float types.
+</p>
+<pre>
+    double input = 9.0;
+    double negativeInput = -9.0;
+    double result = Math.abs(input);
+    double negativeResult = Math.abs(negativeInput);
+    System.out.println(result);
+    System.out.println(negativeResult);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>9.0<br/>9.0</kbd>
+
+
+<p>
+    Absolute value is useful for distance calculations. Here we compute the distance between two numbers with the same
+    result regardless of the order of the subtraction. This allows us to compute distance even if we don't know which
+    value is larger.
+</p>
+<pre>
+    double a = 15.0;
+    double b = 10.0;
+    double distance = Math.abs(a-b);
+    double reverseDistance = Math.abs(b-a);
+    System.out.println(distance);
+    System.out.println(reverseDistance);
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>5.0<br/>5.0</kbd>
+
+
+<hr/>
+<h4>Exponentiation</h4>
+<p>
+    Math.pow(double a, double b) return a raised to the b power. This method takes 2 inputs separated by a comma and
+    their order is important.
+</p>
+<pre>
+    double base = 2.0;
+    double exponent = 8.0;
+    double result = Math.pow(base, exponent);
+    System.out.println(result);
+</pre>
+
+<p>
+    Output: <kbd>256.0</kbd>
+</p>
+
+<hr/>
+<h4>Random Number Generator (RNG)</h4>
+
+<p>
+    Math.random() will return a pseudo-random double between 0.0 and 1.0.
+</p>
+
+<pre>
+    if(Math.random() > 0.5){
+        System.out.println("There is a 50% chance this line will be printed");
+    }
+</pre>
+<p>
+    Each time the above is executed there will be a 50% chance that the String value will be printed to the console.
+</p>
+<p>What if we don't want a value in the range 0.0-1.0? What if we want a value from 0.0-100.0? We'll multiply the
+    result!</p>
+
+<pre>
+    double randomNumber = Math.random()*100;
+    System.out.println("The random value is: " + randomNumber);
+</pre>
+
+<p>The output will be a random double between 0.0 and 100.0</p>
+
+
+== String Methods
+
+<p>
+    <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#method_summary">String Methods</a>
+</p>
+
+<p>
+    The String methods are slightly different that Math methods in that they are called on a specific instance of a
+    String value using the . operator (dot operator). This means we must have a String in our control to use these
+    methods. Below are a few common String methods. See the link above for a complete list of String methods.
+</p>
+
+
+<hr/>
+<h4>Length</h4>
+<p>
+    length() returns the number of characters in the String. This includes spaces and other white space characters.
+</p>
+<pre>
+    String input = "a String";
+    int inputLength = input.length();
+    System.out.println(inputLength);
+</pre>
+
+<p>
+    Output: <kbd>8</kbd>
+</p>
+
+
+<hr/>
+<h4>Contains</h4>
+<p>
+    contains(String pattern) returns true if the String contains pattern as a sub string, false otherwise.
+</p>
+<pre>
+    String url = "buffalo.edu";
+    System.out.println(url.contains(".com");
+    System.out.println(url.contains(".edu");
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>false<br/>true</kbd>
+
+
+<hr/>
+<h4>Lower Case</h4>
+<p>
+    toLowerCase() returns a copy of the String in all lower case letters. Note that this method does not change the
+    value of the String itself.
+</p>
+<pre>
+    String input = "STOP YELLING";
+    String output = input.toLowerCase();
+    System.out.println(input);  // The original value is unchanged
+    System.out.println(output); // The method call returns the lowercase String
+</pre>
+
+<p>
+    Output:
+</p>
+<kbd>STOP YELLING<br/>stop yelling</kbd>
+
+
+== Defining Methods
+
+<p>
+    Method definition:
+</p>
+<pre>
+[access] [return type] methodName([parameters]){
+  [body]
+ }
+</pre>
+
+<dl>
+    <dt>access</dt>
+    <dd>Determines how the method can be accessed. We will explore different levels of access when we explore classes.
+        For now, we've been using "static" which allows us to call the method without creating an instance of the class
+        (object).
+    </dd>
+    <dt>return type</dt>
+    <dd>The type of the variable returned by the method. The method must contain a return statement with a value of
+        this type. If the return type is "void" the method doesn't return a value and can omit the return statement.
+    </dd>
+    <dt>methodName</dt>
+    <dd>The name used to call the method.</dd>
+    <dt>parameters</dt>
+    <dd>Comma-separated list of the methods input variables.</dd>
+</dl>
+
+<p>
+    Calling a method:
+</p>
+<pre>
+    methodName([arguments])
+</pre>
+<dl>
+    <dt>methodName</dt>
+    <dd>The name used to define the method.</dd>
+    <dt>arguments</dt>
+    <dd>Comma-separated list of the methods input values. The values will assigned to the parameters in the method
+        definition. The types and order must match between the arguments and parameters.
+    </dd>
+    <dt>return value</dt>
+    <dd>A method call is an expression that evaluates to a value matching the return type of the method. This is the
+        value that is returned with the <code>return</code> keyword inside the body of the method.
+    </dd>
+</dl>
+
+
+<hr/>
+
+<p>
+    Let's examine a java program and trace through its execution.
+</p>
+
+<pre>
+    static int myMethod(int input){
+        int result = input*10;
+        return result;
+    }
+
+    public static void main(String[] args){
+        int returnValue = myMethod(5);
+        System.out.println(returnValue);
+    }
+</pre>
+
+<p>
+    Output: <kbd>50</kbd>
+</p>
+
+<br/><br/>
+<p>Breakdown:</p>
+<ol>
+    <li><code>public static void main(String[] args){</code> Execution starts with the main method</li>
+    <li><code>int returnValue = myMethod(5);</code> The right side of the equal sign need to be evaluated to a single
+        int value
+    </li>
+    <li><code>myMethod(5)</code> Look for a method named myMethod and call it with an argument of 5 as an int</li>
+    <li><code>static int myMethod(int input){</code> Shift control to myMethod to resolve the method call</li>
+    <li><code>int input = 5;</code> <b>The hidden line</b>. Create an int variable, name it input, and assign it the
+        argument value of 5
+    </li>
+    <li><code>int result = input*10;</code> Create an int variable, name it result, and assign it the result of input*10
+    </li>
+    <li><code>int result = 5*10;</code></li>
+    <li><code>int result = 50;</code></li>
+    <li><code>return result;</code> Return the value of result back to the main method</li>
+    <li><code>return 50;</code> *The return value must match the return type from the method header</li>
+    <li><code>int returnValue = 50;</code> Back in the main method, the call to myMethod(5) is replaced by its return
+        value. All variable declared within the method fall out of scope and are destroyed
+    </li>
+    <li><code>System.out.println(returnValue);</code> Print the value of returnValue</li>
+    <li><code>System.out.println(50);</code></li>
+    <li><code>System.out.println("50");</code></li>
+    <li><code>}</code> The end of the main method is reached and the program ends</li>
+</ol>
+
+
+<hr/>
+
+
+{#-Void with no parameters (I want to print this message whenever called)#}
+{#-Void with parameters (Print hello to the parameter) (the hidden lines of code)#}
+{#-Non-void with parameters (Simple math method)#}
+{#-Multiple parameters. Stress the order.#}
+{#-Non-void without parameters? Foreshadow getters?#}
+{##}
+{#Scope. Parameters don't exist outside the method.#}
+{##}
+{#method stores all the fixed code. Parameters are the only part that might change.#}
+
+== Multiple Parameters
+
+<p>
+    If a method requires multiple parameters, their types and names are given as a comma-separated list. It is important
+    to note the order of these parameters when calling a method with multiple parameters.
+</p>
+
+<pre>
+    static int subtract(int firstParameter, int secondParameter){
+        return firstParameter - secondParameter;
+    }
+
+    public static void main(String[] args){
+        System.out.println(subtract(5,3));
+        System.out.println(subtract(3,5));
+    }
+</pre>
+
+<p>
+    Output: </p>
+<kbd>2<br/>-2</kbd>
+
+<p>
+    In the case of calling <code>subtract(5,3)</code> there are now 2 hidden lines of code that executed before running
+    the method's code, <code>int firstParameter = 5;</code> and <code>int secondParameter = 3;</code>.
+</p>
+<p>
+    When calling <code>subtract(3,5)</code> the hidden lines are <code>int firstParameter = 3;</code> and <code>int
+    secondParameter = 5;</code>.
+</p>
+
+<p>A method may contain any number of parameters, even 0. Many of the early methods in this course didn't have any
+    parameters and took the form of <code>Q1()</code>. Even with no parameters, method calls and definitions must
+    include the parentheses. In this way Java can distinguish between a method with no parameters, and a variable name.
+</p>
+
+== void
+
+<p>
+    Defining a method with a return type of void means the method doesn't return anything when it is called. These are
+    typically methods that perform an action, as opposed to computing a value. An example of a method with return type
+    void is <code>System.out.println</code>. We use his method to print text to the screen for the user to read and we
+    don't need any return value.
+</p>
+
+<p>
+    When defining methods with a void return type, including a return statement is optional. If a return statement is
+    used in a void method it must be used with no value <code>return;</code> and functions similar to
+    <code>break;</code> in a loop in that it immediately exits the function call and returns control to the calling
+    method.
+</p>
+
+{#== Code Style#}
+{##}
+{#Using methods is essential to writing readable/debuggable code. Large programs that don't use methods are messy.#}
+{##}
+{#Example code. Identify which parts could benefit from being methods and factor out that code.#}
+
+{#== End Part 1 [Fundamentals]#}
+{##}
+{#You now know how to code! Congrats!#}
+

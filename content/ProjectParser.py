@@ -7,8 +7,6 @@ django.setup()
 
 from courses.models import Course, Group, Repository, Developer, Video, Extra
 
-directory = "content/cse442-groups/"
-
 
 class Group_O:
     def __init__(self, group_name):
@@ -26,7 +24,7 @@ class Group_O:
         self.landing_link = ""
 
 
-def parse_groups():
+def parse_groups(directory):
     group_file = directory + "groups"
     all_groups = {}
     all_with_duplicates = []
@@ -66,7 +64,7 @@ def parse_groups():
     return [all_students_in_groups, all_groups, group_objects]
 
 
-def parse_group_descriptions(groups_objects):
+def parse_group_descriptions(directory, groups_objects):
     group_descriptions_file = directory + "group_descriptions"
     with open(group_descriptions_file, "r") as group_descriptions:
         for line in group_descriptions:
@@ -85,7 +83,7 @@ def parse_group_descriptions(groups_objects):
             groups_objects[group_name].project_description = project_description
 
 
-def parse_group_ta(groups_objects):
+def parse_group_ta(directory, groups_objects):
     group_ta_file = directory + "ta-groups.txt"
     with open(group_ta_file, "r") as group_ta:
         for line in group_ta:
@@ -102,7 +100,7 @@ def parse_group_ta(groups_objects):
             groups_objects[group_name].ta = ta_ubit
 
 
-def parse_group_repos(groups_objects):
+def parse_group_repos(directory, groups_objects):
     group_repo_file = directory + "AllRepos"
     with open(group_repo_file, "r") as group_repo:
         for line in group_repo.readlines():
@@ -122,7 +120,7 @@ def parse_group_repos(groups_objects):
                 groups_objects[group_name].private = True
 
 
-def parse_group_landing_pages(groups_objects):
+def parse_group_landing_pages(directory, groups_objects):
     landing_pages_file = directory + "landing_pages"
     with open(landing_pages_file, "r") as landing_pages:
         for line in landing_pages.readlines():
@@ -155,7 +153,7 @@ def youtube_url_validation(url):
 
 # end source
 
-def parse_group_videos(groups_objects):
+def parse_group_videos(directory, groups_objects):
     group_video_file = directory + "AllVideos"
     with open(group_video_file, "r") as group_video:
         for line in group_video.readlines():
@@ -175,7 +173,7 @@ def parse_group_videos(groups_objects):
             groups_objects[group_name].videos[video_occasion] = video_id
 
 
-def parse_extra(groups_objects, file, type):
+def parse_extra(directory, groups_objects, file, type):
     group_extra_file = directory + file
     with open(group_extra_file, "r") as group_extra:
         for line in group_extra.readlines():
@@ -194,16 +192,16 @@ def parse_extra(groups_objects, file, type):
             groups_objects[group_name].extra[type] = extra_link
 
 
-def parse_files():
-    [students_in_groups, groups, groups_o] = parse_groups()
+def parse_files(directory):
+    [students_in_groups, groups, groups_o] = parse_groups(directory)
 
-    parse_group_descriptions(groups_o)
-    parse_group_ta(groups_o)
-    parse_group_repos(groups_o)
-    parse_group_videos(groups_o)
-    parse_extra(groups_o, "beta_testing", "Beta Testing")
-    parse_extra(groups_o, "content_creation", "Content Creation")
-    parse_group_landing_pages(groups_o)
+    parse_group_descriptions(directory, groups_o)
+    parse_group_ta(directory, groups_o)
+    parse_group_repos(directory, groups_o)
+    parse_group_videos(directory, groups_o)
+    parse_extra(directory, groups_o, "beta_testing", "Beta Testing")
+    parse_extra(directory, groups_o, "content_creation", "Content Creation")
+    parse_group_landing_pages(directory, groups_o)
 
     return groups_o
 
@@ -217,7 +215,8 @@ def process_projects(course_number):
     course.course_project = True
     course.save()
 
-    all_groups = parse_files()
+    directory = "content/" + course_number + "-groups/"
+    all_groups = parse_files(directory)
     # Group.objects.all().delete()
 
     for group_o in all_groups.values():

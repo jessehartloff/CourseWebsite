@@ -22,9 +22,16 @@ class Comment(models.Model):
 ### Courses ###
 
 class Course(models.Model):
-    course_number = models.CharField(max_length=15, blank=True, null=True)
+    course_number_simple = models.CharField(max_length=25, blank=True, null=True)
+    course_number = models.CharField(max_length=25, blank=True, null=True)
+    # semester = models.CharField(max_length=15, blank=True, null=True)
     course_title = models.CharField(max_length=100, blank=True, null=True)
+    archived = models.BooleanField(default=False, blank=True)
     course_project = models.BooleanField(default=False, blank=True)
+
+    def display_number(self):
+        splits = self.course_number.split("-")
+        return splits[0].upper()
 
 
 class Content(models.Model):

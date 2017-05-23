@@ -90,7 +90,6 @@ def index(request):
     # a_list = Content.objects.filter(course=course)
     # context = {'lesson_list': a_list, 'course': course}
     return render(request, 'courses/index.html')
-    # return render(request, 'faculty_page.html')
 
 
 def render_content(request, course_number, page_type, template, short_title=""):
@@ -104,7 +103,8 @@ def render_content(request, course_number, page_type, template, short_title=""):
     this_lecture = Content.objects.get(course=course, page_type=page_type, short_title=short_title) if short_title != "" \
         else Content.objects.get(course=course, page_type=page_type)
     form = CommentForm()
-    context = {'lectures': lectures, 'assignments': assignments, 'course': course, 'this_lecture': this_lecture,
+    context = {'lectures': lectures, 'assignments': assignments, 'course': course,
+               'course_display_number': course.display_number(), 'this_lecture': this_lecture,
                'form': form, 'extras': extras}
     return render(request, template, context)
 

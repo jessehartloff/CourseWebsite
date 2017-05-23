@@ -1,24 +1,18 @@
-{% extends "courses/course_base.html" %}
+{% extends "base.html" %}
 
-{% block content %}
-    <div class="well">
+{% block body %}
 
-{#        <h2><a href="{% url 'courses:syllabus' course.course_number %}">Syllabus</a></h2>#}
-{#        <h2><a href="{% url 'courses:schedule' course.course_number %}">Schedule</a></h2>#}
+    <br/><br/><br/>
 
-{#        <h2>Earn Points</h2>#}
-{#        {% for assignment in assignments %}#}
-{#            <h4>&nbsp;<a class="menu_link"#}
-{#                         href="{% url 'courses:assignment' course.course_number assignment.title %}">{{ assignment.title }}</a><br/>#}
-{#            </h4>#}
-{#        {% endfor %}#}
-{#        <h2>Lessons</h2>#}
-{#        {% for lecture in lectures %}#}
-{#            <h4>&nbsp;<a class="menu_link"#}
-{#                         href="{% url 'courses:lecture' course.course_number lecture.title %}">{{ lecture.title }}</a><br/>#}
-{#            </h4>#}
-{#        {% endfor %}#}
-    <br/>
-{#    <h2><a href="#" onclick="toggle_bars(); return false;">Hide/Show Sidebars</a></h2>#}
-    </div>
+    {% for course in all_courses %}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'courses:syllabus' course.course_number %}" class="btn btn-primary btn-lg" role="button"
+           aria-pressed="true">{{ course.course_number }}</a>
+
+
+
+    {% endfor %}
+
+
+
 {% endblock %}

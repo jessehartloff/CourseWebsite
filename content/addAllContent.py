@@ -81,10 +81,11 @@ def sort_lesson_type(course, page_type):
 
 
 def copy_files(course, source_directory, destination_directory):
-    distutils.dir_util.copy_tree(content_directory + course.course_number.lower() + "/" + source_directory, destination_directory)
+    distutils.dir_util.copy_tree(content_directory + course.course_number.lower() + "/" + source_directory,
+                                 destination_directory)
 
 
-def process_course(course_number, course_title, image_destination_directory):
+def process_course(course_number, simple_number, course_title, image_destination_directory, archived=False):
     delete_course(course_number)
 
     # comments = Comment.objects.all()
@@ -93,7 +94,8 @@ def process_course(course_number, course_title, image_destination_directory):
     # comment_object = Comment.objects.create(comment_text="Howdy!")
     # comment_object.save()
 
-    course = Course.objects.create(course_number=course_number, course_title=course_title)
+    course = Course.objects.create(course_number=course_number, course_number_simple=simple_number,
+                                   course_title=course_title, archived=archived)
 
     populate_directory(course, lectures_directory, 'lecture')
     populate_directory(course, assignments_directory, 'assignment')

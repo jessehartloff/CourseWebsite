@@ -1,0 +1,604 @@
+---
+title: Algorithms
+short_title: algos
+next_content_short: class
+previous_content_short: files
+---
+
+{# Basic Algo's might be sprinkled throughout earlier lessons #}
+
+[Monday - min/max/average of a DS. Possibly read from a file]
+[Wednesday - Linear Search. Binary search]
+[Friday - Sorting]
+
+
+== Algorithms
+
+<p>
+    We now know the fundamental concepts of programming (Variables, Control Flow, Functions) and we know how to access
+    and store data (Data Structures, Files). Now we will process this data by training computers to extract certain
+    information from the data through algorithms.
+</p>
+
+
+== Significant Values
+
+<p>
+    First we will explore several algorithms to extract information from a data structure. We will explore finding the
+    average value contained in a data structure as well as the maximum and minimum values it contains.
+</p>
+
+<hr/>
+<h4>
+    Average
+</h4>
+
+<p>
+    We have seen how to compute the sum of a data structure. Let's take that concept one step further and find the
+    average by dividing by the number of values in the structure.
+</p>
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(1);
+    numbers.add(2);
+    numbers.add(2);
+    numbers.add(2);
+
+    int sum = 0;
+    for(int value : numbers){
+        sum += value;
+    }
+
+    double average = sum*1.0/numbers.size();
+    System.out.println(average);
+</code></pre>
+<p>
+    Output: <kbd>1.75</kbd>
+</p>
+
+<p>
+    Here we see that we iterate over the ArrayList while adding to a running sum. After the loop, we divide the sum by
+    the number of values to find the average.
+</p>
+<p>
+    Note that <code>sum</code> and <code>numbers.size()</code> are both
+    integers and dividing them directly would perform integer division which would drop the decimal and return 1 instead
+    of 1.75. A simple way to avoid this is by first multiplying the sum by the double 1.0 (not 1) which will convert the
+    sum to a
+    double without changing the value. Since the division is now a double divided an int the result will be a double.
+</p>
+
+<hr/>
+<h4>
+    Maximum Value
+</h4>
+
+<p>
+    The next algorithm we will see is finding the most significant value in a data structure. We will introduce this
+    concept by finding the maximum value, though the concept can be applied to any measure of significance.
+</p>
+
+{#<pre>#}
+{#    [initialize element]#}
+{#    [initialize value]#}
+{#    [iterate while updating the most significant element/value]#}
+{#    [return the most significant element/value]#}
+{#</pre>#}
+
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(32);
+    numbers.add(79);
+    numbers.add(100);
+    numbers.add(53);
+
+    int max = 0;
+    for(int value : numbers){
+        if(value > max){
+            max = value;
+        }
+    }
+    System.out.println(max);
+</code></pre>
+<p>
+    Output: <kbd>100</kbd>
+</p>
+
+<p>
+    Here we can see the typical steps to find the most significant value in a data structure. First, we initialize a
+    variable that will store the maximum. Then we iterate over the data structure while checking if each value is is the
+    largest we've seen so far. If it is, store it in max. After iterating through all the data, max will be storing the
+    maximum value of the entire data structure.
+</p>
+
+<p>
+    However, there is something that can go wrong with this code. It works for the data provided, but consider what it
+    would find for the max value in the following ArrayList.
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(-32);
+    numbers.add(-79);
+    numbers.add(-100);
+    numbers.add(-53);
+</code></pre>
+
+<p>
+    If we run our code to find max value on this ArrayList it will return 0 when it should return -32. Our mistake is
+    initializing the max value to be higher than the actual max in the data. Care must be taken to make sure this
+    doesn't happen which can be tricky when writing methods with unknown inputs. To avoid these issues we will
+    initialize max to be so small that it can't possibly interfere with the data. We do this by using constants provided
+    by java for purposes like these.
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(-32);
+    numbers.add(-79);
+    numbers.add(-100);
+    numbers.add(-53);
+
+    int max = Integer.MIN_VALUE;
+    for(int value : numbers){
+        if(value > max){
+            max = value;
+        }
+    }
+    System.out.println(max);
+</code></pre>
+<p>
+    Output: <kbd>-32</kbd>
+</p>
+
+<p>
+    Here we use java's Integer.MIN_VALUE constant to initialize max to the smallest possible value that can be stored in
+    an int. This allows to us to find the true max of the ArrayList. This constant is an actual number that is stored in
+    max. We can print out this value to see the limits of int values.
+</p>
+<pre><code class="java">
+    int minValue = Integer.MIN_VALUE;
+    System.out.println(minValue);
+    int maxValue = Integer.MAX_VALUE;
+    System.out.println(maxValue);
+</code></pre>
+<p>
+    Output: </p>
+<kbd>-2147483648<br/>2147483647</kbd>
+
+<p>
+    It is important to note that an int cannot store values outside of this range. Attempting to do so will cause
+    odd behaviour. For example.
+</p>
+<pre><code class="java">
+    int maxValue = Integer.MAX_VALUE;
+    System.out.println(maxValue);
+    System.out.println(maxValue+1);
+</code></pre>
+<p>
+    Output: </p>
+<kbd>2147483647<br/>-2147483648</kbd>
+
+<p>
+    We see that going above the max value of an int will "wrap around" to the min value. When this happens in software
+    it can cause many errors that are difficult to debug.
+</p>
+
+<p>
+    When finding maximum and minimum values we will use the following constants:
+</p>
+<dl>
+    <dt>Integer.MIN_VALUE</dt>
+    <dd>The minimum value that can be stored in an int (-2147483648)</dd>
+    <dt>Integer.MAX_VALUE</dt>
+    <dd>The maximum value that can be stored in an int (2147483647)</dd>
+    <dt>Double.NEGATIVE_INFINITY</dt>
+    <dd>The greatest magnitude negative number that can be stored in a double</dd>
+    <dt>Double.POSITIVE_INFINITY</dt>
+    <dd>The largest value that can be stored in a double</dd>
+</dl>
+
+<p>
+    Note that doubles can store much larger numbers than int, though they lose accuracy due to truncation. Also, there
+    is a MIN_VALUE for doubles, but it stores the smallest positive value that a double can store.
+</p>
+
+<br/>
+
+<p>
+    When we are not only concerned with the maximum value, but also want to know what index stores that value we can
+    track both pieces of information. Now when we update the max value found we will also update the index where it was
+    found.
+</p>
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+    numbers.add(0);
+    numbers.add(-47);
+    numbers.add(92);
+    numbers.add(-3);
+
+    int max = Integer.MIN_VALUE;
+    int index = -1;
+    for(int i=0; i < numbers.size(); i++){
+        if(numbers.get(i) > max){
+            max = numbers.get(i);
+            index = i;
+        }
+    }
+    System.out.println("The max value of " + max + " was found at index " + index);
+</code></pre>
+<p>
+    Output: <kbd>The max value of 92 was found at index 2</kbd>
+</p>
+
+<p>
+    Following the same concept as for max and min value, we initialize the index to impossible value (-1). This is not a
+    proper index and will be overwritten once the first value is read. By using -1 we can also check for this value
+    elsewhere in the code if we have concerns that there might be an error. For example, if you initialize the index to
+    -1 in a method that returns an index we can check if it returns -1 when it's called and know if something went wrong
+    (ex. the data structure was empty).
+</p>
+
+
+== Linear Search
+
+<p>
+    Search: Does a given data structure contain a particular element?
+</p>
+
+<p>
+    This is a question we have to answer very often when writing software. We will see two different algorithms to
+    answer this question. First, linear search which iterates over the data and checks every element for equality one at
+    a time. If any element is equal to the value we are looking for, return true. If every single element is checked and
+    the value is not found, we can conclude that the value is not in the data structure and we can return false.
+</p>
+
+<pre><code class="java">
+public static boolean linearSearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+    for(int value : numbers){
+        if(value == toFind){
+            return true;
+        }
+    }
+    return false;
+}
+
+public static void main(String[] args){
+    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+    for(int i=1; i<100; i++){
+        squares.add(i*i);
+    }
+    System.out.println(linearSearch(squares, 9));
+    System.out.println(linearSearch(squares, 23));
+}
+</code></pre>
+
+<p>
+    Output:
+</p>
+<kbd>true<br/>false</kbd>
+
+<p>
+    In this main method we populate an ArrayList with the first 100 perfect squares and search for 2 different values.
+    Since 9 is a perfect square, the method finds it in the ArrayList and returns true. Likewise, 23 is not a perfect
+    square so the search checks every element without finding 23 and returns false after the loop concludes.
+</p>
+
+
+== Runtime
+
+<p>
+    Would you visit a website that did everything you ever wanted, but took a full minute to load or refresh? Would you
+    play the greatest game ever made if it lagged constantly? It's not always enough to write software that works. We
+    also have to be concerned with the efficiency of our programs. While there are many different types of efficiency to
+    consider, we will only analyze runtime here. As you
+    progress through computer science you will become increasingly aware of the efficiency of the software you write.
+</p>
+
+<p>
+    Example: Movie graphics are much higher quality than video game graphics not because they have better technology,
+    but because they can spend much more time letting their algorithms render their models instead of the 1/30
+    or 1/60 of a second games have to render a frame in real time. Rendering high quality graphics in such a limited
+    time requires highly sophisticated algorithms as well as powerful hardware.
+</p>
+
+
+== Binary Search
+
+<p>
+    Example Repository: <a href="https://github.com/hartloff/Search.git">https://github.com/hartloff/Search.git</a>
+</p>
+
+<p>
+    Linear search found the correct answer, but can we find the value faster? What if have a large data set that we need
+    to search frequently? We don't want to visit every element of the data to search for a particular value. We'll now
+    see binary search which is an search algorithm that takes advantage of the structure of a sorted data structure.
+    Note that if the data is not sorted, linear search is the most efficient way to find a particular element, but if
+    the data is sorted we can drastically reduce the runtime of finding an element.
+</p>
+
+<p>
+    Binary search follows these general steps when looking for a value we'll call <var>x</var>:
+</p>
+
+<ol>
+    <li>Initialize the lower and upper bounds of the search space to the first and last elements respectively</li>
+    <li>Compare the middle element of the search space to <var>x</var></li>
+    <ul>
+        <li>If <var>x</var> is equal to the middle element, return true</li>
+        <li>If <var>x</var> is greater than the middle element, set the lower bound equal to the middle element</li>
+        <li>If <var>x</var> is less than the middle element, set the upper bound equal to the middle element</li>
+        <li>Continue comparing <var>x</var> with the middle element until either <var>x</var> is found or the search
+            space is empty
+        </li>
+    </ul>
+    <li>If the search space is empty without finding <var>x</var>, return false</li>
+</ol>
+
+<p>
+    The key to this algorithm that it takes advantage of the sorted order, and the transitive property, to cut the
+    search space in half each time the middle element is compared with <var>x</var>. Since the data is sorted, we know
+    that the center element is greater than, or equal to, every element that come before it. Then if <var>x</var> is
+    greater than the middle element, we know that it must be greater than all element in the first half of the data. In
+    just 1 comparison we can eliminate half of the possible location of <var>x</var> and move our lower bound to the
+    middle of the search space with confidence. Likewise, if <var>x</var> is less that the middle element we know it
+    must be less that every element in the second half of the search space. We repeatedly check the middle element while
+    reducing the search space in half until we either find <var>x</var> and return true, or run out of possible
+    locations and return false.
+</p>
+
+
+<pre><code class="java">
+public static boolean binarySearch(ArrayList&lt;Integer&gt; numbers, int toFind){
+    if(numbers.size() == 0){
+        return false;
+    }
+
+    int lowerBound = 0;
+    int upperBound = numbers.size() - 1;
+
+    // check the end points first
+    if(numbers.get(lowerBound) == toFind || numbers.get(upperBound) == toFind){
+        return true;
+    }
+
+    while(upperBound - lowerBound > 1){
+        // Dividing 2 ints so this is integer division and returns the floor of the result
+        int midPoint = (upperBound + lowerBound) / 2;
+        int midValue = numbers.get(midPoint);
+
+        if(midValue == toFind){
+            return true;
+        }else if(toFind < midValue){
+            upperBound = midPoint;
+        }else{
+            // It's not equal to or less than so it must be greater than
+            lowerBound = midPoint;
+        }
+    }
+
+    return false;
+}
+</code></pre>
+
+<p>
+    Binary search is fast, but it assumed that the values in the ArrayList were sorted. To be able to use binary search
+    we must first sort our data.
+</p>
+
+<pre><code class="java">
+public static void main(String[] args){
+    ArrayList&lt;Integer&gt; squares = new ArrayList&lt;Integer&gt;();
+    for(int i=1; i<100; i++){
+        squares.add(i*i);
+    }
+    System.out.println(binarySearch(squares, 9));
+    System.out.println(binarySearch(squares, 23));
+}
+</code></pre>
+<p>
+    Output:
+</p>
+<kbd>true<br/>false</kbd>
+
+<p>
+    In this example we are careful to make sure the ArrayList contains sorted data, but what if we have unsorted data?
+    If we know we'll have to search the data often we will consider sorting the ArrayList so we can use binary search.
+</p>
+
+{#<p>#}
+{#    Great.. so we wrote a lot more code to do the same thing and added a constraint that the data must be sorted.#}
+{#</p>#}
+
+== Sort
+
+{#<p>#}
+{#    Binary search was cool, but we need to be sorted first#}
+{#</p>#}
+{##}
+
+<p>
+    For programming assignments in this course you can use java's built in sort method to sort data.
+</p>
+
+<pre><code class="java">
+    Collections.sort(data);
+</code></pre>
+
+<pre><code class="java">
+    ArrayList&lt;Integer&gt; data = new ArrayList&lt;Integer&gt;();
+    data.add(5);
+    data.add(1);
+    data.add(8);
+    data.add(3);
+
+    System.out.println(data);
+    Collections.sort(data);
+    System.out.println(data);
+</code></pre>
+
+<p>
+    Output: </p>
+<kbd>[5, 1, 8, 3]<br/>[1, 3, 5, 8]</kbd>
+
+
+<p>
+    Note that a HashMap does not maintain it's data in a meaningful order and thus cannot be sorted. However, we can
+    sort ArrayLists which do preserve the order of its elements. This order is reflected by the index for each value.
+    For example, the element at index 3 is always the 4th element in the ordering. By rearranging the elements we can
+    achieve sorted order in an ArrayList.
+</p>
+
+
+<p>
+    Collections.sort works with Strings too!
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("wing");
+    words.add("coach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</code></pre>
+
+<p>
+    Output: </p>
+<kbd>[wing, coach, kettle, camp]<br/>[camp, coach, kettle, wing]</kbd>
+
+<p>
+    Sorting Strings does not always behave how you might expect since the characters are ordered by their
+    <a href="http://www.asciitable.com/">ASCII</a> values. One important aspect of this is that every capital letter
+    will be ordered before any lower-case letter as shown in the following example.
+</p>
+
+<pre><code class="java">
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+    Collections.sort(words);
+    System.out.println(words);
+</code></pre>
+
+<p>
+    Output: </p>
+<kbd>[Wing, cOach, kettle, camp]<br/>[Wing, cOach, camp, kettle]</kbd>
+
+<p>
+    If we're not thinking in terms of ASCII values, this is not the ordering we would expect. We must be aware of this
+    and plan accordingly.
+</p>
+
+<br/>
+<hr/>
+
+<h3>Custom Sorting</h3>
+
+<p>
+    Since we don't always want to sort data from smallest to largest, we need a way to define different orderings. We'll
+    see an example of ignoring case when sorting Strings to address the behaviour from the previous example.
+</p>
+
+<div class="alert alert-info">
+    Note: This example is included for completeness only. It contains several concepts that we have not yet covered so
+    this is beyond the current expectation of the course.
+</div>
+
+<pre><code class="java">
+    ArrayList&lt;String&gt; words = new ArrayList&lt;String&gt;();
+    words.add("Wing");
+    words.add("cOach");
+    words.add("kettle");
+    words.add("camp");
+
+    System.out.println(words);
+
+    Collections.sort(words, new Comparator&lt;String&gt;(){
+        @Override
+        public int compare(String o1, String o2){
+            return o1.compareToIgnoreCase(o2);
+        }
+    });
+
+    System.out.println(words);
+</code></pre>
+
+<p>
+    Output: </p>
+<kbd>[Wing, cOach, kettle, camp]<br/>[camp, cOach, kettle, Wing]</kbd>
+
+<p>
+    Within the compare method we can define any ordering we chose. Sorting decisions will be made based on the return
+    value of compare. If compare returns 0 the inputs are treated as equal, if it returns a negative value the first
+    parameter (o1) is smaller than the second (o2), and if it returns a positive value o1 is larger than o2. In this
+    example, the compareToIgnoreCase method follows these conditions.
+</p>
+
+== Selection Sort
+
+<p>
+    Example Repository: <a href="https://github.com/hartloff/Sort.git">https://github.com/hartloff/Sort.git</a>
+</p>
+
+<p>
+    Beyond this course it will be important to understand how to sort data, even if you're not writing your own
+    sorting methods. This understanding will helps us make more informed design decision when writing software. To this
+    end, let's explore how we could sort data with our own method by implementing a sorting algorithm called selection
+    sort.
+</p>
+
+
+<pre><code class="java">
+public static void selectionSort(ArrayList&lt;Integer&gt; numbers){
+    for(int i = 0; i < numbers.size(); i++){
+
+        // Find the min value from index i to numbers.size()-1
+        int minValue = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for(int j = i; j < numbers.size(); j++){
+            int currentValue = numbers.get(j);
+            if(currentValue < minValue){
+                minValue = currentValue;
+                minIndex = j;
+            }
+        }
+
+        // swap the values in i and minIndex
+        numbers.set(minIndex, numbers.get(i));
+        numbers.set(i, minValue);
+    }
+}
+</code></pre>
+
+<p>
+    Selection sort works by repeatedly finding the smallest unsorted element and adding to a sorted portion of the data
+    structure. All the data begins unsorted, so the algorithm first finds the minimum value of all the data and swaps
+    it with the value in index 0. Putting this value in index 0 starts the sorted portion of the the data. We know this
+    minimum value end up in index 0, so we put it there and never visit index 0 again. We then look at the remaining
+    elements, find the minimum value among them, and put that value in index 1. Now the first 2 elements are sorted and
+    we only consider the elements from index 2 to the end of the list. We continue to find the minimum value in the
+    unsorted portion and adding it to the sorted portion until the entire data set is sorted.
+</p>
+
+<p>
+    Selection sort does sort the data, but it's quite slow. Can we sort data faster? Of course the answer is yes. In
+    fact Collections.sort is much faster than selection sort. The bigger question is <em>how</em> can we sort faster?..
+</p>
+
+
+{#== A Taste of Trees#}
+{##}
+{#Mention that TreeSet keeps things sorted#}
+
+
+{#== End of Part 2#}
+{##}
+{#Now you know how to work with data!#}

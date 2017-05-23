@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'i&to3#n$g0k$hmvvhb9*_&jszk!p^1g9oc=$@(hn=p5hycgr@q'
-#SECRET_KEY = os.environ['DJANGO_SECRET']
+# SECRET_KEY = os.environ['DJANGO_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['yeager.cse.buffalo.edu', 'fury.cse.buffalo.edu']
 

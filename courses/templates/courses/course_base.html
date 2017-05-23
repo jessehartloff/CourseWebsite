@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load  render_as_template %}
 
-{% block title %} {{ course.course_number }}: {{ course.course_title }} {% endblock %}
+{% block title %} {{ course.course_number_simple }}: {{ course.course_title }} {% endblock %}
 {#{% block corner_title %}{{ course.course_number }}{% endblock %}#}
-{% block corner_title %}{{ course.course_number }}{% endblock %}
+{% block corner_title %}{{ course.course_number_simple }}{% endblock %}
 
 {% block navbar %}
     <ul class="nav navbar-nav">
@@ -23,18 +23,16 @@
 
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown"
-               href="{% url 'courses:course_home' course.course_number %}">Points<span
+               href="{% url 'courses:course_home' course.course_number_simple %}">Points<span
                     class="caret"></span></a>
             <ul class="dropdown-menu">
                 {#                <li><a href="{% url 'courses:autolab' course.course_number %}"> Autolab</a></li>#}
-                <li><a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank">
+                <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">
                     Autolab</a></li>
                 {% for lesson in assignments %}
-                    {% if forloop.counter0 < 4 or course.course_number != "CSE115" %}
                         <li>
                             <a href="{% url 'courses:assignment' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
                         </li>
-                    {% endif %}
                 {% endfor %}
             </ul>
         </li>
@@ -49,18 +47,16 @@
                 {#            <li><a href="{% url 'courses:qa' course.course_number %}"> Questions</a></li>#}
                 <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank"> Questions</a></li>
                 {% for lesson in lectures %}
-                    {% if forloop.counter0 < 12 or course.course_number != "CSE115" %}
                         <li>
                             <a href="{% url 'courses:lecture' course.course_number lesson.short_title %}">{{ lesson.title }}</a>
                         </li>
-                    {% endif %}
                 {% endfor %}
             </ul>
         </li>
 
         {#        <li><a href="{% url 'courses:autolab' course.course_number %}">Autolab</a></li>#}
         {#        <li><a href="{% url 'courses:qa' course.course_number %}">Questions</a></li>#}
-        <li><a href="https://autograder.cse.buffalo.edu/courses/cse115-s17/assessments" target="_blank">Autolab</a></li>
+        <li><a href="https://autograder.cse.buffalo.edu/" target="_blank">Autolab</a></li>
         <li><a href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">Questions</a></li>
 
 
@@ -85,7 +81,7 @@
         <div class="well sidebar-well">
             <!--<button onclick="hide_bars(); return false;">Hide Sidebars</button>-->
             <!--<li><a href="#" onclick="hide_bars(); return false;">Hide</a></li>-->
-            <h4>&nbsp;{{ course.course_number }}</h4>
+            <h4>&nbsp;{{ course.course_number_simple }}</h4>
             {#            &nbsp; <a class="menu_link" href="{% url 'courses:syllabus' course.course_number %}"> Syllabus</a><br/>#}
             {#            &nbsp; <a class="menu_link" href="{% url 'courses:schedule' course.course_number %}"> Schedule</a>#}
             {#            <br/>#}
@@ -100,33 +96,25 @@
             {% endfor %}
             <h4>&nbsp;Earn Points</h4>
             {#            &nbsp;<a class="menu_link" href="{% url 'courses:autolab' course.course_number %}"> Autolab</a>#}
-            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/courses/{{ course.course_number }}-s17/assessments"
+            &nbsp;<a class="menu_link" href="https://autograder.cse.buffalo.edu/"
                      target="_blank"> Autolab</a>
             <br/>
 
             {% for assignment in assignments %}
-                {% if forloop.counter0 < 4 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
                              href="{% url 'courses:assignment' course.course_number assignment.short_title %}">
                     <!--&#x2022;--> {{ assignment.title }}</a><br/>
-                {% else %}
-                    &nbsp; {{ assignment.title }}<br/>
-                {% endif %}
             {% endfor %}
 
             <h4>&nbsp;Learn Concepts</h4>
 
             {#            &nbsp;<a class="menu_link" href="{% url 'courses:qa' course.course_number %}"> Questions</a><br/>#}
-            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/questions/index.php" target="_blank">
+            &nbsp;<a class="menu_link" href="https://fury.cse.buffalo.edu/" target="_blank">
             Questions</a><br/>
             {% for lecture in lectures %}
-                {% if forloop.counter0 < 12 or course.course_number != "CSE115" %}
                     &nbsp;<a class="menu_link"
                              href="{% url 'courses:lecture' course.course_number lecture.short_title %}">
                     {{ forloop.counter }}. {{ lecture.title }}</a><br/>
-                {% else %}
-                    &nbsp; {{ forloop.counter }}. {{ lecture.title }}<br/>
-                {% endif %}
             {% endfor %}
         </div>
     </div>

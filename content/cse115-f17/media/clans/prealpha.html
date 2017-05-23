@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>game</title>
+    <script src="character.js"></script>
+    <script src="Landmark.js"></script>
+    <script src="game_world.js"></script>
+    <script src="ai.js"></script>
+    <script src="player.js"></script>
+    <script src="events/Event.js"></script>
+    <script src="events/Attack_Event.js"></script>
+    <script src="events/Help_Event.js"></script>
+</head>
+
+<body onkeypress="player_move(event)" onload="initialize()">
+
+<!--<p>score: <span id="score"></span></p>-->
+
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+</body>
+</html>

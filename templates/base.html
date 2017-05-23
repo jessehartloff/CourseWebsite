@@ -14,43 +14,6 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="{% static 'courses/functions.js' %}"></script>
     <script>
-        {#        var bars = true;#}
-        {##}
-        {#        function toggle_bars() {#}
-        {#            if (bars) {#}
-        {#                hide_bars();#}
-        {#            } else {#}
-        {#                show_bars();#}
-        {#            }#}
-        {#        }#}
-
-        {#        function hide_bars() {#}
-        {#            document.getElementById("left_sidebar").className = "hidden";#}
-        {#            document.getElementById("right_sidebar").className = "hidden";#}
-        {#            document.getElementById("center_content").className = "col-sm-12 padded";#}
-        {#            bars = false;#}
-        {#        }#}
-        {##}
-        {#        function show_bars() {#}
-        {#            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";#}
-        {#            document.getElementById("right_sidebar").className = "col-sm-2 less-padding";#}
-        {#            document.getElementById("center_content").className = "col-sm-8 less-padding";#}
-        {#            bars = true;#}
-        {#        }#}
-        {##}
-        {##}
-        {#        function no_left_bar() {#}
-        {#            document.getElementById("left_sidebar").className = "hidden";#}
-        {#            document.getElementById("right_sidebar").className = "col-sm-3 less-padding";#}
-        {#            document.getElementById("center_content").className = "col-sm-9";#}
-        {#            bars = true;#}
-        {#        }#}
-
-        //        function hide_question_bar() {
-        //            document.getElementById("left_sidebar").className = "col-sm-2 less-padding";
-        //            document.getElementById("right_sidebar").className = "hidden";
-        //            document.getElementById("center_content").className = "col-sm-10 less-padding";
-        //        }
     </script>
     <script>
         function loadVideo(element, youTube) {
@@ -71,7 +34,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {#            <a class="navbar-brand" href="{% url 'lecture:index' %}">CSE442</a>#}
 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
@@ -79,10 +41,13 @@
                         {% block corner_title %}Courses{% endblock %}</a>
                     <ul class="dropdown-menu">
                         {% for course in all_courses %}
-                            <li>
-                                <a href="{% url 'courses:syllabus' course.course_number %}">{{ course.course_number }}: {{ course.course_title }}</a>
-                            </li>
+                            {% if not course.archived %}
+                                <li>
+                                    <a href="{% url 'courses:syllabus' course.course_number %}">{{ course.course_number_simple }}: {{ course.course_title }}</a>
+                                </li>
+                            {% endif %}
                         {% endfor %}
+                    <li><a href="{% url 'courses:index' %}">Archive</a></li>
                     </ul>
                 </li>
             </ul>
@@ -102,29 +67,29 @@
 
     {% block body %}
         <div class="row">
-        <div id="left_sidebar" class="hidden-xs col-sm-2 less-padding">
-            {% block left_sidebar %}
+            <div id="left_sidebar" class="hidden-xs col-sm-2 less-padding">
+                {% block left_sidebar %}
+                {% endblock %}
+            </div>
+
+
+            <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
+                <div class="content-area">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+
+
+            {#            <div id="right_sidebar" class="col-sm-2 less-padding">#}
+            {% block right_sidebar %}
+                {#                    <div class="right-side-bar">#}
+                {#                        <div class="well sidebar-well">#}
+                {#                        </div>#}
+                {#                    </div></div>#}
             {% endblock %}
         </div>
-
-
-        <div id="center_content" class="col-xs-12 col-sm-10 less-padding">
-            <div class="content-area">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-
-
-        {#            <div id="right_sidebar" class="col-sm-2 less-padding">#}
-        {% block right_sidebar %}
-            {#                    <div class="right-side-bar">#}
-            {#                        <div class="well sidebar-well">#}
-            {#                        </div>#}
-            {#                    </div></div>#}
-        {% endblock %}
-                </div>
     {% endblock %}
-    </div>
+</div>
 
 </body>
 </html>
