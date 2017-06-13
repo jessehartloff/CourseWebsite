@@ -1,0 +1,112 @@
+---
+title: Variables In Depth
+short_title: variables
+next_content_short: none
+previous_content_short: none
+---
+
+
+{#== Terms#}
+{##}
+{#<ul class="list-inline list-group">#}
+{#    <li>development environment</li>#}
+{#    <li class="list-inline-item list-group-item">properties</li>#}
+{#    <li class="list-inline-item list-group-item">type</li>#}
+{#    <li class="list-inline-item list-group-item">name</li>#}
+{#    <li class="list-inline-item list-group-item">value</li>#}
+{#    <li class="list-inline-item list-group-item">location</li>#}
+{#    <li class="list-inline-item list-group-item">scope</li>#}
+{#    <li class="list-inline-item list-group-item">lifetime</li>#}
+{#</ul>#}
+
+== Properties
+
+{% load staticfiles %}
+
+<p>
+Variables have several properties:
+<ul>
+<li>type</li>
+<li>name</li>
+<li>value</li>
+<li>location</li>
+<li>scope</li>
+<li>lifetime</li>
+</ul>
+
+To fully understand how variables work in a computer program it is necessary to have a firm grasp on each of these properties.
+
+</p>
+
+
+== Type
+
+<p>
+From the perspective of programmer the type of a variable determines
+the set of values which can be assigned to it.  The type also
+determines the internal representation of those values, including the
+encoding used and the number of bits allocated for the representation.
+</p>
+
+<p>
+Consider the Java type named int.  As we know the values of type int
+are whole numbers: values like 0, 1, -1, 2, -2, 3, -3, etc.  It turns
+out that there is a limited range of values that are representable as
+an int: -2,147,483,648 to +2,147,483,647.  (Why those specific values?
+That's another DeepDive topic: understanding the two's complement
+representation.)
+</p>
+
+<p>A value of type int occupies 32 bits of memory and is encoded using
+the two's complement representation. (What are bits?  That's another
+DeepDive topic: understanding memory.)  Java has three other types
+that use the two's complement encoding: byte, short and long.  Why?
+They are different sizes, and so can encode different ranges of
+values.  A byte occupies 8 bits, and can represent values from -128 to
++127.  A short occupies 16 bits, and can represent values from -32,768
+to +32,767.  A long occupies 64 bits, and can represent values from
+-9,223,372,036,854,775,808 to 9,223,372,036,854,775,80.
+</p>
+
+<p>A value of type float or double uses a different encoding to
+represent numeric values, called the IEEE754 encoding (named for the
+IEEE standard that specifies the encoding).  A float represents values
+using 32 bits, whereas a double uses 64 bits.
+</p>
+
+
+== Name
+
+<p>The name of a variable is available in the high-level program.  It
+  does not actually exist at runtime.
+</p>
+
+
+== Value
+
+<p>
+The value of a variable is what is stored in the variable, encoded as
+per the type.
+</p>
+
+
+== Location
+
+<p>
+Where in memory the variable exists.
+</p>
+
+
+== Scope
+
+<p>
+The textual extent of the variable declaration in the high-level program.
+</p>
+
+
+== Lifetime
+
+<p>
+The period of time during the execution of a program that the variable
+is actually bound to a location in memory.
+</p>

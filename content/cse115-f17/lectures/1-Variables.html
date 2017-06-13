@@ -9,7 +9,7 @@ previous_content_short: none
 {#== Terms#}
 {##}
 {#<ul class="list-inline list-group">#}
-    {#    <li>development environment</li>#}
+{#    <li>development environment</li>#}
 {#    <li class="list-inline-item list-group-item">variable</li>#}
 {#    <li class="list-inline-item list-group-item">int</li>#}
 {#    <li class="list-inline-item list-group-item">double</li>#}
@@ -17,7 +17,7 @@ previous_content_short: none
 {#    <li class="list-inline-item list-group-item">comment</li>#}
 {#    <li class="list-inline-item list-group-item">string</li>#}
 {#    <li class="list-inline-item list-group-item">print</li>#}
-    {#    <li class="list-inline-item list-group-item">assignment</li>#}
+{#    <li class="list-inline-item list-group-item">assignment</li>#}
 {#    <li class="list-inline-item list-group-item">expression</li>#}
 {#    <li class="list-inline-item list-group-item">concatenation</li>#}
 {#</ul>#}
@@ -56,13 +56,14 @@ Syntax:
 </pre>
 
 <p>
-    Both examples have the same result and follow these three steps
+Both examples have the same result and follow these two steps:
 </p>
 <ol>
-    <li><b>int</b> - Create a variable of type int</li>
-    <li><b>myFirstVariable</b> - name the variable myFirstVariable</li>
-    <li><b>= 7</b> - Store the value 7 in the new variable</li>
+    <li><b>int myFirstVariable</b> - Create a variable named myFirstVariable of type int</li>
+    <li><b>myFirstVariable = 7</b> - Assign the value 7 to the variable named myFirstVariable</li>
 </ol>
+In the first example the creation of the variable and the assignment of a value to the variable are done in two separate instructions.
+In the second example the two steps are combined into one line.
 
 <br/>
 General structure:
@@ -77,7 +78,7 @@ General structure:
 
 <ul>
     <li>A program can have many variables</li>
-    <li>Only 1 variable per name</li>
+    <li>Only 1 variable per name <b>(this is actually not true)</b></li>
     <li>Names cannot contain spaces. Use camelCase</li>
     <li>Start names with a lowercase letter</li>
     <li>Variables can be reassigned different values</li>
@@ -108,7 +109,7 @@ General structure:
     <dt>int</dt>
     <dd>Stores integer values (whole numbers). Can store values that are negative, positive, or 0.</dd>
     <dt>double</dt>
-    <dd>Stores numbers with decimals (ex. 3.1415). Can store values that are negative, positive, or 0. Some precision
+    <dd>Stores numbers with decimals (ex. 3.1415). Can store values that are negative, positive, or 0.0. Some precision
         is lost so int is used if only whole numbers are needed.
     </dd>
     <dt>String</dt>
@@ -158,7 +159,7 @@ Syntax:
 </pre>
 
 <p>
-    Same output as he previous example.
+    Same output as the previous example.
 </p>
 
 
@@ -194,7 +195,7 @@ Syntax:
 <pre>
     int age;
 
-    // This line will be ignored the computer
+    // This line will be ignored the computer (everything to the right of '//' on this line)
     /*
       Comments allow us to leave notes for each other in our code.
       The computer will ignore all this text
@@ -220,10 +221,10 @@ Syntax:
 </p>
 
 <pre>
-    int x = 7;
-    int y = 5;
-    int z = x + y;
-    System.out.println(z);
+    int x = 7;    // 7 is an expression
+    int y = 5;    // 5 is an expression
+    int z = x + y;  // x is an expression, y is an expression, x + y is an expression
+    System.out.println(z);  // z is an expression (as are System.out (!))
 </pre>
 
 <p>
@@ -231,8 +232,7 @@ Syntax:
 </p>
 
 <p>
-    In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is
-    stored in the int variable named z.
+    In this example the expression <code>x + y</code> is an expression that is evaluated to a single value which is stored in the int variable named z.
 </p>
 
 <hr/>
